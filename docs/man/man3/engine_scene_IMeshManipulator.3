@@ -1,0 +1,188 @@
+.TH "engine::scene::IMeshManipulator" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::IMeshManipulator \- An interface for easily manipulate meshes.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IMeshManipulator.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~IMeshManipulator\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual void \fBflipSurfaces\fP (\fBIMesh\fP *mesh) const =0"
+.br
+.RI "\fIFlips the direction of surfaces. \fP"
+.ti -1c
+.RI "virtual void \fBsetVertexColorAlpha\fP (\fBIMesh\fP *mesh, s32 alpha) const =0"
+.br
+.RI "\fISets the alpha vertex color value of the whole mesh to a new value. \fP"
+.ti -1c
+.RI "virtual void \fBsetVertexColors\fP (\fBIMesh\fP *mesh, \fBvideo::SColor\fP color) const =0"
+.br
+.RI "\fISets the colors of all vertices to one color. \fP"
+.ti -1c
+.RI "virtual void \fBrecalculateNormals\fP (\fBIMesh\fP *mesh, bool smooth=false) const =0"
+.br
+.RI "\fIRecalculates all normals of the mesh. \fP"
+.ti -1c
+.RI "virtual void \fBrecalculateNormals\fP (\fBIMeshBuffer\fP *buffer, bool smooth=false) const =0"
+.br
+.RI "\fIRecalculates all normals of the mesh buffer. \fP"
+.ti -1c
+.RI "virtual void \fBscaleMesh\fP (\fBIMesh\fP *mesh, const \fBcore::vector3df\fP &scale) const =0"
+.br
+.RI "\fIScales the whole mesh. \fP"
+.ti -1c
+.RI "virtual \fBSMesh\fP * \fBcreateMeshCopy\fP (\fBIMesh\fP *mesh) const =0"
+.br
+.RI "\fIClones a static \fBIMesh\fP into a modifyable \fBSMesh\fP. \fP"
+.ti -1c
+.RI "virtual void \fBmakePlanarTextureMapping\fP (\fBIMesh\fP *mesh, f32 resolution=0.001f) const =0"
+.br
+.RI "\fICreates a planar texture mapping on the mesh. \fP"
+.ti -1c
+.RI "virtual \fBIMesh\fP * \fBcreateMeshWithTangents\fP (\fBIMesh\fP *mesh) const =0"
+.br
+.RI "\fICreates a copy of the mesh, which will only consist of S3DVertexTangents vertices. \fP"
+.ti -1c
+.RI "virtual \fBIMesh\fP * \fBcreateMeshUniquePrimitives\fP (\fBIMesh\fP *mesh) const =0"
+.br
+.RI "\fIUnweld vertices. \fP"
+.ti -1c
+.RI "virtual void \fBrecalculateBoundingBox\fP (\fBscene::IMeshBuffer\fP *buffer) const =0"
+.br
+.RI "\fIRecalculates the bounding box for a meshbuffer. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetPolyCount\fP (\fBscene::IMesh\fP *mesh) const =0"
+.br
+.RI "\fIReturns amount of polygons in mesh. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetPolyCount\fP (\fBscene::IAnimatedMesh\fP *mesh) const =0"
+.br
+.RI "\fIReturns amount of polygons in mesh. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+An interface for easily manipulate meshes. 
+
+Scale, set alpha value, flip surfaces, and so on. This exists for fixing problems with wrong imported or exported meshes quickly after loading. It is not intended for doing mesh modifications and/or animations during runtime. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual \fBSMesh\fP* engine::scene::IMeshManipulator::createMeshCopy (\fBIMesh\fP * mesh) const\fC [pure virtual]\fP"
+.PP
+Clones a static \fBIMesh\fP into a modifyable \fBSMesh\fP. 
+.PP
+All meshbuffers in the returned \fBSMesh\fP are of type \fBSMeshBuffer\fP or \fBSMeshBufferLightMap\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fImesh,:\fP Mesh to copy. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the cloned mesh. If you no longer need the cloned mesh, you should call \fBSMesh::drop()\fP. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBIMesh\fP* engine::scene::IMeshManipulator::createMeshWithTangents (\fBIMesh\fP * mesh) const\fC [pure virtual]\fP"
+.PP
+Creates a copy of the mesh, which will only consist of S3DVertexTangents vertices. 
+.PP
+This is useful if you want to draw tangent space normal mapped geometry because it calculates the tangent and binormal data which is needed there. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fImesh,:\fP Input mesh 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Mesh consiting only of S3DVertexTangents vertices. If you no longer need the cloned mesh, you should call \fBIMesh::drop()\fP. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::IMeshManipulator::flipSurfaces (\fBIMesh\fP * mesh) const\fC [pure virtual]\fP"
+.PP
+Flips the direction of surfaces. 
+.PP
+Changes backfacing triangles to frontfacing triangles and vice versa. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fImesh,:\fP Mesh on which the operation is performed. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::IMeshManipulator::makePlanarTextureMapping (\fBIMesh\fP * mesh, f32 resolution = \fC0.001f\fP) const\fC [pure virtual]\fP"
+.PP
+Creates a planar texture mapping on the mesh. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fImesh,:\fP Mesh on which the operation is performed. 
+.br
+\fIresolution,:\fP resolution of the planar mapping. This is the value specifying which is the relation between world space and texture coordinate space. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::IMeshManipulator::recalculateNormals (\fBIMeshBuffer\fP * buffer, bool smooth = \fCfalse\fP) const\fC [pure virtual]\fP"
+.PP
+Recalculates all normals of the mesh buffer. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIbuffer,:\fP Mesh buffer on which the operation is performed. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::IMeshManipulator::recalculateNormals (\fBIMesh\fP * mesh, bool smooth = \fCfalse\fP) const\fC [pure virtual]\fP"
+.PP
+Recalculates all normals of the mesh. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fImesh,:\fP Mesh on which the operation is performed. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::IMeshManipulator::scaleMesh (\fBIMesh\fP * mesh, const \fBcore::vector3df\fP & scale) const\fC [pure virtual]\fP"
+.PP
+Scales the whole mesh. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fImesh,:\fP Mesh on which the operation is performed. 
+.br
+\fIscale,:\fP Scale factor. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::IMeshManipulator::setVertexColorAlpha (\fBIMesh\fP * mesh, s32 alpha) const\fC [pure virtual]\fP"
+.PP
+Sets the alpha vertex color value of the whole mesh to a new value. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fImesh,:\fP Mesh on which the operation is performed. 
+.br
+\fIalpha,:\fP New alpha value. Must be a value between 0 and 255. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

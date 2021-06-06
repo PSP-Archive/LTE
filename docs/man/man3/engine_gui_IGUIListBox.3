@@ -1,0 +1,90 @@
+.TH "engine::gui::IGUIListBox" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::gui::IGUIListBox \- Default list box GUI element.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IGUIListBox.h>\fP
+.PP
+Inherits \fBengine::gui::IGUIElement\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBIGUIListBox\fP (\fBIGUIEnvironment\fP *environment, \fBIGUIElement\fP *parent, s32 id, \fBcore::rect\fP< s32 > rectangle)"
+.br
+.RI "\fIconstructor \fP"
+.ti -1c
+.RI "\fB~IGUIListBox\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual s32 \fBgetItemCount\fP ()=0"
+.br
+.RI "\fIreturns amount of list items \fP"
+.ti -1c
+.RI "virtual const wchar_t * \fBgetListItem\fP (s32 id)=0"
+.br
+.RI "\fIreturns string of a list item. the may id be a value from 0 to itemCount-1 \fP"
+.ti -1c
+.RI "virtual s32 \fBaddItem\fP (const wchar_t *text)=0"
+.br
+.RI "\fIadds an list item, returns id of item \fP"
+.ti -1c
+.RI "virtual s32 \fBaddItem\fP (const wchar_t *text, const wchar_t *icon)=0"
+.br
+.RI "\fIadds an list item with an icon. \fP"
+.ti -1c
+.RI "virtual void \fBsetIconFont\fP (\fBIGUIFont\fP *font)=0"
+.br
+.RI "\fISets the font which should be used as icon font. \fP"
+.ti -1c
+.RI "virtual void \fBclear\fP ()=0"
+.br
+.RI "\fIclears the list, deletes all items in the listbox \fP"
+.ti -1c
+.RI "virtual s32 \fBgetSelected\fP ()=0"
+.br
+.RI "\fIreturns id of selected item. returns -1 if no item is selected. \fP"
+.ti -1c
+.RI "virtual void \fBsetSelected\fP (s32 id)=0"
+.br
+.RI "\fIsets the selected item. Set this to -1 if no item should be selected \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Default list box GUI element. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual s32 engine::gui::IGUIListBox::addItem (const wchar_t * text, const wchar_t * icon)\fC [pure virtual]\fP"
+.PP
+adds an list item with an icon. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItext\fP Text of list entry 
+.br
+\fIicon\fP Text of the Icon. This text can be for example one of the texts defined in GUIIcons.h. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+returns the id of the new created item 
+.RE
+.PP
+
+.SS "virtual void engine::gui::IGUIListBox::setIconFont (\fBIGUIFont\fP * font)\fC [pure virtual]\fP"
+.PP
+Sets the font which should be used as icon font. 
+.PP
+This font is set to the engine engine built-in-font by default. Icons can be displayed in front of every list item. An icon is a string, displayed with the icon font. When using the build-in-font of the engine engine as icon font, the icon strings defined in GUIIcons.h can be used. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

@@ -1,0 +1,91 @@
+.TH "engine::gui::IGUIFont" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::gui::IGUIFont \- Font interface.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IGUIFont.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~IGUIFont\fP ()"
+.br
+.RI "\fIDestructor. \fP"
+.ti -1c
+.RI "virtual void \fBdraw\fP (const wchar_t *text, const \fBcore::rect\fP< s32 > &position, \fBvideo::SColor\fP color, bool hcenter=false, bool vcenter=false, const \fBcore::rect\fP< s32 > *clip=0)=0"
+.br
+.RI "\fIDraws an text and clips it to the specified rectangle if wanted. \fP"
+.ti -1c
+.RI "virtual \fBcore::dimension2d\fP< s32 > \fBgetDimension\fP (const wchar_t *text)=0"
+.br
+.RI "\fICalculates the dimension of a text. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetCharacterFromPos\fP (const wchar_t *text, s32 pixel_x)=0"
+.br
+.RI "\fICalculates the index of the character in the text which is on a specific position. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Font interface. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual void engine::gui::IGUIFont::draw (const wchar_t * text, const \fBcore::rect\fP< s32 > & position, \fBvideo::SColor\fP color, bool hcenter = \fCfalse\fP, bool vcenter = \fCfalse\fP, const \fBcore::rect\fP< s32 > * clip = \fC0\fP)\fC [pure virtual]\fP"
+.PP
+Draws an text and clips it to the specified rectangle if wanted. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItext,:\fP Text to draw 
+.br
+\fIposition,:\fP Rectangle specifying position where to draw the text. 
+.br
+\fIcolor,:\fP Color of the text 
+.br
+\fIhcenter,:\fP Specifiies if the text should be centered horizontally into the rectangle. 
+.br
+\fIvcenter,:\fP Specifiies if the text should be centered vertically into the rectangle. 
+.br
+\fIclip,:\fP Optional pointer to a rectalgle against which the text will be clipped. If the pointer is null, no clipping will be done. 
+.RE
+.PP
+
+.SS "virtual s32 engine::gui::IGUIFont::getCharacterFromPos (const wchar_t * text, s32 pixel_x)\fC [pure virtual]\fP"
+.PP
+Calculates the index of the character in the text which is on a specific position. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItext,:\fP Text string. 
+.br
+\fIpixel_x,:\fP X pixel position of which the index of the character will be returned. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns zero based index of the character in the text, and -1 if no no character is on this position. (=the text is too short). 
+.RE
+.PP
+
+.SS "virtual \fBcore::dimension2d\fP<s32> engine::gui::IGUIFont::getDimension (const wchar_t * text)\fC [pure virtual]\fP"
+.PP
+Calculates the dimension of a text. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns width and height of the area covered by the text if it would be drawn. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

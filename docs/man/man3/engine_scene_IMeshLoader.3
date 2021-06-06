@@ -1,0 +1,57 @@
+.TH "engine::scene::IMeshLoader" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::IMeshLoader \- Class which is able to load an animated mesh from a file.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IMeshLoader.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~IMeshLoader\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual bool \fBisALoadableFileExtension\fP (const c8 *fileName)=0"
+.br
+.RI "\fIReturns true if the file maybe is able to be loaded by this class. \fP"
+.ti -1c
+.RI "virtual \fBIAnimatedMesh\fP * \fBcreateMesh\fP (\fBengine::io::IReadFile\fP *file)=0"
+.br
+.RI "\fICreates/loads an animated mesh from the file. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Class which is able to load an animated mesh from a file. 
+
+If you want the engine Engine be able to load meshes of currently unsupported file formats (e.g .cob), then implement this and add your new Surface loader with \fBISceneManager::addExternalMeshLoader()\fP to the engine. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual \fBIAnimatedMesh\fP* engine::scene::IMeshLoader::createMesh (\fBengine::io::IReadFile\fP * file)\fC [pure virtual]\fP"
+.PP
+Creates/loads an animated mesh from the file. 
+.PP
+\fBReturns:\fP
+.RS 4
+Pointer to the created mesh. Returns 0 if loading failed. If you no longer need the mesh, you should call \fBIAnimatedMesh::drop()\fP. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual bool engine::scene::IMeshLoader::isALoadableFileExtension (const c8 * fileName)\fC [pure virtual]\fP"
+.PP
+Returns true if the file maybe is able to be loaded by this class. 
+.PP
+This decision should be based only on the file extension (e.g. '.cob') 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

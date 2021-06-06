@@ -1,0 +1,40 @@
+.TH "engine::scene::IDummyTransformationSceneNode" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::IDummyTransformationSceneNode \- Dummy scene node for adding additional transformations to the scene graph.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IDummyTransformationSceneNode.h>\fP
+.PP
+Inherits \fBengine::scene::ISceneNode\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBIDummyTransformationSceneNode\fP (\fBISceneNode\fP *parent, \fBISceneManager\fP *mgr, s32 id)"
+.br
+.RI "\fIconstructor \fP"
+.ti -1c
+.RI "virtual \fBcore::matrix4\fP & \fBgetRelativeTransformationMatrix\fP ()=0"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Dummy scene node for adding additional transformations to the scene graph. 
+
+This scene node does not render itself, and does not respond to set/getPosition, set/getRotation and set/getScale. Its just a simple scene node that takes a matrix as relative transformation, making it possible to insert any transformation anywhere into the scene graph. This scene node is for example used by the \fBIAnimatedMeshSceneNode\fP for emulating joint scene nodes when playing skeletal animations. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual \fBcore::matrix4\fP& engine::scene::IDummyTransformationSceneNode::getRelativeTransformationMatrix ()\fC [pure virtual]\fP"
+.PP
+This is the matrix, this scene node uses instead of scale, translation and rotation. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

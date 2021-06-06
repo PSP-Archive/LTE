@@ -1,0 +1,197 @@
+.TH "engine::core::triangle3d" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::core::triangle3d \- 3d triangle template class for doing collision detection and other things.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <triangle3d.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBisTotalInsideBox\fP (const \fBaabbox3d\fP< f32 > &box) const "
+.br
+.ti -1c
+.RI "\fBcore::vector3df\fP \fBclosestPointOnTriangle\fP (const \fBcore::vector3df\fP &p) const "
+.br
+.ti -1c
+.RI "bool \fBisPointInside\fP (const \fBvector3d\fP< T > &p) const "
+.br
+.ti -1c
+.RI "bool \fBisPointInsideFast\fP (const \fBvector3d\fP< T > &p) const "
+.br
+.ti -1c
+.RI "bool \fBgetIntersectionWithLimitedLine\fP (const \fBline3d\fP< T > &line, \fBvector3d\fP< T > &outIntersection) const "
+.br
+.ti -1c
+.RI "bool \fBgetIntersectionWithLine\fP (const \fBvector3d\fP< T > &linePoint, const \fBvector3d\fP< T > &lineVect, \fBvector3d\fP< T > &outIntersection) const "
+.br
+.ti -1c
+.RI "bool \fBgetIntersectionOfPlaneWithLine\fP (const \fBvector3d\fP< T > &linePoint, const \fBvector3d\fP< T > &lineVect, \fBvector3d\fP< T > &outIntersection) const "
+.br
+.ti -1c
+.RI "\fBvector3d\fP< T > \fBgetNormal\fP () const "
+.br
+.ti -1c
+.RI "bool \fBisFrontFacing\fP (const \fBvector3d\fP< T > &lookDirection) const "
+.br
+.ti -1c
+.RI "\fBplane3d\fP< T > \fBgetPlane\fP () const "
+.br
+.RI "\fIReturns the plane of this triangle. \fP"
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBvector3d\fP< T > \fBpointA\fP"
+.br
+.RI "\fIthe three points of the triangle \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<class T> class engine::core::triangle3d< T >"
+3d triangle template class for doing collision detection and other things. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class T> \fBcore::vector3df\fP \fBengine::core::triangle3d\fP< T >::closestPointOnTriangle (const \fBcore::vector3df\fP & p) const\fC [inline]\fP"
+.PP
+Returns the closest point on a triangle to a point on the same plane. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIp,:\fP Point which must be on the same plane as the triangle. 
+.RE
+.PP
+
+.SS "template<class T> bool \fBengine::core::triangle3d\fP< T >::getIntersectionOfPlaneWithLine (const \fBvector3d\fP< T > & linePoint, const \fBvector3d\fP< T > & lineVect, \fBvector3d\fP< T > & outIntersection) const\fC [inline]\fP"
+.PP
+Calculates the intersection between a 3d line and the plane the triangle is on. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIlineVect,:\fP Vector of the line to intersect with. 
+.br
+\fIlinePoint,:\fP Point of the line to intersect with. 
+.br
+\fIoutIntersection,:\fP Place to store the intersection point, if there is one. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if there was an intersection, false if there was not. 
+.RE
+.PP
+
+.SS "template<class T> bool \fBengine::core::triangle3d\fP< T >::getIntersectionWithLimitedLine (const \fBline3d\fP< T > & line, \fBvector3d\fP< T > & outIntersection) const\fC [inline]\fP"
+.PP
+Returns an intersection with a 3d line. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIlineVect,:\fP Vector of the line to intersect with. 
+.br
+\fIlinePoint,:\fP Point of the line to intersect with. 
+.br
+\fIoutIntersection,:\fP Place to store the intersection point, if there is one. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if there was an intersection, false if there was not. 
+.RE
+.PP
+
+.SS "template<class T> bool \fBengine::core::triangle3d\fP< T >::getIntersectionWithLine (const \fBvector3d\fP< T > & linePoint, const \fBvector3d\fP< T > & lineVect, \fBvector3d\fP< T > & outIntersection) const\fC [inline]\fP"
+.PP
+Returns an intersection with a 3d line. Please note that also points are returned as intersection, which are on the line, but not between the start and end point of the line. If you want the returned point be between start and end, please use \fBgetIntersectionWithLimitedLine()\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIlineVect,:\fP Vector of the line to intersect with. 
+.br
+\fIlinePoint,:\fP Point of the line to intersect with. 
+.br
+\fIoutIntersection,:\fP Place to store the intersection point, if there is one. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if there was an intersection, false if there was not. 
+.RE
+.PP
+
+.SS "template<class T> \fBvector3d\fP<T> \fBengine::core::triangle3d\fP< T >::getNormal () const\fC [inline]\fP"
+.PP
+Returns the normal of the triangle. Please note: The normal is not normalized. 
+.SS "template<class T> bool \fBengine::core::triangle3d\fP< T >::isFrontFacing (const \fBvector3d\fP< T > & lookDirection) const\fC [inline]\fP"
+.PP
+Returns if the triangle is front of backfacing. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIlookDirection,:\fP Look direction. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if the plane is front facing, which mean it would be visible, and false if it is backfacing. 
+.RE
+.PP
+
+.SS "template<class T> bool \fBengine::core::triangle3d\fP< T >::isPointInside (const \fBvector3d\fP< T > & p) const\fC [inline]\fP"
+.PP
+Returns if a point is inside the triangle 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIp,:\fP Point to test. Assumes that this point is already on the plane of the triangle. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if the point is inside the triangle, otherwise false. 
+.RE
+.PP
+
+.SS "template<class T> bool \fBengine::core::triangle3d\fP< T >::isPointInsideFast (const \fBvector3d\fP< T > & p) const\fC [inline]\fP"
+.PP
+Returns if a point is inside the triangle. This method is an implementation of the example used in a paper by Kasper Fauerby original written by Keidy from Mr-Gamemaker. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIp,:\fP Point to test. Assumes that this point is already on the plane of the triangle. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if the point is inside the triangle, otherwise false. 
+.RE
+.PP
+
+.SS "template<class T> bool \fBengine::core::triangle3d\fP< T >::isTotalInsideBox (const \fBaabbox3d\fP< f32 > & box) const\fC [inline]\fP"
+.PP
+Determinates if the triangle is totally inside a bounding box. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIbox,:\fP Box to check. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if the triangle is withing the box, and false if it is not. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

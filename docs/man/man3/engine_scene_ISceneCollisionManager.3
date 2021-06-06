@@ -1,0 +1,159 @@
+.TH "engine::scene::ISceneCollisionManager" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::ISceneCollisionManager \- The Scene Collision Manager provides methods for performing collision tests and picking on scene nodes.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ISceneCollisionManager.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~ISceneCollisionManager\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual bool \fBgetCollisionPoint\fP (const \fBcore::line3d\fP< f32 > &ray, \fBITriangleSelector\fP *selector, \fBcore::vector3df\fP &outCollisionPoint, \fBcore::triangle3df\fP &outTriangle)=0"
+.br
+.ti -1c
+.RI "virtual \fBcore::vector3df\fP \fBgetCollisionResultPosition\fP (\fBITriangleSelector\fP *selector, const \fBcore::vector3df\fP &ellipsoidPosition, const \fBcore::vector3df\fP &ellipsoidRadius, const \fBcore::vector3df\fP &ellipsoidDirectionAndSpeed, \fBcore::triangle3df\fP &triout, bool &outFalling, f32 slidingSpeed=0.0005f, const core::vector3df &gravityDirectionAndSpeed=core::vector3df(0.0f, 0.0f, 0.0f))=0"
+.br
+.ti -1c
+.RI "virtual \fBcore::line3d\fP< f32 > \fBgetRayFromScreenCoordinates\fP (\fBcore::position2d\fP< s32 > pos, \fBICameraSceneNode\fP *camera=0)=0"
+.br
+.ti -1c
+.RI "virtual \fBcore::position2d\fP< s32 > \fBgetScreenCoordinatesFrom3DPosition\fP (\fBcore::vector3df\fP pos, \fBICameraSceneNode\fP *camera=0)=0"
+.br
+.ti -1c
+.RI "virtual \fBISceneNode\fP * \fBgetSceneNodeFromScreenCoordinatesBB\fP (\fBcore::position2d\fP< s32 > pos, s32 idBitMask=0, bool bNoDebugObjects=false)=0"
+.br
+.ti -1c
+.RI "virtual \fBISceneNode\fP * \fBgetSceneNodeFromRayBB\fP (\fBcore::line3d\fP< f32 > ray, s32 idBitMask=0, bool bNoDebugObjects=false)=0"
+.br
+.ti -1c
+.RI "virtual \fBISceneNode\fP * \fBgetSceneNodeFromCameraBB\fP (\fBICameraSceneNode\fP *camera, s32 idBitMask=0, bool bNoDebugObjects=false)=0"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+The Scene Collision Manager provides methods for performing collision tests and picking on scene nodes. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual bool engine::scene::ISceneCollisionManager::getCollisionPoint (const \fBcore::line3d\fP< f32 > & ray, \fBITriangleSelector\fP * selector, \fBcore::vector3df\fP & outCollisionPoint, \fBcore::triangle3df\fP & outTriangle)\fC [pure virtual]\fP"
+.PP
+Finds the collision point of a line and lots of triangles, if there is one. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIray,:\fP Line with witch collisions are tested. 
+.br
+\fIselector,:\fP TriangleSelector containing the triangles. It can be created for example using \fBISceneManager::createTriangleSelector()\fP or ISceneManager::createTriangleOctTreeSelector(). 
+.br
+\fIoutCollisionPoint,:\fP If a collision is detected, this will contain the position of the nearest collision. 
+.br
+\fIoutTriangle,:\fP If a collision is detected, this will contain the triangle with which the ray collided. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if a collision was detected and false if not. 
+.RE
+.PP
+
+.SS "virtual \fBcore::vector3df\fP engine::scene::ISceneCollisionManager::getCollisionResultPosition (\fBITriangleSelector\fP * selector, const \fBcore::vector3df\fP & ellipsoidPosition, const \fBcore::vector3df\fP & ellipsoidRadius, const \fBcore::vector3df\fP & ellipsoidDirectionAndSpeed, \fBcore::triangle3df\fP & triout, bool & outFalling, f32 slidingSpeed = \fC0.0005f\fP, const \fBcore::vector3df\fP & gravityDirectionAndSpeed = \fC\fBcore::vector3df\fP(0.0f, 0.0f, 0.0f)\fP)\fC [pure virtual]\fP"
+.PP
+Collides a moving ellipsoid with a 3d world with gravity and returns the resulting new position of the ellipsoid. This can be used for moving a character in a 3d world: The character will slide at walls and is able to walk up stairs. The method used how to calculate the collision result position is based on the paper 'Improved Collision detection and Response' by Kasper Fauerby. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIselector,:\fP TriangleSelector containing the triangles of the world. It can be created for example using \fBISceneManager::createTriangleSelector()\fP or ISceneManager::createTriangleOctTreeSelector(). 
+.br
+\fIellipsoidPosition,:\fP Position of the ellipsoid. 
+.br
+\fIellipsoidRadius,:\fP Radius of the ellipsoid. 
+.br
+\fIellipsoidDirectionAndSpeed,:\fP Direction and speed of the movement of the ellipsoid. 
+.br
+\fIgravityDirectionAndSpeed,:\fP Direction and force of gravity. 
+.br
+\fItriout,:\fP Optional parameter where the last triangle causing a collision is stored, if there is a collision. 
+.br
+\fIoutFallint,:\fP Is set to true if the ellipsoid is falling down, caused by gravity. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the new position of the ellipsoid. 
+.RE
+.PP
+
+.SS "virtual \fBcore::line3d\fP<f32> engine::scene::ISceneCollisionManager::getRayFromScreenCoordinates (\fBcore::position2d\fP< s32 > pos, \fBICameraSceneNode\fP * camera = \fC0\fP)\fC [pure virtual]\fP"
+.PP
+Returns a 3d ray which would go through the 2d screen coodinates. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpos,:\fP Screen coordinates in pixels. 
+.br
+\fIcamera,:\fP Camera from which the ray starts. If null, the active camera is used. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a ray starting from the position of the camera and ending at a lenght of the far value of the camera at a position which would be behind the 2d screen coodinates. 
+.RE
+.PP
+
+.SS "virtual \fBISceneNode\fP* engine::scene::ISceneCollisionManager::getSceneNodeFromCameraBB (\fBICameraSceneNode\fP * camera, s32 idBitMask = \fC0\fP, bool bNoDebugObjects = \fCfalse\fP)\fC [pure virtual]\fP"
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the scene node nearest to the camera, which collides with the ray and matches the idBitMask, if the mask is not null. If no scene node is found, 0 is returned. 
+.RE
+.PP
+
+.SS "virtual \fBISceneNode\fP* engine::scene::ISceneCollisionManager::getSceneNodeFromRayBB (\fBcore::line3d\fP< f32 > ray, s32 idBitMask = \fC0\fP, bool bNoDebugObjects = \fCfalse\fP)\fC [pure virtual]\fP"
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the scene node nearest to ray.start, which collides with the ray and matches the idBitMask, if the mask is not null. If no scene node is found, 0 is returned. 
+.RE
+.PP
+
+.SS "virtual \fBISceneNode\fP* engine::scene::ISceneCollisionManager::getSceneNodeFromScreenCoordinatesBB (\fBcore::position2d\fP< s32 > pos, s32 idBitMask = \fC0\fP, bool bNoDebugObjects = \fCfalse\fP)\fC [pure virtual]\fP"
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the visible scene node under screen coordinates with matching bits in its id. If there is no scene node under this position, 0 is returned. 
+.RE
+.PP
+
+.SS "virtual \fBcore::position2d\fP<s32> engine::scene::ISceneCollisionManager::getScreenCoordinatesFrom3DPosition (\fBcore::vector3df\fP pos, \fBICameraSceneNode\fP * camera = \fC0\fP)\fC [pure virtual]\fP"
+.PP
+Calculates 2d screen position from a 3d position. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpos,:\fP 3D position in world space to be transformed into 2d. 
+.br
+\fIcamera,:\fP Camera to be used. If null, the currently active camera is used. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the 2d screen coordinates which a object in the 3d world would have if it would be rendered to the screen. If the 3d position is behind the camera, it is set to (-10000,-10000). In most cases you can ignore this fact, because if you use this method for drawing a decorator over a 3d object, it will be clipped by the screen borders. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

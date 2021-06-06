@@ -1,0 +1,47 @@
+.TH "engine::gui::IGUIScrollBar" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::gui::IGUIScrollBar \- Default scroll bar GUI element.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IGUIScrollBar.h>\fP
+.PP
+Inherits \fBengine::gui::IGUIElement\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBIGUIScrollBar\fP (\fBIGUIEnvironment\fP *environment, \fBIGUIElement\fP *parent, s32 id, \fBcore::rect\fP< s32 > rectangle)"
+.br
+.RI "\fIconstructor \fP"
+.ti -1c
+.RI "\fB~IGUIScrollBar\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual void \fBsetMax\fP (s32 max)=0"
+.br
+.RI "\fIsets the maximum value of the scrollbar. must be > 0 \fP"
+.ti -1c
+.RI "virtual s32 \fBgetPos\fP ()=0"
+.br
+.RI "\fIgets the current position of the scrollbar \fP"
+.ti -1c
+.RI "virtual void \fBsetPos\fP (s32 pos)=0"
+.br
+.RI "\fIsets the current position of the scrollbar \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Default scroll bar GUI element. 
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

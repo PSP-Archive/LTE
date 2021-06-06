@@ -1,0 +1,62 @@
+.TH "C:/EngineSDK/include/SceneParameters.h" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+C:/EngineSDK/include/SceneParameters.h \- Header file containing all scene parameters for modifying mesh loading etc. 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI "namespace \fBengine\fP"
+.br
+.ti -1c
+.RI "namespace \fBengine::scene\fP"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "const char *const \fBengine::scene::CSM_TEXTURE_PATH\fP = 'CSM_TexturePath'"
+.br
+.RI "\fIName of the parameter for changing the texture path of the built-in csm loader. \fP"
+.ti -1c
+.RI "const char *const \fBengine::scene::LMTS_TEXTURE_PATH\fP = 'LMTS_TexturePath'"
+.br
+.RI "\fIName of the parameter for changing the texture path of the built-in lmts loader. \fP"
+.ti -1c
+.RI "const char *const \fBengine::scene::MY3D_TEXTURE_PATH\fP = 'MY3D_TexturePath'"
+.br
+.RI "\fIName of the parameter for changing the texture path of the built-in my3d loader. \fP"
+.ti -1c
+.RI "const char *const \fBengine::scene::COLLADA_CREATE_SCENE_INSTANCES\fP = 'COLLADA_CreateSceneInstances'"
+.br
+.RI "\fIName of the parameter specifying the COLLADA mesh loading mode. \fP"
+.ti -1c
+.RI "const char *const \fBengine::scene::DMF_TEXTURE_PATH\fP = 'DMF_TexturePath'"
+.br
+.RI "\fIName of the parameter for changing the texture path of the built-in DMF loader. \fP"
+.ti -1c
+.RI "const char *const \fBengine::scene::DMF_USE_MATERIALS_DIRS\fP = 'DMF_MaterialsDir'"
+.br
+.RI "\fIName of the parameter for preserving DMF textures dir structure with built-in DMF loader. \fP"
+.ti -1c
+.RI "const char *const \fBengine::scene::DMF_ALPHA_CHANNEL_REF\fP = 'DMF_AlphaRef'"
+.br
+.RI "\fIName of the parameter for setting reference value of alpha in transparent materials. \fP"
+.ti -1c
+.RI "const char *const \fBengine::scene::DMF_FLIP_ALPHA_TEXTURES\fP = 'DMF_FlipAlpha'"
+.br
+.RI "\fIName of the parameter for choose to flip or not tga files. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Header file containing all scene parameters for modifying mesh loading etc. 
+
+This file includes all parameter names which can be set using ISceneManager::getParameters() to modify the behaviour of plugins and mesh loaders. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

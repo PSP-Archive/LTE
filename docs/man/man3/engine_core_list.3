@@ -1,0 +1,189 @@
+.TH "engine::core::list" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::core::list \- Double linked list template.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <engineList.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBlist\fP ()"
+.br
+.RI "\fIconstructor \fP"
+.ti -1c
+.RI "\fB~list\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "u32 \fBgetSize\fP () const "
+.br
+.ti -1c
+.RI "void \fBclear\fP ()"
+.br
+.ti -1c
+.RI "bool \fBempty\fP () const "
+.br
+.ti -1c
+.RI "void \fBpush_back\fP (const T &element)"
+.br
+.ti -1c
+.RI "void \fBpush_front\fP (const T &element)"
+.br
+.ti -1c
+.RI "\fBIterator\fP \fBbegin\fP () const "
+.br
+.ti -1c
+.RI "\fBIterator\fP \fBend\fP () const "
+.br
+.ti -1c
+.RI "\fBIterator\fP \fBgetLast\fP () const "
+.br
+.ti -1c
+.RI "void \fBinsert_after\fP (\fBIterator\fP &it, const T &element)"
+.br
+.ti -1c
+.RI "void \fBinsert_before\fP (\fBIterator\fP &it, const T &element)"
+.br
+.ti -1c
+.RI "\fBIterator\fP \fBerase\fP (\fBIterator\fP &it)"
+.br
+.in -1c
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBIterator\fP"
+.br
+.RI "\fIList iterator. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<class T> class engine::core::list< T >"
+Double linked list template. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class T> \fBIterator\fP \fBengine::core::list\fP< T >::begin () const\fC [inline]\fP"
+.PP
+Gets begin node. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a list iterator pointing to the begin of the list. 
+.RE
+.PP
+
+.SS "template<class T> void \fBengine::core::list\fP< T >::clear ()\fC [inline]\fP"
+.PP
+Clears the list, deletes all elements in the list. All existing iterators of this list will be invalid. 
+.SS "template<class T> bool \fBengine::core::list\fP< T >::empty () const\fC [inline]\fP"
+.PP
+Returns ture if the list is empty. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if the list is empty and false if not. 
+.RE
+.PP
+
+.SS "template<class T> \fBIterator\fP \fBengine::core::list\fP< T >::end () const\fC [inline]\fP"
+.PP
+Gets end node. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a list iterator pointing to null. 
+.RE
+.PP
+
+.SS "template<class T> \fBIterator\fP \fBengine::core::list\fP< T >::erase (\fBIterator\fP & it)\fC [inline]\fP"
+.PP
+Erases an element 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIit,:\fP \fBIterator\fP pointing to the element which should be erased. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns iterator pointing to next element. 
+.RE
+.PP
+
+.SS "template<class T> \fBIterator\fP \fBengine::core::list\fP< T >::getLast () const\fC [inline]\fP"
+.PP
+Gets last element. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a list iterator pointing to the end of the list. 
+.RE
+.PP
+
+.SS "template<class T> u32 \fBengine::core::list\fP< T >::getSize () const\fC [inline]\fP"
+.PP
+Returns amount of elements in list. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns amount of elements in the list. 
+.RE
+.PP
+
+.SS "template<class T> void \fBengine::core::list\fP< T >::insert_after (\fBIterator\fP & it, const T & element)\fC [inline]\fP"
+.PP
+Inserts an element after an element. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIit,:\fP \fBIterator\fP pointing to element after which the new element should be inserted. 
+.br
+\fIelement,:\fP The new element to be insterted into the list. 
+.RE
+.PP
+
+.SS "template<class T> void \fBengine::core::list\fP< T >::insert_before (\fBIterator\fP & it, const T & element)\fC [inline]\fP"
+.PP
+Inserts an element before an element. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIit,:\fP \fBIterator\fP pointing to element before which the new element should be inserted. 
+.br
+\fIelement,:\fP The new element to be insterted into the list. 
+.RE
+.PP
+
+.SS "template<class T> void \fBengine::core::list\fP< T >::push_back (const T & element)\fC [inline]\fP"
+.PP
+Adds an element at the end of the list. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIelement,:\fP Element to add to the list. 
+.RE
+.PP
+
+.SS "template<class T> void \fBengine::core::list\fP< T >::push_front (const T & element)\fC [inline]\fP"
+.PP
+Adds an element at the begin of the list. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIelement,:\fP Element to add to the list. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

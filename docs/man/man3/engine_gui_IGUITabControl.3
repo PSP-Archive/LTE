@@ -1,0 +1,86 @@
+.TH "engine::gui::IGUITabControl" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::gui::IGUITabControl \- A standard tab control.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IGUITabControl.h>\fP
+.PP
+Inherits \fBengine::gui::IGUIElement\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBIGUITabControl\fP (\fBIGUIEnvironment\fP *environment, \fBIGUIElement\fP *parent, s32 id, \fBcore::rect\fP< s32 > rectangle)"
+.br
+.RI "\fIconstructor \fP"
+.ti -1c
+.RI "virtual \fB~IGUITabControl\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual \fBIGUITab\fP * \fBaddTab\fP (wchar_t *caption, s32 id=-1)=0"
+.br
+.RI "\fIAdds a tab. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetTabcount\fP ()=0"
+.br
+.RI "\fIReturns amount of tabs in the tabcontrol. \fP"
+.ti -1c
+.RI "virtual \fBIGUITab\fP * \fBgetTab\fP (s32 idx)=0"
+.br
+.RI "\fIReturns a tab based on zero based index. \fP"
+.ti -1c
+.RI "virtual bool \fBsetActiveTab\fP (s32 idx)=0"
+.br
+.RI "\fIBrings a tab to front. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetActiveTab\fP ()=0"
+.br
+.RI "\fIReturns which tab is currently active. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+A standard tab control. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual \fBIGUITab\fP* engine::gui::IGUITabControl::getTab (s32 idx)\fC [pure virtual]\fP"
+.PP
+Returns a tab based on zero based index. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIidx,:\fP zero based index of tab. Is a value betwenn 0 and \fBgetTabcount()\fP-1; 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns pointer to the Tab. Returns 0 if no tab is corresponding to this tab. 
+.RE
+.PP
+
+.SS "virtual bool engine::gui::IGUITabControl::setActiveTab (s32 idx)\fC [pure virtual]\fP"
+.PP
+Brings a tab to front. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIidx,:\fP number of the tab. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if successful. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

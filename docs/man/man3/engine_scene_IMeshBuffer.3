@@ -1,0 +1,88 @@
+.TH "engine::scene::IMeshBuffer" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::IMeshBuffer \- Struct for holding a mesh with a single material.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IMeshBuffer.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+Inherited by \fBengine::scene::SMeshBuffer\fP, \fBengine::scene::SMeshBufferLightMap\fP, and \fBengine::scene::SMeshBufferTangents\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~IMeshBuffer\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual \fBvideo::SMaterial\fP & \fBgetMaterial\fP ()=0"
+.br
+.RI "\fIreturns the material of this meshbuffer \fP"
+.ti -1c
+.RI "virtual const \fBvideo::SMaterial\fP & \fBgetMaterial\fP () const =0"
+.br
+.RI "\fIreturns the material of this meshbuffer \fP"
+.ti -1c
+.RI "virtual \fBvideo::E_VERTEX_TYPE\fP \fBgetVertexType\fP () const =0"
+.br
+.RI "\fIreturns which type of vertex data is stored. \fP"
+.ti -1c
+.RI "virtual const void * \fBgetVertices\fP () const =0"
+.br
+.ti -1c
+.RI "virtual void * \fBgetVertices\fP ()=0"
+.br
+.ti -1c
+.RI "virtual s32 \fBgetVertexCount\fP () const =0"
+.br
+.RI "\fIreturns amount of vertices \fP"
+.ti -1c
+.RI "virtual const u16 * \fBgetIndices\fP () const =0"
+.br
+.RI "\fIreturns pointer to Indices \fP"
+.ti -1c
+.RI "virtual u16 * \fBgetIndices\fP ()=0"
+.br
+.RI "\fIreturns pointer to Indices \fP"
+.ti -1c
+.RI "virtual s32 \fBgetIndexCount\fP () const =0"
+.br
+.RI "\fIreturns amount of indices \fP"
+.ti -1c
+.RI "virtual const \fBcore::aabbox3d\fP< f32 > & \fBgetBoundingBox\fP () const =0"
+.br
+.RI "\fIreturns an axis aligned bounding box \fP"
+.ti -1c
+.RI "virtual \fBcore::aabbox3d\fP< f32 > & \fBgetBoundingBox\fP ()=0"
+.br
+.RI "\fIreturns an axis aligned bounding box \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Struct for holding a mesh with a single material. 
+
+\fBSMeshBuffer\fP is a simple implementation of a MeshBuffer. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual void* engine::scene::IMeshBuffer::getVertices ()\fC [pure virtual]\fP"
+.PP
+returns pointer to vertex data. The data is a array of vertices. Which vertex type is used can be determinated with \fBgetVertexType()\fP. 
+.PP
+Implemented in \fBengine::scene::SMeshBuffer\fP, \fBengine::scene::SMeshBufferLightMap\fP, and \fBengine::scene::SMeshBufferTangents\fP.
+.SS "virtual const void* engine::scene::IMeshBuffer::getVertices () const\fC [pure virtual]\fP"
+.PP
+returns pointer to vertex data. The data is a array of vertices. Which vertex type is used can be determinated with \fBgetVertexType()\fP. 
+.PP
+Implemented in \fBengine::scene::SMeshBuffer\fP, \fBengine::scene::SMeshBufferLightMap\fP, and \fBengine::scene::SMeshBufferTangents\fP.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

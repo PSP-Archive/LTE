@@ -1,0 +1,45 @@
+.TH "engine::scene::IParticleAffector" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::IParticleAffector \- A particle affector modifies particles.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IParticleAffector.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual void \fBaffect\fP (u32 now, \fBSParticle\fP *particlearray, u32 count)=0"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+A particle affector modifies particles. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual void engine::scene::IParticleAffector::affect (u32 now, \fBSParticle\fP * particlearray, u32 count)\fC [pure virtual]\fP"
+.PP
+Affects an array of particles. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fInow,:\fP Current time. (Same as \fBITimer::getTime()\fP would return) 
+.br
+\fIparticlearray,:\fP Array of particles. 
+.br
+\fIcount,:\fP Amount of particles in array. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

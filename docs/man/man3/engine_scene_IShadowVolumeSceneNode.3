@@ -1,0 +1,35 @@
+.TH "engine::scene::IShadowVolumeSceneNode" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::IShadowVolumeSceneNode \- Scene node for rendering a shadow volume into a stencil buffer.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IShadowVolumeSceneNode.h>\fP
+.PP
+Inherits \fBengine::scene::ISceneNode\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBIShadowVolumeSceneNode\fP (\fBISceneNode\fP *parent, \fBISceneManager\fP *mgr, s32 id)"
+.br
+.RI "\fIconstructor \fP"
+.ti -1c
+.RI "virtual void \fBsetMeshToRenderFrom\fP (\fBIMesh\fP *mesh)=0"
+.br
+.RI "\fIsets the mesh from which the shadow volume should be generated. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Scene node for rendering a shadow volume into a stencil buffer. 
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

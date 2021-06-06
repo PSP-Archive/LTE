@@ -1,0 +1,65 @@
+.TH "engine::scene::IMetaTriangleSelector" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::IMetaTriangleSelector \- Interface for making multiple triangle selectors work as one big selector.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IMetaTriangleSelector.h>\fP
+.PP
+Inherits \fBengine::scene::ITriangleSelector\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual void \fBaddTriangleSelector\fP (\fBITriangleSelector\fP *toAdd)=0"
+.br
+.ti -1c
+.RI "virtual bool \fBremoveTriangleSelector\fP (\fBITriangleSelector\fP *toRemove)=0"
+.br
+.ti -1c
+.RI "virtual void \fBremoveAllTriangleSelectors\fP ()=0"
+.br
+.RI "\fIRemoves all triangle selectors from the collection. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Interface for making multiple triangle selectors work as one big selector. 
+
+This is nothing more than a collection of one or more triangle selectors providing together the interface of one triangle selector. In this way, collision tests can be done with different triangle soups in one pass. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual void engine::scene::IMetaTriangleSelector::addTriangleSelector (\fBITriangleSelector\fP * toAdd)\fC [pure virtual]\fP"
+.PP
+Adds a triangle selector to the collection of triangle selectors in this metaTriangleSelector. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItoAdd,:\fP Pointer to an triangle selector to add to the list. 
+.RE
+.PP
+
+.SS "virtual bool engine::scene::IMetaTriangleSelector::removeTriangleSelector (\fBITriangleSelector\fP * toRemove)\fC [pure virtual]\fP"
+.PP
+Removes a specific triangle selector which was added before from the collection. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItoRemove,:\fP Pointer to an triangle selector which is in the list but will be removed. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if successful, false if not. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

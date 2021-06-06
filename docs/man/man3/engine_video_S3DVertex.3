@@ -1,0 +1,57 @@
+.TH "engine::video::S3DVertex" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::video::S3DVertex \- standard vertex used by the engine engine.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <S3DVertex.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBS3DVertex\fP ()"
+.br
+.RI "\fIdefault constructor \fP"
+.ti -1c
+.RI "\fBS3DVertex\fP (f32 x, f32 y, f32 z, f32 nx, f32 ny, f32 nz, \fBSColor\fP c, f32 tu, f32 tv)"
+.br
+.RI "\fIconstructor \fP"
+.ti -1c
+.RI "\fBS3DVertex\fP (const \fBcore::vector3df\fP &pos, const \fBcore::vector3df\fP &normal, \fBvideo::SColor\fP &color, const \fBcore::vector2d\fP< f32 > &tcoords)"
+.br
+.RI "\fIconstructor \fP"
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBcore::vector2d\fP< f32 > \fBTCoords\fP"
+.br
+.RI "\fITexture coordinates. \fP"
+.ti -1c
+.RI "\fBengine::video::SColor\fP \fBColor\fP"
+.br
+.RI "\fIColor. \fP"
+.ti -1c
+.RI "\fBcore::vector3df\fP \fBNormal\fP"
+.br
+.RI "\fINormal vector. \fP"
+.ti -1c
+.RI "\fBcore::vector3df\fP \fBPos\fP"
+.br
+.RI "\fIPosition. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+standard vertex used by the engine engine. 
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

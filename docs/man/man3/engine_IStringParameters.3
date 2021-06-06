@@ -1,0 +1,157 @@
+.TH "engine::IStringParameters" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::IStringParameters \- Provides a generic interface for parameters and their values as strings.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IStringParameters.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual void \fBsetParameter\fP (const c8 *parameterName, const c8 *value)=0"
+.br
+.ti -1c
+.RI "virtual const c8 * \fBgetParameter\fP (const c8 *parameterName)=0"
+.br
+.ti -1c
+.RI "virtual void \fBsetParameter\fP (const c8 *parameterName, bool value)=0"
+.br
+.RI "\fISets a parameter as boolean value. \fP"
+.ti -1c
+.RI "virtual bool \fBgetParameterAsBool\fP (const c8 *parameterName)=0"
+.br
+.ti -1c
+.RI "virtual void \fBsetParameter\fP (const c8 *parameterName, s32 value)=0"
+.br
+.RI "\fISets a parameter as integer value. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetParameterAsInt\fP (const c8 *parameterName)=0"
+.br
+.ti -1c
+.RI "virtual void \fBsetParameter\fP (const c8 *parameterName, f32 value)=0"
+.br
+.RI "\fISets a parameter as float value. \fP"
+.ti -1c
+.RI "virtual f32 \fBgetParameterAsFloat\fP (const c8 *parameterName)=0"
+.br
+.ti -1c
+.RI "virtual s32 \fBgetParameterCount\fP ()=0"
+.br
+.RI "\fIReturns amount of string parameters set in this scene manager. \fP"
+.ti -1c
+.RI "virtual const c8 * \fBgetParameterName\fP (s32 index)=0"
+.br
+.ti -1c
+.RI "virtual const c8 * \fBgetParameterValue\fP (s32 index)=0"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Provides a generic interface for parameters and their values as strings. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual const c8* engine::IStringParameters::getParameter (const c8 * parameterName)\fC [pure virtual]\fP"
+.PP
+Gets a string parameter. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIparameterName,:\fP Name of the parameter to get. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns value of the parameter previously set by \fBsetParameter()\fP as string or 0 if parameter is not set. 
+.RE
+.PP
+
+.SS "virtual bool engine::IStringParameters::getParameterAsBool (const c8 * parameterName)\fC [pure virtual]\fP"
+.PP
+Gets a parameter as boolean value 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIparameterName,:\fP Name of the parameter to get. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns value of the parameter previously set by \fBsetParameter()\fP as bool or 0 if parameter is not set. 
+.RE
+.PP
+
+.SS "virtual f32 engine::IStringParameters::getParameterAsFloat (const c8 * parameterName)\fC [pure virtual]\fP"
+.PP
+Gets a parameter as integer value 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIparameterName,:\fP Name of the parameter to get. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns value of the parameter previously set by \fBsetParameter()\fP as float value or 0 if parameter is not set. 
+.RE
+.PP
+
+.SS "virtual s32 engine::IStringParameters::getParameterAsInt (const c8 * parameterName)\fC [pure virtual]\fP"
+.PP
+Gets a parameter as integer value 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIparameterName,:\fP Name of the parameter to get. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns value of the parameter previously set by \fBsetParameter()\fP as integer or 0 if parameter is not set. 
+.RE
+.PP
+
+.SS "virtual const c8* engine::IStringParameters::getParameterName (s32 index)\fC [pure virtual]\fP"
+.PP
+Returns string parameter name by index. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIindex,:\fP Index value, must be between 0 and \fBgetParameterCount()\fP-1. 
+.RE
+.PP
+
+.SS "virtual const c8* engine::IStringParameters::getParameterValue (s32 index)\fC [pure virtual]\fP"
+.PP
+Returns string parameter value by index. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIindex,:\fP Index value, must be between 0 and \fBgetParameterCount()\fP-1. 
+.RE
+.PP
+
+.SS "virtual void engine::IStringParameters::setParameter (const c8 * parameterName, const c8 * value)\fC [pure virtual]\fP"
+.PP
+Sets a string parameter. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIparameterName,:\fP Name for the parameter 
+.br
+\fIvalue,:\fP Value for the parameter. Set this to 0 to delete the parameter 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

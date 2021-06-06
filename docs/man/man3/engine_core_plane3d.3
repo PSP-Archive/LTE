@@ -1,0 +1,181 @@
+.TH "engine::core::plane3d" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::core::plane3d \- Template plane class with some intersection testing methods.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <plane3d.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBgetIntersectionWithLine\fP (const \fBvector3d\fP< T > &linePoint, const \fBvector3d\fP< T > &lineVect, \fBvector3d\fP< T > &outIntersection) const "
+.br
+.ti -1c
+.RI "f32 \fBgetKnownIntersectionWithLine\fP (const \fBvector3d\fP< T > &linePoint1, const \fBvector3d\fP< T > &linePoint2) const "
+.br
+.ti -1c
+.RI "bool \fBgetIntersectionWithLimitedLine\fP (const \fBvector3d\fP< T > &linePoint1, const \fBvector3d\fP< T > &linePoint2, \fBvector3d\fP< T > &outIntersection) const "
+.br
+.ti -1c
+.RI "\fBEIntersectionRelation3D\fP \fBclassifyPointRelation\fP (const \fBvector3d\fP< T > &point) const "
+.br
+.ti -1c
+.RI "void \fBrecalculateD\fP (const \fBvector3d\fP< T > &MPoint)"
+.br
+.ti -1c
+.RI "\fBvector3d\fP< T > \fBgetMemberPoint\fP () const "
+.br
+.ti -1c
+.RI "bool \fBexistsInterSection\fP (const \fBplane3d\fP< T > &other) const "
+.br
+.ti -1c
+.RI "bool \fBgetIntersectionWithPlane\fP (const \fBplane3d\fP< T > &other, \fBvector3d\fP< T > &outLinePoint, \fBvector3d\fP< T > &outLineVect) const "
+.br
+.ti -1c
+.RI "bool \fBgetIntersectionWithPlanes\fP (const \fBplane3d\fP< T > &o1, const \fBplane3d\fP< T > &o2, \fBvector3d\fP< T > &outPoint) const "
+.br
+.RI "\fIReturns the intersection point with two other planes if there is one. \fP"
+.ti -1c
+.RI "bool \fBisFrontFacing\fP (const \fBvector3d\fP< T > &lookDirection) const "
+.br
+.ti -1c
+.RI "T \fBgetDistanceTo\fP (const \fBvector3d\fP< T > &point) const "
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<class T> class engine::core::plane3d< T >"
+Template plane class with some intersection testing methods. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class T> \fBEIntersectionRelation3D\fP \fBengine::core::plane3d\fP< T >::classifyPointRelation (const \fBvector3d\fP< T > & point) const\fC [inline]\fP"
+.PP
+Classifies the relation of a point to this plane. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpoint,:\fP Point to classify its relation. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns ISREL3D_FRONT if the point is in front of the plane, ISREL3D_BACK if the point is behind of the plane, and ISREL3D_PLANAR if the point is within the plane. 
+.RE
+.PP
+
+.SS "template<class T> bool \fBengine::core::plane3d\fP< T >::existsInterSection (const \fBplane3d\fP< T > & other) const\fC [inline]\fP"
+.PP
+Tests if there is a intersection between this plane and another 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if there is a intersection. 
+.RE
+.PP
+
+.SS "template<class T> T \fBengine::core::plane3d\fP< T >::getDistanceTo (const \fBvector3d\fP< T > & point) const\fC [inline]\fP"
+.PP
+Returns the distance to a point. Note that this only works if the normal is Normalized. 
+.SS "template<class T> bool \fBengine::core::plane3d\fP< T >::getIntersectionWithLimitedLine (const \fBvector3d\fP< T > & linePoint1, const \fBvector3d\fP< T > & linePoint2, \fBvector3d\fP< T > & outIntersection) const\fC [inline]\fP"
+.PP
+Returns an intersection with a 3d line, limited between two 3d points. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIlinePoint1,:\fP Point 1 of the line. 
+.br
+\fIlinePoint2,:\fP Point 2 of the line. 
+.br
+\fIoutIntersection,:\fP Place to store the intersection point, if there is one. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if there was an intersection, false if there was not. 
+.RE
+.PP
+
+.SS "template<class T> bool \fBengine::core::plane3d\fP< T >::getIntersectionWithLine (const \fBvector3d\fP< T > & linePoint, const \fBvector3d\fP< T > & lineVect, \fBvector3d\fP< T > & outIntersection) const\fC [inline]\fP"
+.PP
+Returns an intersection with a 3d line. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIlineVect,:\fP Vector of the line to intersect with. 
+.br
+\fIlinePoint,:\fP Point of the line to intersect with. 
+.br
+\fIoutIntersection,:\fP Place to store the intersection point, if there is one. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if there was an intersection, false if there was not. 
+.RE
+.PP
+
+.SS "template<class T> bool \fBengine::core::plane3d\fP< T >::getIntersectionWithPlane (const \fBplane3d\fP< T > & other, \fBvector3d\fP< T > & outLinePoint, \fBvector3d\fP< T > & outLineVect) const\fC [inline]\fP"
+.PP
+Intersects this plane with another. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if there is a intersection, false if not. 
+.RE
+.PP
+
+.SS "template<class T> f32 \fBengine::core::plane3d\fP< T >::getKnownIntersectionWithLine (const \fBvector3d\fP< T > & linePoint1, const \fBvector3d\fP< T > & linePoint2) const\fC [inline]\fP"
+.PP
+Returns where on a line between two points an intersection with this plane happened. Only useful if known that there is an intersection. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIlinePoint1,:\fP Point1 of the line to intersect with. 
+.br
+\fIlinePoint2,:\fP Point2 of the line to intersect with. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns where on a line between two points an intersection with this plane happened. For example, 0.5 is returned if the intersection happened exectly in the middle of the two points. 
+.RE
+.PP
+
+.SS "template<class T> \fBvector3d\fP<T> \fBengine::core::plane3d\fP< T >::getMemberPoint () const\fC [inline]\fP"
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a member point of the plane. 
+.RE
+.PP
+
+.SS "template<class T> bool \fBengine::core::plane3d\fP< T >::isFrontFacing (const \fBvector3d\fP< T > & lookDirection) const\fC [inline]\fP"
+.PP
+Returns if the plane is front of backfacing. Note that this only works if the normal is Normalized. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIlookDirection,:\fP Look direction. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if the plane is front facing, which mean it would be visible, and false if it is backfacing. 
+.RE
+.PP
+
+.SS "template<class T> void \fBengine::core::plane3d\fP< T >::recalculateD (const \fBvector3d\fP< T > & MPoint)\fC [inline]\fP"
+.PP
+Recalculates the distance from origin by applying a new member point to the plane. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

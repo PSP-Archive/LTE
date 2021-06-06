@@ -1,0 +1,100 @@
+.TH "engine::IUnknown" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::IUnknown \- Base class of most objects of the engine Engine.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IUnknown.h>\fP
+.PP
+Inherited by \fBengine::audio::IAudioDriver\fP, \fBengine::audio::IAudioSound\fP, \fBengine::gui::ICursorControl\fP, \fBengine::gui::IGUIElement\fP, \fBengine::gui::IGUIEnvironment\fP, \fBengine::gui::IGUIFont\fP, \fBengine::gui::IGUISkin\fP, \fBengine::ILogger\fP, \fBengine::io::IFileList\fP, \fBengine::io::IFileSystem\fP, \fBengine::io::IReadFile\fP, \fBengine::io::IWriteFile\fP, \fBengine::io::IXMLWriter\fP, \fBengine::IOSOperator\fP, \fBengine::IStringParameters\fP, \fBengine::ITimer\fP, \fBengine::scene::IAnimatedMesh\fP, \fBengine::scene::IAnimationEndCallBack\fP, \fBengine::scene::IMesh\fP, \fBengine::scene::IMeshBuffer\fP, \fBengine::scene::IMeshCache\fP, \fBengine::scene::IMeshLoader\fP, \fBengine::scene::IMeshManipulator\fP, \fBengine::scene::IParticleAffector\fP, \fBengine::scene::IParticleEmitter\fP, \fBengine::scene::ISceneCollisionManager\fP, \fBengine::scene::ISceneManager\fP, \fBengine::scene::ISceneNode\fP, \fBengine::scene::ISceneNodeAnimator\fP, \fBengine::scene::ITriangleSelector\fP, \fBengine::video::IImage\fP, \fBengine::video::IImageLoader\fP, \fBengine::video::IMaterialRenderer\fP, \fBengine::video::IShaderConstantSetCallBack\fP, \fBengine::video::ITexture\fP, \fBengine::video::IVideoDriver\fP, and \fBengine::video::IVideoModeList\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBIUnknown\fP ()"
+.br
+.RI "\fIConstructor. \fP"
+.ti -1c
+.RI "virtual \fB~IUnknown\fP ()"
+.br
+.RI "\fIDestructor. \fP"
+.ti -1c
+.RI "void \fBgrab\fP ()"
+.br
+.ti -1c
+.RI "bool \fBdrop\fP ()"
+.br
+.ti -1c
+.RI "const c8 * \fBgetDebugName\fP () const "
+.br
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBsetDebugName\fP (const c8 *newName)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Base class of most objects of the engine Engine. 
+
+This class provides reference counting through the methods \fBgrab()\fP and \fBdrop()\fP. It also is able to store a debug string for every instance of an object. Most objects of the engine Engine are derived from \fBIUnknown\fP, and so they are reference counted.
+.PP
+When you create an object in the engine engine, calling a method which starts with 'create', an object is created, and you get a pointer to the new object. If you no longer need the object, you have to call \fBdrop()\fP. This will destroy the object, if \fBgrab()\fP was not called in another part of you program, because this part still needs the object. Note, that you only need to call \fBdrop()\fP to the object, if you created it, and the method had a 'create' in it.
+.PP
+A simple example:
+.PP
+If you want to create a texture, you may want to call an imaginable method IDriver::createTexture. You call ITexture* texture = driver->createTexture(dimension2d<s32>(128, 128)); If you no longer need the texture, call texture->\fBdrop()\fP.
+.PP
+If you want to load a texture, you may want to call imaginable method IDriver::loadTexture. You do this like ITexture* texture = driver->loadTexture('example.jpg'); You will not have to drop the pointer to the loaded texture, because the name of the method does not start with 'create'. The texture is stored somewhere by the driver. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "bool engine::IUnknown::drop ()\fC [inline]\fP"
+.PP
+Drops the object. Decrements the reference counter by one. Returns true, if the object was deleted. The \fBIUnknown\fP class provides a basic reference counting mechanism with its methods \fBgrab()\fP and \fBdrop()\fP. Most objects of the engine Engine are derived from \fBIUnknown\fP, and so they are reference counted.
+.PP
+When you create an object in the engine engine, calling a method which starts with 'create', an object is created, and you get a pointer to the new object. If you no longer need the object, you have to call \fBdrop()\fP. This will destroy the object, if \fBgrab()\fP was not called in another part of you program, because this part still needs the object. Note, that you only need to call \fBdrop()\fP to the object, if you created it, and the method had a 'create' in it.
+.PP
+A simple example:
+.PP
+If you want to create a texture, you may want to call an imaginable method IDriver::createTexture. You call ITexture* texture = driver->createTexture(dimension2d<s32>(128, 128)); If you no longer need the texture, call texture->\fBdrop()\fP. If you want to load a texture, you may want to call imaginable method IDriver::loadTexture. You do this like ITexture* texture = driver->loadTexture('example.jpg'); You will not have to drop the pointer to the loaded texture, because the name of the method does not start with 'create'. The texture is stored somewhere by the driver. 
+.SS "const c8* engine::IUnknown::getDebugName () const\fC [inline]\fP"
+.PP
+Returns the debug name of the object. The Debugname may only be set and changed by the object itself. This method should only be used in Debug mode. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a string, previously set by \fBsetDebugName()\fP; 
+.RE
+.PP
+
+.SS "void engine::IUnknown::grab ()\fC [inline]\fP"
+.PP
+Grabs the object. Increments the reference counter by one. Someone who calls \fBgrab()\fP to an object, should later also call \fBdrop()\fP to it. If an object never gets as much \fBdrop()\fP as \fBgrab()\fP calls, it will never be destroyed. The \fBIUnknown\fP class provides a basic reference counting mechanism with its methods \fBgrab()\fP and \fBdrop()\fP. Most objects of the engine Engine are derived from \fBIUnknown\fP, and so they are reference counted.
+.PP
+When you create an object in the engine engine, calling a method which starts with 'create', an object is created, and you get a pointer to the new object. If you no longer need the object, you have to call \fBdrop()\fP. This will destroy the object, if \fBgrab()\fP was not called in another part of you program, because this part still needs the object. Note, that you only need to call \fBdrop()\fP to the object, if you created it, and the method had a 'create' in it.
+.PP
+A simple example:
+.PP
+If you want to create a texture, you may want to call an imaginable method IDriver::createTexture. You call ITexture* texture = driver->createTexture(dimension2d<s32>(128, 128)); If you no longer need the texture, call texture->\fBdrop()\fP. If you want to load a texture, you may want to call imaginable method IDriver::loadTexture. You do this like ITexture* texture = driver->loadTexture('example.jpg'); You will not have to drop the pointer to the loaded texture, because the name of the method does not start with 'create'. The texture is stored somewhere by the driver. 
+.SS "void engine::IUnknown::setDebugName (const c8 * newName)\fC [inline, protected]\fP"
+.PP
+Sets the debug name of the object. The Debugname may only be set and changed by the object itself. This method should only be used in Debug mode. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fInewName,:\fP New debug name to set. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

@@ -1,0 +1,58 @@
+.TH "engine::scene::SParticle" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::SParticle \- Struct for holding particle data.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <SParticle.h>\fP
+.PP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBcore::vector3df\fP \fBpos\fP"
+.br
+.RI "\fIPosition of the particle. \fP"
+.ti -1c
+.RI "\fBcore::vector3df\fP \fBvector\fP"
+.br
+.RI "\fIDirection and speed of the particle. \fP"
+.ti -1c
+.RI "u32 \fBstartTime\fP"
+.br
+.RI "\fIStart life time of the particle. \fP"
+.ti -1c
+.RI "u32 \fBendTime\fP"
+.br
+.RI "\fIEnd life time of the particle. \fP"
+.ti -1c
+.RI "\fBvideo::SColor\fP \fBcolor\fP"
+.br
+.RI "\fICurrent color of the particle. \fP"
+.ti -1c
+.RI "\fBvideo::SColor\fP \fBstartColor\fP"
+.br
+.ti -1c
+.RI "\fBcore::vector3df\fP \fBstartVector\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Struct for holding particle data. 
+.PP
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBvideo::SColor\fP \fBengine::scene::SParticle::startColor\fP"
+.PP
+Original color of the particle. That's the color of the particle it had when it was emitted. 
+.SS "\fBcore::vector3df\fP \fBengine::scene::SParticle::startVector\fP"
+.PP
+Original direction and speed of the particle, the direction and speed the particle had when it was emitted. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

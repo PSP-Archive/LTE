@@ -1,0 +1,353 @@
+.TH "engine::core::array" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::core::array \- Self reallocating template array (like stl vector) with additional features.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <engineArray.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBarray\fP (u32 start_count)"
+.br
+.ti -1c
+.RI "\fBarray\fP (const \fBarray\fP< T > &other)"
+.br
+.RI "\fICopy constructor. \fP"
+.ti -1c
+.RI "\fB~array\fP ()"
+.br
+.ti -1c
+.RI "void \fBreallocate\fP (u32 new_size)"
+.br
+.ti -1c
+.RI "void \fBpush_back\fP (const T &element)"
+.br
+.ti -1c
+.RI "void \fBpush_front\fP (const T &element)"
+.br
+.ti -1c
+.RI "void \fBinsert\fP (const T &element, u32 index=0)"
+.br
+.ti -1c
+.RI "void \fBclear\fP ()"
+.br
+.RI "\fIClears the array and deletes all allocated memory. \fP"
+.ti -1c
+.RI "void \fBset_pointer\fP (T *newPointer, u32 size)"
+.br
+.ti -1c
+.RI "void \fBset_free_when_destroyed\fP (bool f)"
+.br
+.ti -1c
+.RI "void \fBset_used\fP (u32 usedNow)"
+.br
+.ti -1c
+.RI "void \fBoperator=\fP (const \fBarray\fP< T > &other)"
+.br
+.RI "\fIAssignement operator. \fP"
+.ti -1c
+.RI "T & \fBoperator[]\fP (u32 index)"
+.br
+.RI "\fIDirect access operator. \fP"
+.ti -1c
+.RI "const T & \fBoperator[]\fP (u32 index) const "
+.br
+.RI "\fIDirect access operator. \fP"
+.ti -1c
+.RI "const T & \fBgetLast\fP () const "
+.br
+.RI "\fIGets last frame. \fP"
+.ti -1c
+.RI "T & \fBgetLast\fP ()"
+.br
+.RI "\fIGets last frame. \fP"
+.ti -1c
+.RI "T * \fBpointer\fP ()"
+.br
+.ti -1c
+.RI "const T * \fBconst_pointer\fP () const "
+.br
+.ti -1c
+.RI "u32 \fBsize\fP () const "
+.br
+.ti -1c
+.RI "u32 \fBallocated_size\fP () const "
+.br
+.ti -1c
+.RI "bool \fBempty\fP () const "
+.br
+.ti -1c
+.RI "void \fBsort\fP ()"
+.br
+.ti -1c
+.RI "s32 \fBbinary_search\fP (const T &element)"
+.br
+.ti -1c
+.RI "s32 \fBbinary_search\fP (const T &element, s32 left, s32 right)"
+.br
+.ti -1c
+.RI "s32 \fBlinear_search\fP (const T &element)"
+.br
+.ti -1c
+.RI "s32 \fBlinear_reverse_search\fP (const T &element)"
+.br
+.ti -1c
+.RI "void \fBerase\fP (u32 index)"
+.br
+.ti -1c
+.RI "void \fBerase\fP (u32 index, s32 count)"
+.br
+.ti -1c
+.RI "void \fBset_sorted\fP (bool _is_sorted)"
+.br
+.RI "\fISets if the array is sorted. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<class T> class engine::core::array< T >"
+Self reallocating template array (like stl vector) with additional features. 
+
+Some features are: Heap sorting, binary search methods, easier debugging. 
+.PP
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<class T> \fBengine::core::array\fP< T >::\fBarray\fP (u32 start_count)\fC [inline]\fP"
+.PP
+Constructs a array and allocates an initial chunk of memory. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstart_count,:\fP Amount of elements to allocate. 
+.RE
+.PP
+
+.SS "template<class T> \fBengine::core::array\fP< T >::~\fBarray\fP ()\fC [inline]\fP"
+.PP
+Destructor. Frees allocated memory, if set_free_when_destroyed was not set to false by the user before. 
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class T> u32 \fBengine::core::array\fP< T >::allocated_size () const\fC [inline]\fP"
+.PP
+Returns amount memory allocated. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns amount of memory allocated. The amount of bytes allocated would be \fBallocated_size()\fP * sizeof(ElementsUsed); 
+.RE
+.PP
+
+.SS "template<class T> s32 \fBengine::core::array\fP< T >::binary_search (const T & element, s32 left, s32 right)\fC [inline]\fP"
+.PP
+Performs a binary search for an element, returns -1 if not found. The array will be sorted before the binary search if it is not already sorted. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIelement,:\fP Element to search for. 
+.br
+\fIleft,:\fP First left index 
+.br
+\fIright,:\fP Last right index. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns position of the searched element if it was found, otherwise -1 is returned. 
+.RE
+.PP
+
+.SS "template<class T> s32 \fBengine::core::array\fP< T >::binary_search (const T & element)\fC [inline]\fP"
+.PP
+Performs a binary search for an element, returns -1 if not found. The array will be sorted before the binary search if it is not already sorted. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIelement,:\fP Element to search for. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns position of the searched element if it was found, otherwise -1 is returned. 
+.RE
+.PP
+
+.SS "template<class T> const T* \fBengine::core::array\fP< T >::const_pointer () const\fC [inline]\fP"
+.PP
+Returns a const pointer to the array. 
+.PP
+\fBReturns:\fP
+.RS 4
+Pointer to the array. 
+.RE
+.PP
+
+.SS "template<class T> bool \fBengine::core::array\fP< T >::empty () const\fC [inline]\fP"
+.PP
+Returns true if array is empty 
+.PP
+\fBReturns:\fP
+.RS 4
+True if the array is empty, false if not. 
+.RE
+.PP
+
+.SS "template<class T> void \fBengine::core::array\fP< T >::erase (u32 index, s32 count)\fC [inline]\fP"
+.PP
+Erases some elements from the array. may be slow, because all elements following after the erased element have to be copied. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIindex,:\fP Index of the first element to be erased. 
+.br
+\fIcount,:\fP Amount of elements to be erased. 
+.RE
+.PP
+
+.SS "template<class T> void \fBengine::core::array\fP< T >::erase (u32 index)\fC [inline]\fP"
+.PP
+Erases an element from the array. May be slow, because all elements following after the erased element have to be copied. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIindex,:\fP Index of element to be erased. 
+.RE
+.PP
+
+.SS "template<class T> void \fBengine::core::array\fP< T >::insert (const T & element, u32 index = \fC0\fP)\fC [inline]\fP"
+.PP
+Insert item into array at specified position. Please use this only if you know what you are doing (possible performance loss). The preferred method of adding elements should be \fBpush_back()\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIelement,:\fP Element to be inserted 
+.br
+\fIindex,:\fP Where position to insert the new element. 
+.RE
+.PP
+
+.SS "template<class T> s32 \fBengine::core::array\fP< T >::linear_reverse_search (const T & element)\fC [inline]\fP"
+.PP
+Finds an element in linear time, which is very slow. Use binary_search for faster finding. Only works if =operator is implemented. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIelement,:\fP Element to search for. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns position of the searched element if it was found, otherwise -1 is returned. 
+.RE
+.PP
+
+.SS "template<class T> s32 \fBengine::core::array\fP< T >::linear_search (const T & element)\fC [inline]\fP"
+.PP
+Finds an element in linear time, which is very slow. Use binary_search for faster finding. Only works if =operator is implemented. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIelement,:\fP Element to search for. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns position of the searched element if it was found, otherwise -1 is returned. 
+.RE
+.PP
+
+.SS "template<class T> T* \fBengine::core::array\fP< T >::pointer ()\fC [inline]\fP"
+.PP
+Returns a pointer to the array. 
+.PP
+\fBReturns:\fP
+.RS 4
+Pointer to the array. 
+.RE
+.PP
+
+.SS "template<class T> void \fBengine::core::array\fP< T >::push_back (const T & element)\fC [inline]\fP"
+.PP
+Adds an element at back of array. If the array is to small to add this new element, the array is made bigger. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIelement,:\fP Element to add at the back of the array. 
+.RE
+.PP
+
+.SS "template<class T> void \fBengine::core::array\fP< T >::push_front (const T & element)\fC [inline]\fP"
+.PP
+Adds an element at the front of the array. If the array is to small to add this new element, the array is made bigger. Please note that this is slow, because the whole array needs to be copied for this. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIelement,:\fP Element to add at the back of the array. 
+.RE
+.PP
+
+.SS "template<class T> void \fBengine::core::array\fP< T >::reallocate (u32 new_size)\fC [inline]\fP"
+.PP
+Reallocates the array, make it bigger or smaller. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fInew_size,:\fP New size of array. 
+.RE
+.PP
+
+.SS "template<class T> void \fBengine::core::array\fP< T >::set_free_when_destroyed (bool f)\fC [inline]\fP"
+.PP
+Sets if the array should delete the memory it used. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIf,:\fP If true, the array frees the allocated memory in its destructor, otherwise not. The default is true. 
+.RE
+.PP
+
+.SS "template<class T> void \fBengine::core::array\fP< T >::set_pointer (T * newPointer, u32 size)\fC [inline]\fP"
+.PP
+Sets pointer to new array, using this as new workspace. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fInewPointer,:\fP Pointer to new array of elements. 
+.br
+\fIsize,:\fP Size of the new array. 
+.RE
+.PP
+
+.SS "template<class T> void \fBengine::core::array\fP< T >::set_used (u32 usedNow)\fC [inline]\fP"
+.PP
+Sets the size of the array. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIusedNow,:\fP Amount of elements now used. 
+.RE
+.PP
+
+.SS "template<class T> u32 \fBengine::core::array\fP< T >::size () const\fC [inline]\fP"
+.PP
+Returns size of used array. 
+.PP
+\fBReturns:\fP
+.RS 4
+Size of elements in the array. 
+.RE
+.PP
+
+.SS "template<class T> void \fBengine::core::array\fP< T >::sort ()\fC [inline]\fP"
+.PP
+Sorts the array using heapsort. There is no additional memory waste and the algorithm performs (O) n log n in worst case. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

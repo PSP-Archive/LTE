@@ -1,0 +1,482 @@
+.TH "engine::gui::IGUIEnvironment" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::gui::IGUIEnvironment \- GUI Environment. Used as factory and manager of all other GUI elements.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IGUIEnvironment.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~IGUIEnvironment\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual void \fBdrawAll\fP ()=0"
+.br
+.RI "\fIDraws all gui elements. \fP"
+.ti -1c
+.RI "virtual void \fBsetFocus\fP (\fBIGUIElement\fP *element)=0"
+.br
+.RI "\fISets the focus to an element. \fP"
+.ti -1c
+.RI "virtual void \fBremoveFocus\fP (\fBIGUIElement\fP *element)=0"
+.br
+.RI "\fIRemoves the focus from an element. \fP"
+.ti -1c
+.RI "virtual bool \fBhasFocus\fP (\fBIGUIElement\fP *element)=0"
+.br
+.RI "\fIReturns if the element has focus. \fP"
+.ti -1c
+.RI "virtual \fBvideo::IVideoDriver\fP * \fBgetVideoDriver\fP ()=0"
+.br
+.RI "\fIReturns the current video driver. \fP"
+.ti -1c
+.RI "virtual bool \fBpostEventFromUser\fP (\fBSEvent\fP event)=0"
+.br
+.RI "\fIPosts an input event to the environment. \fP"
+.ti -1c
+.RI "virtual void \fBsetUserEventReceiver\fP (\fBIEventReceiver\fP *evr)=0"
+.br
+.RI "\fIThis sets a new event receiver for gui events. \fP"
+.ti -1c
+.RI "virtual \fBIGUISkin\fP * \fBgetSkin\fP ()=0"
+.br
+.RI "\fIReturns pointer to the current gui skin. \fP"
+.ti -1c
+.RI "virtual void \fBsetSkin\fP (\fBIGUISkin\fP *skin)=0"
+.br
+.RI "\fISets a new GUI Skin. \fP"
+.ti -1c
+.RI "virtual \fBIGUISkin\fP * \fBcreateSkin\fP (\fBEGUI_SKIN_TYPE\fP type)=0"
+.br
+.RI "\fICreates a new GUI Skin based on a template. \fP"
+.ti -1c
+.RI "virtual \fBIGUIFont\fP * \fBgetFont\fP (const c8 *filename)=0"
+.br
+.RI "\fIReturns pointer to the font with the specified file name. \fP"
+.ti -1c
+.RI "virtual \fBIGUIFont\fP * \fBgetBuiltInFont\fP ()=0"
+.br
+.RI "\fIReturns the default built-in font. \fP"
+.ti -1c
+.RI "virtual \fBIGUIElement\fP * \fBgetRootGUIElement\fP ()=0"
+.br
+.RI "\fIReturns the root gui element. \fP"
+.ti -1c
+.RI "virtual \fBIGUIButton\fP * \fBaddButton\fP (const \fBcore::rect\fP< s32 > &rectangle, \fBIGUIElement\fP *parent=0, s32 id=-1, const wchar_t *text=0)=0"
+.br
+.RI "\fIAdds an button element. \fP"
+.ti -1c
+.RI "virtual \fBIGUIWindow\fP * \fBaddWindow\fP (const \fBcore::rect\fP< s32 > &rectangle, bool modal=false, const wchar_t *text=0, \fBIGUIElement\fP *parent=0, s32 id=-1)=0"
+.br
+.RI "\fIAdds an empty window element. \fP"
+.ti -1c
+.RI "virtual \fBIGUIWindow\fP * \fBaddMessageBox\fP (const wchar_t *caption, const wchar_t *text=0, bool modal=true, s32 flags=EMBF_OK, \fBIGUIElement\fP *parent=0, s32 id=-1)=0"
+.br
+.RI "\fIAdds a message box. \fP"
+.ti -1c
+.RI "virtual \fBIGUIScrollBar\fP * \fBaddScrollBar\fP (bool horizontal, const \fBcore::rect\fP< s32 > &rectangle, \fBIGUIElement\fP *parent=0, s32 id=-1)=0"
+.br
+.RI "\fIAdds a scrollbar. \fP"
+.ti -1c
+.RI "virtual \fBIGUIImage\fP * \fBaddImage\fP (\fBvideo::ITexture\fP *image, \fBcore::position2d\fP< s32 > pos, bool useAlphaChannel=true, \fBIGUIElement\fP *parent=0, s32 id=-1, const wchar_t *text=0)=0"
+.br
+.RI "\fIAdds an image element. \fP"
+.ti -1c
+.RI "virtual \fBIGUIImage\fP * \fBaddImage\fP (const \fBcore::rect\fP< s32 > &rectangle, \fBIGUIElement\fP *parent=0, s32 id=-1, const wchar_t *text=0)=0"
+.br
+.RI "\fIAdds an image element. \fP"
+.ti -1c
+.RI "virtual \fBIGUICheckBox\fP * \fBaddCheckBox\fP (bool checked, const \fBcore::rect\fP< s32 > &rectangle, \fBIGUIElement\fP *parent=0, s32 id=-1, const wchar_t *text=0)=0"
+.br
+.RI "\fIAdds a checkbox element. \fP"
+.ti -1c
+.RI "virtual \fBIGUIListBox\fP * \fBaddListBox\fP (const \fBcore::rect\fP< s32 > &rectangle, \fBIGUIElement\fP *parent=0, s32 id=-1, bool drawBackground=false)=0"
+.br
+.RI "\fIAdds a list box element. \fP"
+.ti -1c
+.RI "virtual \fBIGUIMeshViewer\fP * \fBaddMeshViewer\fP (const \fBcore::rect\fP< s32 > &rectangle, \fBIGUIElement\fP *parent=0, s32 id=-1, const wchar_t *text=0)=0"
+.br
+.RI "\fIAdds an mesh viewer. Not 100% implemented yet. \fP"
+.ti -1c
+.RI "virtual \fBIGUIFileOpenDialog\fP * \fBaddFileOpenDialog\fP (const wchar_t *title=0, bool modal=true, \fBIGUIElement\fP *parent=0, s32 id=-1)=0"
+.br
+.RI "\fIAdds a file open dialog. \fP"
+.ti -1c
+.RI "virtual \fBIGUIStaticText\fP * \fBaddStaticText\fP (const wchar_t *text, const \fBcore::rect\fP< s32 > &rectangle, bool border=false, bool wordWrap=true, \fBIGUIElement\fP *parent=0, s32 id=-1, bool fillBackground=false)=0"
+.br
+.RI "\fIAdds a static text. \fP"
+.ti -1c
+.RI "virtual \fBIGUIEditBox\fP * \fBaddEditBox\fP (const wchar_t *text, const \fBcore::rect\fP< s32 > &rectangle, bool border=true, \fBIGUIElement\fP *parent=0, s32 id=-1)=0"
+.br
+.RI "\fIAdds an edit box. \fP"
+.ti -1c
+.RI "virtual \fBIGUIInOutFader\fP * \fBaddInOutFader\fP (const \fBcore::rect\fP< s32 > *rectangle=0, \fBIGUIElement\fP *parent=0, s32 id=-1)=0"
+.br
+.RI "\fIAdds an element for fading in or out. \fP"
+.ti -1c
+.RI "virtual \fBIGUITabControl\fP * \fBaddTabControl\fP (const \fBcore::rect\fP< s32 > &rectangle, \fBIGUIElement\fP *parent=0, bool fillbackground=false, bool border=true, s32 id=-1)=0"
+.br
+.RI "\fIAdds a tab control to the environment. \fP"
+.ti -1c
+.RI "virtual \fBIGUITab\fP * \fBaddTab\fP (const \fBcore::rect\fP< s32 > &rectangle, \fBIGUIElement\fP *parent=0, s32 id=-1)=0"
+.br
+.RI "\fIAdds tab to the environment. \fP"
+.ti -1c
+.RI "virtual \fBIGUIContextMenu\fP * \fBaddContextMenu\fP (const \fBcore::rect\fP< s32 > &rectangle, \fBIGUIElement\fP *parent=0, s32 id=-1)=0"
+.br
+.RI "\fIAdds a context menu to the environment. \fP"
+.ti -1c
+.RI "virtual \fBIGUIContextMenu\fP * \fBaddMenu\fP (\fBIGUIElement\fP *parent=0, s32 id=-1)=0"
+.br
+.RI "\fIAdds a menu to the environment. \fP"
+.ti -1c
+.RI "virtual \fBIGUIToolBar\fP * \fBaddToolBar\fP (\fBIGUIElement\fP *parent=0, s32 id=-1)=0"
+.br
+.RI "\fIAdds a toolbar to the environment. \fP"
+.ti -1c
+.RI "virtual \fBIGUIComboBox\fP * \fBaddComboBox\fP (const \fBcore::rect\fP< s32 > &rectangle, \fBIGUIElement\fP *parent=0, s32 id=-1)=0"
+.br
+.RI "\fIAdds a combo box to the environment. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+GUI Environment. Used as factory and manager of all other GUI elements. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual \fBIGUIButton\fP* engine::gui::IGUIEnvironment::addButton (const \fBcore::rect\fP< s32 > & rectangle, \fBIGUIElement\fP * parent = \fC0\fP, s32 id = \fC-1\fP, const wchar_t * text = \fC0\fP)\fC [pure virtual]\fP"
+.PP
+Adds an button element. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created button. Returns 0 if an error occured. This pointer should not be dropped. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBIGUICheckBox\fP* engine::gui::IGUIEnvironment::addCheckBox (bool checked, const \fBcore::rect\fP< s32 > & rectangle, \fBIGUIElement\fP * parent = \fC0\fP, s32 id = \fC-1\fP, const wchar_t * text = \fC0\fP)\fC [pure virtual]\fP"
+.PP
+Adds a checkbox element. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created check box. Returns 0 if an error occured. This pointer should not be dropped. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBIGUIComboBox\fP* engine::gui::IGUIEnvironment::addComboBox (const \fBcore::rect\fP< s32 > & rectangle, \fBIGUIElement\fP * parent = \fC0\fP, s32 id = \fC-1\fP)\fC [pure virtual]\fP"
+.PP
+Adds a combo box to the environment. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIparent\fP is the parent item of the element. E.g. a window. Set it to 0 to place the combo box directly in the environment. 
+.br
+\fIid\fP is a s32 to identify the combo box. 
+.RE
+.PP
+
+.SS "virtual \fBIGUIContextMenu\fP* engine::gui::IGUIEnvironment::addContextMenu (const \fBcore::rect\fP< s32 > & rectangle, \fBIGUIElement\fP * parent = \fC0\fP, s32 id = \fC-1\fP)\fC [pure virtual]\fP"
+.PP
+Adds a context menu to the environment. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrectangle\fP is the position of the menu. Note that the menu is resizing itself based on what items you add. 
+.br
+\fIparent\fP is the parent item of the element. E.g. a window. Set it to 0 to place the menu directly in the environment. 
+.br
+\fIid\fP is a s32 to identify the menu. 
+.RE
+.PP
+
+.SS "virtual \fBIGUIEditBox\fP* engine::gui::IGUIEnvironment::addEditBox (const wchar_t * text, const \fBcore::rect\fP< s32 > & rectangle, bool border = \fCtrue\fP, \fBIGUIElement\fP * parent = \fC0\fP, s32 id = \fC-1\fP)\fC [pure virtual]\fP"
+.PP
+Adds an edit box. 
+.PP
+Supports unicode input from every keyboard around the world, scrolling, copying and pasting (exchanging data with the clipboard directly), maximum character amount, marking and all shortcuts like ctrl+X, ctrl+V, ctrg+C, shift+Left, shift+Right, Home, End, and so on. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItext\fP is the text to be displayed. Can be altered after creation with SetText(). 
+.br
+\fIrectangle\fP is the position of the edit box. 
+.br
+\fIborder\fP has to be set to true if the edit box should have a 3d border. 
+.br
+\fIparent\fP is the parent item of the element. E.g. a window. Set it to 0 to place the edit box directly in the environment. 
+.br
+\fIid\fP is a s32 to identify the edit box. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created static text. Returns 0 if an error occured. This pointer should not be dropped. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBIGUIFileOpenDialog\fP* engine::gui::IGUIEnvironment::addFileOpenDialog (const wchar_t * title = \fC0\fP, bool modal = \fCtrue\fP, \fBIGUIElement\fP * parent = \fC0\fP, s32 id = \fC-1\fP)\fC [pure virtual]\fP"
+.PP
+Adds a file open dialog. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fImodal,:\fP Defines if the dialog is modal. This means, that all other gui elements which were created before the message box cannot be used until this messagebox is removed. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created file open dialog. Returns 0 if an error occured. This pointer should not be dropped. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBIGUIImage\fP* engine::gui::IGUIEnvironment::addImage (const \fBcore::rect\fP< s32 > & rectangle, \fBIGUIElement\fP * parent = \fC0\fP, s32 id = \fC-1\fP, const wchar_t * text = \fC0\fP)\fC [pure virtual]\fP"
+.PP
+Adds an image element. 
+.PP
+Use \fBIGUIImage::setImage\fP later to set the image to be displayed. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created image element. Returns 0 if an error occured. This pointer should not be dropped. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBIGUIImage\fP* engine::gui::IGUIEnvironment::addImage (\fBvideo::ITexture\fP * image, \fBcore::position2d\fP< s32 > pos, bool useAlphaChannel = \fCtrue\fP, \fBIGUIElement\fP * parent = \fC0\fP, s32 id = \fC-1\fP, const wchar_t * text = \fC0\fP)\fC [pure virtual]\fP"
+.PP
+Adds an image element. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIimage,:\fP Image to be displayed. 
+.br
+\fIpos,:\fP Position of the image. The width and height of the image is taken from the image. 
+.br
+\fIuseAlphaChannel,:\fP Sets if the image should use the alpha channel of the texture to draw itself. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created image element. Returns 0 if an error occured. This pointer should not be dropped. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBIGUIListBox\fP* engine::gui::IGUIEnvironment::addListBox (const \fBcore::rect\fP< s32 > & rectangle, \fBIGUIElement\fP * parent = \fC0\fP, s32 id = \fC-1\fP, bool drawBackground = \fCfalse\fP)\fC [pure virtual]\fP"
+.PP
+Adds a list box element. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created list box. Returns 0 if an error occured. This pointer should not be dropped. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBIGUIMeshViewer\fP* engine::gui::IGUIEnvironment::addMeshViewer (const \fBcore::rect\fP< s32 > & rectangle, \fBIGUIElement\fP * parent = \fC0\fP, s32 id = \fC-1\fP, const wchar_t * text = \fC0\fP)\fC [pure virtual]\fP"
+.PP
+Adds an mesh viewer. Not 100% implemented yet. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created mesh viewer. Returns 0 if an error occured. This pointer should not be dropped. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBIGUIWindow\fP* engine::gui::IGUIEnvironment::addMessageBox (const wchar_t * caption, const wchar_t * text = \fC0\fP, bool modal = \fCtrue\fP, s32 flags = \fCEMBF_OK\fP, \fBIGUIElement\fP * parent = \fC0\fP, s32 id = \fC-1\fP)\fC [pure virtual]\fP"
+.PP
+Adds a message box. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcaption,:\fP Text to be displayed the title of the message box. 
+.br
+\fItext,:\fP Text to be displayed in the body of the message box. 
+.br
+\fImodal,:\fP Defines if the dialog is modal. This means, that all other gui elements which were created before the message box cannot be used until this messagebox is removed. 
+.br
+\fIflags,:\fP Flags specifying the layout of the message box. For example to create a message box with an OK and a CANCEL button on it, set this to (EMBF_OK | EMBF_CANCEL). 
+.br
+\fIparent,:\fP Parent gui element of the message box. 
+.br
+\fIid,:\fP Id with which the gui element can be identified. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created message box. Returns 0 if an error occured. This pointer should not be dropped. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBIGUIScrollBar\fP* engine::gui::IGUIEnvironment::addScrollBar (bool horizontal, const \fBcore::rect\fP< s32 > & rectangle, \fBIGUIElement\fP * parent = \fC0\fP, s32 id = \fC-1\fP)\fC [pure virtual]\fP"
+.PP
+Adds a scrollbar. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created scrollbar. Returns 0 if an error occured. This pointer should not be dropped. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBIGUIStaticText\fP* engine::gui::IGUIEnvironment::addStaticText (const wchar_t * text, const \fBcore::rect\fP< s32 > & rectangle, bool border = \fCfalse\fP, bool wordWrap = \fCtrue\fP, \fBIGUIElement\fP * parent = \fC0\fP, s32 id = \fC-1\fP, bool fillBackground = \fCfalse\fP)\fC [pure virtual]\fP"
+.PP
+Adds a static text. 
+.PP
+The returned pointer must not be dropped. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItext\fP is the text to be displayed. Can be altered after creation with SetText(). 
+.br
+\fIrectangle\fP is the position of the static text. 
+.br
+\fIborder\fP has to be set to true if the static text should have a 3d border. 
+.br
+\fIwordWrap\fP specifyes, if the text should be wrapped into multiple lines. 
+.br
+\fIparent\fP is the parent item of the element. E.g. a window. Set it to 0 to place the fader directly in the environment. 
+.br
+\fIid\fP is a s32 to identify the static text element. 
+.br
+\fIfillBackground\fP specifies if the background will be filled. Default: false. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created static text. Returns 0 if an error occured. This pointer should not be dropped. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBIGUITab\fP* engine::gui::IGUIEnvironment::addTab (const \fBcore::rect\fP< s32 > & rectangle, \fBIGUIElement\fP * parent = \fC0\fP, s32 id = \fC-1\fP)\fC [pure virtual]\fP"
+.PP
+Adds tab to the environment. 
+.PP
+You can use this element to group other elements. This is not used for creating tabs on tab controls, please use \fBIGUITabControl::addTab()\fP for this instead. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrectangle\fP is the position of the tab. 
+.br
+\fIparent\fP is the parent item of the element. E.g. a window. Set it to 0 to place the tab directly in the environment. 
+.br
+\fIid\fP is a s32 to identify the tab. 
+.RE
+.PP
+
+.SS "virtual \fBIGUITabControl\fP* engine::gui::IGUIEnvironment::addTabControl (const \fBcore::rect\fP< s32 > & rectangle, \fBIGUIElement\fP * parent = \fC0\fP, bool fillbackground = \fCfalse\fP, bool border = \fCtrue\fP, s32 id = \fC-1\fP)\fC [pure virtual]\fP"
+.PP
+Adds a tab control to the environment. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrectangle\fP is the position of the tab control. 
+.br
+\fIparent\fP is the parent item of the element. E.g. a window. Set it to 0 to place the tab control directly in the environment. 
+.br
+\fIfillbackground\fP specifies if the background of the tab control should be drawn to. 
+.br
+\fIborder\fP specifiys if a flat 3d border should be drawn. This is usually not necesarry unless you don't place the control directly into the environment without a window as parent. 
+.br
+\fIid\fP is a s32 to identify the tab control. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created tab control element. Returns 0 if an error occured. This pointer should not be dropped. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBIGUIToolBar\fP* engine::gui::IGUIEnvironment::addToolBar (\fBIGUIElement\fP * parent = \fC0\fP, s32 id = \fC-1\fP)\fC [pure virtual]\fP"
+.PP
+Adds a toolbar to the environment. 
+.PP
+It is like a menu is always placed on top in its parent, and contains buttons. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIparent\fP is the parent item of the element. E.g. a window. Set it to 0 to place the tool bar directly in the environment. 
+.br
+\fIid\fP is a s32 to identify the tool bar. 
+.RE
+.PP
+
+.SS "virtual \fBIGUIWindow\fP* engine::gui::IGUIEnvironment::addWindow (const \fBcore::rect\fP< s32 > & rectangle, bool modal = \fCfalse\fP, const wchar_t * text = \fC0\fP, \fBIGUIElement\fP * parent = \fC0\fP, s32 id = \fC-1\fP)\fC [pure virtual]\fP"
+.PP
+Adds an empty window element. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fImodal,:\fP Defines if the dialog is modal. This means, that all other gui elements which were created before the message box cannot be used until this messagebox is removed. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created window. Returns 0 if an error occured. This pointer should not be dropped. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBIGUISkin\fP* engine::gui::IGUIEnvironment::createSkin (\fBEGUI_SKIN_TYPE\fP type)\fC [pure virtual]\fP"
+.PP
+Creates a new GUI Skin based on a template. 
+.PP
+Use \fBsetSkin()\fP to set the created skin. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created skin. If you no longer need the image, you should call \fBIGUISkin::drop()\fP. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBIGUIFont\fP* engine::gui::IGUIEnvironment::getFont (const c8 * filename)\fC [pure virtual]\fP"
+.PP
+Returns pointer to the font with the specified file name. 
+.PP
+Loads the font if it was not loaded before. Returns 0 if the font could not be loaded. 
+.PP
+\fBReturns:\fP
+.RS 4
+returns a pointer to the font. This pointer should not be dropped. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBIGUIElement\fP* engine::gui::IGUIEnvironment::getRootGUIElement ()\fC [pure virtual]\fP"
+.PP
+Returns the root gui element. 
+.PP
+This is the first gui element, parent of all other gui elements. You'll never need to use this method, unless you are not creating your own gui elements, trying to add them to the gui elements without a parent. The returned pointer should not be dropped. See \fBIUnknown::drop()\fP for more information. 
+.SS "virtual bool engine::gui::IGUIEnvironment::postEventFromUser (\fBSEvent\fP event)\fC [pure virtual]\fP"
+.PP
+Posts an input event to the environment. 
+.PP
+Usually you do not have to use this method, it is used by the internal engine. 
+.SS "virtual void engine::gui::IGUIEnvironment::setSkin (\fBIGUISkin\fP * skin)\fC [pure virtual]\fP"
+.PP
+Sets a new GUI Skin. 
+.PP
+You can used this to change the appearance of the whole GUI Environment. You can set one ot the built-in skins or implement your own class derived from \fBIGUISkin\fP and set this useing this method. To set for example the built-in Windows classic skin, use the following code: 
+.PP
+.nf
+       gui::IGUISkin* newskin = environment->createSkin(gui::EGST_WINDOWS_CLASSIC);
+        environment->setSkin(newskin);
+        newskin->drop();
+
+.fi
+.PP
+ 
+.SS "virtual void engine::gui::IGUIEnvironment::setUserEventReceiver (\fBIEventReceiver\fP * evr)\fC [pure virtual]\fP"
+.PP
+This sets a new event receiver for gui events. 
+.PP
+Usually you do not have to use this method, it is used by the internal engine. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

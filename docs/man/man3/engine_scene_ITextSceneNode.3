@@ -1,0 +1,39 @@
+.TH "engine::scene::ITextSceneNode" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::ITextSceneNode \- A scene node for displaying 2d text at a position in three dimensional space.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ITextSceneNode.h>\fP
+.PP
+Inherits \fBengine::scene::ISceneNode\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBITextSceneNode\fP (\fBISceneNode\fP *parent, \fBISceneManager\fP *mgr, s32 id, const \fBcore::vector3df\fP &position=\fBcore::vector3df\fP(0, 0, 0))"
+.br
+.RI "\fIconstructor \fP"
+.ti -1c
+.RI "virtual void \fBsetText\fP (const wchar_t *text)=0"
+.br
+.RI "\fIsets the text string \fP"
+.ti -1c
+.RI "virtual void \fBsetTextColor\fP (\fBvideo::SColor\fP color)=0"
+.br
+.RI "\fIsets the color of the text \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+A scene node for displaying 2d text at a position in three dimensional space. 
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

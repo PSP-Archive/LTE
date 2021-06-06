@@ -1,0 +1,138 @@
+.TH "C:/EngineSDK/include/engineXML.h" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+C:/EngineSDK/include/engineXML.h \- Header file of the engineXML, the engine XML parser. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio.h>\fP
+.br
+
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI "namespace \fBengine\fP"
+.br
+.ti -1c
+.RI "namespace \fBengine::io\fP"
+.br
+.in -1c
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBengine::io::IFileReadCallBack\fP"
+.br
+.RI "\fICallback class for file read abstraction. \fP"
+.ti -1c
+.RI "class \fBengine::io::IXMLBase\fP"
+.br
+.RI "\fIEmpty class to be used as parent class for engineXMLReader. \fP"
+.ti -1c
+.RI "class \fBengine::io::IengineXMLReader< char_type, super_class >\fP"
+.br
+.RI "\fIInterface providing easy read access to a XML file. \fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef unsigned short \fBengine::io::char16\fP"
+.br
+.RI "\fIdefines the utf-16 type. \fP"
+.ti -1c
+.RI "typedef unsigned long \fBengine::io::char32\fP"
+.br
+.RI "\fIdefines the utf-32 type. \fP"
+.ti -1c
+.RI "typedef IengineXMLReader< char, IXMLBase > \fBengine::io::engineXMLReader\fP"
+.br
+.RI "\fIA UTF-8 or ASCII character xml parser. \fP"
+.ti -1c
+.RI "typedef IengineXMLReader< \fBchar16\fP, IXMLBase > \fBengine::io::engineXMLReaderUTF16\fP"
+.br
+.RI "\fIA UTF-16 xml parser. \fP"
+.ti -1c
+.RI "typedef IengineXMLReader< \fBchar32\fP, IXMLBase > \fBengine::io::engineXMLReaderUTF32\fP"
+.br
+.RI "\fIA UTF-32 xml parser. \fP"
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBengine::io::ETEXT_FORMAT\fP { \fBengine::io::ETF_ASCII\fP, \fBengine::io::ETF_UTF8\fP, \fBengine::io::ETF_UTF16_BE\fP, \fBengine::io::ETF_UTF16_LE\fP, \fBengine::io::ETF_UTF32_BE\fP, \fBengine::io::ETF_UTF32_LE\fP }"
+.br
+.RI "\fIEnumeration of all supported source text file formats. \fP"
+.ti -1c
+.RI "enum \fBengine::io::EXML_NODE\fP { \fBengine::io::EXN_NONE\fP, \fBengine::io::EXN_ELEMENT\fP, \fBengine::io::EXN_ELEMENT_END\fP, \fBengine::io::EXN_TEXT\fP, \fBengine::io::EXN_COMMENT\fP, \fBengine::io::EXN_CDATA\fP, \fBengine::io::EXN_UNKNOWN\fP }"
+.br
+.RI "\fIEnumeration for all xml nodes which are parsed by engineXMLReader. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBengineXMLReader\fP * \fBengine::io::createengineXMLReader\fP (const char *filename)"
+.br
+.RI "\fICreates an instance of an UFT-8 or ASCII character xml parser. \fP"
+.ti -1c
+.RI "\fBengineXMLReader\fP * \fBengine::io::createengineXMLReader\fP (FILE *file)"
+.br
+.RI "\fICreates an instance of an UFT-8 or ASCII character xml parser. \fP"
+.ti -1c
+.RI "\fBengineXMLReader\fP * \fBengine::io::createengineXMLReader\fP (IFileReadCallBack *callback)"
+.br
+.RI "\fICreates an instance of an UFT-8 or ASCII character xml parser. \fP"
+.ti -1c
+.RI "\fBengineXMLReaderUTF16\fP * \fBengine::io::createengineXMLReaderUTF16\fP (const char *filename)"
+.br
+.RI "\fICreates an instance of an UFT-16 xml parser. \fP"
+.ti -1c
+.RI "\fBengineXMLReaderUTF16\fP * \fBengine::io::createengineXMLReaderUTF16\fP (FILE *file)"
+.br
+.RI "\fICreates an instance of an UFT-16 xml parser. \fP"
+.ti -1c
+.RI "\fBengineXMLReaderUTF16\fP * \fBengine::io::createengineXMLReaderUTF16\fP (IFileReadCallBack *callback)"
+.br
+.RI "\fICreates an instance of an UFT-16 xml parser. \fP"
+.ti -1c
+.RI "\fBengineXMLReaderUTF32\fP * \fBengine::io::createengineXMLReaderUTF32\fP (const char *filename)"
+.br
+.RI "\fICreates an instance of an UFT-32 xml parser. \fP"
+.ti -1c
+.RI "\fBengineXMLReaderUTF32\fP * \fBengine::io::createengineXMLReaderUTF32\fP (FILE *file)"
+.br
+.RI "\fICreates an instance of an UFT-32 xml parser. \fP"
+.ti -1c
+.RI "\fBengineXMLReaderUTF32\fP * \fBengine::io::createengineXMLReaderUTF32\fP (IFileReadCallBack *callback)"
+.br
+.RI "\fICreates an instance of an UFT-32 xml parser. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Header file of the engineXML, the engine XML parser. 
+
+This file includes everything needed for using engineXML, the XML parser of the engine Engine. To use engineXML, you only need to include this file in your project:
+.PP
+.PP
+.nf
+        #include <engineXML.h>
+.fi
+.PP
+.PP
+It is also common to use the two namespaces in which engineXML is included, directly after including \fBengineXML.h\fP:
+.PP
+.PP
+.nf
+        #include <engineXML.h>
+        using namespace engine;
+        using namespace io;
+.fi
+.PP
+ 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

@@ -1,0 +1,101 @@
+.TH "engine::video::IImage" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::video::IImage \- Interface for software image data.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IImage.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~IImage\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual void * \fBlock\fP ()=0"
+.br
+.ti -1c
+.RI "virtual void \fBunlock\fP ()=0"
+.br
+.ti -1c
+.RI "virtual const \fBcore::dimension2d\fP< s32 > & \fBgetDimension\fP ()=0"
+.br
+.RI "\fIReturns width and height of image data. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetBitsPerPixel\fP ()=0"
+.br
+.RI "\fIReturns bits per pixel. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetBytesPerPixel\fP ()=0"
+.br
+.RI "\fIReturns bytes per pixel. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetImageDataSizeInBytes\fP ()=0"
+.br
+.RI "\fIReturns image data size in bytes. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetImageDataSizeInPixels\fP ()=0"
+.br
+.RI "\fIReturns image data size in pixels. \fP"
+.ti -1c
+.RI "virtual \fBSColor\fP \fBgetPixel\fP (s32 x, s32 y)=0"
+.br
+.RI "\fIreturns a pixel \fP"
+.ti -1c
+.RI "virtual \fBECOLOR_FORMAT\fP \fBgetColorFormat\fP ()=0"
+.br
+.RI "\fIreturns the color format \fP"
+.ti -1c
+.RI "virtual u32 \fBgetRedMask\fP ()=0"
+.br
+.RI "\fIreturns mask for red value of a pixel \fP"
+.ti -1c
+.RI "virtual u32 \fBgetGreenMask\fP ()=0"
+.br
+.RI "\fIreturns mask for green value of a pixel \fP"
+.ti -1c
+.RI "virtual u32 \fBgetBlueMask\fP ()=0"
+.br
+.RI "\fIreturns mask for blue value of a pixel \fP"
+.ti -1c
+.RI "virtual u32 \fBgetAlphaMask\fP ()=0"
+.br
+.RI "\fIreturns mask for alpha value of a pixel \fP"
+.ti -1c
+.RI "virtual u32 \fBgetPitch\fP ()=0"
+.br
+.RI "\fIreturns pitch of image \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Interface for software image data. 
+
+Image loaders create these images from files. IVideoDrivers convert these images into their (hardware) textures. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual void* engine::video::IImage::lock ()\fC [pure virtual]\fP"
+.PP
+Lock function. Use this to get a pointer to the image data. After you don't need the pointer anymore, you must call \fBunlock()\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns pointer to the image data. What type of data is pointed to depends on the color format of the image. For example if the color format is ECF_A8R8G8B8, it is of s32. Be sure to call \fBunlock()\fP after you don't need the pointer any more. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IImage::unlock ()\fC [pure virtual]\fP"
+.PP
+Unlock function. Should be called after the pointer received by \fBlock()\fP is not needed anymore. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

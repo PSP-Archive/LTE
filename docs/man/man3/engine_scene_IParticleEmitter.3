@@ -1,0 +1,56 @@
+.TH "engine::scene::IParticleEmitter" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::IParticleEmitter \- A particle emitter for using with particle systems.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IParticleEmitter.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~IParticleEmitter\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual s32 \fBemitt\fP (u32 now, u32 timeSinceLastCall, \fBSParticle\fP *&outArray)=0"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+A particle emitter for using with particle systems. 
+
+A Particle emitter emitts new particles into a particle system. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual s32 engine::scene::IParticleEmitter::emitt (u32 now, u32 timeSinceLastCall, \fBSParticle\fP *& outArray)\fC [pure virtual]\fP"
+.PP
+Prepares an array with new particles to emitt into the system and returns how much new particles there are. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fInow,:\fP Current time. 
+.br
+\fItimeSinceLastCall,:\fP Time elapsed since last call, in milliseconds. 
+.br
+\fIoutArray,:\fP Pointer which will point to the array with the new particles to add into the system. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns amount of new particles in the array. Can be 0. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

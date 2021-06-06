@@ -1,0 +1,23 @@
+.TH "engine::io::IXMLBase" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::io::IXMLBase \- Empty class to be used as parent class for engineXMLReader.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <engineXML.h>\fP
+.PP
+.SH "Detailed Description"
+.PP 
+Empty class to be used as parent class for engineXMLReader. 
+
+If you need another class as base class for the xml reader, you can do this by creating the reader using for example new CXMLReaderImpl<char, YourBaseClass>(yourcallback); The engine Engine for example needs \fBIUnknown\fP as base class for every object to let it automaticly reference countend, hence it replaces \fBIXMLBase\fP with \fBIUnknown\fP. See engineXML.cpp on how this can be done in detail. 
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

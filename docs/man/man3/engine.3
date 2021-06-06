@@ -1,0 +1,232 @@
+.TH "engine" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine \- Everything in the LTE 3D Engine can be found in this namespace.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBSEvent\fP"
+.br
+.RI "\fIStruct for holding event data. An event can be a gui, mouse or keyboard event. \fP"
+.ti -1c
+.RI "class \fBIEventReceiver\fP"
+.br
+.RI "\fIInterface of an object wich can receive events. \fP"
+.ti -1c
+.RI "class \fBILogger\fP"
+.br
+.RI "\fIInterface for logging messages, warnings and errors. \fP"
+.ti -1c
+.RI "class \fBIOSOperator\fP"
+.br
+.RI "\fIThe Operating system operator provides operation system specific methods and informations. \fP"
+.ti -1c
+.RI "class \fBIStringParameters\fP"
+.br
+.RI "\fIProvides a generic interface for parameters and their values as strings. \fP"
+.ti -1c
+.RI "class \fBITimer\fP"
+.br
+.RI "\fIInterface for getting and manipulating the virtual time. \fP"
+.ti -1c
+.RI "class \fBIUnknown\fP"
+.br
+.RI "\fIBase class of most objects of the engine Engine. \fP"
+.ti -1c
+.RI "struct \fBSengineCreationParameters\fP"
+.br
+.RI "\fIStructure for holding advanced engine Device creation parameters. \fP"
+.ti -1c
+.RI "struct \fBSKeyMap\fP"
+.br
+.RI "\fIStruct storing which key belongs to which action. \fP"
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI "namespace \fBaudio\fP"
+.br
+.RI "\fIThe audio namespace contains classes for accessing the audio driver. All audio playing is done here. \fP"
+.PP
+.in +1c
+
+.ti -1c
+.RI "namespace \fBcore\fP"
+.br
+.RI "\fIIn this namespace can be found basic classes like vectors, planes, arrays, lists and so on. \fP"
+.PP
+.in +1c
+
+.ti -1c
+.RI "namespace \fBgui\fP"
+.br
+.RI "\fIThe gui namespace contains useful classes for easy creation of a graphical user interface. \fP"
+.PP
+.in +1c
+
+.ti -1c
+.RI "namespace \fBio\fP"
+.br
+.RI "\fIThis namespace provides interfaces for input/output: Reading and writing files, accessing zip archives, xml files, ... \fP"
+.PP
+.in +1c
+
+.ti -1c
+.RI "namespace \fBscene\fP"
+.br
+.RI "\fIAll scene management can be found in this namespace: Mesh loading, special scene nodes like octrees and billboards, ... \fP"
+.PP
+.in +1c
+
+.ti -1c
+.RI "namespace \fBvideo\fP"
+.br
+.RI "\fIThe video namespace contains classes for accessing the video driver. All 2d and 3d rendering is done here. \fP"
+.PP
+
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBEEVENT_TYPE\fP { \fBEET_GUI_EVENT\fP =  0, \fBEET_MOUSE_INPUT_EVENT\fP, \fBEET_KEY_INPUT_EVENT\fP, \fBEET_LOG_TEXT_EVENT\fP, \fBEET_AUDIO_EVENT\fP, \fBEET_USER_EVENT\fP }"
+.br
+.RI "\fIEnumeration for all event types there are. \fP"
+.ti -1c
+.RI "enum \fBEMOUSE_INPUT_EVENT\fP { \fBEMIE_LMOUSE_PRESSED_DOWN\fP =  0, \fBEMIE_RMOUSE_PRESSED_DOWN\fP, \fBEMIE_MMOUSE_PRESSED_DOWN\fP, \fBEMIE_LMOUSE_LEFT_UP\fP, \fBEMIE_RMOUSE_LEFT_UP\fP, \fBEMIE_MMOUSE_LEFT_UP\fP, \fBEMIE_MOUSE_MOVED\fP, \fBEMIE_MOUSE_WHEEL\fP }"
+.br
+.RI "\fIEnumeration for all mouse input events. \fP"
+.ti -1c
+.RI "enum \fBELOG_LEVEL\fP { \fBELL_INFORMATION\fP =  0, \fBELL_WARNING\fP, \fBELL_ERROR\fP, \fBELL_NONE\fP }"
+.br
+.ti -1c
+.RI "enum \fBEKEY_ACTION\fP { , \fBEKA_FORCE_32BIT\fP =  0x7fffffff }"
+.br
+.RI "\fIenumeration for key actions. Used for example in the FPS Camera. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "engineDevice * \fBcreateDevice\fP (\fBIEventReceiver\fP *receiver=0, bool showLogo=true)"
+.br
+.RI "\fICreates an engine device. The engine device is the root object for using the engine. \fP"
+.ti -1c
+.RI "engineDevice * \fBcreateDeviceEx\fP (const \fBSengineCreationParameters\fP &parameters)"
+.br
+.RI "\fIunused \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Everything in the LTE 3D Engine can be found in this namespace. 
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBengine::EEVENT_TYPE\fP"
+.PP
+Enumeration for all event types there are. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIEET_GUI_EVENT \fP\fP
+An event of the graphical user interface. 
+.TP
+\fB\fIEET_MOUSE_INPUT_EVENT \fP\fP
+A mouse input event. 
+.TP
+\fB\fIEET_KEY_INPUT_EVENT \fP\fP
+A key input evant. 
+.TP
+\fB\fIEET_LOG_TEXT_EVENT \fP\fP
+A log event. 
+.TP
+\fB\fIEET_AUDIO_EVENT \fP\fP
+An audio event. 
+.TP
+\fB\fIEET_USER_EVENT \fP\fP
+A user event with user data. This is not used by engine and can be used to send user specific data though the system. 
+.SS "enum \fBengine::EMOUSE_INPUT_EVENT\fP"
+.PP
+Enumeration for all mouse input events. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIEMIE_LMOUSE_PRESSED_DOWN \fP\fP
+Left mouse button was pressed down. 
+.TP
+\fB\fIEMIE_RMOUSE_PRESSED_DOWN \fP\fP
+Right mouse button was pressed down. 
+.TP
+\fB\fIEMIE_MMOUSE_PRESSED_DOWN \fP\fP
+Middle mouse button was pressed down. 
+.TP
+\fB\fIEMIE_LMOUSE_LEFT_UP \fP\fP
+Left mouse button was left up. 
+.TP
+\fB\fIEMIE_RMOUSE_LEFT_UP \fP\fP
+Right mouse button was left up. 
+.TP
+\fB\fIEMIE_MMOUSE_LEFT_UP \fP\fP
+Middle mouse button was left up. 
+.TP
+\fB\fIEMIE_MOUSE_MOVED \fP\fP
+The mouse cursor changed its position. 
+.TP
+\fB\fIEMIE_MOUSE_WHEEL \fP\fP
+The mouse wheel was moved. Use Wheel value in event data to find out in what direction and how fast. 
+.SS "enum \fBengine::ELOG_LEVEL\fP"
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIELL_INFORMATION \fP\fP
+High log level, warnings, errors and important information texts are printed out. 
+.TP
+\fB\fIELL_WARNING \fP\fP
+Default log level, warnings and errors are printed out. 
+.TP
+\fB\fIELL_ERROR \fP\fP
+Low log level, only errors are printed into the log. 
+.TP
+\fB\fIELL_NONE \fP\fP
+Nothing is printed out to the log. 
+.SS "enum \fBengine::EKEY_ACTION\fP"
+.PP
+enumeration for key actions. Used for example in the FPS Camera. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIEKA_FORCE_32BIT \fP\fP
+This value is not used. It only forces this enumeration to compile in 32 bit. 
+.SH "Function Documentation"
+.PP 
+.SS "engineDevice* engine::createDevice (IEventReceiver * receiver = \fC0\fP, bool showLogo = \fCtrue\fP)"
+.PP
+Creates an engine device. The engine device is the root object for using the engine. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIreceiver,:\fP A user created event receiver. 
+.br
+\fIshowLogo,:\fP true if you want to show the logo when the game starts. If you don't show the logo the engine will run only for 10minutes, useful for debugging. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns pointer to the created engineDevice or null if the device could not be created. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

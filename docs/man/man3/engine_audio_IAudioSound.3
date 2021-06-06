@@ -1,0 +1,147 @@
+.TH "engine::audio::IAudioSound" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::audio::IAudioSound \- Audio sound.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IAudioDriver.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual void \fBplay\fP ()"
+.br
+.RI "\fIStart playing the sound. \fP"
+.ti -1c
+.RI "virtual void \fBstop\fP ()"
+.br
+.RI "\fIStop the sound. \fP"
+.ti -1c
+.RI "virtual void \fBpause\fP ()"
+.br
+.RI "\fIPause the sound. \fP"
+.ti -1c
+.RI "virtual void \fBrewind\fP ()"
+.br
+.RI "\fIRewind the sound. \fP"
+.ti -1c
+.RI "virtual bool \fBisPlaying\fP ()"
+.br
+.RI "\fIReturns true if the sound is playing. \fP"
+.ti -1c
+.RI "virtual void \fBsetVolume\fP (s32 vol)"
+.br
+.RI "\fISets the volume of this sound. \fP"
+.ti -1c
+.RI "virtual void \fBsetVolume\fP (s32 volLeft, s32 volRight)"
+.br
+.RI "\fISets the volume of this sound in stereo mode. \fP"
+.ti -1c
+.RI "virtual bool \fBsetPosition\fP (s32 millisec)"
+.br
+.RI "\fIReturns true if the position was changed, value is in ms. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetPosition\fP ()"
+.br
+.RI "\fIReturns the current position in ms. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetLoopCount\fP ()"
+.br
+.RI "\fIReturns the count of loops. \fP"
+.ti -1c
+.RI "virtual void \fBsetLoopCount\fP (s32 loop)"
+.br
+.RI "\fISets the num of loops. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetPlayCount\fP ()"
+.br
+.RI "\fIReturns the num of times the sound is played. \fP"
+.ti -1c
+.RI "virtual const ISoundInfo * \fBgetSoundInfo\fP () const "
+.br
+.RI "\fIReturns the pointer to the sound spec / tags. \fP"
+.ti -1c
+.RI "virtual void \fBgetTimeValue\fP (s32 millisec, s32 *hour, s32 *mins, s32 *secs, s32 *ms)"
+.br
+.RI "\fIGet mins, secs, and ms from millisec. \fP"
+.ti -1c
+.RI "virtual \fBcore::stringw\fP \fBgetFormatString\fP (s32 millisec)"
+.br
+.RI "\fIReturns millisec formatted as hh:mm:ss.millisec. \fP"
+.ti -1c
+.RI "virtual \fBcore::stringw\fP \fBgetStringDuration\fP ()"
+.br
+.RI "\fIReturns a formatted string of the duration. \fP"
+.ti -1c
+.RI "virtual \fBcore::stringw\fP \fBgetStringPosition\fP ()"
+.br
+.RI "\fIReturns a formatted string of the position. \fP"
+.ti -1c
+.RI "virtual bool \fBunpack\fP ()"
+.br
+.RI "\fIUnpacks an MP3 stream to make execution faster. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Audio sound. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual void engine::audio::IAudioSound::setLoopCount (s32 loop)\fC [virtual]\fP"
+.PP
+Sets the num of loops. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIloop,:\fP -1 = infinite, 0 = 1 = no loop, > 1 loops 
+.RE
+.PP
+
+.SS "virtual bool engine::audio::IAudioSound::setPosition (s32 millisec)\fC [virtual]\fP"
+.PP
+Returns true if the position was changed, value is in ms. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fImillisec,:\fP time in milliseconds 
+.RE
+.PP
+
+.SS "virtual void engine::audio::IAudioSound::setVolume (s32 volLeft, s32 volRight)\fC [virtual]\fP"
+.PP
+Sets the volume of this sound in stereo mode. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvolLeft,:\fP volume of the left speaker (value between 0 and 100) 
+.br
+\fIvolRight,:\fP volume of the right speaker (value between 0 and 100) 
+.RE
+.PP
+
+.SS "virtual void engine::audio::IAudioSound::setVolume (s32 vol)\fC [virtual]\fP"
+.PP
+Sets the volume of this sound. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvol,:\fP a value between 0 and 100 
+.RE
+.PP
+
+.SS "virtual bool engine::audio::IAudioSound::unpack ()\fC [virtual]\fP"
+.PP
+Unpacks an MP3 stream to make execution faster. 
+.PP
+Note that this should be used only for little effects, when a MP3 is unpacked you cannot control the position of the stream 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

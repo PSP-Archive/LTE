@@ -1,0 +1,75 @@
+.TH "engine::scene::SMesh" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::SMesh \- Simple implementation of the \fBIMesh\fP interface.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <SMesh.h>\fP
+.PP
+Inherits \fBengine::scene::IMesh\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBSMesh\fP ()"
+.br
+.RI "\fIconstructor \fP"
+.ti -1c
+.RI "\fB~SMesh\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual s32 \fBgetMeshBufferCount\fP ()"
+.br
+.RI "\fIreturns amount of mesh buffers. \fP"
+.ti -1c
+.RI "virtual \fBIMeshBuffer\fP * \fBgetMeshBuffer\fP (s32 nr)"
+.br
+.RI "\fIreturns pointer to a mesh buffer \fP"
+.ti -1c
+.RI "virtual const \fBcore::aabbox3d\fP< f32 > & \fBgetBoundingBox\fP () const "
+.br
+.RI "\fIreturns an axis aligned bounding box \fP"
+.ti -1c
+.RI "virtual \fBcore::aabbox3d\fP< f32 > & \fBgetBoundingBox\fP ()"
+.br
+.ti -1c
+.RI "void \fBrecalculateBoundingBox\fP ()"
+.br
+.RI "\fIrecalculates the bounding box \fP"
+.ti -1c
+.RI "void \fBaddMeshBuffer\fP (\fBIMeshBuffer\fP *buf)"
+.br
+.RI "\fIadds a MeshBuffer \fP"
+.ti -1c
+.RI "virtual void \fBsetMaterialFlag\fP (\fBvideo::E_MATERIAL_FLAG\fP flag, bool newvalue)"
+.br
+.RI "\fIsets a flag of all contained materials to a new value \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Simple implementation of the \fBIMesh\fP interface. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual \fBcore::aabbox3d\fP<f32>& engine::scene::SMesh::getBoundingBox ()\fC [inline, virtual]\fP"
+.PP
+Returns an axis aligned bounding box of the mesh. 
+.PP
+\fBReturns:\fP
+.RS 4
+A bounding box of this mesh is returned. 
+.RE
+.PP
+
+.PP
+Implements \fBengine::scene::IMesh\fP.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

@@ -1,0 +1,43 @@
+.TH "engine::gui::IGUIImage" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::gui::IGUIImage \- GUI element displaying an image.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IGUIImage.h>\fP
+.PP
+Inherits \fBengine::gui::IGUIElement\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBIGUIImage\fP (\fBIGUIEnvironment\fP *environment, \fBIGUIElement\fP *parent, s32 id, \fBcore::rect\fP< s32 > rectangle)"
+.br
+.RI "\fIconstructor \fP"
+.ti -1c
+.RI "\fB~IGUIImage\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual void \fBsetImage\fP (\fBvideo::ITexture\fP *image)=0"
+.br
+.RI "\fIsets an image \fP"
+.ti -1c
+.RI "virtual void \fBsetUseAlphaChannel\fP (bool use)=0"
+.br
+.RI "\fIsets if the image should use its alpha channel to draw itself \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+GUI element displaying an image. 
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

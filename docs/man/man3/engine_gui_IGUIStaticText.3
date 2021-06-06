@@ -1,0 +1,112 @@
+.TH "engine::gui::IGUIStaticText" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::gui::IGUIStaticText \- Multi or single line text label.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IGUIStaticText.h>\fP
+.PP
+Inherits \fBengine::gui::IGUIElement\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBIGUIStaticText\fP (\fBIGUIEnvironment\fP *environment, \fBIGUIElement\fP *parent, s32 id, \fBcore::rect\fP< s32 > rectangle)"
+.br
+.RI "\fIconstructor \fP"
+.ti -1c
+.RI "\fB~IGUIStaticText\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual void \fBsetOverrideFont\fP (\fBIGUIFont\fP *font=0)=0"
+.br
+.RI "\fISets another skin independent font. \fP"
+.ti -1c
+.RI "virtual void \fBsetOverrideColor\fP (\fBvideo::SColor\fP color)=0"
+.br
+.RI "\fISets another color for the text. \fP"
+.ti -1c
+.RI "virtual void \fBenableOverrideColor\fP (bool enable)=0"
+.br
+.RI "\fISets if the static text should use the overide color or the color in the gui skin. \fP"
+.ti -1c
+.RI "virtual void \fBsetWordWrap\fP (bool enable)=0"
+.br
+.RI "\fIEnables or disables word wrap for using the static text as multiline text control. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetTextHeight\fP ()=0"
+.br
+.RI "\fIReturns the height of the text in pixels when it is drawn. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Multi or single line text label. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual void engine::gui::IGUIStaticText::enableOverrideColor (bool enable)\fC [pure virtual]\fP"
+.PP
+Sets if the static text should use the overide color or the color in the gui skin. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIenable,:\fP If set to true, the override color, which can be set with \fBIGUIStaticText::setOverrideColor\fP is used, otherwise the EGDC_BUTTON_TEXT color of the skin. 
+.RE
+.PP
+
+.SS "virtual s32 engine::gui::IGUIStaticText::getTextHeight ()\fC [pure virtual]\fP"
+.PP
+Returns the height of the text in pixels when it is drawn. 
+.PP
+This is useful for adjusting the layout of gui elements based on the height of the multiline text in this element. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns height of text in pixels. 
+.RE
+.PP
+
+.SS "virtual void engine::gui::IGUIStaticText::setOverrideColor (\fBvideo::SColor\fP color)\fC [pure virtual]\fP"
+.PP
+Sets another color for the text. 
+.PP
+If set, the static text does not use the EGDC_BUTTON_TEXT color defined in the skin, but the set color instead. You don't need to call IGUIStaticText::enableOverrrideColor(true) after this, this is done by this function. If you set a color, and you want the text displayed with the color of the skin again, call IGUIStaticText::enableOverrideColor(false); 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcolor,:\fP New color of the text. 
+.RE
+.PP
+
+.SS "virtual void engine::gui::IGUIStaticText::setOverrideFont (\fBIGUIFont\fP * font = \fC0\fP)\fC [pure virtual]\fP"
+.PP
+Sets another skin independent font. 
+.PP
+If this is set to zero, the button uses the font of the skin. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfont,:\fP New font to set. 
+.RE
+.PP
+
+.SS "virtual void engine::gui::IGUIStaticText::setWordWrap (bool enable)\fC [pure virtual]\fP"
+.PP
+Enables or disables word wrap for using the static text as multiline text control. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIenable,:\fP If set to true, words going over one line are breaked to the next line. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

@@ -1,0 +1,163 @@
+.TH "engine::scene::SViewFrustrum" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::SViewFrustrum \- Defines the view frustrum. Thats the space viewed by the camera.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <SViewFrustrum.h>\fP
+.PP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "\fBVF_FAR_PLANE\fP = 0"
+.br
+.RI "\fIFar plane of the frustrum. Thats the plane farest away from the eye. \fP"
+.ti -1c
+.RI "\fBVF_NEAR_PLANE\fP"
+.br
+.RI "\fINear plane of the frustrum. Thats the plane nearest to the eye. \fP"
+.ti -1c
+.RI "\fBVF_LEFT_PLANE\fP"
+.br
+.RI "\fILeft plane of the frustrum. \fP"
+.ti -1c
+.RI "\fBVF_RIGHT_PLANE\fP"
+.br
+.RI "\fIRight plane of the frustrum. \fP"
+.ti -1c
+.RI "\fBVF_BOTTOM_PLANE\fP"
+.br
+.RI "\fIBottom plane of the frustrum. \fP"
+.ti -1c
+.RI "\fBVF_TOP_PLANE\fP"
+.br
+.RI "\fITop plane of the frustrum. \fP"
+.ti -1c
+.RI "\fBVF_PLANE_COUNT\fP"
+.br
+.RI "\fIAmount of planes enclosing the view frustum. Should be 6. \fP"
+.ti -1c
+.RI "enum \fBVFPLANES\fP { \fBVF_FAR_PLANE\fP =  0, \fBVF_NEAR_PLANE\fP, \fBVF_LEFT_PLANE\fP, \fBVF_RIGHT_PLANE\fP, \fBVF_BOTTOM_PLANE\fP, \fBVF_TOP_PLANE\fP, \fBVF_PLANE_COUNT\fP }"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBSViewFrustrum\fP ()"
+.br
+.RI "\fIDefault Constructor. \fP"
+.ti -1c
+.RI "\fBSViewFrustrum\fP (const \fBcore::matrix4\fP &mat)"
+.br
+.ti -1c
+.RI "void \fBtransform\fP (const \fBcore::matrix4\fP &mat)"
+.br
+.ti -1c
+.RI "\fBcore::vector3df\fP \fBgetFarLeftUp\fP () const "
+.br
+.ti -1c
+.RI "\fBcore::vector3df\fP \fBgetFarLeftDown\fP () const "
+.br
+.ti -1c
+.RI "\fBcore::vector3df\fP \fBgetFarRightUp\fP () const "
+.br
+.ti -1c
+.RI "\fBcore::vector3df\fP \fBgetFarRightDown\fP () const "
+.br
+.ti -1c
+.RI "\fBcore::aabbox3d\fP< f32 > \fBgetBoundingBox\fP () const "
+.br
+.RI "\fIreturns a bounding box enclosing the whole view frustrum \fP"
+.ti -1c
+.RI "void \fBrecalculateBoundingBox\fP ()"
+.br
+.RI "\fIrecalculates the bounding box member based on the planes \fP"
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBcore::vector3df\fP \fBcameraPosition\fP"
+.br
+.RI "\fIthe position of the camera \fP"
+.ti -1c
+.RI "\fBcore::plane3d\fP< f32 > \fBplanes\fP [VF_PLANE_COUNT]"
+.br
+.RI "\fIall planes enclosing the view frustrum. \fP"
+.ti -1c
+.RI "\fBcore::aabbox3d\fP< f32 > \fBboundingBox\fP"
+.br
+.RI "\fIbouding box around the view frustrum \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Defines the view frustrum. Thats the space viewed by the camera. 
+
+The view frustrum is enclosed by 6 planes. These six planes share four points. A bounding box around these four points is also stored in this structure. 
+.PP
+.SH "Member Enumeration Documentation"
+.PP 
+.SS "enum \fBengine::scene::SViewFrustrum::VFPLANES\fP"
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIVF_FAR_PLANE \fP\fP
+Far plane of the frustrum. Thats the plane farest away from the eye. 
+.TP
+\fB\fIVF_NEAR_PLANE \fP\fP
+Near plane of the frustrum. Thats the plane nearest to the eye. 
+.TP
+\fB\fIVF_LEFT_PLANE \fP\fP
+Left plane of the frustrum. 
+.TP
+\fB\fIVF_RIGHT_PLANE \fP\fP
+Right plane of the frustrum. 
+.TP
+\fB\fIVF_BOTTOM_PLANE \fP\fP
+Bottom plane of the frustrum. 
+.TP
+\fB\fIVF_TOP_PLANE \fP\fP
+Top plane of the frustrum. 
+.TP
+\fB\fIVF_PLANE_COUNT \fP\fP
+Amount of planes enclosing the view frustum. Should be 6. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "engine::scene::SViewFrustrum::SViewFrustrum (const \fBcore::matrix4\fP & mat)"
+.PP
+This constructor creates a view frustrum based on a projection and/or view matrix. 
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBcore::vector3df\fP engine::scene::SViewFrustrum::getFarLeftDown () const"
+.PP
+returns the point which is on the far left bottom corner inside the the view frustrum. 
+.SS "\fBcore::vector3df\fP engine::scene::SViewFrustrum::getFarLeftUp () const"
+.PP
+returns the point which is on the far left upper corner inside the the view frustrum. 
+.SS "\fBcore::vector3df\fP engine::scene::SViewFrustrum::getFarRightDown () const"
+.PP
+returns the point which is on the far right bottom corner inside the the view frustrum. 
+.SS "\fBcore::vector3df\fP engine::scene::SViewFrustrum::getFarRightUp () const"
+.PP
+returns the point which is on the far right top corner inside the the view frustrum. 
+.SS "void engine::scene::SViewFrustrum::transform (const \fBcore::matrix4\fP & mat)"
+.PP
+transforms the furstum by the matrix 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIMatrix\fP by which the view frustrum is transformed. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

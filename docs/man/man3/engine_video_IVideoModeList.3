@@ -1,0 +1,109 @@
+.TH "engine::video::IVideoModeList" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::video::IVideoModeList \- A list of all available video modes.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IVideoModeList.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~IVideoModeList\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual s32 \fBgetVideoModeCount\fP () const =0"
+.br
+.ti -1c
+.RI "virtual \fBcore::dimension2d\fP< s32 > \fBgetVideoModeResolution\fP (s32 modeNumber) const =0"
+.br
+.ti -1c
+.RI "virtual s32 \fBgetVideoModeDepth\fP (s32 modeNumber) const =0"
+.br
+.ti -1c
+.RI "virtual \fBcore::dimension2d\fP< s32 > \fBgetDesktopResolution\fP () const =0"
+.br
+.ti -1c
+.RI "virtual s32 \fBgetDesktopDepth\fP () const =0"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+A list of all available video modes. 
+
+You can get a list via engineDevice::getVideoModeList(). If you are confused now, because you think you have to create an engine Device with a video mode before being able to get the video mode list, let me tell you that there is no need to start up an engine Device with EDT_DIRECT3D8, EDT_OPENGL or DT_SOFTWARE: For this (and for lots of other reasons) the null device, DT_NULL exists. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual s32 engine::video::IVideoModeList::getDesktopDepth () const\fC [pure virtual]\fP"
+.PP
+Returns the pixel depth of a video mode in bits. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the size of each pixel of the current desktop video mode in bits. 
+.RE
+.PP
+
+.SS "virtual \fBcore::dimension2d\fP<s32> engine::video::IVideoModeList::getDesktopResolution () const\fC [pure virtual]\fP"
+.PP
+Returns current desktop screen resolution. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns size of screen in pixels of the current desktop video mode. 
+.RE
+.PP
+
+.SS "virtual s32 engine::video::IVideoModeList::getVideoModeCount () const\fC [pure virtual]\fP"
+.PP
+Gets amount of video modes in the list. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns amount of video modes. 
+.RE
+.PP
+
+.SS "virtual s32 engine::video::IVideoModeList::getVideoModeDepth (s32 modeNumber) const\fC [pure virtual]\fP"
+.PP
+Returns the pixel depth of a video mode in bits. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fImodeNumber,:\fP zero based index of the video mode. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the size of each pixel of the specified video mode in bits. 
+.RE
+.PP
+
+.SS "virtual \fBcore::dimension2d\fP<s32> engine::video::IVideoModeList::getVideoModeResolution (s32 modeNumber) const\fC [pure virtual]\fP"
+.PP
+Returns the screen size of a video mode in pixels. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fImodeNumber,:\fP zero based index of the video mode. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns size of screen in pixels of the specified video mode. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

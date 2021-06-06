@@ -1,0 +1,156 @@
+.TH "engine::scene::IAnimatedMeshX" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::IAnimatedMeshX \- Interface for using some special functions of X meshes.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IAnimatedMeshX.h>\fP
+.PP
+Inherits \fBengine::scene::IAnimatedMesh\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fBcore::matrix4\fP * \fBgetMatrixOfJoint\fP (s32 jointNumber, s32 frame)=0"
+.br
+.ti -1c
+.RI "virtual s32 \fBgetJointCount\fP () const =0"
+.br
+.ti -1c
+.RI "virtual const c8 * \fBgetJointName\fP (s32 number) const =0"
+.br
+.ti -1c
+.RI "virtual s32 \fBgetJointNumber\fP (const c8 *name) const =0"
+.br
+.ti -1c
+.RI "virtual const \fBcore::array\fP< \fBcore::vector3df\fP > * \fBgetDrawableSkeleton\fP (s32 frame)=0"
+.br
+.ti -1c
+.RI "virtual s32 \fBgetAnimationCount\fP () const =0"
+.br
+.RI "\fIReturns amount of animations in .X-file. \fP"
+.ti -1c
+.RI "virtual const c8 * \fBgetAnimationName\fP (s32 idx) const =0"
+.br
+.ti -1c
+.RI "virtual void \fBsetCurrentAnimation\fP (s32 idx)=0"
+.br
+.ti -1c
+.RI "virtual bool \fBsetCurrentAnimation\fP (const c8 *name)=0"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Interface for using some special functions of X meshes. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual const c8* engine::scene::IAnimatedMeshX::getAnimationName (s32 idx) const\fC [pure virtual]\fP"
+.PP
+Returns the name of an animation. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIidx,:\fP Zero based Index of the animation. Must be a value between 0 and \fBgetAnimationCount()\fP-1; 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns pointer to the string of the name of the animation. Returns 0 if an animation with this index does not exist. 
+.RE
+.PP
+
+.SS "virtual const \fBcore::array\fP<\fBcore::vector3df\fP>* engine::scene::IAnimatedMeshX::getDrawableSkeleton (s32 frame)\fC [pure virtual]\fP"
+.PP
+Returns a pointer to list of points containing the skeleton. Draw a line between point 1 and 2, and 3 and 4 and 5 and 6 and so on to visualize this. Only for debug purposes. If you use an .x-File with the \fBIAnimatedMeshSceneNode\fP and turn DebugDataVisible to true, the Scene node will visualize the skeleton using this method. 
+.SS "virtual s32 engine::scene::IAnimatedMeshX::getJointCount () const\fC [pure virtual]\fP"
+.PP
+Gets joint count. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns amount of joints in the skeletal animated mesh. 
+.RE
+.PP
+
+.SS "virtual const c8* engine::scene::IAnimatedMeshX::getJointName (s32 number) const\fC [pure virtual]\fP"
+.PP
+Gets the name of a joint. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fInumber,:\fP Zero based index of joint. The last joint has the number \fBIAnimatedMeshX::getJointCount()\fP-1; 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns name of joint and null if an error happened. 
+.RE
+.PP
+
+.SS "virtual s32 engine::scene::IAnimatedMeshX::getJointNumber (const c8 * name) const\fC [pure virtual]\fP"
+.PP
+Gets a joint number from its name 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIname,:\fP Name of the joint. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the number of the joint or -1 if not found. 
+.RE
+.PP
+
+.SS "virtual \fBcore::matrix4\fP* engine::scene::IAnimatedMeshX::getMatrixOfJoint (s32 jointNumber, s32 frame)\fC [pure virtual]\fP"
+.PP
+Returns a pointer to a transformation matrix of a part of the mesh based on a frame time. This is used for being able to attach objects to parts of animated meshes. For example a weapon to an animated hand. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIjointNumber,:\fP Zero based index of joint. The last joint has the number \fBIAnimatedMeshX::getJointCount()\fP-1; 
+.br
+\fIframe,:\fP Frame of the animation. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the matrix of the mesh part or null if an error occured. 
+.RE
+.PP
+
+.SS "virtual bool engine::scene::IAnimatedMeshX::setCurrentAnimation (const c8 * name)\fC [pure virtual]\fP"
+.PP
+Sets an animation as animation to play back. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIname,:\fP Name of the animtion. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if successful, and false if the specified animation does not exist. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::IAnimatedMeshX::setCurrentAnimation (s32 idx)\fC [pure virtual]\fP"
+.PP
+Sets an animation as animation to play back. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIidx,:\fP Zero based Index of the animation. Must be a value between 0 and \fBgetAnimationCount()\fP-1; 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

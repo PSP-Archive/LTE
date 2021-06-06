@@ -1,0 +1,52 @@
+.TH "engine::scene::ISceneNodeAnimator" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::ISceneNodeAnimator \- Animates a scene node. Can animate position, rotation, material, and so on.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ISceneNodeAnimator.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+Inherited by \fBengine::scene::ISceneNodeAnimatorCollisionResponse\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~ISceneNodeAnimator\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual void \fBanimateNode\fP (\fBISceneNode\fP *node, u32 timeMs)=0"
+.br
+.RI "\fIAnimates a scene node. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Animates a scene node. Can animate position, rotation, material, and so on. 
+
+A scene node animator is able to animate a scene node in a very simple way. It may change its position, rotation, scale and/or material. There are lots of animators to choose from. You can create scene node animators with the \fBISceneManager\fP interface. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual void engine::scene::ISceneNodeAnimator::animateNode (\fBISceneNode\fP * node, u32 timeMs)\fC [pure virtual]\fP"
+.PP
+Animates a scene node. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fInode,:\fP Node to animate. 
+.br
+\fItimeMs,:\fP Current time in milli seconds. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

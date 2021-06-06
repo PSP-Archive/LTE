@@ -1,0 +1,55 @@
+.TH "engine::video::S3DVertex2TCoords" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::video::S3DVertex2TCoords \- Vertex with two texture coordinates.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <S3DVertex.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBS3DVertex2TCoords\fP ()"
+.br
+.RI "\fIdefault constructor \fP"
+.ti -1c
+.RI "\fBS3DVertex2TCoords\fP (f32 x, f32 y, f32 z, \fBSColor\fP c, f32 tu, f32 tv, f32 tu2, f32 tv2)"
+.br
+.RI "\fIconstructor \fP"
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBcore::vector2d\fP< f32 > \fBTCoords\fP"
+.br
+.RI "\fIFirst set of texture coordinates. \fP"
+.ti -1c
+.RI "\fBSColor\fP \fBColor\fP"
+.br
+.RI "\fIColor. \fP"
+.ti -1c
+.RI "\fBcore::vector3df\fP \fBNormal\fP"
+.br
+.RI "\fINormal. \fP"
+.ti -1c
+.RI "\fBcore::vector3df\fP \fBPos\fP"
+.br
+.RI "\fIPosition. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Vertex with two texture coordinates. 
+
+Usually used for geometry with lightmaps or other special materials. 
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

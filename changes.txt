@@ -1,0 +1,49 @@
+LTE 3D Engine V1.1 - Bugs and Change log
+===========================================================================
+Last update by SiberianSTAR on 25 July 2006
+---------------------------------------------------------------------------
+
+29 July 2006
+  ___________________________________
++| change log: ________________________
+fixed: a buffer overflow was making PSP crash with high poly meshes
+update: improved the engine stub
+update: added three new style for the fps camera
+new: added the audio driver to play audio files
+
+
+25 July 2006
+  ___________________________________
++| change log: ________________________
+fixed: Clicking on an empty scrollbar was making PSP crash
+fixed: Change the name into the right case of two include files. 
+       (Now compilation works in linux). Thanks to Monthag for reporting.
+
+info: The collision code is good, to avoid falling thro the floor
+      use addTriangleSelector instead of addOctTreeTriangleSelector
+      for q3 maps.
+
+  ___________________________________
++| known bugs: ________________________
+ 1. software clipping algorithm is slow
+ 2. octtree triangle selector doesn't work well.
+ 3. terrain data generation takes too much memory, i've to decrease details
+
+22 July 2006
+  ___________________________________
++| change log: ________________________
+- first release
+- almost all irrlicht functions are supported
+
+  ___________________________________
++| known bugs: ________________________
+ 1. software clipping algorithm is slow
+ 2. collision detection is slow and buggy
+ 3. terrain data generation takes too much memory, i've to decrease details
+
+
+
+
+---------------------------------------------------------------------------
+If you find a bug please report it on the forum @ http://www.ltestudios.com/forum
+Thanks

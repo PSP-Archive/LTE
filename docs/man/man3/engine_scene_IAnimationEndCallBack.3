@@ -1,0 +1,43 @@
+.TH "engine::scene::IAnimationEndCallBack" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::IAnimationEndCallBack \- Callback interface for catching events of ended animations.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IAnimatedMeshSceneNode.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual void \fBOnAnimationEnd\fP (\fBIAnimatedMeshSceneNode\fP *node)=0"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Callback interface for catching events of ended animations. 
+
+Implement this interface and use \fBIAnimatedMeshSceneNode::setAnimationEndCallback\fP to be able to be notified if an animation playback has ended. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual void engine::scene::IAnimationEndCallBack::OnAnimationEnd (\fBIAnimatedMeshSceneNode\fP * node)\fC [pure virtual]\fP"
+.PP
+Will be called when the animation playback has ended. See \fBIAnimatedMeshSceneNode::setAnimationEndCallback\fP for more informations. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fInode,:\fP Node of which the animation has ended. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

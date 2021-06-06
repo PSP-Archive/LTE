@@ -1,0 +1,92 @@
+.TH "engine::core::line3d" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::core::line3d \- 3D line between two points with intersection methods.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <line3d.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "f32 \fBgetLength\fP () const "
+.br
+.ti -1c
+.RI "f32 \fBgetLengthSQ\fP () const "
+.br
+.ti -1c
+.RI "\fBvector3d\fP< T > \fBgetMiddle\fP () const "
+.br
+.RI "\fIReturns middle of line. \fP"
+.ti -1c
+.RI "\fBvector3d\fP< T > \fBgetVector\fP () const "
+.br
+.RI "\fIReturns vector of line. \fP"
+.ti -1c
+.RI "bool \fBisPointBetweenStartAndEnd\fP (const \fBvector3d\fP< T > &point) const "
+.br
+.ti -1c
+.RI "\fBvector3d\fP< T > \fBgetClosestPoint\fP (const \fBvector3d\fP< T > &point) const "
+.br
+.RI "\fIReturns the closest point on this line to a point. \fP"
+.ti -1c
+.RI "bool \fBgetIntersectionWithSphere\fP (\fBvector3d\fP< T > sorigin, T sradius, f32 &outdistance)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<class T> class engine::core::line3d< T >"
+3D line between two points with intersection methods. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class T> bool \fBengine::core::line3d\fP< T >::getIntersectionWithSphere (\fBvector3d\fP< T > sorigin, T sradius, f32 & outdistance)\fC [inline]\fP"
+.PP
+Returns if the line intersects with a shpere 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsorigin,:\fP Origin of the shpere. 
+.br
+\fIsradius,:\fP Radius if the sphere. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if there is an intersection. If there is one, the distance to the first intersection point is stored in outdistance. 
+.RE
+.PP
+
+.SS "template<class T> f32 \fBengine::core::line3d\fP< T >::getLength () const\fC [inline]\fP"
+.PP
+Returns length of line 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns length of line. 
+.RE
+.PP
+
+.SS "template<class T> f32 \fBengine::core::line3d\fP< T >::getLengthSQ () const\fC [inline]\fP"
+.PP
+Returns sqared length of line 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns sqared length of line. 
+.RE
+.PP
+
+.SS "template<class T> bool \fBengine::core::line3d\fP< T >::isPointBetweenStartAndEnd (const \fBvector3d\fP< T > & point) const\fC [inline]\fP"
+.PP
+Returns if the overgiven point is between start and end of the line. Assumes that the point is already somewhere on the line. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

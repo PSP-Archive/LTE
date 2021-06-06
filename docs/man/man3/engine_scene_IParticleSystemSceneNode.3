@@ -1,0 +1,188 @@
+.TH "engine::scene::IParticleSystemSceneNode" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::IParticleSystemSceneNode \- A particle system scene node for creating snow, fire, exlosions, smoke...  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IParticleSystemSceneNode.h>\fP
+.PP
+Inherits \fBengine::scene::ISceneNode\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBIParticleSystemSceneNode\fP (\fBISceneNode\fP *parent, \fBISceneManager\fP *mgr, s32 id, const \fBcore::vector3df\fP &position=\fBcore::vector3df\fP(0, 0, 0), const \fBcore::vector3df\fP &rotation=\fBcore::vector3df\fP(0, 0, 0), const \fBcore::vector3df\fP &scale=\fBcore::vector3df\fP(1.0f, 1.0f, 1.0f))"
+.br
+.RI "\fIconstructor \fP"
+.ti -1c
+.RI "virtual void \fBsetParticleSize\fP (const \fBcore::dimension2d\fP< f32 > &size=\fBcore::dimension2d\fP< f32 >(5.0f, 5.0f))=0"
+.br
+.RI "\fISets the size of all particles. \fP"
+.ti -1c
+.RI "virtual void \fBsetParticlesAreGlobal\fP (bool global)=0"
+.br
+.ti -1c
+.RI "virtual void \fBsetEmitter\fP (\fBIParticleEmitter\fP *emitter)=0"
+.br
+.ti -1c
+.RI "virtual void \fBaddAffector\fP (\fBIParticleAffector\fP *affector)=0"
+.br
+.ti -1c
+.RI "virtual void \fBremoveAllAffectors\fP ()=0"
+.br
+.RI "\fIRemoves all particle affectors in the particle system. \fP"
+.ti -1c
+.RI "virtual \fBIParticleEmitter\fP * \fBcreatePointEmitter\fP (\fBcore::vector3df\fP direction=\fBcore::vector3df\fP(0.0f, 0.03f, 0.0f), u32 minParticlesPerSecond=5, u32 maxParticlePerSecond=10, video::SColor minStartColor=video::SColor(255, 0, 0, 0), video::SColor maxStartColor=video::SColor(255, 255, 255, 255), u32 lifeTimeMin=2000, u32 lifeTimeMax=4000, s32 maxAngleDegrees=0)=0"
+.br
+.ti -1c
+.RI "virtual \fBIParticleEmitter\fP * \fBcreateBoxEmitter\fP (\fBcore::aabbox3d\fP< f32 > box=\fBcore::aabbox3d\fP< f32 >(-10, 28,-10, 10, 30, 10), \fBcore::vector3df\fP direction=\fBcore::vector3df\fP(0.0f, 0.03f, 0.0f), u32 minParticlesPerSecond=5, u32 maxParticlePerSecond=10, video::SColor minStartColor=video::SColor(255, 0, 0, 0), video::SColor maxStartColor=video::SColor(255, 255, 255, 255), u32 lifeTimeMin=2000, u32 lifeTimeMax=4000, s32 maxAngleDegrees=0)=0"
+.br
+.ti -1c
+.RI "virtual \fBIParticleAffector\fP * \fBcreateFadeOutParticleAffector\fP (\fBvideo::SColor\fP targetColor=\fBvideo::SColor\fP(0, 0, 0, 0), u32 timeNeededToFadeOut=1000)=0"
+.br
+.ti -1c
+.RI "virtual \fBIParticleAffector\fP * \fBcreateGravityAffector\fP (\fBcore::vector3df\fP gravity=\fBcore::vector3df\fP(0.0f,-0.03f, 0.0f), u32 timeForceLost=1000)=0"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+A particle system scene node for creating snow, fire, exlosions, smoke... 
+
+A scene node controlling a particle System. The behavior of the particles can be controlling by setting the right particle emitters and effectors. You can for example easily a campfire by doing this:
+.PP
+.PP
+.nf
+        scene::IParticleSystemSceneNode* p = scenemgr->addParticleSystemSceneNode();
+        p->setParticleSize(core::dimension2d<f32>(20.0f, 10.0f));
+        scene::IParticleEmitter* em = p->createBoxEmitter(
+                core::aabbox3d<f32>(-5,0,-5,5,1,5), 
+                core::vector3df(0.0f,0.03f,0.0f),
+                40,80, video::SColor(0,255,255,255),video::SColor(0,255,255,255), 1100,2000);
+        p->setEmitter(em);
+        em->drop();
+        scene::IParticleAffector* paf = p->createFadeOutParticleAffector();
+        p->addAffector(paf);
+        paf->drop();
+.fi
+.PP
+ 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual void engine::scene::IParticleSystemSceneNode::addAffector (\fBIParticleAffector\fP * affector)\fC [pure virtual]\fP"
+.PP
+Adds new particle effector to the particle system. A particle affector modifies the particles. For example, the FadeOut affector lets all particles fade out after some time. It is created and used in this way: IParticleAffector* p = \fBcreateFadeOutParticleAffector()\fP; addAffector(p); p->\fBdrop()\fP; Please note that a affector is not necessary for the particle system to work. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIaffector,:\fP New affector. 
+.RE
+.PP
+
+.SS "virtual \fBIParticleEmitter\fP* engine::scene::IParticleSystemSceneNode::createBoxEmitter (\fBcore::aabbox3d\fP< f32 > box = \fC\fBcore::aabbox3d\fP< f32 >(-10, 28,-10, 10, 30, 10)\fP, \fBcore::vector3df\fP direction = \fC\fBcore::vector3df\fP(0.0f, 0.03f, 0.0f)\fP, u32 minParticlesPerSecond = \fC5\fP, u32 maxParticlePerSecond = \fC10\fP, \fBvideo::SColor\fP minStartColor = \fC\fBvideo::SColor\fP(255, 0, 0, 0)\fP, \fBvideo::SColor\fP maxStartColor = \fC\fBvideo::SColor\fP(255, 255, 255, 255)\fP, u32 lifeTimeMin = \fC2000\fP, u32 lifeTimeMax = \fC4000\fP, s32 maxAngleDegrees = \fC0\fP)\fC [pure virtual]\fP"
+.PP
+Creates a box particle emitter. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdirection,:\fP Direction and speed of particle emission. 
+.br
+\fIminParticlesPerSecond,:\fP Minimal amount of particles emitted per second. 
+.br
+\fImaxParticlesPerSecond,:\fP Maximal amount of particles emitted per second. 
+.br
+\fIminStartColor,:\fP Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. 
+.br
+\fImaxStartColor,:\fP Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. 
+.br
+\fIlifetimeMin,:\fP Minimal lifetime of a particle, in milliseconds. 
+.br
+\fIlifetimeMax,:\fP Maximal lifetime of a particle, in milliseconds. 
+.br
+\fImaxAngleDegrees,:\fP Maximal angle in degrees, the emitting direction of the particle will differ from the orignial direction. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created particle emitter. To set this emitter as new emitter of this particle system, just call \fBsetEmitter()\fP. Note that you'll have to \fBdrop()\fP the returned pointer, after you don't need it any more, see \fBIUnknown::drop()\fP for more informations. 
+.RE
+.PP
+
+.SS "virtual \fBIParticleAffector\fP* engine::scene::IParticleSystemSceneNode::createFadeOutParticleAffector (\fBvideo::SColor\fP targetColor = \fC\fBvideo::SColor\fP(0, 0, 0, 0)\fP, u32 timeNeededToFadeOut = \fC1000\fP)\fC [pure virtual]\fP"
+.PP
+Creates a fade out particle affector. This affector modifies the color of every particle and and reaches the final color when the particle dies. This affector looks really good, if the EMT_TRANSPARENT_VERTEX_ALPHA material is used and the targetColor is video::SColor(0,0,0,0): Particles are fading out into void with this setting. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItargetColor,:\fP Color whereto the color of the particle is changed. 
+.br
+\fItimeNeededToFadeOut,:\fP How much time in milli seconds should the affector need to change the color to the targetColor. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created particle affector. To add this affector as new affector of this particle system, just call \fBaddAffector()\fP. Note that you'll have to \fBdrop()\fP the returned pointer, after you don't need it any more, see \fBIUnknown::drop()\fP for more informations. 
+.RE
+.PP
+
+.SS "virtual \fBIParticleAffector\fP* engine::scene::IParticleSystemSceneNode::createGravityAffector (\fBcore::vector3df\fP gravity = \fC\fBcore::vector3df\fP(0.0f,-0.03f, 0.0f)\fP, u32 timeForceLost = \fC1000\fP)\fC [pure virtual]\fP"
+.PP
+of the emitter is totally lost and the particle does not move any more. This is the time where gravity fully affects the particle. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created particle affector. To add this affector as new affector of this particle system, just call \fBaddAffector()\fP. Note that you'll have to \fBdrop()\fP the returned pointer, after you don't need it any more, see \fBIUnknown::drop()\fP for more informations. 
+.RE
+.PP
+
+.SS "virtual \fBIParticleEmitter\fP* engine::scene::IParticleSystemSceneNode::createPointEmitter (\fBcore::vector3df\fP direction = \fC\fBcore::vector3df\fP(0.0f, 0.03f, 0.0f)\fP, u32 minParticlesPerSecond = \fC5\fP, u32 maxParticlePerSecond = \fC10\fP, \fBvideo::SColor\fP minStartColor = \fC\fBvideo::SColor\fP(255, 0, 0, 0)\fP, \fBvideo::SColor\fP maxStartColor = \fC\fBvideo::SColor\fP(255, 255, 255, 255)\fP, u32 lifeTimeMin = \fC2000\fP, u32 lifeTimeMax = \fC4000\fP, s32 maxAngleDegrees = \fC0\fP)\fC [pure virtual]\fP"
+.PP
+Creates a point particle emitter. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdirection,:\fP Direction and speed of particle emission. 
+.br
+\fIminParticlesPerSecond,:\fP Minimal amount of particles emitted per second. 
+.br
+\fImaxParticlesPerSecond,:\fP Maximal amount of particles emitted per second. 
+.br
+\fIminStartColor,:\fP Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. 
+.br
+\fImaxStartColor,:\fP Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. 
+.br
+\fIlifetimeMin,:\fP Minimal lifetime of a particle, in milliseconds. 
+.br
+\fIlifetimeMax,:\fP Maximal lifetime of a particle, in milliseconds. 
+.br
+\fImaxAngleDegrees,:\fP Maximal angle in degrees, the emitting direction of the particle will differ from the orignial direction. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created particle emitter. To set this emitter as new emitter of this particle system, just call \fBsetEmitter()\fP. Note that you'll have to \fBdrop()\fP the returned pointer, after you don't need it any more, see \fBIUnknown::drop()\fP for more informations. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::IParticleSystemSceneNode::setEmitter (\fBIParticleEmitter\fP * emitter)\fC [pure virtual]\fP"
+.PP
+Sets the particle emitter, which creates the particles. A particle emitter can be created using one of the methods. For example to create and use a simple PointEmitter, call IParticleEmitter* p = \fBcreatePointEmitter()\fP; setEmitter(p); p->\fBdrop()\fP; 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIemitter,:\fP Sets the particle emitter. You can set this to 0 for removing the current emitter and stopping the particle system emitting new particles. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::IParticleSystemSceneNode::setParticlesAreGlobal (bool global)\fC [pure virtual]\fP"
+.PP
+Sets if the particles should be global. If it is, the particles are affected by the movement of the particle system scene node too, otherwise they completely ignore it. Default is true. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

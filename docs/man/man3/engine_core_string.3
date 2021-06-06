@@ -1,0 +1,375 @@
+.TH "engine::core::string" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::core::string \- Very simple string class with some useful features.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <engineString.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBstring\fP ()"
+.br
+.RI "\fIDefault constructor. \fP"
+.ti -1c
+.RI "\fBstring\fP (const \fBstring\fP< T > &other)"
+.br
+.RI "\fIConstructor. \fP"
+.ti -1c
+.RI "\fBstring\fP (int number)"
+.br
+.RI "\fIConstructs a string from an int. \fP"
+.ti -1c
+.RI "template<class B> \fBstring\fP (const B *c, s32 lenght)"
+.br
+.RI "\fIConstructor for copying a string from a pointer with a given lenght. \fP"
+.ti -1c
+.RI "template<class B> \fBstring\fP (const B *c)"
+.br
+.RI "\fIConstructor for unicode and ascii strings. \fP"
+.ti -1c
+.RI "\fB~string\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "\fBstring\fP< T > & \fBoperator=\fP (const \fBstring\fP< T > &other)"
+.br
+.RI "\fIAssignment operator. \fP"
+.ti -1c
+.RI "template<class B> \fBstring\fP< T > & \fBoperator=\fP (const B *c)"
+.br
+.RI "\fIAssignment operator for strings, ascii and unicode. \fP"
+.ti -1c
+.RI "\fBstring\fP< T > \fBoperator+\fP (const \fBstring\fP< T > &other)"
+.br
+.RI "\fIAdd operator for other strings. \fP"
+.ti -1c
+.RI "template<class B> \fBstring\fP< T > \fBoperator+\fP (const B *c)"
+.br
+.RI "\fIAdd operator for strings, ascii and unicode. \fP"
+.ti -1c
+.RI "T & \fBoperator[]\fP (const s32 index) const "
+.br
+.RI "\fIDirect access operator. \fP"
+.ti -1c
+.RI "bool \fBoperator==\fP (const T *str) const "
+.br
+.RI "\fIComparison operator. \fP"
+.ti -1c
+.RI "bool \fBoperator==\fP (const \fBstring\fP< T > &other) const "
+.br
+.RI "\fIComparison operator. \fP"
+.ti -1c
+.RI "bool \fBoperator<\fP (const \fBstring\fP< T > &other) const "
+.br
+.RI "\fIIs smaller operator. \fP"
+.ti -1c
+.RI "bool \fBoperator!=\fP (const \fBstring\fP< T > &other) const "
+.br
+.RI "\fIEquals not operator. \fP"
+.ti -1c
+.RI "s32 \fBsize\fP () const "
+.br
+.RI "\fIReturns length of string. \fP"
+.ti -1c
+.RI "const T * \fBc_str\fP () const "
+.br
+.RI "\fIReturns character string. \fP"
+.ti -1c
+.RI "void \fBmake_lower\fP ()"
+.br
+.RI "\fIMakes the string lower case. \fP"
+.ti -1c
+.RI "void \fBmake_upper\fP ()"
+.br
+.RI "\fIMakes the string upper case. \fP"
+.ti -1c
+.RI "bool \fBequals_ignore_case\fP (const \fBstring\fP< T > &other) const "
+.br
+.RI "\fICompares the string ignoring case. \fP"
+.ti -1c
+.RI "bool \fBequalsn\fP (const \fBstring\fP< T > &other, int len)"
+.br
+.RI "\fIcompares the first n characters of the strings \fP"
+.ti -1c
+.RI "bool \fBequalsn\fP (const T *str, int len)"
+.br
+.RI "\fIcompares the first n characters of the strings \fP"
+.ti -1c
+.RI "void \fBappend\fP (T character)"
+.br
+.RI "\fIAppends a character to this string. \fP"
+.ti -1c
+.RI "void \fBappend\fP (const \fBstring\fP< T > &other)"
+.br
+.RI "\fIAppends a string to this string. \fP"
+.ti -1c
+.RI "void \fBappend\fP (const \fBstring\fP< T > &other, s32 length)"
+.br
+.RI "\fIAppends a string of the length l to this string. \fP"
+.ti -1c
+.RI "void \fBreserve\fP (s32 count)"
+.br
+.RI "\fIReserves some memory. \fP"
+.ti -1c
+.RI "s32 \fBfindFirst\fP (T c) const "
+.br
+.RI "\fIfinds first occurrence of character in string \fP"
+.ti -1c
+.RI "s32 \fBfindFirstChar\fP (T *c, int count) const "
+.br
+.RI "\fIfinds first occurrence of a character of a list in string \fP"
+.ti -1c
+.RI "template<class B> s32 \fBfindFirstCharNotInList\fP (B *c, int count) const "
+.br
+.RI "\fIFinds first position of a character not in a given list. \fP"
+.ti -1c
+.RI "template<class B> s32 \fBfindLastCharNotInList\fP (B *c, int count) const "
+.br
+.RI "\fIFinds last position of a character not in a given list. \fP"
+.ti -1c
+.RI "s32 \fBfindNext\fP (T c, s32 startPos) const "
+.br
+.RI "\fIfinds next occurrence of character in string \fP"
+.ti -1c
+.RI "s32 \fBfindLast\fP (T c) const "
+.br
+.ti -1c
+.RI "\fBstring\fP< T > \fBsubString\fP (s32 begin, s32 length)"
+.br
+.ti -1c
+.RI "void \fBreplace\fP (T toReplace, T replaceWith)"
+.br
+.RI "\fIreplaces all characters of a special type with another one \fP"
+.ti -1c
+.RI "void \fBtrim\fP ()"
+.br
+.RI "\fItrims the string. \fP"
+.ti -1c
+.RI "void \fBerase\fP (int index)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<class T> class engine::core::string< T >"
+Very simple string class with some useful features. 
+
+string<c8> and string<wchar_t> work both with unicode AND ascii, so you can assign unicode to string<c8> and ascii to string<wchar_t> (and the other way round) if your ever would want to. Note that the conversation between both is not done using an encoding.
+.PP
+Known bugs: Special characters like 'Ä', 'Ü' and 'Ö' are ignored in the methods make_upper, make_lower and equals_ignore_case. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class T> void \fBengine::core::string\fP< T >::append (const \fBstring\fP< T > & other, s32 length)\fC [inline]\fP"
+.PP
+Appends a string of the length l to this string. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother,:\fP other String to append to this string. 
+.br
+\fIlength,:\fP How much characters of the other string to add to this one. 
+.RE
+.PP
+
+.SS "template<class T> void \fBengine::core::string\fP< T >::append (const \fBstring\fP< T > & other)\fC [inline]\fP"
+.PP
+Appends a string to this string. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother,:\fP String to append. 
+.RE
+.PP
+
+.SS "template<class T> void \fBengine::core::string\fP< T >::append (T character)\fC [inline]\fP"
+.PP
+Appends a character to this string. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcharacter,:\fP Character to append. 
+.RE
+.PP
+
+.SS "template<class T> const T* \fBengine::core::string\fP< T >::c_str () const\fC [inline]\fP"
+.PP
+Returns character string. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns pointer to C-style zero terminated string. 
+.RE
+.PP
+
+.SS "template<class T> bool \fBengine::core::string\fP< T >::equals_ignore_case (const \fBstring\fP< T > & other) const\fC [inline]\fP"
+.PP
+Compares the string ignoring case. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother,:\fP Other string to compare. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if the string are equal ignoring case. 
+.RE
+.PP
+
+.SS "template<class T> void \fBengine::core::string\fP< T >::erase (int index)\fC [inline]\fP"
+.PP
+Erases a character from the string. May be slow, because all elements following after the erased element have to be copied. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIindex,:\fP Index of element to be erased. 
+.RE
+.PP
+
+.SS "template<class T> s32 \fBengine::core::string\fP< T >::findFirst (T c) const\fC [inline]\fP"
+.PP
+finds first occurrence of character in string 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIc,:\fP Character to search for. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns position where the character has been found, or -1 if not found. 
+.RE
+.PP
+
+.SS "template<class T> s32 \fBengine::core::string\fP< T >::findFirstChar (T * c, int count) const\fC [inline]\fP"
+.PP
+finds first occurrence of a character of a list in string 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIc,:\fP List of strings to find. For example if the method should find the first occurance of 'a' or 'b', this parameter should be 'ab'. 
+.br
+\fIcount,:\fP Amount of characters in the list. Ususally, this should be strlen(ofParameter1) 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns position where one of the character has been found, or -1 if not found. 
+.RE
+.PP
+
+.SS "template<class T> template<class B> s32 \fBengine::core::string\fP< T >::findFirstCharNotInList (B * c, int count) const\fC [inline]\fP"
+.PP
+Finds first position of a character not in a given list. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIc,:\fP List of characters not to find. For example if the method should find the first occurance of a character not 'a' or 'b', this parameter should be 'ab'. 
+.br
+\fIcount,:\fP Amount of characters in the list. Ususally, this should be strlen(ofParameter1) 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns position where the character has been found, or -1 if not found. 
+.RE
+.PP
+
+.SS "template<class T> s32 \fBengine::core::string\fP< T >::findLast (T c) const\fC [inline]\fP"
+.PP
+finds last occurrence of character in string 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIc,:\fP Character to search for. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns position where the character has been found, or -1 if not found. 
+.RE
+.PP
+
+.SS "template<class T> template<class B> s32 \fBengine::core::string\fP< T >::findLastCharNotInList (B * c, int count) const\fC [inline]\fP"
+.PP
+Finds last position of a character not in a given list. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIc,:\fP List of characters not to find. For example if the method should find the first occurance of a character not 'a' or 'b', this parameter should be 'ab'. 
+.br
+\fIcount,:\fP Amount of characters in the list. Ususally, this should be strlen(ofParameter1) 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns position where the character has been found, or -1 if not found. 
+.RE
+.PP
+
+.SS "template<class T> s32 \fBengine::core::string\fP< T >::findNext (T c, s32 startPos) const\fC [inline]\fP"
+.PP
+finds next occurrence of character in string 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIc,:\fP Character to search for. 
+.br
+\fIstartPos,:\fP Position in string to start searching. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns position where the character has been found, or -1 if not found. 
+.RE
+.PP
+
+.SS "template<class T> void \fBengine::core::string\fP< T >::reserve (s32 count)\fC [inline]\fP"
+.PP
+Reserves some memory. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcount,:\fP Amount of characters to reserve. 
+.RE
+.PP
+
+.SS "template<class T> s32 \fBengine::core::string\fP< T >::size () const\fC [inline]\fP"
+.PP
+Returns length of string. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns length of the string in characters. 
+.RE
+.PP
+
+.SS "template<class T> \fBstring\fP<T> \fBengine::core::string\fP< T >::subString (s32 begin, s32 length)\fC [inline]\fP"
+.PP
+Returns a substring 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIbegin,:\fP Start of substring. 
+.br
+\fIlength,:\fP Length of substring. 
+.RE
+.PP
+
+.SS "template<class T> void \fBengine::core::string\fP< T >::trim ()\fC [inline]\fP"
+.PP
+trims the string. 
+.PP
+Removes whitespace from begin and end of the string. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

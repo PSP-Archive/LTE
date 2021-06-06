@@ -1,0 +1,39 @@
+.TH "engine::gui::IGUIFileOpenDialog" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::gui::IGUIFileOpenDialog \- Standard file chooser dialog.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IGUIFileOpenDialog.h>\fP
+.PP
+Inherits \fBengine::gui::IGUIElement\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBIGUIFileOpenDialog\fP (\fBIGUIEnvironment\fP *environment, \fBIGUIElement\fP *parent, s32 id, \fBcore::rect\fP< s32 > rectangle)"
+.br
+.RI "\fIconstructor \fP"
+.ti -1c
+.RI "virtual \fB~IGUIFileOpenDialog\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual const wchar_t * \fBgetFilename\fP ()=0"
+.br
+.RI "\fIReturns the filename of the selected file. Returns NULL, if no file was selected. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Standard file chooser dialog. 
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

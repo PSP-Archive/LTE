@@ -1,0 +1,99 @@
+.TH "engine::io::IFileList" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::io::IFileList \- The Filelist lists all files in a directory.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IFileList.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~IFileList\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual s32 \fBgetFileCount\fP ()=0"
+.br
+.ti -1c
+.RI "virtual const c8 * \fBgetFileName\fP (s32 index)=0"
+.br
+.ti -1c
+.RI "virtual const c8 * \fBgetFullFileName\fP (s32 index)=0"
+.br
+.ti -1c
+.RI "virtual bool \fBisDirectory\fP (s32 index)=0"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+The Filelist lists all files in a directory. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual s32 engine::io::IFileList::getFileCount ()\fC [pure virtual]\fP"
+.PP
+Returns the amount of files in the filelist. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the amount of files and directories in the file list. 
+.RE
+.PP
+
+.SS "virtual const c8* engine::io::IFileList::getFileName (s32 index)\fC [pure virtual]\fP"
+.PP
+Gets the name of a file in the list, based on an index. The path is not included in this name. Use getFullFileName for this. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIindex\fP is the zero based index of the file which name should be returned. The index has to be smaller than the amount \fBgetFileCount()\fP returns. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the file name of the file. Returns 0, if an error occured. 
+.RE
+.PP
+
+.SS "virtual const c8* engine::io::IFileList::getFullFileName (s32 index)\fC [pure virtual]\fP"
+.PP
+Gets the full name of a file in the list, path included, based on an index. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIindex\fP is the zero based index of the file which name should be returned. The index has to be smaller than the amount \fBgetFileCount()\fP returns. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the file name of the file. Returns 0, if an error occured. 
+.RE
+.PP
+
+.SS "virtual bool engine::io::IFileList::isDirectory (s32 index)\fC [pure virtual]\fP"
+.PP
+Returns of the file is a directory 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIindex\fP is the zero based index of the file which name should be returned. The index has to be smaller than the amount \fBgetFileCount()\fP returns. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true, if the file is a directory, and false, if it is not. If an error occurs, the result is undefined. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

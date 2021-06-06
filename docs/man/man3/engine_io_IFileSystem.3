@@ -1,0 +1,247 @@
+.TH "engine::io::IFileSystem" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::io::IFileSystem \- The FileSystem manages files and archives and provides access to them.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IFileSystem.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~IFileSystem\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual \fBIReadFile\fP * \fBcreateAndOpenFile\fP (const c8 *filename)=0"
+.br
+.RI "\fIOpens a file for read access. \fP"
+.ti -1c
+.RI "virtual \fBIWriteFile\fP * \fBcreateAndWriteFile\fP (const c8 *filename, bool append=false)=0"
+.br
+.RI "\fIOpens a file for write access. \fP"
+.ti -1c
+.RI "virtual bool \fBaddZipFileArchive\fP (const c8 *filename, bool ignoreCase=true, bool ignorePaths=true)=0"
+.br
+.RI "\fIAdds an zip archive to the file system. \fP"
+.ti -1c
+.RI "virtual const c8 * \fBgetWorkingDirectory\fP ()=0"
+.br
+.RI "\fIReturns the string of the current working directory. \fP"
+.ti -1c
+.RI "virtual bool \fBchangeWorkingDirectoryTo\fP (const c8 *newDirectory)=0"
+.br
+.RI "\fIChanges the current Working Directory to the overgiven string. \fP"
+.ti -1c
+.RI "virtual \fBIFileList\fP * \fBcreateFileList\fP ()=0"
+.br
+.RI "\fICreates a list of files and directories in the current working directory and returns it. \fP"
+.ti -1c
+.RI "virtual bool \fBexistFile\fP (const c8 *filename)=0"
+.br
+.RI "\fIDeterminates if a file exists and would be able to be opened. \fP"
+.ti -1c
+.RI "virtual \fBIXMLReader\fP * \fBcreateXMLReader\fP (const c8 *filename)=0"
+.br
+.RI "\fICreates a XML Reader from a file which returns all parsed strings as wide characters (wchar_t*). \fP"
+.ti -1c
+.RI "virtual \fBIXMLReader\fP * \fBcreateXMLReader\fP (\fBIReadFile\fP *file)=0"
+.br
+.RI "\fICreates a XML Reader from a file which returns all parsed strings as wide characters (wchar_t*). \fP"
+.ti -1c
+.RI "virtual \fBIXMLReaderUTF8\fP * \fBcreateXMLReaderUTF8\fP (const c8 *filename)=0"
+.br
+.RI "\fICreates a XML Reader from a file which returns all parsed strings as ASCII/UTF-8 characters (char*). \fP"
+.ti -1c
+.RI "virtual \fBIXMLReaderUTF8\fP * \fBcreateXMLReaderUTF8\fP (\fBIReadFile\fP *file)=0"
+.br
+.RI "\fICreates a XML Reader from a file which returns all parsed strings as ASCII/UTF-8 characters (char*). \fP"
+.ti -1c
+.RI "virtual \fBIXMLWriter\fP * \fBcreateXMLWriter\fP (const c8 *filename)=0"
+.br
+.RI "\fICreates a XML Writer from a file. \fP"
+.ti -1c
+.RI "virtual \fBIXMLWriter\fP * \fBcreateXMLWriter\fP (\fBIWriteFile\fP *file)=0"
+.br
+.RI "\fICreates a XML Writer from a file. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+The FileSystem manages files and archives and provides access to them. 
+
+It manages where files are, so that modules which use the the IO do not need to know where every file is located. A file could be in a .zip-Archive or as file on disk, using the \fBIFileSystem\fP makes no difference to this. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual bool engine::io::IFileSystem::addZipFileArchive (const c8 * filename, bool ignoreCase = \fCtrue\fP, bool ignorePaths = \fCtrue\fP)\fC [pure virtual]\fP"
+.PP
+Adds an zip archive to the file system. 
+.PP
+After calling this, the engine Engine will search and open files directly from this archive too. This is useful for hiding data from the end user, speeding up file access and making it possible to access for example Quake3 .pk3 files, which are nothing different than .zip files. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfilename,:\fP Filename of the zip archive to add to the file system. 
+.br
+\fIignoreCase,:\fP If set to true, files in the archive can be accessed without writing all letters in the right case. 
+.br
+\fIignorePaths,:\fP If set to true, files in the added archive can be accessed without its complete path. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if the archive was added successful, false if not. 
+.RE
+.PP
+
+.SS "virtual bool engine::io::IFileSystem::changeWorkingDirectoryTo (const c8 * newDirectory)\fC [pure virtual]\fP"
+.PP
+Changes the current Working Directory to the overgiven string. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIewDirectory\fP is a string specifiing the new working directory. The string is operating system dependent. Under Windows it has the form '<drive>:\\<directory>\\<sudirectory>\\<..>'. An example would be: 'C:\\Windows\\' 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if successful, otherwise false. 
+.RE
+.PP
+
+.SS "virtual \fBIReadFile\fP* engine::io::IFileSystem::createAndOpenFile (const c8 * filename)\fC [pure virtual]\fP"
+.PP
+Opens a file for read access. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfilename,:\fP Name of file to open. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created file interface. The returned pointer should be dropped when no longer needed. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBIWriteFile\fP* engine::io::IFileSystem::createAndWriteFile (const c8 * filename, bool append = \fCfalse\fP)\fC [pure virtual]\fP"
+.PP
+Opens a file for write access. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfilename,:\fP Name of file to open. 
+.br
+\fIappend,:\fP If the file already exist, all write operations are appended to the file. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created file interface. 0 is returned, if the file could not created or opened for writing. The returned pointer should be dropped when no longer needed. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBIFileList\fP* engine::io::IFileSystem::createFileList ()\fC [pure virtual]\fP"
+.PP
+Creates a list of files and directories in the current working directory and returns it. 
+.PP
+\fBReturns:\fP
+.RS 4
+a Pointer to the created \fBIFileList\fP is returned. After the list has been used it has to be deleted using its \fBIFileList::drop()\fP method. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBIXMLReader\fP* engine::io::IFileSystem::createXMLReader (\fBIReadFile\fP * file)\fC [pure virtual]\fP"
+.PP
+Creates a XML Reader from a file which returns all parsed strings as wide characters (wchar_t*). 
+.PP
+Use \fBcreateXMLReaderUTF8()\fP if you prefer char* instead of wchar_t*. See \fBIengineXMLReader\fP for more information on how to use the parser. 
+.PP
+\fBReturns:\fP
+.RS 4
+0, if file could not be opened, otherwise a pointer to the created IXMLReader is returned. After use, the reader has to be deleted using its IXMLReader::drop() method. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBIXMLReader\fP* engine::io::IFileSystem::createXMLReader (const c8 * filename)\fC [pure virtual]\fP"
+.PP
+Creates a XML Reader from a file which returns all parsed strings as wide characters (wchar_t*). 
+.PP
+Use \fBcreateXMLReaderUTF8()\fP if you prefer char* instead of wchar_t*. See \fBIengineXMLReader\fP for more information on how to use the parser. 
+.PP
+\fBReturns:\fP
+.RS 4
+0, if file could not be opened, otherwise a pointer to the created IXMLReader is returned. After use, the reader has to be deleted using its IXMLReader::drop() method. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBIXMLReaderUTF8\fP* engine::io::IFileSystem::createXMLReaderUTF8 (\fBIReadFile\fP * file)\fC [pure virtual]\fP"
+.PP
+Creates a XML Reader from a file which returns all parsed strings as ASCII/UTF-8 characters (char*). 
+.PP
+Use \fBcreateXMLReader()\fP if you prefer wchar_t* instead of char*. See \fBIengineXMLReader\fP for more information on how to use the parser. 
+.PP
+\fBReturns:\fP
+.RS 4
+0, if file could not be opened, otherwise a pointer to the created IXMLReader is returned. After use, the reader has to be deleted using its IXMLReaderUTF8::drop() method. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBIXMLReaderUTF8\fP* engine::io::IFileSystem::createXMLReaderUTF8 (const c8 * filename)\fC [pure virtual]\fP"
+.PP
+Creates a XML Reader from a file which returns all parsed strings as ASCII/UTF-8 characters (char*). 
+.PP
+Use \fBcreateXMLReader()\fP if you prefer wchar_t* instead of char*. See \fBIengineXMLReader\fP for more information on how to use the parser. 
+.PP
+\fBReturns:\fP
+.RS 4
+0, if file could not be opened, otherwise a pointer to the created IXMLReader is returned. After use, the reader has to be deleted using its IXMLReaderUTF8::drop() method. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBIXMLWriter\fP* engine::io::IFileSystem::createXMLWriter (\fBIWriteFile\fP * file)\fC [pure virtual]\fP"
+.PP
+Creates a XML Writer from a file. 
+.PP
+\fBReturns:\fP
+.RS 4
+0, if file could not be opened, otherwise a pointer to the created \fBIXMLWriter\fP is returned. After use, the reader has to be deleted using its \fBIXMLWriter::drop()\fP method. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBIXMLWriter\fP* engine::io::IFileSystem::createXMLWriter (const c8 * filename)\fC [pure virtual]\fP"
+.PP
+Creates a XML Writer from a file. 
+.PP
+\fBReturns:\fP
+.RS 4
+0, if file could not be opened, otherwise a pointer to the created \fBIXMLWriter\fP is returned. After use, the reader has to be deleted using its \fBIXMLWriter::drop()\fP method. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual bool engine::io::IFileSystem::existFile (const c8 * filename)\fC [pure virtual]\fP"
+.PP
+Determinates if a file exists and would be able to be opened. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfilename\fP is the string identifying the file which should be tested for existance. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if file exsits, and false if it does not exist or an error occured. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

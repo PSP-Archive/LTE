@@ -1,0 +1,55 @@
+.TH "engine::IOSOperator" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::IOSOperator \- The Operating system operator provides operation system specific methods and informations.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IOSOperator.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~IOSOperator\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual const wchar_t * \fBgetOperationSystemVersion\fP ()=0"
+.br
+.RI "\fIreturns the current operation system version as string. \fP"
+.ti -1c
+.RI "virtual void \fBcopyToClipboard\fP (const c8 *text)=0"
+.br
+.RI "\fIcopies text to the clipboard \fP"
+.ti -1c
+.RI "virtual c8 * \fBgetTextFromClipboard\fP ()=0"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+The Operating system operator provides operation system specific methods and informations. 
+
+Currently only 3 methods are supported. But it will be extended with more functionality soon. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual c8* engine::IOSOperator::getTextFromClipboard ()\fC [pure virtual]\fP"
+.PP
+gets text from the clipboard 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns 0 if no string is in there. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

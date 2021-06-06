@@ -1,0 +1,97 @@
+.TH "engine::scene::IAnimatedMeshMS3D" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::IAnimatedMeshMS3D \- Interface for using some special functions of MS3D meshes.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IAnimatedMeshMS3D.h>\fP
+.PP
+Inherits \fBengine::scene::IAnimatedMesh\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fBcore::matrix4\fP * \fBgetMatrixOfJoint\fP (s32 jointNumber, s32 frame)=0"
+.br
+.ti -1c
+.RI "virtual s32 \fBgetJointCount\fP () const =0"
+.br
+.ti -1c
+.RI "virtual const c8 * \fBgetJointName\fP (s32 number) const =0"
+.br
+.ti -1c
+.RI "virtual s32 \fBgetJointNumber\fP (const c8 *name) const =0"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Interface for using some special functions of MS3D meshes. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual s32 engine::scene::IAnimatedMeshMS3D::getJointCount () const\fC [pure virtual]\fP"
+.PP
+Gets joint count. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns amount of joints in the skeletal animated mesh. 
+.RE
+.PP
+
+.SS "virtual const c8* engine::scene::IAnimatedMeshMS3D::getJointName (s32 number) const\fC [pure virtual]\fP"
+.PP
+Gets the name of a joint. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fInumber,:\fP Zero based index of joint. The last joint has the number \fBIAnimatedMeshMS3D::getJointCount()\fP-1; 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns name of joint and null if an error happened. 
+.RE
+.PP
+
+.SS "virtual s32 engine::scene::IAnimatedMeshMS3D::getJointNumber (const c8 * name) const\fC [pure virtual]\fP"
+.PP
+Gets a joint number from its name 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIname,:\fP Name of the joint. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the number of the joint or -1 if not found. 
+.RE
+.PP
+
+.SS "virtual \fBcore::matrix4\fP* engine::scene::IAnimatedMeshMS3D::getMatrixOfJoint (s32 jointNumber, s32 frame)\fC [pure virtual]\fP"
+.PP
+Returns a pointer to a transformation matrix of a part of the mesh based on a frame time. This is used for being able to attach objects to parts of animated meshes. For example a weapon to an animated hand. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIjointNumber,:\fP Zero based index of joint. The last joint has the number \fBIAnimatedMeshMS3D::getJointCount()\fP-1; 
+.br
+\fIframe,:\fP Frame of the animation. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the matrix of the mesh part or null if an error occured. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

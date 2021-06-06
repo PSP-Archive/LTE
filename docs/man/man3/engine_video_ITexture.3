@@ -1,0 +1,141 @@
+.TH "engine::video::ITexture" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::video::ITexture \- Interface for a Video Driver dependent Texture.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ITexture.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~ITexture\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual void * \fBlock\fP ()=0"
+.br
+.RI "\fILock function. \fP"
+.ti -1c
+.RI "virtual void \fBunlock\fP ()=0"
+.br
+.RI "\fIUnlock function. Must be called after a \fBlock()\fP to the texture. \fP"
+.ti -1c
+.RI "virtual const \fBcore::dimension2d\fP< s32 > & \fBgetOriginalSize\fP ()=0"
+.br
+.RI "\fIReturns original size of the texture. \fP"
+.ti -1c
+.RI "virtual const \fBcore::dimension2d\fP< s32 > & \fBgetSize\fP ()=0"
+.br
+.RI "\fIReturns dimension (=size) of the texture. \fP"
+.ti -1c
+.RI "virtual \fBE_DRIVER_TYPE\fP \fBgetDriverType\fP ()=0"
+.br
+.RI "\fIReturns driver type of texture. \fP"
+.ti -1c
+.RI "virtual \fBECOLOR_FORMAT\fP \fBgetColorFormat\fP ()=0"
+.br
+.RI "\fIReturns the color format of texture. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetPitch\fP ()=0"
+.br
+.RI "\fIReturns pitch of texture (in bytes). \fP"
+.ti -1c
+.RI "virtual void \fBregenerateMipMapLevels\fP ()=0"
+.br
+.RI "\fIRegenerates the mip map levels of the texture. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Interface for a Video Driver dependent Texture. 
+
+An \fBITexture\fP is created by an \fBIVideoDriver\fP by using \fBIVideoDriver::addTexture\fP or \fBIVideoDriver::getTexture\fP. After this, this texture may only be used by this VideoDriver. As you can imagine, textures of the DirectX and the OpenGL device will not be compatible, for example. An exception is the Software device and the NULL device, their textures are compatible. If you try to use a texture created by one device with an other device, the device will refuse to do that and write a warning or an error message to the output buffer. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual \fBECOLOR_FORMAT\fP engine::video::ITexture::getColorFormat ()\fC [pure virtual]\fP"
+.PP
+Returns the color format of texture. 
+.PP
+This format is in most cases ECF_A1R5G5B5 or ECF_A8R8G8B8. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the color format of texture. 
+.RE
+.PP
+
+.SS "virtual \fBE_DRIVER_TYPE\fP engine::video::ITexture::getDriverType ()\fC [pure virtual]\fP"
+.PP
+Returns driver type of texture. 
+.PP
+This is the driver, which created the texture. This method is used internally by the video devices, to check, if they may use a texture because textures may be incompatible between different devices. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns driver type of texture. 
+.RE
+.PP
+
+.SS "virtual const \fBcore::dimension2d\fP<s32>& engine::video::ITexture::getOriginalSize ()\fC [pure virtual]\fP"
+.PP
+Returns original size of the texture. 
+.PP
+The texture is usually scaled, if it was created with an unoptimal size. For example if the size of the texture file it was loaded from was not a power of two. This returns the size of the texture, it had before it was scaled. Can be useful when drawing 2d images on the screen, which should have the exact size of the original texture. Use \fBITexture::getSize()\fP if you want to know the real size it has now stored in the system. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the original size of the texture. 
+.RE
+.PP
+
+.SS "virtual s32 engine::video::ITexture::getPitch ()\fC [pure virtual]\fP"
+.PP
+Returns pitch of texture (in bytes). 
+.PP
+The pitch is the amount of bytes used for a row of pixels in a texture. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns pitch of texture in bytes. 
+.RE
+.PP
+
+.SS "virtual const \fBcore::dimension2d\fP<s32>& engine::video::ITexture::getSize ()\fC [pure virtual]\fP"
+.PP
+Returns dimension (=size) of the texture. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the size of the texture. 
+.RE
+.PP
+
+.SS "virtual void* engine::video::ITexture::lock ()\fC [pure virtual]\fP"
+.PP
+Lock function. 
+.PP
+Locks the Texture and returns a pointer to access the pixels. After \fBlock()\fP has been called and all operations on the pixels are done, you must call \fBunlock()\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the pixel data. The format of the pixel can be determinated by using \fBgetColorFormat()\fP. NULL is returned, if the texture cannot be locked. 
+.RE
+.PP
+
+.SS "virtual void engine::video::ITexture::regenerateMipMapLevels ()\fC [pure virtual]\fP"
+.PP
+Regenerates the mip map levels of the texture. 
+.PP
+Useful after locking and modifying the texture 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

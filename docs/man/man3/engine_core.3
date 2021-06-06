@@ -1,0 +1,192 @@
+.TH "engine::core" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::core \- In this namespace can be found basic classes like vectors, planes, arrays, lists and so on.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBaabbox3d\fP"
+.br
+.RI "\fIAxis aligned bounding box in 3d dimensional space. \fP"
+.ti -1c
+.RI "class \fBdimension2d\fP"
+.br
+.RI "\fISpecifies a 2 dimensional size. \fP"
+.ti -1c
+.RI "class \fBarray\fP"
+.br
+.RI "\fISelf reallocating template array (like stl vector) with additional features. \fP"
+.ti -1c
+.RI "class \fBlist\fP"
+.br
+.RI "\fIDouble linked list template. \fP"
+.ti -1c
+.RI "class \fBstring\fP"
+.br
+.RI "\fIVery simple string class with some useful features. \fP"
+.ti -1c
+.RI "class \fBline2d\fP"
+.br
+.RI "\fI2D line between two points with intersection methods. \fP"
+.ti -1c
+.RI "class \fBline3d\fP"
+.br
+.RI "\fI3D line between two points with intersection methods. \fP"
+.ti -1c
+.RI "class \fBmatrix4\fP"
+.br
+.RI "\fI4x4 matrix. Mostly used as transformation matrix for 3d calculations. \fP"
+.ti -1c
+.RI "class \fBplane3d\fP"
+.br
+.RI "\fITemplate plane class with some intersection testing methods. \fP"
+.ti -1c
+.RI "class \fBposition2d\fP"
+.br
+.RI "\fISimple class for holding 2d coordinates. \fP"
+.ti -1c
+.RI "class \fBquaternion\fP"
+.br
+.RI "\fIQuaternion class. \fP"
+.ti -1c
+.RI "class \fBrect\fP"
+.br
+.RI "\fIRectangle template. \fP"
+.ti -1c
+.RI "class \fBtriangle3d\fP"
+.br
+.RI "\fI3d triangle template class for doing collision detection and other things. \fP"
+.ti -1c
+.RI "class \fBvector2d\fP"
+.br
+.RI "\fI2d vector template class with lots of operators and methods. \fP"
+.ti -1c
+.RI "class \fBvector3d\fP"
+.br
+.RI "\fI3d vector template class with lots of operators and methods. \fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef \fBaabbox3d\fP< f32 > \fBaabbox3df\fP"
+.br
+.RI "\fITypedef for a f32 3d bounding box. \fP"
+.ti -1c
+.RI "typedef \fBaabbox3d\fP< s32 > \fBaabbox3di\fP"
+.br
+.RI "\fITypedef for an integer 3d bounding box. \fP"
+.ti -1c
+.RI "typedef \fBstring\fP< c8 > \fBstringc\fP"
+.br
+.RI "\fITypedef for character strings. \fP"
+.ti -1c
+.RI "typedef \fBstring\fP< wchar_t > \fBstringw\fP"
+.br
+.RI "\fITypedef for wide character strings. \fP"
+.ti -1c
+.RI "typedef \fBplane3d\fP< f32 > \fBplane3df\fP"
+.br
+.RI "\fITypedef for a f32 3d plane. \fP"
+.ti -1c
+.RI "typedef \fBplane3d\fP< s32 > \fBplane3di\fP"
+.br
+.RI "\fITypedef for an integer 3d plane. \fP"
+.ti -1c
+.RI "typedef \fBtriangle3d\fP< f32 > \fBtriangle3df\fP"
+.br
+.RI "\fITypedef for a f32 3d triangle. \fP"
+.ti -1c
+.RI "typedef \fBtriangle3d\fP< s32 > \fBtriangle3di\fP"
+.br
+.RI "\fITypedef for an integer 3d triangle. \fP"
+.ti -1c
+.RI "typedef \fBvector2d\fP< f32 > \fBvector2df\fP"
+.br
+.RI "\fITypedef for f32 2d vector. \fP"
+.ti -1c
+.RI "typedef \fBvector2d\fP< s32 > \fBvector2di\fP"
+.br
+.RI "\fITypedef for integer 2d vector. \fP"
+.ti -1c
+.RI "typedef \fBvector3d\fP< f32 > \fBvector3df\fP"
+.br
+.RI "\fITypedef for a f32 3d vector. \fP"
+.ti -1c
+.RI "typedef \fBvector3d\fP< s32 > \fBvector3di\fP"
+.br
+.RI "\fITypedef for an integer 3d vector. \fP"
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBEIntersectionRelation3D\fP "
+.br
+.RI "\fIEnumeration for intersection relations of 3d objects. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "template<class T> const T \fBmin_\fP (const T a, const T b)"
+.br
+.RI "\fIreturns minimum of two values. Own implementation to get rid of the STL (VS6 problems) \fP"
+.ti -1c
+.RI "template<class T> T \fBmax_\fP (const T a, const T b)"
+.br
+.RI "\fIreturns minimum of two values. Own implementation to get rid of the STL (VS6 problems) \fP"
+.ti -1c
+.RI "template<class T> T \fBabs_\fP (const T a)"
+.br
+.RI "\fIreturns abs of two values. Own implementation to get rid of STL (VS6 problems) \fP"
+.ti -1c
+.RI "bool \fBequals\fP (f32 a, f32 b)"
+.br
+.ti -1c
+.RI "template<class T> void \fBheapsink\fP (T *\fBarray\fP, s32 element, s32 max)"
+.br
+.RI "\fISinks an element into the heap. \fP"
+.ti -1c
+.RI "template<class T> void \fBheapsort\fP (T *array_, s32 size)"
+.br
+.RI "\fISorts an array with size 'size' using heapsort. \fP"
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "const f32 \fBROUNDING_ERROR\fP = 0.0001f"
+.br
+.RI "\fIRounding error constant often used when comparing f32 values. \fP"
+.ti -1c
+.RI "const f32 \fBPI\fP = 3.1415926535897932384626433832795f"
+.br
+.RI "\fIConstant for PI. \fP"
+.ti -1c
+.RI "const f64 \fBGRAD_PI\fP = 180.0f / 3.1415926535897932384626433832795f"
+.br
+.RI "\fIConstant for converting bettween degrees and radiants. \fP"
+.ti -1c
+.RI "const f64 \fBGRAD_PI2\fP = 3.1415926535897932384626433832795f / 180.0"
+.br
+.RI "\fIConstant for converting bettween degrees and radiants. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+In this namespace can be found basic classes like vectors, planes, arrays, lists and so on. 
+.SH "Function Documentation"
+.PP 
+.SS "bool engine::core::equals (f32 a, f32 b)\fC [inline]\fP"
+.PP
+returns if a float equals the other one, taking floating point rounding errors into account 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

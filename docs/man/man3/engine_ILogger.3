@@ -1,0 +1,113 @@
+.TH "engine::ILogger" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::ILogger \- Interface for logging messages, warnings and errors.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ILogger.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~ILogger\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual \fBELOG_LEVEL\fP \fBgetLogLevel\fP ()=0"
+.br
+.RI "\fIReturns the current set log level. \fP"
+.ti -1c
+.RI "virtual void \fBsetLogLevel\fP (\fBELOG_LEVEL\fP ll)=0"
+.br
+.ti -1c
+.RI "virtual void \fBlog\fP (const c8 *text, \fBELOG_LEVEL\fP ll=ELL_INFORMATION)=0"
+.br
+.ti -1c
+.RI "virtual void \fBlog\fP (const c8 *text, const c8 *hint, \fBELOG_LEVEL\fP ll=ELL_INFORMATION)=0"
+.br
+.ti -1c
+.RI "virtual void \fBlog\fP (const wchar_t *text, const wchar_t *hint, \fBELOG_LEVEL\fP ll=ELL_INFORMATION)=0"
+.br
+.ti -1c
+.RI "virtual void \fBlog\fP (const wchar_t *text, \fBELOG_LEVEL\fP ll=ELL_INFORMATION)=0"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Interface for logging messages, warnings and errors. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual void engine::ILogger::log (const wchar_t * text, \fBELOG_LEVEL\fP ll = \fCELL_INFORMATION\fP)\fC [pure virtual]\fP"
+.PP
+Prints out a text into the log 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItext,:\fP Text to print out. 
+.br
+\fIll,:\fP Log level of the text. If the text is an error, set it to ELL_ERROR, if it is warning set it to ELL_WARNING, and if it is just an informational text, set it to ELL_INFORMATION. Texts are filtered with these levels. If you want to be a text displayed, independent on what level filter is set, use ELL_NONE. 
+.RE
+.PP
+
+.SS "virtual void engine::ILogger::log (const wchar_t * text, const wchar_t * hint, \fBELOG_LEVEL\fP ll = \fCELL_INFORMATION\fP)\fC [pure virtual]\fP"
+.PP
+Prints out a text into the log 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItext,:\fP Text to print out. 
+.br
+\fIhint,:\fP Additional info. This string is added after a ' :' to the string. 
+.br
+\fIll,:\fP Log level of the text. If the text is an error, set it to ELL_ERROR, if it is warning set it to ELL_WARNING, and if it is just an informational text, set it to ELL_INFORMATION. Texts are filtered with these levels. If you want to be a text displayed, independent on what level filter is set, use ELL_NONE. 
+.RE
+.PP
+
+.SS "virtual void engine::ILogger::log (const c8 * text, const c8 * hint, \fBELOG_LEVEL\fP ll = \fCELL_INFORMATION\fP)\fC [pure virtual]\fP"
+.PP
+Prints out a text into the log 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItext,:\fP Text to print out. 
+.br
+\fIhint,:\fP Additional info. This string is added after a ' :' to the string. 
+.br
+\fIll,:\fP Log level of the text. If the text is an error, set it to ELL_ERROR, if it is warning set it to ELL_WARNING, and if it is just an informational text, set it to ELL_INFORMATION. Texts are filtered with these levels. If you want to be a text displayed, independent on what level filter is set, use ELL_NONE. 
+.RE
+.PP
+
+.SS "virtual void engine::ILogger::log (const c8 * text, \fBELOG_LEVEL\fP ll = \fCELL_INFORMATION\fP)\fC [pure virtual]\fP"
+.PP
+Prints out a text into the log 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItext,:\fP Text to print out. 
+.br
+\fIll,:\fP Log level of the text. If the text is an error, set it to ELL_ERROR, if it is warning set it to ELL_WARNING, and if it is just an informational text, set it to ELL_INFORMATION. Texts are filtered with these levels. If you want to be a text displayed, independent on what level filter is set, use ELL_NONE. 
+.RE
+.PP
+
+.SS "virtual void engine::ILogger::setLogLevel (\fBELOG_LEVEL\fP ll)\fC [pure virtual]\fP"
+.PP
+Sets a new log level. With this value, texts which are sent to the logger are filtered out. For example setting this value to ELL_WARNING, only warnings and errors are printed out. Setting it to ELL_INFORMATION, which is the default setting, warnings, errors and informational texts are printed out. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIll,:\fP new log level filter value. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

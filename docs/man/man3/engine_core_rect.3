@@ -1,0 +1,80 @@
+.TH "engine::core::rect" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::core::rect \- Rectangle template.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <rect.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBisPointInside\fP (const \fBposition2d\fP< T > &pos) const "
+.br
+.ti -1c
+.RI "bool \fBisRectCollided\fP (const \fBrect\fP< T > &other) const "
+.br
+.RI "\fIReturns if the rectangle collides with an other rectangle. \fP"
+.ti -1c
+.RI "void \fBclipAgainst\fP (const \fBrect\fP< T > &other)"
+.br
+.RI "\fIClips this rectangle with another one. \fP"
+.ti -1c
+.RI "T \fBgetWidth\fP () const "
+.br
+.RI "\fIReturns width of rectangle. \fP"
+.ti -1c
+.RI "T \fBgetHeight\fP () const "
+.br
+.RI "\fIReturns height of rectangle. \fP"
+.ti -1c
+.RI "void \fBrepair\fP ()"
+.br
+.ti -1c
+.RI "bool \fBisValid\fP () const "
+.br
+.ti -1c
+.RI "\fBposition2d\fP< T > \fBgetCenter\fP () const "
+.br
+.RI "\fIReturns the center of the rectangle. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<class T> class engine::core::rect< T >"
+Rectangle template. 
+
+Mostly used by 2D GUI elements and for 2D drawing methods. It has 2 positions instead of position and dimension and a fast method for collision detection with other rectangles and points. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class T> bool \fBengine::core::rect\fP< T >::isPointInside (const \fBposition2d\fP< T > & pos) const\fC [inline]\fP"
+.PP
+Returns if a 2d point is within this rectangle. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpos,:\fP Position to test if it lies within this rectangle. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if the position is within the rectangle, false if not. 
+.RE
+.PP
+
+.SS "template<class T> bool \fBengine::core::rect\fP< T >::isValid () const\fC [inline]\fP"
+.PP
+Returns if the rect is valid to draw. It could be invalid, if The UpperLeftCorner is lower or more right than the LowerRightCorner, or if the area described by the rect is 0. 
+.SS "template<class T> void \fBengine::core::rect\fP< T >::repair ()\fC [inline]\fP"
+.PP
+If the lower right corner of the rect is smaller then the upper left, the points are swapped. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

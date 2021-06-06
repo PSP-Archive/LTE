@@ -1,0 +1,146 @@
+.TH "engine::video::IGPUProgrammingServices" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::video::IGPUProgrammingServices \- Interface making it possible to create and use programs running on the GPU.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IGPUProgrammingServices.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual s32 \fBaddHighLevelShaderMaterial\fP (const c8 *vertexShaderProgram, const c8 *vertexShaderEntryPointName='main', E_VERTEX_SHADER_TYPE vsCompileTarget=EVST_VS_1_1, const c8 *pixelShaderProgram=0, const c8 *pixelShaderEntryPointName='main', E_PIXEL_SHADER_TYPE psCompileTarget=EPST_PS_1_1, \fBIShaderConstantSetCallBack\fP *callback=0, \fBE_MATERIAL_TYPE\fP baseMaterial=video::EMT_SOLID, s32 userData=0)=0"
+.br
+.ti -1c
+.RI "virtual s32 \fBaddHighLevelShaderMaterialFromFiles\fP (const c8 *vertexShaderProgram, const c8 *vertexShaderEntryPointName='main', E_VERTEX_SHADER_TYPE vsCompileTarget=EVST_VS_1_1, const c8 *pixelShaderProgram=0, const c8 *pixelShaderEntryPointName='main', E_PIXEL_SHADER_TYPE psCompileTarget=EPST_PS_1_1, \fBIShaderConstantSetCallBack\fP *callback=0, \fBE_MATERIAL_TYPE\fP baseMaterial=video::EMT_SOLID, s32 userData=0)=0"
+.br
+.ti -1c
+.RI "virtual s32 \fBaddHighLevelShaderMaterialFromFiles\fP (\fBio::IReadFile\fP *vertexShaderProgram, const c8 *vertexShaderEntryPointName='main', E_VERTEX_SHADER_TYPE vsCompileTarget=EVST_VS_1_1, \fBio::IReadFile\fP *pixelShaderProgram=0, const c8 *pixelShaderEntryPointName='main', E_PIXEL_SHADER_TYPE psCompileTarget=EPST_PS_1_1, \fBIShaderConstantSetCallBack\fP *callback=0, \fBE_MATERIAL_TYPE\fP baseMaterial=video::EMT_SOLID, s32 userData=0)=0"
+.br
+.ti -1c
+.RI "virtual s32 \fBaddShaderMaterial\fP (const c8 *vertexShaderProgram=0, const c8 *pixelShaderProgram=0, \fBIShaderConstantSetCallBack\fP *callback=0, \fBE_MATERIAL_TYPE\fP baseMaterial=video::EMT_SOLID, s32 userData=0)=0"
+.br
+.ti -1c
+.RI "virtual s32 \fBaddShaderMaterialFromFiles\fP (\fBio::IReadFile\fP *vertexShaderProgram, \fBio::IReadFile\fP *pixelShaderProgram, \fBIShaderConstantSetCallBack\fP *callback=0, \fBE_MATERIAL_TYPE\fP baseMaterial=video::EMT_SOLID, s32 userData=0)=0"
+.br
+.ti -1c
+.RI "virtual s32 \fBaddShaderMaterialFromFiles\fP (const c8 *vertexShaderProgramFileName, const c8 *pixelShaderProgramFileName, \fBIShaderConstantSetCallBack\fP *callback=0, \fBE_MATERIAL_TYPE\fP baseMaterial=video::EMT_SOLID, s32 userData=0)=0"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Interface making it possible to create and use programs running on the GPU. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual s32 engine::video::IGPUProgrammingServices::addHighLevelShaderMaterial (const c8 * vertexShaderProgram, const c8 * vertexShaderEntryPointName = \fC'main'\fP, \fBE_VERTEX_SHADER_TYPE\fP vsCompileTarget = \fCEVST_VS_1_1\fP, const c8 * pixelShaderProgram = \fC0\fP, const c8 * pixelShaderEntryPointName = \fC'main'\fP, \fBE_PIXEL_SHADER_TYPE\fP psCompileTarget = \fCEPST_PS_1_1\fP, \fBIShaderConstantSetCallBack\fP * callback = \fC0\fP, \fBE_MATERIAL_TYPE\fP baseMaterial = \fCvideo::EMT_SOLID\fP, s32 userData = \fC0\fP)\fC [pure virtual]\fP"
+.PP
+Adds a new material renderer to the VideoDriver, based on a high level shading language. Currently only HLSL/D3D9 and GLSL/OpenGL is supported. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvertexShaderProgram,:\fP String containing the source of the vertex shader program. This can be 0 if no vertex program should be used. 
+.br
+\fIEntry\fP name of the function of the vertexShaderProgram 
+.br
+\fIvsCompileTarget,:\fP Vertex shader version where the high level shader should be compiled to. 
+.br
+\fIpixelShaderProgram,:\fP String containing the source of the pixel shader program. This can be 0 if no pixel shader should be used. 
+.br
+\fIpixelShaderEntryPointName,:\fP Entry name of the function of the pixelShaderEntryPointName 
+.br
+\fIpsCompileTarget,:\fP Pixel shader version where the high level shader should be compiled to. 
+.br
+\fIcallback,:\fP Pointer to an implementation of \fBIShaderConstantSetCallBack\fP in which you can set the needed vertex and pixel shader program constants. Set this to 0 if you don't need this. 
+.br
+\fIbaseMaterial,:\fP Base material which renderstates will be used to shade the material. 
+.br
+\fIuserData,:\fP a user data int. This int can be set to any value and will be set as parameter in the callback method when calling OnSetConstants(). In this way it is easily possible to use the same callback method for multiple materials and distinguish between them during the call. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the number of the material type which can be set in \fBSMaterial::MaterialType\fP to use the renderer. -1 is returned if an error occured. -1 is returned for example if a vertex or pixel shader program could not be compiled or a compile target is not reachable. The error strings are then printed out into the error log, and can be catched with a custom event receiver. 
+.RE
+.PP
+
+.SS "virtual s32 engine::video::IGPUProgrammingServices::addHighLevelShaderMaterialFromFiles (\fBio::IReadFile\fP * vertexShaderProgram, const c8 * vertexShaderEntryPointName = \fC'main'\fP, \fBE_VERTEX_SHADER_TYPE\fP vsCompileTarget = \fCEVST_VS_1_1\fP, \fBio::IReadFile\fP * pixelShaderProgram = \fC0\fP, const c8 * pixelShaderEntryPointName = \fC'main'\fP, \fBE_PIXEL_SHADER_TYPE\fP psCompileTarget = \fCEPST_PS_1_1\fP, \fBIShaderConstantSetCallBack\fP * callback = \fC0\fP, \fBE_MATERIAL_TYPE\fP baseMaterial = \fCvideo::EMT_SOLID\fP, s32 userData = \fC0\fP)\fC [pure virtual]\fP"
+.PP
+Like \fBIGPUProgrammingServices::addShaderMaterial()\fP (look there for a detailed description), but tries to load the programs from files. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvertexShaderProgram,:\fP Text file containing the source of the vertex shader program. Set to null if no shader should be created. 
+.br
+\fIpixelShaderProgram,:\fP Text file containing the source of the pixel shader program. Set to 0 if no shader should be created. 
+.RE
+.PP
+
+.SS "virtual s32 engine::video::IGPUProgrammingServices::addHighLevelShaderMaterialFromFiles (const c8 * vertexShaderProgram, const c8 * vertexShaderEntryPointName = \fC'main'\fP, \fBE_VERTEX_SHADER_TYPE\fP vsCompileTarget = \fCEVST_VS_1_1\fP, const c8 * pixelShaderProgram = \fC0\fP, const c8 * pixelShaderEntryPointName = \fC'main'\fP, \fBE_PIXEL_SHADER_TYPE\fP psCompileTarget = \fCEPST_PS_1_1\fP, \fBIShaderConstantSetCallBack\fP * callback = \fC0\fP, \fBE_MATERIAL_TYPE\fP baseMaterial = \fCvideo::EMT_SOLID\fP, s32 userData = \fC0\fP)\fC [pure virtual]\fP"
+.PP
+Like \fBIGPUProgrammingServices::addShaderMaterial()\fP (look there for a detailed description), but tries to load the programs from files. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvertexShaderProgram,:\fP Text file containing the source of the vertex shader program. Set to null if no shader should be created. 
+.br
+\fIpixelShaderProgram,:\fP Text file containing the source of the pixel shader program. Set to 0 if no shader should be created. 
+.RE
+.PP
+
+.SS "virtual s32 engine::video::IGPUProgrammingServices::addShaderMaterial (const c8 * vertexShaderProgram = \fC0\fP, const c8 * pixelShaderProgram = \fC0\fP, \fBIShaderConstantSetCallBack\fP * callback = \fC0\fP, \fBE_MATERIAL_TYPE\fP baseMaterial = \fCvideo::EMT_SOLID\fP, s32 userData = \fC0\fP)\fC [pure virtual]\fP"
+.PP
+Adds a new material renderer to the VideoDriver, using pixel and/or vertex shaders to render geometry. Note that it is a good idea to call \fBIVideoDriver::queryFeature()\fP before to check if the \fBIVideoDriver\fP supports the vertex and/or pixel shader version your are using. The material is added to the VideoDriver like with \fBIVideoDriver::addMaterialRenderer()\fP and can be used like it had been added with that method. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvertexShaderProgram,:\fP String containing the source of the vertex shader program. This can be 0 if no vertex program should be used. For DX8 programs, the will always input registers look like this: v0: position, v1: normal, v2: color, v3: texture cooridnates, v4: texture coordinates 2 if available. For DX9 programs, you can manually set the registers using the dcl_ statements. 
+.br
+\fIpixelShaderProgram,:\fP String containing the source of the pixel shader program. This can be 0 if you don't want to use a pixel shader. 
+.br
+\fIcallback,:\fP Pointer to an implementation of \fBIShaderConstantSetCallBack\fP in which you can set the needed vertex and pixel shader program constants. Set this to 0 if you don't need this. 
+.br
+\fIbaseMaterial,:\fP Base material which renderstates will be used to shade the material. 
+.br
+\fIuserData,:\fP a user data int. This int can be set to any value and will be set as parameter in the callback method when calling OnSetConstants(). In this way it is easily possible to use the same callback method for multiple materials and distinguish between them during the call. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the number of the material type which can be set in \fBSMaterial::MaterialType\fP to use the renderer. -1 is returned if an error occured. -1 is returned for example if a vertex or pixel shader program could not be compiled, the error strings are then printed out into the error log, and can be catched with a custom event receiver. 
+.RE
+.PP
+
+.SS "virtual s32 engine::video::IGPUProgrammingServices::addShaderMaterialFromFiles (const c8 * vertexShaderProgramFileName, const c8 * pixelShaderProgramFileName, \fBIShaderConstantSetCallBack\fP * callback = \fC0\fP, \fBE_MATERIAL_TYPE\fP baseMaterial = \fCvideo::EMT_SOLID\fP, s32 userData = \fC0\fP)\fC [pure virtual]\fP"
+.PP
+Like \fBIGPUProgrammingServices::addShaderMaterial()\fP, but tries to load the programs from files. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvertexShaderProgramFileName,:\fP Text file name containing the source of the vertex shader program. Set to null if no shader should be created. 
+.br
+\fIpixelShaderProgramFileName,:\fP Text file name containing the source of the pixel shader program. Set to 0 if no shader should be created. 
+.RE
+.PP
+
+.SS "virtual s32 engine::video::IGPUProgrammingServices::addShaderMaterialFromFiles (\fBio::IReadFile\fP * vertexShaderProgram, \fBio::IReadFile\fP * pixelShaderProgram, \fBIShaderConstantSetCallBack\fP * callback = \fC0\fP, \fBE_MATERIAL_TYPE\fP baseMaterial = \fCvideo::EMT_SOLID\fP, s32 userData = \fC0\fP)\fC [pure virtual]\fP"
+.PP
+Like \fBIGPUProgrammingServices::addShaderMaterial()\fP, but tries to load the programs from files. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvertexShaderProgram,:\fP Text file containing the source of the vertex shader program. Set to null if no shader should be created. 
+.br
+\fIpixelShaderProgram,:\fP Text file containing the source of the pixel shader program. Set to 0 if no shader should be created. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

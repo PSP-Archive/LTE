@@ -1,0 +1,33 @@
+.TH "engine::video::SExposedVideoData" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::video::SExposedVideoData \- structure for holding data describing a driver and operating system specific data.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <SExposedVideoData.h>\fP
+.PP
+.SH "Detailed Description"
+.PP 
+structure for holding data describing a driver and operating system specific data. 
+
+This data can be retrived by \fBIVideoDriver::getExposedVideoData()\fP. Use this with caution. This only should be used to make it possible to extend the engine easily without modification of its source. Note that this structure does not contain any valid data, if you are using the software or the null device. 
+.PP
+.SH "Member Data Documentation"
+.PP 
+.SS "s32 \fBengine::video::SExposedVideoData::HDc\fP"
+.PP
+Private GDI Device Context. Get if for example with: HDC h = reinterpret_cast<HDC>(exposedData.OpenGLWin32.HDc) 
+.SS "s32 \fBengine::video::SExposedVideoData::HRc\fP"
+.PP
+Permanent Rendering Context. Get if for example with: HGLRC h = reinterpret_cast<HGLRC>(exposedData.OpenGLWin32.HRc) 
+.SS "s32 \fBengine::video::SExposedVideoData::HWnd\fP"
+.PP
+Window handle. Get with for example HWND h = reinterpret_cast<HWND>(exposedData.D3D9.HWnd) 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

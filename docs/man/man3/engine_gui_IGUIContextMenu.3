@@ -1,0 +1,204 @@
+.TH "engine::gui::IGUIContextMenu" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::gui::IGUIContextMenu \- GUI Context menu interface.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IGUIContextMenu.h>\fP
+.PP
+Inherits \fBengine::gui::IGUIElement\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBIGUIContextMenu\fP (\fBIGUIEnvironment\fP *environment, \fBIGUIElement\fP *parent, s32 id, \fBcore::rect\fP< s32 > rectangle)"
+.br
+.RI "\fIconstructor \fP"
+.ti -1c
+.RI "\fB~IGUIContextMenu\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual s32 \fBgetItemCount\fP () const =0"
+.br
+.RI "\fIReturns amount of menu items. \fP"
+.ti -1c
+.RI "virtual s32 \fBaddItem\fP (const wchar_t *text, s32 commandId=-1, bool enabled=true, bool hasSubMenu=false)=0"
+.br
+.RI "\fIAdds a menu item. \fP"
+.ti -1c
+.RI "virtual void \fBaddSeparator\fP ()=0"
+.br
+.RI "\fIAdds a separator item to the menu. \fP"
+.ti -1c
+.RI "virtual const wchar_t * \fBgetItemText\fP (s32 idx)=0"
+.br
+.RI "\fIReturns text of the menu item. \fP"
+.ti -1c
+.RI "virtual void \fBsetItemText\fP (s32 idx, const wchar_t *text)=0"
+.br
+.RI "\fISets text of the menu item. \fP"
+.ti -1c
+.RI "virtual bool \fBisItemEnabled\fP (s32 idx)=0"
+.br
+.RI "\fIReturns if a menu item is enabled. \fP"
+.ti -1c
+.RI "virtual void \fBsetItemEnabled\fP (s32 idx, bool enabled)=0"
+.br
+.RI "\fISets if the menu item should be enabled. \fP"
+.ti -1c
+.RI "virtual void \fBremoveItem\fP (s32 idx)=0"
+.br
+.RI "\fIRemoves a menu item. \fP"
+.ti -1c
+.RI "virtual void \fBremoveAllItems\fP ()=0"
+.br
+.RI "\fIRemoves all menu items. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetSelectedItem\fP ()=0"
+.br
+.RI "\fIReturns the selected item in the menu. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetItemCommandId\fP (s32 idx)=0"
+.br
+.RI "\fIReturns command id of a menu item. \fP"
+.ti -1c
+.RI "virtual void \fBsetItemCommandId\fP (s32 idx, s32 id)=0"
+.br
+.RI "\fISets the command id of a menu item. \fP"
+.ti -1c
+.RI "virtual \fBIGUIContextMenu\fP * \fBgetSubMenu\fP (s32 idx)=0"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+GUI Context menu interface. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual s32 engine::gui::IGUIContextMenu::addItem (const wchar_t * text, s32 commandId = \fC-1\fP, bool enabled = \fCtrue\fP, bool hasSubMenu = \fCfalse\fP)\fC [pure virtual]\fP"
+.PP
+Adds a menu item. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItext,:\fP Text of menu item. Set this to 0 to create an separator instead of a real item, which is the same like calling \fBaddSeparator()\fP; 
+.br
+\fIcommandId,:\fP Command id of menu item, a simple id you may set to whatever you want. 
+.br
+\fIenabled,:\fP Specifies if the menu item should be enabled. 
+.br
+\fIhasSubMenu,:\fP Set this to true if there should be a submenu at this item. You can acess this submenu via \fBgetSubMenu()\fP. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the index of the new item 
+.RE
+.PP
+
+.SS "virtual s32 engine::gui::IGUIContextMenu::getItemCommandId (s32 idx)\fC [pure virtual]\fP"
+.PP
+Returns command id of a menu item. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIidx,:\fP Zero based index of the menu item 
+.RE
+.PP
+
+.SS "virtual const wchar_t* engine::gui::IGUIContextMenu::getItemText (s32 idx)\fC [pure virtual]\fP"
+.PP
+Returns text of the menu item. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIidx,:\fP Zero based index of the menu item 
+.RE
+.PP
+
+.SS "virtual s32 engine::gui::IGUIContextMenu::getSelectedItem ()\fC [pure virtual]\fP"
+.PP
+Returns the selected item in the menu. 
+.PP
+\fBReturns:\fP
+.RS 4
+Index of the selected item, -1 if none selected. 
+.RE
+.PP
+
+.SS "virtual \fBIGUIContextMenu\fP* engine::gui::IGUIContextMenu::getSubMenu (s32 idx)\fC [pure virtual]\fP"
+.PP
+0 is returned if there is no submenu 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIidx,:\fP Zero based index of the menu item 
+.RE
+.PP
+
+.SS "virtual bool engine::gui::IGUIContextMenu::isItemEnabled (s32 idx)\fC [pure virtual]\fP"
+.PP
+Returns if a menu item is enabled. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIidx,:\fP Zero based index of the menu item 
+.RE
+.PP
+
+.SS "virtual void engine::gui::IGUIContextMenu::removeItem (s32 idx)\fC [pure virtual]\fP"
+.PP
+Removes a menu item. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIidx,:\fP Zero based index of the menu item 
+.RE
+.PP
+
+.SS "virtual void engine::gui::IGUIContextMenu::setItemCommandId (s32 idx, s32 id)\fC [pure virtual]\fP"
+.PP
+Sets the command id of a menu item. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIidx,:\fP Zero based index of the menu item 
+.br
+\fIid,:\fP Command id of menu item, a simple id you may set to whatever you want. 
+.RE
+.PP
+
+.SS "virtual void engine::gui::IGUIContextMenu::setItemEnabled (s32 idx, bool enabled)\fC [pure virtual]\fP"
+.PP
+Sets if the menu item should be enabled. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIidx,:\fP Zero based index of the menu item 
+.br
+\fIenabled,:\fP True if it is enabled, otherwise false. 
+.RE
+.PP
+
+.SS "virtual void engine::gui::IGUIContextMenu::setItemText (s32 idx, const wchar_t * text)\fC [pure virtual]\fP"
+.PP
+Sets text of the menu item. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIidx,:\fP Zero based index of the menu item 
+.br
+\fItext,:\fP New text of the item. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

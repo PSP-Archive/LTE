@@ -1,0 +1,67 @@
+.TH "engine::video::S3DVertexTangents" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::video::S3DVertexTangents \- Vertex with a tangent and binormal vector.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <S3DVertex.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBS3DVertexTangents\fP ()"
+.br
+.RI "\fIdefault constructor \fP"
+.ti -1c
+.RI "\fBS3DVertexTangents\fP (f32 x, f32 y, f32 z)"
+.br
+.RI "\fIconstructor \fP"
+.ti -1c
+.RI "\fBS3DVertexTangents\fP (const \fBcore::vector3df\fP &pos, const \fBcore::vector2df\fP &tcoords, \fBvideo::SColor\fP c)"
+.br
+.RI "\fIconstructor \fP"
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBcore::vector3df\fP \fBPos\fP"
+.br
+.RI "\fIPosition. \fP"
+.ti -1c
+.RI "\fBcore::vector3df\fP \fBNormal\fP"
+.br
+.RI "\fINormal vector. \fP"
+.ti -1c
+.RI "\fBengine::video::SColor\fP \fBColor\fP"
+.br
+.RI "\fIColor. \fP"
+.ti -1c
+.RI "\fBcore::vector2d\fP< f32 > \fBTCoords\fP"
+.br
+.RI "\fITexture coordinates. \fP"
+.ti -1c
+.RI "\fBcore::vector3df\fP \fBTangent\fP"
+.br
+.RI "\fITangent vector along the x-axis of the texture. \fP"
+.ti -1c
+.RI "\fBcore::vector3df\fP \fBBinormal\fP"
+.br
+.RI "\fIBinormal vector (tangent x normal). \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Vertex with a tangent and binormal vector. 
+
+Usually used for tangent space normal mapping. 
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

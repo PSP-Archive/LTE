@@ -1,0 +1,112 @@
+.TH "engine::core::quaternion" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::core::quaternion \- Quaternion class.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <quaternion.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBquaternion\fP ()"
+.br
+.RI "\fIDefault Constructor. \fP"
+.ti -1c
+.RI "\fBquaternion\fP (f32 X, f32 Y, f32 Z, f32 W)"
+.br
+.RI "\fIConstructor. \fP"
+.ti -1c
+.RI "\fBquaternion\fP (f32 x, f32 y, f32 z)"
+.br
+.RI "\fIConstructor which converts euler angles to a quaternion. \fP"
+.ti -1c
+.RI "\fBquaternion\fP (const \fBmatrix4\fP &mat)"
+.br
+.RI "\fIConstructor which converts a matrix to a quaternion. \fP"
+.ti -1c
+.RI "bool \fBoperator==\fP (const \fBquaternion\fP &other) const "
+.br
+.RI "\fIequal operator \fP"
+.ti -1c
+.RI "\fBquaternion\fP & \fBoperator=\fP (const \fBquaternion\fP &other)"
+.br
+.RI "\fIassignment operator \fP"
+.ti -1c
+.RI "\fBquaternion\fP & \fBoperator=\fP (const \fBmatrix4\fP &other)"
+.br
+.RI "\fImatrix assignment operator \fP"
+.ti -1c
+.RI "\fBquaternion\fP \fBoperator+\fP (const \fBquaternion\fP &other) const "
+.br
+.RI "\fIadd operator \fP"
+.ti -1c
+.RI "\fBquaternion\fP \fBoperator *\fP (const \fBquaternion\fP &other) const "
+.br
+.RI "\fImultiplication operator \fP"
+.ti -1c
+.RI "\fBquaternion\fP \fBoperator *\fP (f32 s) const "
+.br
+.RI "\fImultiplication operator \fP"
+.ti -1c
+.RI "\fBquaternion\fP & \fBoperator *=\fP (f32 s)"
+.br
+.RI "\fImultiplication operator \fP"
+.ti -1c
+.RI "\fBvector3df\fP \fBoperator *\fP (const \fBvector3df\fP &v) const "
+.br
+.RI "\fImultiplication operator \fP"
+.ti -1c
+.RI "\fBquaternion\fP & \fBoperator *=\fP (const \fBquaternion\fP &other)"
+.br
+.RI "\fImultiplication operator \fP"
+.ti -1c
+.RI "f32 \fBgetDotProduct\fP (const \fBquaternion\fP &other) const "
+.br
+.RI "\fIcalculates the dot product \fP"
+.ti -1c
+.RI "void \fBset\fP (f32 x, f32 y, f32 z, f32 w)"
+.br
+.RI "\fIsets new quaternion \fP"
+.ti -1c
+.RI "void \fBset\fP (f32 x, f32 y, f32 z)"
+.br
+.RI "\fIsets new quaternion based on euler angles \fP"
+.ti -1c
+.RI "\fBquaternion\fP & \fBnormalize\fP ()"
+.br
+.RI "\fInormalizes the quaternion \fP"
+.ti -1c
+.RI "\fBmatrix4\fP \fBgetMatrix\fP () const "
+.br
+.RI "\fICreates a matrix from this quaternion. \fP"
+.ti -1c
+.RI "void \fBmakeInverse\fP ()"
+.br
+.RI "\fIInverts this quaternion. \fP"
+.ti -1c
+.RI "\fBquaternion\fP \fBslerp\fP (\fBquaternion\fP q1, \fBquaternion\fP q2, f32 time)"
+.br
+.RI "\fIInterpolates the quaternion between to quaternions based on time. \fP"
+.ti -1c
+.RI "void \fBfromAngleAxis\fP (f32 angle, const \fBvector3df\fP &axis)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Quaternion class. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "void engine::core::quaternion::fromAngleAxis (f32 angle, const \fBvector3df\fP & axis)\fC [inline]\fP"
+.PP
+axis must be unit length The quaternion representing the rotation is q = FastCos(A/2)+FastSin(A/2)*(x*i+y*j+z*k) 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

@@ -1,0 +1,120 @@
+.TH "engine::scene::IMeshCache" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::IMeshCache \- The mesh cache stores already loaded meshes and provides an interface to them.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IMeshCache.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~IMeshCache\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual void \fBaddMesh\fP (const c8 *filename, \fBIAnimatedMesh\fP *mesh)=0"
+.br
+.RI "\fIAdds a mesh to the internal list of loaded meshes. \fP"
+.ti -1c
+.RI "virtual void \fBremoveMesh\fP (\fBIAnimatedMesh\fP *mesh)=0"
+.br
+.RI "\fIRemoves a mesh from the cache. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetMeshCount\fP ()=0"
+.br
+.RI "\fIReturns amount of loaded meshes in the cache. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetMeshIndex\fP (\fBIAnimatedMesh\fP *mesh)=0"
+.br
+.RI "\fIReturns current index number of the mesh, and -1 if it is not in the cache. \fP"
+.ti -1c
+.RI "virtual \fBIAnimatedMesh\fP * \fBgetMeshByIndex\fP (s32 index)=0"
+.br
+.RI "\fIReturns a mesh based on its index number. \fP"
+.ti -1c
+.RI "virtual const c8 * \fBgetMeshFilename\fP (s32 index)=0"
+.br
+.RI "\fIReturns name of a mesh based on its index number. \fP"
+.ti -1c
+.RI "virtual const c8 * \fBgetMeshFilename\fP (\fBIAnimatedMesh\fP *mesh)=0"
+.br
+.RI "\fIReturns the filename of a loaded mesh, if there is any. \fP"
+.ti -1c
+.RI "virtual const c8 * \fBgetMeshFilename\fP (\fBIMesh\fP *mesh)=0"
+.br
+.RI "\fIReturns the filename of a loaded mesh, if there is any. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+The mesh cache stores already loaded meshes and provides an interface to them. 
+
+You can access it using \fBISceneManager::getMeshCache()\fP. All existing scene managers will return a pointer to the same mesh cache, because it is shared between them. With this interface, it is possible to manually add new loaded meshes (if \fBISceneManager::getMesh()\fP is not sufficient), to remove them and to iterate through already loaded meshes. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual void engine::scene::IMeshCache::addMesh (const c8 * filename, \fBIAnimatedMesh\fP * mesh)\fC [pure virtual]\fP"
+.PP
+Adds a mesh to the internal list of loaded meshes. 
+.PP
+Usually, \fBISceneManager::getMesh()\fP is called to load a mesh from a file. That method searches the list of loaded meshes if a mesh has already been loaded and returns a pointer to if it is in that list and already in memory. Otherwise it loads the mesh. With \fBIMeshCache::addMesh()\fP, it is possible to pretend that a mesh already has been loaded. This method can be used for example by mesh loaders who need to load more than one mesh with one call. They can add additional meshes with this method to the scene manager. The COLLADA loader for example uses this method. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfilename,:\fP Filename of the mesh. When called \fBISceneManager::getMesh()\fP with this parameter, the method will return the mesh parameter given with this method. 
+.br
+\fImesh,:\fP Pointer to a mesh which will now be referenced by this name. 
+.RE
+.PP
+
+.SS "virtual \fBIAnimatedMesh\fP* engine::scene::IMeshCache::getMeshByIndex (s32 index)\fC [pure virtual]\fP"
+.PP
+Returns a mesh based on its index number. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIindex,:\fP Index of the mesh, number between 0 and \fBgetMeshCount()\fP-1. Note that this number is only valid until a new mesh is loaded or removed * 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns pointer to the mesh or 0 if there is none with this number. 
+.RE
+.PP
+
+.SS "virtual s32 engine::scene::IMeshCache::getMeshCount ()\fC [pure virtual]\fP"
+.PP
+Returns amount of loaded meshes in the cache. 
+.PP
+You can load new meshes into the cache using getMesh() and \fBaddMesh()\fP. If you ever need to access the internal mesh cache, you can do this using \fBremoveMesh()\fP, getMeshNumber(), \fBgetMeshByIndex()\fP and \fBgetMeshFilename()\fP 
+.SS "virtual const c8* engine::scene::IMeshCache::getMeshFilename (\fBIAnimatedMesh\fP * mesh)\fC [pure virtual]\fP"
+.PP
+Returns the filename of a loaded mesh, if there is any. 
+.PP
+Returns 0 if there is none. 
+.SS "virtual const c8* engine::scene::IMeshCache::getMeshFilename (s32 index)\fC [pure virtual]\fP"
+.PP
+Returns name of a mesh based on its index number. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIindex,:\fP Index of the mesh, number between 0 and \fBgetMeshCount()\fP-1. Note that this is only valid until a new mesh is loaded 
+.RE
+.PP
+
+.SS "virtual void engine::scene::IMeshCache::removeMesh (\fBIAnimatedMesh\fP * mesh)\fC [pure virtual]\fP"
+.PP
+Removes a mesh from the cache. 
+.PP
+After loading a mesh with getMesh(), the mesh can be removed from the cache using this method, freeing a lot of memory. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

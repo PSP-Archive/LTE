@@ -1,0 +1,286 @@
+.TH "engine::core::matrix4" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::core::matrix4 \- 4x4 matrix. Mostly used as transformation matrix for 3d calculations.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <matrix4.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBmatrix4\fP ()"
+.br
+.RI "\fIConstructor. \fP"
+.ti -1c
+.RI "f32 & \fBoperator()\fP (s32 row, s32 col)"
+.br
+.RI "\fISimple operator for directly accessing every element of the matrix. \fP"
+.ti -1c
+.RI "const f32 & \fBoperator()\fP (s32 row, s32 col) const "
+.br
+.RI "\fISimple operator for directly accessing every element of the matrix. \fP"
+.ti -1c
+.RI "\fBmatrix4\fP & \fBoperator=\fP (const \fBmatrix4\fP &other)"
+.br
+.RI "\fISets this matrix equal to the other matrix. \fP"
+.ti -1c
+.RI "bool \fBoperator==\fP (const \fBmatrix4\fP &other) const "
+.br
+.RI "\fIReturns true if other matrix is equal to this matrix. \fP"
+.ti -1c
+.RI "bool \fBoperator!=\fP (const \fBmatrix4\fP &other) const "
+.br
+.RI "\fIReturns true if other matrix is not equal to this matrix. \fP"
+.ti -1c
+.RI "\fBmatrix4\fP & \fBoperator *=\fP (const \fBmatrix4\fP &other)"
+.br
+.RI "\fImultiply by another matrix \fP"
+.ti -1c
+.RI "\fBmatrix4\fP \fBoperator *\fP (const \fBmatrix4\fP &other) const "
+.br
+.RI "\fImultiply by another matrix \fP"
+.ti -1c
+.RI "void \fBmakeIdentity\fP ()"
+.br
+.RI "\fISet matrix to identity. \fP"
+.ti -1c
+.RI "bool \fBisIdentity\fP ()"
+.br
+.RI "\fIReturns true if the matrix is the identity matrix. \fP"
+.ti -1c
+.RI "void \fBsetTranslation\fP (const \fBvector3df\fP &translation)"
+.br
+.RI "\fISet the translation of the current matrix. Will erase any previous values. \fP"
+.ti -1c
+.RI "\fBvector3df\fP \fBgetTranslation\fP () const "
+.br
+.RI "\fIGets the current translation. \fP"
+.ti -1c
+.RI "void \fBsetInverseTranslation\fP (const \fBvector3df\fP &translation)"
+.br
+.RI "\fISet the inverse translation of the current matrix. Will erase any previous values. \fP"
+.ti -1c
+.RI "void \fBsetRotationRadians\fP (const \fBvector3df\fP &rotation)"
+.br
+.RI "\fIMake a rotation matrix from Euler angles. The 4th row and column are unmodified. \fP"
+.ti -1c
+.RI "void \fBsetRotationDegrees\fP (const \fBvector3df\fP &rotation)"
+.br
+.RI "\fIMake a rotation matrix from Euler angles. The 4th row and column are unmodified. \fP"
+.ti -1c
+.RI "\fBcore::vector3df\fP \fBgetRotationDegrees\fP () const "
+.br
+.RI "\fIReturns the rotation, as set by setRotation(). This code was orginally written by by Chev. \fP"
+.ti -1c
+.RI "void \fBsetInverseRotationRadians\fP (const \fBvector3df\fP &rotation)"
+.br
+.RI "\fIMake an inverted rotation matrix from Euler angles. The 4th row and column are unmodified. \fP"
+.ti -1c
+.RI "void \fBsetInverseRotationDegrees\fP (const \fBvector3df\fP &rotation)"
+.br
+.RI "\fIMake an inverted rotation matrix from Euler angles. The 4th row and column are unmodified. \fP"
+.ti -1c
+.RI "void \fBsetScale\fP (const \fBvector3df\fP &scale)"
+.br
+.RI "\fISet Scale. \fP"
+.ti -1c
+.RI "void \fBinverseTranslateVect\fP (\fBvector3df\fP &vect) const "
+.br
+.RI "\fITranslate a vector by the inverse of the translation part of this matrix. \fP"
+.ti -1c
+.RI "void \fBinverseRotateVect\fP (\fBvector3df\fP &vect) const "
+.br
+.RI "\fIRotate a vector by the inverse of the rotation part of this matrix. \fP"
+.ti -1c
+.RI "void \fBrotateVect\fP (\fBvector3df\fP &vect) const "
+.br
+.RI "\fIRotate a vector by the rotation part of this matrix. \fP"
+.ti -1c
+.RI "void \fBtransformVect\fP (\fBvector3df\fP &vect) const "
+.br
+.RI "\fITransforms the vector by this matrix. \fP"
+.ti -1c
+.RI "void \fBtransformVect\fP (const \fBvector3df\fP &in, \fBvector3df\fP &out) const "
+.br
+.RI "\fITransforms input vector by this matrix and stores result in output vector. \fP"
+.ti -1c
+.RI "void \fBtransformVect\fP (f32 *out, const \fBcore::vector3df\fP &in) const "
+.br
+.RI "\fIAn alternate transform vector method, writing into an array of 4 floats. \fP"
+.ti -1c
+.RI "void \fBtranslateVect\fP (\fBvector3df\fP &vect) const "
+.br
+.RI "\fITranslate a vector by the translation part of this matrix. \fP"
+.ti -1c
+.RI "void \fBtransformPlane\fP (\fBcore::plane3d\fP< f32 > &plane) const "
+.br
+.RI "\fITransforms a plane by this matrix. \fP"
+.ti -1c
+.RI "void \fBtransformPlane\fP (const \fBcore::plane3d\fP< f32 > &in, \fBcore::plane3d\fP< f32 > &out) const "
+.br
+.RI "\fITransforms a plane by this matrix. \fP"
+.ti -1c
+.RI "void \fBtransformBox\fP (\fBcore::aabbox3d\fP< f32 > &box) const "
+.br
+.RI "\fITransforms a axis aligned bounding box. \fP"
+.ti -1c
+.RI "void \fBtransformBoxEx\fP (\fBcore::aabbox3d\fP< f32 > &box) const "
+.br
+.RI "\fITransforms a axis aligned bounding box more accurately than \fBtransformBox()\fP. \fP"
+.ti -1c
+.RI "void \fBmultiplyWith1x4Matrix\fP (f32 *matrix) const "
+.br
+.RI "\fIMultiplies this matrix by a 1x4 matrix. \fP"
+.ti -1c
+.RI "bool \fBmakeInverse\fP ()"
+.br
+.ti -1c
+.RI "bool \fBgetInverse\fP (\fBmatrix4\fP &out)"
+.br
+.ti -1c
+.RI "void \fBbuildProjectionMatrixPerspectiveFovRH\fP (f32 fieldOfViewRadians, f32 aspectRatio, f32 zNear, f32 zFar)"
+.br
+.RI "\fIBuilds a right-handed perspective projection matrix based on a field of view. \fP"
+.ti -1c
+.RI "void \fBbuildProjectionMatrixPerspectiveFovLH\fP (f32 fieldOfViewRadians, f32 aspectRatio, f32 zNear, f32 zFar)"
+.br
+.RI "\fIBuilds a left-handed perspective projection matrix based on a field of view. \fP"
+.ti -1c
+.RI "void \fBbuildProjectionMatrixPerspectiveRH\fP (f32 widthOfViewVolume, f32 heightOfViewVolume, f32 zNear, f32 zFar)"
+.br
+.RI "\fIBuilds a right-handed perspective projection matrix. \fP"
+.ti -1c
+.RI "void \fBbuildProjectionMatrixPerspectiveLH\fP (f32 widthOfViewVolume, f32 heightOfViewVolume, f32 zNear, f32 zFar)"
+.br
+.RI "\fIBuilds a left-handed perspective projection matrix. \fP"
+.ti -1c
+.RI "void \fBbuildProjectionMatrixOrthoLH\fP (f32 widthOfViewVolume, f32 heightOfViewVolume, f32 zNear, f32 zFar)"
+.br
+.RI "\fIBuilds a left-handed orthogonal projection matrix. \fP"
+.ti -1c
+.RI "void \fBbuildProjectionMatrixOrthoRH\fP (f32 widthOfViewVolume, f32 heightOfViewVolume, f32 zNear, f32 zFar)"
+.br
+.RI "\fIBuilds a right-handed orthogonal projection matrix. \fP"
+.ti -1c
+.RI "void \fBbuildCameraLookAtMatrixLH\fP (const \fBvector3df\fP &position, const \fBvector3df\fP &target, const \fBvector3df\fP &upVector)"
+.br
+.RI "\fIBuilds a left-handed look-at matrix. \fP"
+.ti -1c
+.RI "void \fBbuildCameraLookAtMatrixRH\fP (const \fBvector3df\fP &position, const \fBvector3df\fP &target, const \fBvector3df\fP &upVector)"
+.br
+.RI "\fIBuilds a right-handed look-at matrix. \fP"
+.ti -1c
+.RI "void \fBbuildShadowMatrix\fP (\fBcore::vector3df\fP light, \fBcore::plane3df\fP plane, f32 point=1.0f)"
+.br
+.RI "\fIBuilds a matrix that flattens geometry into a plane. \fP"
+.ti -1c
+.RI "void \fBbuildNDCToDCMatrix\fP (const \fBcore::rect\fP< s32 > &area, f32 zScale)"
+.br
+.RI "\fIBuilds a matrix which transforms a normalized Device Corrdinate to Device Coordinates. \fP"
+.ti -1c
+.RI "\fBmatrix4\fP \fBinterpolate\fP (\fBcore::matrix4\fP &b, f32 time)"
+.br
+.ti -1c
+.RI "\fBmatrix4\fP \fBgetTransposed\fP ()"
+.br
+.RI "\fIreturns transposed matrix \fP"
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "f32 \fBM\fP [16]"
+.br
+.RI "\fIMatrix data, stored in column-major order. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+4x4 matrix. Mostly used as transformation matrix for 3d calculations. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "void engine::core::matrix4::buildNDCToDCMatrix (const \fBcore::rect\fP< s32 > & area, f32 zScale)\fC [inline]\fP"
+.PP
+Builds a matrix which transforms a normalized Device Corrdinate to Device Coordinates. 
+.PP
+Used to scale <-1,-1><1,1> to viewport, for example from von <-1,-1> <1,1> to the viewport <0,0><0,640> 
+.SS "void engine::core::matrix4::buildShadowMatrix (\fBcore::vector3df\fP light, \fBcore::plane3df\fP plane, f32 point = \fC1.0f\fP)\fC [inline]\fP"
+.PP
+Builds a matrix that flattens geometry into a plane. 
+.PP
+Builds a matrix that flattens geometry into a plane. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIlight,:\fP light source 
+.br
+\fIplane,:\fP plane into which the geometry if flattened into 
+.br
+\fIpoint,:\fP value between 0 and 1, describing the light source. If this is 1, it is a point light, if it is 0, it is a directional light. 
+.RE
+.PP
+
+.SS "bool engine::core::matrix4::getInverse (\fBmatrix4\fP & out)\fC [inline]\fP"
+.PP
+returns the inversed matrix of this one 
+.PP
+\fBParameters:\fP
+.RS 4
+\fITarget,where\fP result matrix is written to. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns false if there is no inverse matrix. 
+.RE
+.PP
+
+.PP
+Calculates the inverse of this Matrix The inverse is calculated using Cramers rule. If no inverse exists then 'false' is returned. 
+.SS "\fBcore::vector3df\fP engine::core::matrix4::getRotationDegrees () const\fC [inline]\fP"
+.PP
+Returns the rotation, as set by setRotation(). This code was orginally written by by Chev. 
+.PP
+Returns the rotation, as set by setRotation(). This code was sent in by Chev. 
+.SS "\fBmatrix4\fP engine::core::matrix4::interpolate (\fBcore::matrix4\fP & b, f32 time)\fC [inline]\fP"
+.PP
+creates a new matrix as interpolated matrix from to other ones. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIb,:\fP other matrix to interpolate with 
+.br
+\fItime,:\fP Must be a value between 0 and 1. 
+.RE
+.PP
+
+.SS "bool engine::core::matrix4::makeInverse ()\fC [inline]\fP"
+.PP
+Calculates inverse of matrix. Slow. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns false if there is no inverse matrix. 
+.RE
+.PP
+
+.SS "void engine::core::matrix4::transformBox (\fBcore::aabbox3d\fP< f32 > & box) const\fC [inline]\fP"
+.PP
+Transforms a axis aligned bounding box. 
+.PP
+The result box of this operation may not be very accurate. For accurate results, use \fBtransformBoxEx()\fP 
+.SS "void engine::core::matrix4::transformBoxEx (\fBcore::aabbox3d\fP< f32 > & box) const\fC [inline]\fP"
+.PP
+Transforms a axis aligned bounding box more accurately than \fBtransformBox()\fP. 
+.PP
+The result box of this operation should by quite accurate, but this operation is slower than \fBtransformBox()\fP. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

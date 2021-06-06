@@ -1,0 +1,415 @@
+.TH "engine::gui" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::gui \- The gui namespace contains useful classes for easy creation of a graphical user interface.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBICursorControl\fP"
+.br
+.RI "\fIInterface to manipulate the mouse cursor. \fP"
+.ti -1c
+.RI "class \fBIGUIButton\fP"
+.br
+.RI "\fIGUI Button interface. \fP"
+.ti -1c
+.RI "class \fBIGUICheckBox\fP"
+.br
+.RI "\fIGUI Check box interface. \fP"
+.ti -1c
+.RI "class \fBIGUIComboBox\fP"
+.br
+.RI "\fISingle line edit box for editing simple text. \fP"
+.ti -1c
+.RI "class \fBIGUIContextMenu\fP"
+.br
+.RI "\fIGUI Context menu interface. \fP"
+.ti -1c
+.RI "class \fBIGUIEditBox\fP"
+.br
+.RI "\fISingle line edit box for editing simple text. \fP"
+.ti -1c
+.RI "class \fBIGUIElement\fP"
+.br
+.RI "\fIBase class of all GUI elements. \fP"
+.ti -1c
+.RI "class \fBIGUIEnvironment\fP"
+.br
+.RI "\fIGUI Environment. Used as factory and manager of all other GUI elements. \fP"
+.ti -1c
+.RI "class \fBIGUIFileOpenDialog\fP"
+.br
+.RI "\fIStandard file chooser dialog. \fP"
+.ti -1c
+.RI "class \fBIGUIFont\fP"
+.br
+.RI "\fIFont interface. \fP"
+.ti -1c
+.RI "class \fBIGUIImage\fP"
+.br
+.RI "\fIGUI element displaying an image. \fP"
+.ti -1c
+.RI "class \fBIGUIInOutFader\fP"
+.br
+.RI "\fIElement for fading out or in. \fP"
+.ti -1c
+.RI "class \fBIGUIListBox\fP"
+.br
+.RI "\fIDefault list box GUI element. \fP"
+.ti -1c
+.RI "class \fBIGUIMeshViewer\fP"
+.br
+.RI "\fI3d mesh viewing GUI element. \fP"
+.ti -1c
+.RI "class \fBIGUIScrollBar\fP"
+.br
+.RI "\fIDefault scroll bar GUI element. \fP"
+.ti -1c
+.RI "class \fBIGUISkin\fP"
+.br
+.RI "\fIA skin modifies the look of the GUI elements. \fP"
+.ti -1c
+.RI "class \fBIGUIStaticText\fP"
+.br
+.RI "\fIMulti or single line text label. \fP"
+.ti -1c
+.RI "class \fBIGUITab\fP"
+.br
+.RI "\fIA tab, onto which other gui elements could be added. \fP"
+.ti -1c
+.RI "class \fBIGUITabControl\fP"
+.br
+.RI "\fIA standard tab control. \fP"
+.ti -1c
+.RI "class \fBIGUIToolBar\fP"
+.br
+.RI "\fIStays at the top of its parent like the menu bar and contains tool buttons. \fP"
+.ti -1c
+.RI "class \fBIGUIWindow\fP"
+.br
+.RI "\fIDefault moveable window GUI element with border, caption and close icons. \fP"
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBEGUI_ELEMENT_TYPE\fP { \fBEGUIET_ELEMENT\fP =  0, \fBEGUIET_BUTTON\fP, \fBEGUIET_CHECK_BOX\fP, \fBEGUIET_COMBO_BOX\fP, \fBEGUIET_CONTEXT_MENU\fP, \fBEGUIET_EDIT_BOX\fP, \fBEGUIET_FILE_OPEN_DIALOG\fP, \fBEGUIET_IN_OUT_FADER\fP, \fBEGUIET_IMAGE\fP, \fBEGUIET_LIST_BOX\fP, \fBEGUIET_MESH_VIEWER\fP, \fBEGUIET_MODAL_SCREEN\fP, \fBEGUIET_SCROLL_BAR\fP, \fBEGUIET_STATIC_TEXT\fP, \fBEGUIET_TAB\fP, \fBEGUIET_TAB_CONTROL\fP, \fBEGUIET_TOOL_BAR\fP, \fBEGUIET_WINDOW\fP, \fBEGUIET_COUNT\fP }"
+.br
+.RI "\fIList of all basic engine GUI elements. \fP"
+.ti -1c
+.RI "enum \fBEGUI_EVENT_TYPE\fP { \fBEGET_ELEMENT_FOCUS_LOST\fP =  0, \fBEGET_ELEMENT_HOVERED\fP, \fBEGET_ELEMENT_LEFT\fP, \fBEGET_BUTTON_CLICKED\fP, \fBEGET_SCROLL_BAR_CHANGED\fP, \fBEGET_CHECKBOX_CHANGED\fP, \fBEGET_LISTBOX_CHANGED\fP, \fBEGET_LISTBOX_SELECTED_AGAIN\fP, \fBEGET_FILE_SELECTED\fP, \fBEGET_FILE_CHOOSE_DIALOG_CANCELLED\fP, \fBEGET_MESSAGEBOX_YES\fP, \fBEGET_MESSAGEBOX_NO\fP, \fBEGET_MESSAGEBOX_OK\fP, \fBEGET_MESSAGEBOX_CANCEL\fP, \fBEGET_EDITBOX_ENTER\fP, \fBEGET_TAB_CHANGED\fP, \fBEGET_MENU_ITEM_SELECTED\fP, \fBEGET_COMBO_BOX_CHANGED\fP }"
+.br
+.RI "\fIEnumeration for all events which are sendable by the gui system. \fP"
+.ti -1c
+.RI "enum \fBEGUI_SKIN_TYPE\fP { \fBEGST_WINDOWS_CLASSIC\fP, \fBEGST_WINDOWS_METALLIC\fP }"
+.br
+.RI "\fIEnumeration of available default skins. \fP"
+.ti -1c
+.RI "enum \fBEGUI_DEFAULT_COLOR\fP { \fBEGDC_3D_DARK_SHADOW\fP =  0, \fBEGDC_3D_SHADOW\fP, \fBEGDC_3D_FACE\fP, \fBEGDC_3D_HIGH_LIGHT\fP, \fBEGDC_3D_LIGHT\fP, \fBEGDC_ACTIVE_BORDER\fP, \fBEGDC_ACTIVE_CAPTION\fP, \fBEGDC_APP_WORKSPACE\fP, \fBEGDC_BUTTON_TEXT\fP, \fBEGDC_GRAY_TEXT\fP, \fBEGDC_HIGH_LIGHT\fP, \fBEGDC_HIGH_LIGHT_TEXT\fP, \fBEGDC_INACTIVE_BORDER\fP, \fBEGDC_INACTIVE_CAPTION\fP, \fBEGDC_TOOLTIP\fP, \fBEGDC_SCROLLBAR\fP, \fBEGDC_WINDOW\fP }"
+.br
+.RI "\fIEnumeration for skin colors. \fP"
+.ti -1c
+.RI "enum \fBEGUI_DEFAULT_SIZE\fP { \fBEGDS_SCROLLBAR_SIZE\fP =  0, \fBEGDS_MENU_HEIGHT\fP, \fBEGDS_WINDOW_BUTTON_WIDTH\fP, \fBEGDS_CHECK_BOX_WIDTH\fP, \fBEGDS_MESSAGE_BOX_WIDTH\fP, \fBEGDS_MESSAGE_BOX_HEIGHT\fP, \fBEGDS_BUTTON_WIDTH\fP, \fBEGDS_BUTTON_HEIGHT\fP, \fBEGDS_COUNT\fP }"
+.br
+.RI "\fIEnumeration for default sizes. \fP"
+.ti -1c
+.RI "enum \fBEGUI_DEFAULT_TEXT\fP { \fBEGDT_MSG_BOX_OK\fP, \fBEGDT_MSG_BOX_CANCEL\fP, \fBEGDT_MSG_BOX_YES\fP, \fBEGDT_MSG_BOX_NO\fP, \fBEGDT_COUNT\fP }"
+.br
+.ti -1c
+.RI "enum \fBEMESSAGE_BOX_FLAG\fP { \fBEMBF_OK\fP =  0x1, \fBEMBF_CANCEL\fP =  0x2, \fBEMBF_YES\fP =  0x4, \fBEMBF_NO\fP =  0x8, \fBEMBF_FORCE_32BIT\fP =  0x7fffffff }"
+.br
+.RI "\fIenumeration for message box layout flags \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+The gui namespace contains useful classes for easy creation of a graphical user interface. 
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBengine::gui::EGUI_ELEMENT_TYPE\fP"
+.PP
+List of all basic engine GUI elements. 
+.PP
+An \fBIGUIElement\fP returns this when calling \fBIGUIElement::getType()\fP; 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIEGUIET_ELEMENT \fP\fP
+Unknown type. Use this when creating your own elements. 
+.TP
+\fB\fIEGUIET_BUTTON \fP\fP
+A button (\fBIGUIButton\fP). 
+.TP
+\fB\fIEGUIET_CHECK_BOX \fP\fP
+A check box (\fBIGUICheckBox\fP). 
+.TP
+\fB\fIEGUIET_COMBO_BOX \fP\fP
+A combo box (\fBIGUIComboBox\fP). 
+.TP
+\fB\fIEGUIET_CONTEXT_MENU \fP\fP
+A context menu (\fBIGUIContextMenu\fP). 
+.TP
+\fB\fIEGUIET_EDIT_BOX \fP\fP
+An edit box (\fBIGUIEditBox\fP). 
+.TP
+\fB\fIEGUIET_FILE_OPEN_DIALOG \fP\fP
+A file open dialog (\fBIGUIFileOpenDialog\fP). 
+.TP
+\fB\fIEGUIET_IN_OUT_FADER \fP\fP
+A in/out fader (\fBIGUIInOutFader\fP). 
+.TP
+\fB\fIEGUIET_IMAGE \fP\fP
+An image (\fBIGUIImage\fP). 
+.TP
+\fB\fIEGUIET_LIST_BOX \fP\fP
+A list box (\fBIGUIListBox\fP). 
+.TP
+\fB\fIEGUIET_MESH_VIEWER \fP\fP
+A mesh viewer (\fBIGUIMeshViewer\fP). 
+.TP
+\fB\fIEGUIET_MODAL_SCREEN \fP\fP
+A modal screen. 
+.TP
+\fB\fIEGUIET_SCROLL_BAR \fP\fP
+A scroll bar (\fBIGUIScrollBar\fP). 
+.TP
+\fB\fIEGUIET_STATIC_TEXT \fP\fP
+A static text (\fBIGUIStaticText\fP). 
+.TP
+\fB\fIEGUIET_TAB \fP\fP
+A tab (\fBIGUITab\fP). 
+.TP
+\fB\fIEGUIET_TAB_CONTROL \fP\fP
+A tab control. 
+.TP
+\fB\fIEGUIET_TOOL_BAR \fP\fP
+A tool bar (\fBIGUIToolBar\fP). 
+.TP
+\fB\fIEGUIET_WINDOW \fP\fP
+A window. 
+.TP
+\fB\fIEGUIET_COUNT \fP\fP
+Not an element, amount of elements in there. 
+.SS "enum \fBengine::gui::EGUI_EVENT_TYPE\fP"
+.PP
+Enumeration for all events which are sendable by the gui system. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIEGET_ELEMENT_FOCUS_LOST \fP\fP
+A gui element has lost its focus. 
+.TP
+\fB\fIEGET_ELEMENT_HOVERED \fP\fP
+A gui element was hovered. 
+.TP
+\fB\fIEGET_ELEMENT_LEFT \fP\fP
+A hovered gui element was left. 
+.TP
+\fB\fIEGET_BUTTON_CLICKED \fP\fP
+A button was clicked. 
+.TP
+\fB\fIEGET_SCROLL_BAR_CHANGED \fP\fP
+A scrollbar has changed its position. 
+.TP
+\fB\fIEGET_CHECKBOX_CHANGED \fP\fP
+A checkbox has changed its check state. 
+.TP
+\fB\fIEGET_LISTBOX_CHANGED \fP\fP
+A new item in a listbox was seleted. 
+.TP
+\fB\fIEGET_LISTBOX_SELECTED_AGAIN \fP\fP
+An item in the listbox was selected, which was already selected. 
+.TP
+\fB\fIEGET_FILE_SELECTED \fP\fP
+A file has been selected in the file open dialog. 
+.TP
+\fB\fIEGET_FILE_CHOOSE_DIALOG_CANCELLED \fP\fP
+A file open dialog has been closed without choosing a file. 
+.TP
+\fB\fIEGET_MESSAGEBOX_YES \fP\fP
+'Yes' was clicked on a messagebox 
+.TP
+\fB\fIEGET_MESSAGEBOX_NO \fP\fP
+'No' was clicked on a messagebox 
+.TP
+\fB\fIEGET_MESSAGEBOX_OK \fP\fP
+'OK' was clicked on a messagebox 
+.TP
+\fB\fIEGET_MESSAGEBOX_CANCEL \fP\fP
+'Cancel' was clicked on a messagebox 
+.TP
+\fB\fIEGET_EDITBOX_ENTER \fP\fP
+In an editbox was pressed 'ENTER'. 
+.TP
+\fB\fIEGET_TAB_CHANGED \fP\fP
+The tab was changed in an tab control. 
+.TP
+\fB\fIEGET_MENU_ITEM_SELECTED \fP\fP
+A menu item was selected in a (context) menu. 
+.TP
+\fB\fIEGET_COMBO_BOX_CHANGED \fP\fP
+The selection in a combo box has been changed. 
+.SS "enum \fBengine::gui::EGUI_SKIN_TYPE\fP"
+.PP
+Enumeration of available default skins. 
+.PP
+To set one of the skins, use the following code, for example to set the Windows classic skin: 
+.PP
+.nf
+        gui::IGUISkin* newskin = environment->createSkin(gui::EGST_WINDOWS_CLASSIC);
+        environment->setSkin(newskin);
+        newskin->drop();
+
+.fi
+.PP
+ 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIEGST_WINDOWS_CLASSIC \fP\fP
+Default windows look and feel. 
+.TP
+\fB\fIEGST_WINDOWS_METALLIC \fP\fP
+Like EGST_WINDOWS_CLASSIC, but with metallic shaded windows and buttons. 
+.SS "enum \fBengine::gui::EGUI_DEFAULT_COLOR\fP"
+.PP
+Enumeration for skin colors. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIEGDC_3D_DARK_SHADOW \fP\fP
+Dark shadow for three-dimensional display elements. 
+.TP
+\fB\fIEGDC_3D_SHADOW \fP\fP
+Shadow color for three-dimensional display elements (for edges facing away from the light source). 
+.TP
+\fB\fIEGDC_3D_FACE \fP\fP
+Face color for three-dimensional display elements and for dialog box backgrounds. 
+.TP
+\fB\fIEGDC_3D_HIGH_LIGHT \fP\fP
+Highlight color for three-dimensional display elements (for edges facing the light source.). 
+.TP
+\fB\fIEGDC_3D_LIGHT \fP\fP
+Light color for three-dimensional display elements (for edges facing the light source.). 
+.TP
+\fB\fIEGDC_ACTIVE_BORDER \fP\fP
+Active window border. 
+.TP
+\fB\fIEGDC_ACTIVE_CAPTION \fP\fP
+Active window title bar text. 
+.TP
+\fB\fIEGDC_APP_WORKSPACE \fP\fP
+Background color of multiple document interface (MDI) applications. 
+.TP
+\fB\fIEGDC_BUTTON_TEXT \fP\fP
+Text on a button. 
+.TP
+\fB\fIEGDC_GRAY_TEXT \fP\fP
+Grayed (disabled) text. 
+.TP
+\fB\fIEGDC_HIGH_LIGHT \fP\fP
+Item(s) selected in a control. 
+.TP
+\fB\fIEGDC_HIGH_LIGHT_TEXT \fP\fP
+Text of item(s) selected in a control. 
+.TP
+\fB\fIEGDC_INACTIVE_BORDER \fP\fP
+Inactive window border. 
+.TP
+\fB\fIEGDC_INACTIVE_CAPTION \fP\fP
+Inactive window caption. 
+.TP
+\fB\fIEGDC_TOOLTIP \fP\fP
+Tool tip color. 
+.TP
+\fB\fIEGDC_SCROLLBAR \fP\fP
+Scrollbar gray area. 
+.TP
+\fB\fIEGDC_WINDOW \fP\fP
+Window background. 
+.SS "enum \fBengine::gui::EGUI_DEFAULT_SIZE\fP"
+.PP
+Enumeration for default sizes. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIEGDS_SCROLLBAR_SIZE \fP\fP
+default with / height of scrollbar 
+.TP
+\fB\fIEGDS_MENU_HEIGHT \fP\fP
+height of menu 
+.TP
+\fB\fIEGDS_WINDOW_BUTTON_WIDTH \fP\fP
+width of a window button 
+.TP
+\fB\fIEGDS_CHECK_BOX_WIDTH \fP\fP
+width of a checkbox check 
+.TP
+\fB\fIEGDS_MESSAGE_BOX_WIDTH \fP\fP
+width of a messagebox 
+.TP
+\fB\fIEGDS_MESSAGE_BOX_HEIGHT \fP\fP
+height of a messagebox 
+.TP
+\fB\fIEGDS_BUTTON_WIDTH \fP\fP
+width of a default button 
+.TP
+\fB\fIEGDS_BUTTON_HEIGHT \fP\fP
+height of a default button 
+.TP
+\fB\fIEGDS_COUNT \fP\fP
+this value is not used, it only specifies the amount of default sizes available. 
+.SS "enum \fBengine::gui::EGUI_DEFAULT_TEXT\fP"
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIEGDT_MSG_BOX_OK \fP\fP
+Text for the OK button on a message box. 
+.TP
+\fB\fIEGDT_MSG_BOX_CANCEL \fP\fP
+Text for the Cancel button on a message box. 
+.TP
+\fB\fIEGDT_MSG_BOX_YES \fP\fP
+Text for the Yes button on a message box. 
+.TP
+\fB\fIEGDT_MSG_BOX_NO \fP\fP
+Text for the No button on a message box. 
+.TP
+\fB\fIEGDT_COUNT \fP\fP
+this value is not used, it only specifies the amount of default texts available. 
+.SS "enum \fBengine::gui::EMESSAGE_BOX_FLAG\fP"
+.PP
+enumeration for message box layout flags 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIEMBF_OK \fP\fP
+Flag for the ok button. 
+.TP
+\fB\fIEMBF_CANCEL \fP\fP
+Flag for the cancel button. 
+.TP
+\fB\fIEMBF_YES \fP\fP
+Flag for the yes button. 
+.TP
+\fB\fIEMBF_NO \fP\fP
+Flag for the no button. 
+.TP
+\fB\fIEMBF_FORCE_32BIT \fP\fP
+This value is not used. It only forces this enumeration to compile in 32 bit. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

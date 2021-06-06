@@ -1,0 +1,160 @@
+.TH "engine::audio::IAudioDriver" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::audio::IAudioDriver \- Interface to the Audio Driver.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IAudioDriver.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fBIAudioSound\fP * \fBaddSound\fP (const c8 *filename, s32 loopCount=0, bool startAndPlay=false)"
+.br
+.RI "\fIAdd a sound into the audio driver. \fP"
+.ti -1c
+.RI "virtual \fBIAudioSound\fP * \fBaddSound\fP (\fBio::IReadFile\fP *file, s32 loopCount=0, bool startAndPlay=false)"
+.br
+.RI "\fIAdd a sound into the audio driver. \fP"
+.ti -1c
+.RI "virtual \fBIAudioSound\fP * \fBgetSound\fP (const c8 *filename)"
+.br
+.RI "\fIGets a sound from the cache. \fP"
+.ti -1c
+.RI "virtual \fBIAudioSound\fP * \fBgetSound\fP (\fBio::IReadFile\fP *file)"
+.br
+.RI "\fIGets a sound from the cache. \fP"
+.ti -1c
+.RI "virtual void \fBremoveSound\fP (const c8 *filename)"
+.br
+.RI "\fIRemove a sound. \fP"
+.ti -1c
+.RI "virtual void \fBremoveSound\fP (\fBio::IReadFile\fP *file)"
+.br
+.RI "\fIRemove a sound. \fP"
+.ti -1c
+.RI "virtual void \fBremoveSound\fP (\fBIAudioSound\fP *snd)"
+.br
+.RI "\fIRemove a sound. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Interface to the Audio Driver. 
+
+This interface provides you the functions to load audio files, at the moment you can only load MP3 files; MP3 playing is slow so if you want to use some effects in your game use the unpack() function of the sound, it will unpack the mp3 data into PCM 16bits, pay attention because this will use a lot of memory, so use it only for little effects. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual \fBIAudioSound\fP* engine::audio::IAudioDriver::addSound (\fBio::IReadFile\fP * file, s32 loopCount = \fC0\fP, bool startAndPlay = \fCfalse\fP)\fC [virtual]\fP"
+.PP
+Add a sound into the audio driver. 
+.PP
+Note that when you add a sound it remains cached into the driver. To remove the sound please use the function \fBremoveSound()\fP 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfile,:\fP pointer to a read file, you must not drop the file! 
+.br
+\fIloopCount,:\fP loop count, -1 infinite, 0 no loop 
+.br
+\fIstartAndPlay,:\fP if true the sound is played after added 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the pointer to the new sound 
+.RE
+.PP
+
+.SS "virtual \fBIAudioSound\fP* engine::audio::IAudioDriver::addSound (const c8 * filename, s32 loopCount = \fC0\fP, bool startAndPlay = \fCfalse\fP)\fC [virtual]\fP"
+.PP
+Add a sound into the audio driver. 
+.PP
+Note that when you add a sound it remains cached into the driver. To remove the sound please use the function \fBremoveSound()\fP 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfilename,:\fP file name of the sound 
+.br
+\fIloopCount,:\fP loop count, -1 infinite, 0 no loop 
+.br
+\fIstartAndPlay,:\fP if true the sound is played after added 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the pointer to the new sound 
+.RE
+.PP
+
+.SS "virtual \fBIAudioSound\fP* engine::audio::IAudioDriver::getSound (\fBio::IReadFile\fP * file)\fC [virtual]\fP"
+.PP
+Gets a sound from the cache. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfilename,:\fP file pointer of the sound 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the pointer to the found sound, if sound hadn't been found it returns null 
+.RE
+.PP
+
+.SS "virtual \fBIAudioSound\fP* engine::audio::IAudioDriver::getSound (const c8 * filename)\fC [virtual]\fP"
+.PP
+Gets a sound from the cache. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfilename,:\fP file name of the sound 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the pointer to the found sound, if sound hadn't been found it returns null 
+.RE
+.PP
+
+.SS "virtual void engine::audio::IAudioDriver::removeSound (\fBIAudioSound\fP * snd)\fC [virtual]\fP"
+.PP
+Remove a sound. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsnd,:\fP the pointer returned with addSound or getSound 
+.RE
+.PP
+
+.SS "virtual void engine::audio::IAudioDriver::removeSound (\fBio::IReadFile\fP * file)\fC [virtual]\fP"
+.PP
+Remove a sound. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfilename,:\fP file pointer of the sound 
+.RE
+.PP
+
+.SS "virtual void engine::audio::IAudioDriver::removeSound (const c8 * filename)\fC [virtual]\fP"
+.PP
+Remove a sound. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfilename,:\fP file name of the sound 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

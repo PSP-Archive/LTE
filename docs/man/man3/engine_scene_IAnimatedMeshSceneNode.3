@@ -1,0 +1,202 @@
+.TH "engine::scene::IAnimatedMeshSceneNode" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::IAnimatedMeshSceneNode \- Scene node capable of displaying an animated mesh and its shadow.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IAnimatedMeshSceneNode.h>\fP
+.PP
+Inherits \fBengine::scene::ISceneNode\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBIAnimatedMeshSceneNode\fP (\fBISceneNode\fP *parent, \fBISceneManager\fP *mgr, s32 id, const \fBcore::vector3df\fP &position=\fBcore::vector3df\fP(0, 0, 0), const \fBcore::vector3df\fP &rotation=\fBcore::vector3df\fP(0, 0, 0), const \fBcore::vector3df\fP &scale=\fBcore::vector3df\fP(1.0f, 1.0f, 1.0f))"
+.br
+.RI "\fIConstructor. \fP"
+.ti -1c
+.RI "virtual \fB~IAnimatedMeshSceneNode\fP ()"
+.br
+.RI "\fIDestructor. \fP"
+.ti -1c
+.RI "virtual void \fBsetCurrentFrame\fP (s32 frame)=0"
+.br
+.ti -1c
+.RI "virtual bool \fBsetFrameLoop\fP (s32 begin, s32 end)=0"
+.br
+.ti -1c
+.RI "virtual void \fBsetAnimationSpeed\fP (s32 framesPerSecond)=0"
+.br
+.ti -1c
+.RI "virtual \fBIShadowVolumeSceneNode\fP * \fBaddShadowVolumeSceneNode\fP (s32 id=-1, bool zfailmethod=true, f32 infinity=10000.0f)=0"
+.br
+.ti -1c
+.RI "virtual \fBISceneNode\fP * \fBgetMS3DJointNode\fP (const c8 *jointName)=0"
+.br
+.ti -1c
+.RI "virtual \fBISceneNode\fP * \fBgetXJointNode\fP (const c8 *jointName)=0"
+.br
+.ti -1c
+.RI "virtual bool \fBsetMD2Animation\fP (\fBEMD2_ANIMATION_TYPE\fP anim)=0"
+.br
+.ti -1c
+.RI "virtual bool \fBsetMD2Animation\fP (const c8 *animationName)=0"
+.br
+.ti -1c
+.RI "virtual s32 \fBgetFrameNr\fP ()=0"
+.br
+.RI "\fIReturns the current displayed frame number. \fP"
+.ti -1c
+.RI "virtual void \fBsetLoopMode\fP (bool playAnimationLooped)=0"
+.br
+.ti -1c
+.RI "virtual void \fBsetAnimationEndCallback\fP (\fBIAnimationEndCallBack\fP *callback=0)=0"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Scene node capable of displaying an animated mesh and its shadow. 
+
+The shadow is optional: If a shadow should be displayed too, just invoke the IAnimatedMeshSceneNode::createShadowVolumeSceneNode(). 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual \fBIShadowVolumeSceneNode\fP* engine::scene::IAnimatedMeshSceneNode::addShadowVolumeSceneNode (s32 id = \fC-1\fP, bool zfailmethod = \fCtrue\fP, f32 infinity = \fC10000.0f\fP)\fC [pure virtual]\fP"
+.PP
+Creates shadow volume scene node as child of this node and returns a pointer to it. The shadow can be rendered using the ZPass or the zfail method. ZPass is a little bit faster because the shadow volume creation is easier, but with this method there occur ugly looking artifacs when the camera is inside the shadow volume. These error do not occur with the ZFail method. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIid,:\fP Id of the shadow scene node. This id can be used to identify the node later. 
+.br
+\fIzfailmethod,:\fP If set to true, the shadow will use the zfail method, if not, zpass is used. 
+.br
+\fIintinity,:\fP Value used by the shadow volume algorithm to scale the shadow volume. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns pointer to the created shadow scene node. This pointer should not be dropped. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBISceneNode\fP* engine::scene::IAnimatedMeshSceneNode::getMS3DJointNode (const c8 * jointName)\fC [pure virtual]\fP"
+.PP
+Returns a pointer to a child node, wich has the same transformation as the corrsesponding joint, if the mesh in this scene node is a ms3d mesh. Otherwise 0 is returned. With this method it is possible to attach scene nodes to joints more easily. In this way, it is for example possible to attach a weapon to the left hand of an animated model. This example shows how: 
+.PP
+.nf
+
+
+
+                //! 
+
+.fi
+.PP
+ Please note that the SceneNode returned by this method may not exist before this call and is created by it. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIjointName,:\fP Name of the joint. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the scene node which represents the joint with the specified name. Returns 0 if the contained mesh is not an ms3d mesh or the name of the joint could not be found. 
+.RE
+.PP
+
+.SS "virtual \fBISceneNode\fP* engine::scene::IAnimatedMeshSceneNode::getXJointNode (const c8 * jointName)\fC [pure virtual]\fP"
+.PP
+Returns a pointer to a child node, wich has the same transformation as the corrsesponding joint, if the mesh in this scene node is a x mesh. Otherwise 0 is returned. With this method it is possible to attach scene nodes to joints more easily. In this way, it is for example possible to attach a weapon to the left hand of an animated model. This example shows how: 
+.PP
+.nf
+
+
+
+                //! 
+
+.fi
+.PP
+ Please note that the SceneNode returned by this method may not exist before this call and is created by it. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIjointName,:\fP Name of the joint. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the scene node which represents the joint with the specified name. Returns 0 if the contained mesh is not an ms3d mesh or the name of the joint could not be found. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::IAnimatedMeshSceneNode::setAnimationEndCallback (\fBIAnimationEndCallBack\fP * callback = \fC0\fP)\fC [pure virtual]\fP"
+.PP
+Sets a callback interface which will be called if an animation playback has ended. Set this to 0 to disable the callback again. Please note that this will only be called when in non looped mode, see \fBIAnimatedMeshSceneNode::setLoopMode()\fP. 
+.SS "virtual void engine::scene::IAnimatedMeshSceneNode::setAnimationSpeed (s32 framesPerSecond)\fC [pure virtual]\fP"
+.PP
+Sets the speed with witch the animation is played. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIframesPerSecond,:\fP Frames per second played. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::IAnimatedMeshSceneNode::setCurrentFrame (s32 frame)\fC [pure virtual]\fP"
+.PP
+Sets the current frame number. From now on the animation is played from this frame. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIframe,:\fP Number of the frame to let the animation be started from. The frame number must be a valid frame number of the \fBIMesh\fP used by this scene node. Set \fBIAnimatedMesh::getMesh()\fP for details. 
+.RE
+.PP
+
+.SS "virtual bool engine::scene::IAnimatedMeshSceneNode::setFrameLoop (s32 begin, s32 end)\fC [pure virtual]\fP"
+.PP
+Sets the frame numbers between the animation is looped. The default is 0 - MaximalFrameCount of the mesh. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIbegin,:\fP Start frame number of the loop. 
+.br
+\fIend,:\fP End frame number of the loop. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if successful, false if not. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::IAnimatedMeshSceneNode::setLoopMode (bool playAnimationLooped)\fC [pure virtual]\fP"
+.PP
+Sets looping mode which is on by default. If set to false, animations will not be played looped. 
+.SS "virtual bool engine::scene::IAnimatedMeshSceneNode::setMD2Animation (const c8 * animationName)\fC [pure virtual]\fP"
+.PP
+if the mesh in the scene node is not a md2 mesh, or no animation with this name could be found. 
+.SS "virtual bool engine::scene::IAnimatedMeshSceneNode::setMD2Animation (\fBEMD2_ANIMATION_TYPE\fP anim)\fC [pure virtual]\fP"
+.PP
+Starts a default MD2 animation. With this method it is easily possible to start a Run, Attack, Die or whatever animation, if the mesh contained in this scene node is a md2 mesh. Otherwise, nothing happenes. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIanim,:\fP An MD2 animation type, which should be played, for example EMAT_STAND for the standing animation. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if successful, and false if not, for example if the mesh in the scene node is not a md2 mesh. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

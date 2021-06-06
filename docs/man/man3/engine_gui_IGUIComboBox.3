@@ -1,0 +1,59 @@
+.TH "engine::gui::IGUIComboBox" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::gui::IGUIComboBox \- Single line edit box for editing simple text.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IGUIComboBox.h>\fP
+.PP
+Inherits \fBengine::gui::IGUIElement\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBIGUIComboBox\fP (\fBIGUIEnvironment\fP *environment, \fBIGUIElement\fP *parent, s32 id, \fBcore::rect\fP< s32 > rectangle)"
+.br
+.RI "\fIconstructor \fP"
+.ti -1c
+.RI "\fB~IGUIComboBox\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual s32 \fBgetItemCount\fP ()=0"
+.br
+.RI "\fIReturns amount of items in box. \fP"
+.ti -1c
+.RI "virtual const wchar_t * \fBgetItem\fP (s32 idx)=0"
+.br
+.RI "\fIreturns string of an item. the idx may be a value from 0 to itemCount-1 \fP"
+.ti -1c
+.RI "virtual s32 \fBaddItem\fP (const wchar_t *text)=0"
+.br
+.RI "\fIadds an item and returns the index of it \fP"
+.ti -1c
+.RI "virtual void \fBclear\fP ()=0"
+.br
+.RI "\fIdeletes all items in the combo box \fP"
+.ti -1c
+.RI "virtual s32 \fBgetSelected\fP ()=0"
+.br
+.RI "\fIreturns id of selected item. returns -1 if no item is selected. \fP"
+.ti -1c
+.RI "virtual void \fBsetSelected\fP (s32 id)=0"
+.br
+.RI "\fIsets the selected item. Set this to -1 if no item should be selected \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Single line edit box for editing simple text. 
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

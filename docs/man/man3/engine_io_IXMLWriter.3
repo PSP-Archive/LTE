@@ -1,0 +1,73 @@
+.TH "engine::io::IXMLWriter" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::io::IXMLWriter \- Interface providing methods for making it easier to write XML files.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IXMLWriter.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~IXMLWriter\fP ()"
+.br
+.RI "\fIDestructor. \fP"
+.ti -1c
+.RI "virtual void \fBwriteXMLHeader\fP ()=0"
+.br
+.ti -1c
+.RI "virtual void \fBwriteElement\fP (const wchar_t *name, bool empty=false, const wchar_t *attr1Name=0, const wchar_t *attr1Value=0, const wchar_t *attr2Name=0, const wchar_t *attr2Value=0, const wchar_t *attr3Name=0, const wchar_t *attr3Value=0, const wchar_t *attr4Name=0, const wchar_t *attr4Value=0, const wchar_t *attr5Name=0, const wchar_t *attr5Value=0)=0"
+.br
+.ti -1c
+.RI "virtual void \fBwriteComment\fP (const wchar_t *comment)=0"
+.br
+.RI "\fIWrites a comment into the xml file. \fP"
+.ti -1c
+.RI "virtual void \fBwriteClosingTag\fP (const wchar_t *name)=0"
+.br
+.RI "\fIWrites the closing tag for an element. Like </foo>. \fP"
+.ti -1c
+.RI "virtual void \fBwriteText\fP (const wchar_t *text)=0"
+.br
+.ti -1c
+.RI "virtual void \fBwriteLineBreak\fP ()=0"
+.br
+.RI "\fIWrites a line break. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Interface providing methods for making it easier to write XML files. 
+
+This XML Writer only writes UTF-16 xml files, because these are parsed faster than all other formats by IXMLReader. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual void engine::io::IXMLWriter::writeElement (const wchar_t * name, bool empty = \fCfalse\fP, const wchar_t * attr1Name = \fC0\fP, const wchar_t * attr1Value = \fC0\fP, const wchar_t * attr2Name = \fC0\fP, const wchar_t * attr2Value = \fC0\fP, const wchar_t * attr3Name = \fC0\fP, const wchar_t * attr3Value = \fC0\fP, const wchar_t * attr4Name = \fC0\fP, const wchar_t * attr4Value = \fC0\fP, const wchar_t * attr5Name = \fC0\fP, const wchar_t * attr5Value = \fC0\fP)\fC [pure virtual]\fP"
+.PP
+Writes an xml element with maximal 5 attributes like <foo> or <foo optattr='value'>. The element can be empty or not. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIname,:\fP Name of the element 
+.br
+\fIempty,:\fP Specifies if the element should be empty. Like <foo>. If You set this to false, something like this is written instead: <foo>. 
+.RE
+.PP
+
+.SS "virtual void engine::io::IXMLWriter::writeText (const wchar_t * text)\fC [pure virtual]\fP"
+.PP
+Writes a text into the file. All occurrences of special characters like & (&), < (<), > (>), and ' (") are automaticly replaced. 
+.SS "virtual void engine::io::IXMLWriter::writeXMLHeader ()\fC [pure virtual]\fP"
+.PP
+Writes a xml 1.0 header like <?xml version='1.0'?>. This should always be called before writing anything other, because also the text file header for unicode texts is written out with this method. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

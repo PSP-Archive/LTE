@@ -1,0 +1,107 @@
+.TH "engine::io::IReadFile" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::io::IReadFile \- Interface providing read acess to a file.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IReadFile.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual s32 \fBread\fP (void *buffer, s32 sizeToRead)=0"
+.br
+.ti -1c
+.RI "virtual bool \fBseek\fP (s32 finalPos, bool relativeMovement=false)=0"
+.br
+.ti -1c
+.RI "virtual s32 \fBgetSize\fP ()=0"
+.br
+.ti -1c
+.RI "virtual s32 \fBgetPos\fP ()=0"
+.br
+.ti -1c
+.RI "virtual const c8 * \fBgetFileName\fP ()=0"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Interface providing read acess to a file. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual const c8* engine::io::IReadFile::getFileName ()\fC [pure virtual]\fP"
+.PP
+Returns name of file. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the file name as zero terminated character string. 
+.RE
+.PP
+
+.SS "virtual s32 engine::io::IReadFile::getPos ()\fC [pure virtual]\fP"
+.PP
+Returns the current position in the file. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the current position in the file in bytes. 
+.RE
+.PP
+
+.SS "virtual s32 engine::io::IReadFile::getSize ()\fC [pure virtual]\fP"
+.PP
+Returns size of file. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the size of the file in bytes. 
+.RE
+.PP
+
+.SS "virtual s32 engine::io::IReadFile::read (void * buffer, s32 sizeToRead)\fC [pure virtual]\fP"
+.PP
+Reads an amount of bytes from the file. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIbuffer,:\fP Pointer to buffer where to read bytes will be written to. 
+.br
+\fIsizeToRead,:\fP Amount of bytes to read from the file. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns how much bytes were read. 
+.RE
+.PP
+
+.SS "virtual bool engine::io::IReadFile::seek (s32 finalPos, bool relativeMovement = \fCfalse\fP)\fC [pure virtual]\fP"
+.PP
+Changes position in file, returns true if successful. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfinalPos,:\fP Destination position in the file. 
+.br
+\fIrelativeMovement,:\fP If set to true, the position in the file is changed relative to current position. Otherwise the position is changed from begin of file. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if successful, otherwise false. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

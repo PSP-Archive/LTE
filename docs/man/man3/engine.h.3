@@ -1,0 +1,144 @@
+.TH "C:/EngineSDK/include/engine.h" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+C:/EngineSDK/include/engine.h \- Main header file of the engine, the only file needed to include. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'engineCompileConfig.h'\fP
+.br
+\fC#include 'aabbox3d.h'\fP
+.br
+\fC#include 'engineArray.h'\fP
+.br
+\fC#include 'SColor.h'\fP
+.br
+\fC#include 'SLight.h'\fP
+.br
+\fC#include 'dimension2d.h'\fP
+.br
+\fC#include 'EDriverTypes.h'\fP
+.br
+\fC#include 'heapsort.h'\fP
+.br
+\fC#include 'IAnimatedMesh.h'\fP
+.br
+\fC#include 'IAnimatedMeshMD2.h'\fP
+.br
+\fC#include 'IAnimatedMeshMS3D.h'\fP
+.br
+\fC#include 'IAnimatedMeshX.h'\fP
+.br
+\fC#include 'IAnimatedMeshSceneNode.h'\fP
+.br
+\fC#include 'ICameraSceneNode.h'\fP
+.br
+\fC#include 'IDummyTransformationSceneNode.h'\fP
+.br
+\fC#include 'IEventReceiver.h'\fP
+.br
+\fC#include 'IFileList.h'\fP
+.br
+\fC#include 'IFileSystem.h'\fP
+.br
+\fC#include 'IGUIButton.h'\fP
+.br
+\fC#include 'IGUICheckBox.h'\fP
+.br
+\fC#include 'IGUIContextMenu.h'\fP
+.br
+\fC#include 'IGUIComboBox.h'\fP
+.br
+\fC#include 'IGUIElement.h'\fP
+.br
+\fC#include 'IGUIEditBox.h'\fP
+.br
+\fC#include 'IGUIEnvironment.h'\fP
+.br
+\fC#include 'IGUIFileOpenDialog.h'\fP
+.br
+\fC#include 'IGUIFont.h'\fP
+.br
+\fC#include 'IGUIImage.h'\fP
+.br
+\fC#include 'IGUIInOutFader.h'\fP
+.br
+\fC#include 'IGUIListBox.h'\fP
+.br
+\fC#include 'IGUIMeshViewer.h'\fP
+.br
+\fC#include 'IGUIScrollBar.h'\fP
+.br
+\fC#include 'IGUISkin.h'\fP
+.br
+\fC#include 'IGUIStaticText.h'\fP
+.br
+\fC#include 'IGUITabControl.h'\fP
+.br
+\fC#include 'IGUIWindow.h'\fP
+.br
+\fC#include 'IGUIToolbar.h'\fP
+.br
+\fC#include 'ILightSceneNode.h'\fP
+.br
+\fC#include 'ILogger.h'\fP
+.br
+\fC#include 'IMesh.h'\fP
+.br
+\fC#include 'IMeshBuffer.h'\fP
+.br
+\fC#include 'IMeshManipulator.h'\fP
+.br
+\fC#include 'IMetaTriangleSelector.h'\fP
+.br
+\fC#include 'IReadFile.h'\fP
+.br
+\fC#include 'engineDevice.h'\fP
+.br
+
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI "namespace \fBengine\fP"
+.br
+.ti -1c
+.RI "namespace \fBengine::core\fP"
+.br
+.ti -1c
+.RI "namespace \fBengine::gui\fP"
+.br
+.ti -1c
+.RI "namespace \fBengine::io\fP"
+.br
+.ti -1c
+.RI "namespace \fBengine::scene\fP"
+.br
+.ti -1c
+.RI "namespace \fBengine::video\fP"
+.br
+.ti -1c
+.RI "namespace \fBengine::audio\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "engineDevice * \fBengine::createDevice\fP (IEventReceiver *receiver=0, bool showLogo=true)"
+.br
+.RI "\fICreates an engine device. The engine device is the root object for using the engine. \fP"
+.ti -1c
+.RI "engineDevice * \fBengine::createDeviceEx\fP (const SengineCreationParameters &parameters)"
+.br
+.RI "\fIunused \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Main header file of the engine, the only file needed to include. 
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

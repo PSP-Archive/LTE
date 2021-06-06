@@ -1,0 +1,57 @@
+.TH "engine::io::IFileReadCallBack" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::io::IFileReadCallBack \- Callback class for file read abstraction.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <engineXML.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~IFileReadCallBack\fP ()"
+.br
+.RI "\fIvirtual destructor \fP"
+.ti -1c
+.RI "virtual int \fBread\fP (void *buffer, int sizeToRead)=0"
+.br
+.RI "\fIReads an amount of bytes from the file. \fP"
+.ti -1c
+.RI "virtual int \fBgetSize\fP ()=0"
+.br
+.RI "\fIReturns size of file in bytes. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Callback class for file read abstraction. 
+
+With this, it is possible to make the xml parser read in other things than just files. The engine engine is using this for example to read xml from compressed .zip files. To make the parser read in any other data, derive a class from this interface, implement the two methods to read your data and give a pointer to an instance of your implementation when calling \fBcreateengineXMLReader()\fP, \fBcreateengineXMLReaderUTF16()\fP or \fBcreateengineXMLReaderUTF32()\fP 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual int engine::io::IFileReadCallBack::read (void * buffer, int sizeToRead)\fC [pure virtual]\fP"
+.PP
+Reads an amount of bytes from the file. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIbuffer,:\fP Pointer to buffer where to read bytes will be written to. 
+.br
+\fIsizeToRead,:\fP Amount of bytes to read from the file. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns how much bytes were read. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

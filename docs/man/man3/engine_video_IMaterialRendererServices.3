@@ -1,0 +1,32 @@
+.TH "engine::video::IMaterialRendererServices" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::video::IMaterialRendererServices \- Interface providing some methods for changing advanced, internal states of a \fBIVideoDriver\fP.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IMaterialRenderer.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual void \fBsetBasicRenderStates\fP (const \fBSMaterial\fP &material, const \fBSMaterial\fP &lastMaterial, bool resetAllRenderstates)=0"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Interface providing some methods for changing advanced, internal states of a \fBIVideoDriver\fP. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual void engine::video::IMaterialRendererServices::setBasicRenderStates (const \fBSMaterial\fP & material, const \fBSMaterial\fP & lastMaterial, bool resetAllRenderstates)\fC [pure virtual]\fP"
+.PP
+Can be called by an \fBIMaterialRenderer\fP to make its work easier. Sets all basic renderstates if needed. Basic render states are diffuse, ambient, specular, and emissive color, specular power, bilinear and trilinear filtering, wireframe mode, grouraudshading, lighting, zbuffer, zwriteenable, backfaceculling and fog enabling. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

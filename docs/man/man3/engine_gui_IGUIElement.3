@@ -1,0 +1,214 @@
+.TH "engine::gui::IGUIElement" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::gui::IGUIElement \- Base class of all GUI elements.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IGUIElement.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP, and \fBengine::IEventReceiver\fP.
+.PP
+Inherited by \fBengine::gui::IGUIButton\fP, \fBengine::gui::IGUICheckBox\fP, \fBengine::gui::IGUIComboBox\fP, \fBengine::gui::IGUIContextMenu\fP, \fBengine::gui::IGUIEditBox\fP, \fBengine::gui::IGUIFileOpenDialog\fP, \fBengine::gui::IGUIImage\fP, \fBengine::gui::IGUIInOutFader\fP, \fBengine::gui::IGUIListBox\fP, \fBengine::gui::IGUIMeshViewer\fP, \fBengine::gui::IGUIScrollBar\fP, \fBengine::gui::IGUIStaticText\fP, \fBengine::gui::IGUITab\fP, \fBengine::gui::IGUITabControl\fP, \fBengine::gui::IGUIToolBar\fP, and \fBengine::gui::IGUIWindow\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBIGUIElement\fP (\fBEGUI_ELEMENT_TYPE\fP type, \fBIGUIEnvironment\fP *environment, \fBIGUIElement\fP *parent, s32 id, \fBcore::rect\fP< s32 > rectangle)"
+.br
+.RI "\fIConstructor. \fP"
+.ti -1c
+.RI "virtual \fB~IGUIElement\fP ()"
+.br
+.RI "\fIDestructor. \fP"
+.ti -1c
+.RI "\fBIGUIElement\fP * \fBgetParent\fP ()"
+.br
+.RI "\fIReturns parent of this element. \fP"
+.ti -1c
+.RI "\fBcore::rect\fP< s32 > \fBgetRelativePosition\fP ()"
+.br
+.RI "\fIReturns the relative rectangle of this element. \fP"
+.ti -1c
+.RI "void \fBsetRelativePosition\fP (const \fBcore::rect\fP< s32 > &r)"
+.br
+.RI "\fISets the relative rectangle of this element. \fP"
+.ti -1c
+.RI "\fBcore::rect\fP< s32 > \fBgetAbsolutePosition\fP ()"
+.br
+.RI "\fIReturns the absolute rectangle of element. \fP"
+.ti -1c
+.RI "virtual void \fBupdateAbsolutePosition\fP ()"
+.br
+.RI "\fIUpdates the absolute position. \fP"
+.ti -1c
+.RI "\fBIGUIElement\fP * \fBgetElementFromPoint\fP (const \fBcore::position2d\fP< s32 > &point)"
+.br
+.RI "\fIReturns the child element, which is at the position of the point. \fP"
+.ti -1c
+.RI "virtual void \fBaddChild\fP (\fBIGUIElement\fP *child)"
+.br
+.RI "\fIAdds a GUI element as new child of this element. \fP"
+.ti -1c
+.RI "virtual void \fBremoveChild\fP (\fBIGUIElement\fP *child)"
+.br
+.RI "\fIRemoves a child. \fP"
+.ti -1c
+.RI "virtual void \fBremove\fP ()"
+.br
+.RI "\fIRemoves this element from its parent. \fP"
+.ti -1c
+.RI "virtual void \fBdraw\fP ()"
+.br
+.RI "\fIDraws the element and its children. \fP"
+.ti -1c
+.RI "virtual void \fBmove\fP (\fBcore::position2d\fP< s32 > absoluteMovement)"
+.br
+.RI "\fIMoves this element. \fP"
+.ti -1c
+.RI "virtual bool \fBisVisible\fP ()"
+.br
+.RI "\fIReturns true if element is visible. \fP"
+.ti -1c
+.RI "virtual void \fBsetVisible\fP (bool visible)"
+.br
+.RI "\fISets the visible state of this element. \fP"
+.ti -1c
+.RI "virtual bool \fBisEnabled\fP ()"
+.br
+.RI "\fIReturns true if element is enabled. \fP"
+.ti -1c
+.RI "virtual void \fBsetEnabled\fP (bool enabled)"
+.br
+.RI "\fISets the enabled state of this element. \fP"
+.ti -1c
+.RI "virtual void \fBsetText\fP (const wchar_t *text)"
+.br
+.RI "\fISets the new caption of this element. \fP"
+.ti -1c
+.RI "virtual const wchar_t * \fBgetText\fP ()"
+.br
+.RI "\fIReturns caption of this element. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetID\fP ()"
+.br
+.RI "\fIReturns id. Can be used to identify the element. \fP"
+.ti -1c
+.RI "virtual void \fBsetID\fP (s32 id)"
+.br
+.RI "\fISets the id of this element. \fP"
+.ti -1c
+.RI "virtual bool \fBOnEvent\fP (\fBSEvent\fP event)"
+.br
+.RI "\fICalled if an event happened. \fP"
+.ti -1c
+.RI "virtual bool \fBbringToFront\fP (\fBIGUIElement\fP *element)"
+.br
+.RI "\fIBrings a child to front. \fP"
+.ti -1c
+.RI "virtual const \fBcore::list\fP< \fBIGUIElement\fP * > & \fBgetChildren\fP () const "
+.br
+.RI "\fIReturns list with children of this element. \fP"
+.ti -1c
+.RI "virtual \fBIGUIElement\fP * \fBgetElementFromId\fP (s32 id, bool searchchildren=false) const "
+.br
+.RI "\fIFinds the first element with the given id. \fP"
+.ti -1c
+.RI "\fBEGUI_ELEMENT_TYPE\fP \fBgetType\fP ()"
+.br
+.RI "\fIReturns the type of the gui element. \fP"
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBcore::list\fP< \fBIGUIElement\fP * > \fBChildren\fP"
+.br
+.RI "\fIList of all children of this element. \fP"
+.ti -1c
+.RI "\fBIGUIElement\fP * \fBParent\fP"
+.br
+.RI "\fIPointer to the parent. \fP"
+.ti -1c
+.RI "\fBcore::rect\fP< s32 > \fBRelativeRect\fP"
+.br
+.RI "\fIrelative rect of element \fP"
+.ti -1c
+.RI "\fBcore::rect\fP< s32 > \fBAbsoluteRect\fP"
+.br
+.RI "\fIabsolute rect of element \fP"
+.ti -1c
+.RI "\fBcore::rect\fP< s32 > \fBAbsoluteClippingRect\fP"
+.br
+.RI "\fIabsolute clipping rect of element \fP"
+.ti -1c
+.RI "bool \fBIsVisible\fP"
+.br
+.RI "\fIis visible? \fP"
+.ti -1c
+.RI "bool \fBIsEnabled\fP"
+.br
+.RI "\fIis enabled? \fP"
+.ti -1c
+.RI "\fBcore::stringw\fP \fBText\fP"
+.br
+.RI "\fIcaption \fP"
+.ti -1c
+.RI "s32 \fBID\fP"
+.br
+.RI "\fIid \fP"
+.ti -1c
+.RI "\fBIGUIEnvironment\fP * \fBEnvironment\fP"
+.br
+.RI "\fIGUI Environment. \fP"
+.ti -1c
+.RI "\fBEGUI_ELEMENT_TYPE\fP \fBType\fP"
+.br
+.RI "\fItype of element \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Base class of all GUI elements. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual bool engine::gui::IGUIElement::bringToFront (\fBIGUIElement\fP * element)\fC [inline, virtual]\fP"
+.PP
+Brings a child to front. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if successful, false if not. 
+.RE
+.PP
+
+.SS "virtual \fBIGUIElement\fP* engine::gui::IGUIElement::getElementFromId (s32 id, bool searchchildren = \fCfalse\fP) const\fC [inline, virtual]\fP"
+.PP
+Finds the first element with the given id. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIid,:\fP Id to search for. 
+.br
+\fIsearchchildren,:\fP Set this to true, if also children of this element may contain the element with the searched id and they should be searched too. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the first element with the given id. If no element with this id was found, 0 is returned. 
+.RE
+.PP
+
+.SS "\fBEGUI_ELEMENT_TYPE\fP engine::gui::IGUIElement::getType ()\fC [inline]\fP"
+.PP
+Returns the type of the gui element. 
+.PP
+This is needed for the .NET wrapper but will be used later for serializing and deserializing. If you wrote your own GUIElements, you need to set the type for your element as first parameter in the constructor of \fBIGUIElement\fP. For own (=unknown) elements, simply use EGUIET_ELEMENT as type 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

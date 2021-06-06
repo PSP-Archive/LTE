@@ -1,0 +1,113 @@
+.TH "engine::scene::IAnimatedMesh" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::IAnimatedMesh \- Interface for an animated mesh.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IAnimatedMesh.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+Inherited by \fBengine::scene::IAnimatedMeshMD2\fP, \fBengine::scene::IAnimatedMeshMS3D\fP, \fBengine::scene::IAnimatedMeshX\fP, \fBengine::scene::IQ3LevelMesh\fP, and \fBengine::scene::SAnimatedMesh\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~IAnimatedMesh\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual s32 \fBgetFrameCount\fP ()=0"
+.br
+.RI "\fIGets the frame count of the animated mesh. \fP"
+.ti -1c
+.RI "virtual \fBIMesh\fP * \fBgetMesh\fP (s32 frame, s32 detailLevel=255, s32 startFrameLoop=-1, s32 endFrameLoop=-1)=0"
+.br
+.RI "\fIReturns the \fBIMesh\fP interface for a frame. \fP"
+.ti -1c
+.RI "virtual const \fBcore::aabbox3d\fP< f32 > & \fBgetBoundingBox\fP () const =0"
+.br
+.RI "\fIReturns an axis aligned bounding box of the mesh. \fP"
+.ti -1c
+.RI "virtual \fBE_ANIMATED_MESH_TYPE\fP \fBgetMeshType\fP () const "
+.br
+.RI "\fIReturns the type of the animated mesh. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Interface for an animated mesh. 
+
+There are already simple implementations of this interface available so you don't have to implement this interface on your own if you need to: You might want to use \fBengine::scene::SAnimatedMesh\fP, \fBengine::scene::SMesh\fP, \fBengine::scene::SMeshBuffer\fP etc. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual const \fBcore::aabbox3d\fP<f32>& engine::scene::IAnimatedMesh::getBoundingBox () const\fC [pure virtual]\fP"
+.PP
+Returns an axis aligned bounding box of the mesh. 
+.PP
+\fBReturns:\fP
+.RS 4
+A bounding box of this mesh is returned. 
+.RE
+.PP
+
+.PP
+Implemented in \fBengine::scene::SAnimatedMesh\fP.
+.SS "virtual s32 engine::scene::IAnimatedMesh::getFrameCount ()\fC [pure virtual]\fP"
+.PP
+Gets the frame count of the animated mesh. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the amount of frames. If the amount is 1, it is a static, non animated mesh. 
+.RE
+.PP
+
+.PP
+Implemented in \fBengine::scene::SAnimatedMesh\fP.
+.SS "virtual \fBIMesh\fP* engine::scene::IAnimatedMesh::getMesh (s32 frame, s32 detailLevel = \fC255\fP, s32 startFrameLoop = \fC-1\fP, s32 endFrameLoop = \fC-1\fP)\fC [pure virtual]\fP"
+.PP
+Returns the \fBIMesh\fP interface for a frame. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIframe,:\fP Frame number as zero based index. The maximum frame number is \fBgetFrameCount()\fP - 1; 
+.br
+\fIdetailLevel,:\fP Level of detail. 0 is the lowest, 255 the highest level of detail. Most meshes will ignore the detail level. 
+.br
+\fIstartFrameLoop,:\fP Because some animated meshes (.MD2) are blended between 2 static frames, and maybe animated in a loop, the startFrameLoop and the endFrameLoop have to be defined, to prevent the animation to be blended between frames which are outside of this loop. If startFrameLoop and endFrameLoop are both -1, they are ignored. 
+.br
+\fIendFrameLoop,:\fP see startFrameLoop. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the animated mesh based on a detail level. 
+.RE
+.PP
+
+.PP
+Implemented in \fBengine::scene::SAnimatedMesh\fP.
+.SS "virtual \fBE_ANIMATED_MESH_TYPE\fP engine::scene::IAnimatedMesh::getMeshType () const\fC [inline, virtual]\fP"
+.PP
+Returns the type of the animated mesh. 
+.PP
+In most cases it is not neccessary to use this method. This is useful for making a save downcast, for example if \fBgetMeshType()\fP returns EAMT_MD2, its save to cast the \fBIAnimatedMesh\fP to \fBIAnimatedMeshMD2\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+Type of the mesh. 
+.RE
+.PP
+
+.PP
+Reimplemented in \fBengine::scene::SAnimatedMesh\fP.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

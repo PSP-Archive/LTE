@@ -1,0 +1,1151 @@
+.TH "engine::video::IVideoDriver" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::video::IVideoDriver \- Interface to driver which is able to perform 2d and 3d gfx functions.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IVideoDriver.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~IVideoDriver\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual bool \fBbeginScene\fP (bool backBuffer, bool zBuffer, \fBSColor\fP color)=0"
+.br
+.RI "\fIApplications must call this method before performing any rendering. \fP"
+.ti -1c
+.RI "virtual bool \fBendScene\fP (s32 windowId=0, \fBcore::rect\fP< s32 > *sourceRect=0)=0"
+.br
+.RI "\fIPresents the rendered image on the screen. \fP"
+.ti -1c
+.RI "virtual bool \fBqueryFeature\fP (\fBE_VIDEO_DRIVER_FEATURE\fP feature)=0"
+.br
+.RI "\fIQueries the features of the driver. \fP"
+.ti -1c
+.RI "virtual void \fBsetTransform\fP (\fBE_TRANSFORMATION_STATE\fP state, const \fBcore::matrix4\fP &mat)=0"
+.br
+.RI "\fISets the view, world or projection transformation. \fP"
+.ti -1c
+.RI "virtual \fBcore::matrix4\fP \fBgetTransform\fP (\fBE_TRANSFORMATION_STATE\fP state)=0"
+.br
+.RI "\fIReturns the transformation set by setTransform. \fP"
+.ti -1c
+.RI "virtual void \fBsetMaterial\fP (const \fBSMaterial\fP &material)=0"
+.br
+.RI "\fISets a material. \fP"
+.ti -1c
+.RI "virtual \fBITexture\fP * \fBgetTexture\fP (const c8 *filename)=0"
+.br
+.RI "\fIReturns a pointer to a texture. \fP"
+.ti -1c
+.RI "virtual \fBITexture\fP * \fBgetTexture\fP (\fBio::IReadFile\fP *file)=0"
+.br
+.RI "\fIReturns a pointer to a texture. \fP"
+.ti -1c
+.RI "virtual \fBITexture\fP * \fBaddTexture\fP (const \fBcore::dimension2d\fP< s32 > &size, const c8 *name, \fBECOLOR_FORMAT\fP format=ECF_A1R5G5B5)=0"
+.br
+.RI "\fICreates an empty Texture of specified size. \fP"
+.ti -1c
+.RI "virtual \fBITexture\fP * \fBaddTexture\fP (const c8 *name, \fBIImage\fP *image)=0"
+.br
+.RI "\fICreates a texture from a loaded \fBIImage\fP. \fP"
+.ti -1c
+.RI "virtual \fBITexture\fP * \fBcreateRenderTargetTexture\fP (\fBcore::dimension2d\fP< s32 > size)=0"
+.br
+.RI "\fICreates a render target texture. \fP"
+.ti -1c
+.RI "virtual void \fBremoveTexture\fP (\fBITexture\fP *texture)=0"
+.br
+.RI "\fIRemoves a texture from the texture cache and deletes it, freeing lot of memory. \fP"
+.ti -1c
+.RI "virtual void \fBremoveAllTextures\fP ()=0"
+.br
+.RI "\fIRemoves all texture from the texture cache and deletes them, freeing lot of memory. \fP"
+.ti -1c
+.RI "virtual void \fBmakeColorKeyTexture\fP (\fBvideo::ITexture\fP *texture, \fBvideo::SColor\fP color)=0"
+.br
+.RI "\fICreates an 1bit alpha channel of the texture based of an color key. \fP"
+.ti -1c
+.RI "virtual void \fBmakeColorKeyTexture\fP (\fBvideo::ITexture\fP *texture, \fBcore::position2d\fP< s32 > colorKeyPixelPos)=0"
+.br
+.RI "\fICreates an 1bit alpha channel of the texture based of an color key position. \fP"
+.ti -1c
+.RI "virtual void \fBmakeNormalMapTexture\fP (\fBvideo::ITexture\fP *texture, f32 amplitude=1.0f)=0"
+.br
+.RI "\fICreates a normal map from a height map texture. \fP"
+.ti -1c
+.RI "virtual bool \fBsetRenderTarget\fP (\fBvideo::ITexture\fP *texture, bool clearBackBuffer=true, bool clearZBuffer=true, \fBSColor\fP color=\fBvideo::SColor\fP(0, 0, 0, 0))=0"
+.br
+.RI "\fISets a new render target. \fP"
+.ti -1c
+.RI "virtual void \fBsetViewPort\fP (const \fBcore::rect\fP< s32 > &area)=0"
+.br
+.RI "\fISets a new viewport. \fP"
+.ti -1c
+.RI "virtual const \fBcore::rect\fP< s32 > & \fBgetViewPort\fP () const =0"
+.br
+.RI "\fIGets the area of the current viewport. \fP"
+.ti -1c
+.RI "virtual void \fBdrawIndexedTriangleList\fP (const \fBS3DVertex\fP *vertices, s32 vertexCount, const u16 *indexList, s32 triangleCount)=0"
+.br
+.RI "\fIDraws an indexed triangle list. \fP"
+.ti -1c
+.RI "virtual void \fBdrawIndexedTriangleList\fP (const \fBS3DVertex2TCoords\fP *vertices, s32 vertexCount, const u16 *indexList, s32 triangleCount)=0"
+.br
+.RI "\fIDraws an indexed triangle list. \fP"
+.ti -1c
+.RI "virtual void \fBdrawIndexedTriangleList\fP (const \fBS3DVertexTangents\fP *vertices, s32 vertexCount, const u16 *indexList, s32 triangleCount)=0"
+.br
+.RI "\fIDraws an indexed triangle list. \fP"
+.ti -1c
+.RI "virtual void \fBdrawIndexedTriangleFan\fP (const \fBS3DVertex\fP *vertices, s32 vertexCount, const u16 *indexList, s32 triangleCount)=0"
+.br
+.RI "\fIDraws an indexed triangle fan. \fP"
+.ti -1c
+.RI "virtual void \fBdrawIndexedTriangleFan\fP (const \fBS3DVertex2TCoords\fP *vertices, s32 vertexCount, const u16 *indexList, s32 triangleCount)=0"
+.br
+.RI "\fIDraws an indexed triangle fan. \fP"
+.ti -1c
+.RI "virtual void \fBdraw3DLine\fP (const \fBcore::vector3df\fP &start, const \fBcore::vector3df\fP &end, \fBSColor\fP color=\fBSColor\fP(255, 255, 255, 255))=0"
+.br
+.RI "\fIDraws a 3d line. \fP"
+.ti -1c
+.RI "virtual void \fBdraw3DTriangle\fP (const \fBcore::triangle3df\fP &triangle, \fBSColor\fP color=\fBSColor\fP(255, 255, 255, 255))=0"
+.br
+.RI "\fIDraws a 3d triangle. \fP"
+.ti -1c
+.RI "virtual void \fBdraw3DBox\fP (const \fBcore::aabbox3d\fP< f32 > box, \fBSColor\fP color=\fBSColor\fP(255, 255, 255, 255))=0"
+.br
+.RI "\fIDraws a 3d axis aligned box. \fP"
+.ti -1c
+.RI "virtual void \fBdraw2DImage\fP (\fBvideo::ITexture\fP *texture, const \fBcore::position2d\fP< s32 > &destPos)=0"
+.br
+.RI "\fISimply draws an 2d image, without any special effects. \fP"
+.ti -1c
+.RI "virtual void \fBchangeCursor\fP (\fBvideo::ITexture\fP *texture)"
+.br
+.RI "\fIChange the cursor texture. \fP"
+.ti -1c
+.RI "virtual void \fBdraw2DImage\fP (\fBvideo::ITexture\fP *texture, const \fBcore::position2d\fP< s32 > &destPos, const \fBcore::rect\fP< s32 > &sourceRect, const \fBcore::rect\fP< s32 > *clipRect=0, \fBSColor\fP color=\fBSColor\fP(255, 255, 255, 255), bool useAlphaChannelOfTexture=false)=0"
+.br
+.RI "\fIDraws an 2d image, using a color. \fP"
+.ti -1c
+.RI "virtual void \fBdraw2DImage\fP (\fBvideo::ITexture\fP *texture, const \fBcore::rect\fP< s32 > &destRect, const \fBcore::rect\fP< s32 > &sourceRect, const \fBcore::rect\fP< s32 > *clipRect=0, \fBvideo::SColor\fP *colors=0, bool useAlphaChannelOfTexture=false)=0"
+.br
+.RI "\fIDraws a part of the texture into the rectangle. \fP"
+.ti -1c
+.RI "virtual void \fBdraw2DRectangle\fP (\fBSColor\fP color, const \fBcore::rect\fP< s32 > &pos, const \fBcore::rect\fP< s32 > *clip=0)=0"
+.br
+.RI "\fIDraws an 2d rectangle. \fP"
+.ti -1c
+.RI "virtual void \fBdraw2DRectangle\fP (const \fBcore::rect\fP< s32 > &pos, \fBSColor\fP colorLeftUp, \fBSColor\fP colorRightUp, \fBSColor\fP colorLeftDown, \fBSColor\fP colorRightDown, const \fBcore::rect\fP< s32 > *clip=0)=0"
+.br
+.RI "\fIDraws an 2d rectangle with a gradient. \fP"
+.ti -1c
+.RI "virtual void \fBdraw2DLine\fP (const \fBcore::position2d\fP< s32 > &start, const \fBcore::position2d\fP< s32 > &end, \fBSColor\fP color=\fBSColor\fP(255, 255, 255, 255))=0"
+.br
+.RI "\fIDraws a 2d line. \fP"
+.ti -1c
+.RI "virtual void \fBdraw2DPolygon\fP (\fBcore::position2d\fP< s32 > center, f32 radius, \fBvideo::SColor\fP color=\fBSColor\fP(100, 255, 255, 255), s32 vertexCount=10)=0"
+.br
+.RI "\fIDraws a non filled concyclic reqular 2d polyon. \fP"
+.ti -1c
+.RI "virtual void \fBdrawStencilShadowVolume\fP (const \fBcore::vector3df\fP *triangles, s32 count, bool zfail=true)=0"
+.br
+.RI "\fIDraws a shadow volume into the stencil buffer. \fP"
+.ti -1c
+.RI "virtual void \fBdrawStencilShadow\fP (bool clearStencilBuffer=false, \fBvideo::SColor\fP leftUpEdge=\fBvideo::SColor\fP(255, 0, 0, 0), \fBvideo::SColor\fP rightUpEdge=\fBvideo::SColor\fP(255, 0, 0, 0), \fBvideo::SColor\fP leftDownEdge=\fBvideo::SColor\fP(255, 0, 0, 0), \fBvideo::SColor\fP rightDownEdge=\fBvideo::SColor\fP(255, 0, 0, 0))=0"
+.br
+.RI "\fIFills the stencil shadow with color. \fP"
+.ti -1c
+.RI "virtual void \fBdrawMeshBuffer\fP (\fBscene::IMeshBuffer\fP *mb)=0"
+.br
+.RI "\fIDraws a mesh buffer. \fP"
+.ti -1c
+.RI "virtual void \fBsetFog\fP (\fBSColor\fP color=\fBSColor\fP(0, 255, 255, 255), bool linearFog=true, f32 start=50.0f, f32 end=100.0f, f32 density=0.01f, bool pixelFog=false, bool rangeFog=false)=0"
+.br
+.RI "\fISets the fog mode. \fP"
+.ti -1c
+.RI "virtual \fBcore::dimension2d\fP< s32 > \fBgetScreenSize\fP ()=0"
+.br
+.RI "\fIReturns the size of the screen or render window. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetFPS\fP ()=0"
+.br
+.RI "\fIReturns current frames per second value. \fP"
+.ti -1c
+.RI "virtual u32 \fBgetPrimitiveCountDrawn\fP ()=0"
+.br
+.RI "\fIReturns amount of primitives (mostly triangles) which were drawn in the last frame. \fP"
+.ti -1c
+.RI "virtual void \fBdeleteAllDynamicLights\fP ()=0"
+.br
+.RI "\fIDeletes all dynamic lights which were previously added with \fBaddDynamicLight()\fP. \fP"
+.ti -1c
+.RI "virtual void \fBaddDynamicLight\fP (const \fBSLight\fP &light)=0"
+.br
+.RI "\fIAdds a dynamic light. \fP"
+.ti -1c
+.RI "virtual void \fBsetAmbientLight\fP (const \fBSColorf\fP &color)=0"
+.br
+.RI "\fISets the dynamic ambient light color. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetMaximalDynamicLightAmount\fP ()=0"
+.br
+.RI "\fIReturns the maximal amount of dynamic lights the device can handle. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetDynamicLightCount\fP ()=0"
+.br
+.RI "\fIReturns current amount of dynamic lights set. \fP"
+.ti -1c
+.RI "virtual const \fBSLight\fP & \fBgetDynamicLight\fP (s32 idx)=0"
+.br
+.RI "\fIReturns light data which was previously set with IVideDriver::addDynamicLight(). \fP"
+.ti -1c
+.RI "virtual const wchar_t * \fBgetName\fP ()=0"
+.br
+.RI "\fIGets name of this video driver. \fP"
+.ti -1c
+.RI "virtual void \fBaddExternalImageLoader\fP (\fBIImageLoader\fP *loader)=0"
+.br
+.RI "\fIAdds an external image loader to the engine. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetMaximalPrimitiveCount\fP ()=0"
+.br
+.RI "\fIReturns the maximum amount of primitives. \fP"
+.ti -1c
+.RI "virtual void \fBsetTextureCreationFlag\fP (\fBE_TEXTURE_CREATION_FLAG\fP flag, bool enabled)=0"
+.br
+.RI "\fIEnables or disables a texture creation flag. \fP"
+.ti -1c
+.RI "virtual bool \fBgetTextureCreationFlag\fP (\fBE_TEXTURE_CREATION_FLAG\fP flag)=0"
+.br
+.RI "\fIReturns if a texture creation flag is enabled or disabled. \fP"
+.ti -1c
+.RI "virtual \fBIImage\fP * \fBcreateImageFromFile\fP (const char *filename)=0"
+.br
+.RI "\fICreates a software image from a file. \fP"
+.ti -1c
+.RI "virtual \fBIImage\fP * \fBcreateImageFromFile\fP (\fBio::IReadFile\fP *file)=0"
+.br
+.RI "\fICreates a software image from a file. \fP"
+.ti -1c
+.RI "virtual \fBIImage\fP * \fBcreateImageFromData\fP (\fBECOLOR_FORMAT\fP format, const \fBcore::dimension2d\fP< s32 > &size, void *data, bool ownForeignMemory=false)=0"
+.br
+.RI "\fICreates a software image from a byte array. \fP"
+.ti -1c
+.RI "virtual void \fBOnResize\fP (const \fBcore::dimension2d\fP< s32 > &size)=0"
+.br
+.RI "\fIOnly used by the internal engine. \fP"
+.ti -1c
+.RI "virtual s32 \fBaddMaterialRenderer\fP (\fBIMaterialRenderer\fP *renderer)=0"
+.br
+.RI "\fIAdds a new material renderer to the video device. \fP"
+.ti -1c
+.RI "virtual \fBIMaterialRenderer\fP * \fBgetMaterialRenderer\fP (s32 idx)=0"
+.br
+.RI "\fIReturns pointer to material renderer or null if not existing. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetMaterialRendererCount\fP ()=0"
+.br
+.RI "\fIReturns amount of currently available material renderers. \fP"
+.ti -1c
+.RI "virtual \fBSExposedVideoData\fP \fBgetExposedVideoData\fP ()=0"
+.br
+.RI "\fIReturns driver and operating system specific data about the \fBIVideoDriver\fP. \fP"
+.ti -1c
+.RI "virtual \fBE_DRIVER_TYPE\fP \fBgetDriverType\fP ()=0"
+.br
+.RI "\fIReturns type of video driver. \fP"
+.ti -1c
+.RI "virtual \fBIGPUProgrammingServices\fP * \fBgetGPUProgrammingServices\fP ()=0"
+.br
+.RI "\fIReturns pointer to the \fBIGPUProgrammingServices\fP interface. \fP"
+.ti -1c
+.RI "virtual void \fBclearZBuffer\fP ()=0"
+.br
+.RI "\fIClears the ZBuffer. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Interface to driver which is able to perform 2d and 3d gfx functions. 
+
+The \fBIVideoDriver\fP interface is one of the most important interfaces of the engine Engine: All rendering and texture manipulating is done with this interface. You are able to use the engine Engine by only invoking methods of this interface if you would like to, although the \fBengine::scene::ISceneManager\fP interface provides a lot of powerful classes and methods to make the programmers life easier. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual void engine::video::IVideoDriver::addDynamicLight (const \fBSLight\fP & light)\fC [pure virtual]\fP"
+.PP
+Adds a dynamic light. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIlight,:\fP Data specifing the dynamic light. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::addExternalImageLoader (\fBIImageLoader\fP * loader)\fC [pure virtual]\fP"
+.PP
+Adds an external image loader to the engine. 
+.PP
+This is useful if the engine Engine should be able to load textures of currently unsupported file formats (e.g .gif). The \fBIImageLoader\fP only needs to be implemented for loading this file format. A pointer to the implementation can be passed to the engine using this method. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIloader,:\fP Pointer to the external loader created. 
+.RE
+.PP
+
+.SS "virtual s32 engine::video::IVideoDriver::addMaterialRenderer (\fBIMaterialRenderer\fP * renderer)\fC [pure virtual]\fP"
+.PP
+Adds a new material renderer to the video device. 
+.PP
+Use this method to extend the VideoDriver with new MaterialTypes. To extend the engine using this method do the following: Derive a class from \fBIMaterialRenderer\fP and override the methods you need. For setting the right renderstates, you can try to get a pointer to the real rendering device using \fBIVideoDriver::getExposedVideoData()\fP. Add you class with \fBIVideoDriver::addMaterialRenderer()\fP and if you want an object in the engine to be displayed with your new material, set the MaterialType member of the \fBSMaterial\fP struct to the value returned by this method. If you simply want to create a new material using vertex and/or pixel shaders, it would be easier to use the \fBvideo::IGPUProgrammingServices\fP interface which you can get using the \fBgetGPUProgrammingServices()\fP method. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the number of the material type which can be set in \fBSMaterial::MaterialType\fP to use the renderer. -1 is returned if an error occured. (For example if you tried to add an material renderer to the software renderer or the null device, which do not accept material renderers.) 
+.RE
+.PP
+
+.SS "virtual \fBITexture\fP* engine::video::IVideoDriver::addTexture (const c8 * name, \fBIImage\fP * image)\fC [pure virtual]\fP"
+.PP
+Creates a texture from a loaded \fBIImage\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIname,:\fP A name for the texture. Later calls of \fBgetTexture()\fP with this name will return this texture 
+.br
+\fIimage,:\fP Image from which the texture is created from. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the new created Texture. This pointer should not be dropped. See \fBIUnknown::drop()\fP for more information. The format of the new texture will be chosen by the driver, and will in most cases have the ECF_A1R5G5B5 or ECF_A8R8G8B8 format. 
+.RE
+.PP
+
+.SS "virtual \fBITexture\fP* engine::video::IVideoDriver::addTexture (const \fBcore::dimension2d\fP< s32 > & size, const c8 * name, \fBECOLOR_FORMAT\fP format = \fCECF_A1R5G5B5\fP)\fC [pure virtual]\fP"
+.PP
+Creates an empty Texture of specified size. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsize,:\fP Size of the texture. 
+.br
+\fIname,:\fP A name for the texture. Later calls of \fBgetTexture()\fP with this name will return this texture 
+.br
+\fIformat,:\fP Desired color format of the texture. Please note that the driver may choose to create the texture in another color format. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the new created Texture. This pointer should not be dropped. See \fBIUnknown::drop()\fP for more information. The format of the new texture will be chosen by the driver, and will in most cases have the ECF_A1R5G5B5 or ECF_A8R8G8B8 format. 
+.RE
+.PP
+
+.SS "virtual bool engine::video::IVideoDriver::beginScene (bool backBuffer, bool zBuffer, \fBSColor\fP color)\fC [pure virtual]\fP"
+.PP
+Applications must call this method before performing any rendering. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIbackBuffer,:\fP Specifies if the back buffer should be cleared, which means that the screen is filled with a color specified with the parameter color. If this parameter is false, the back buffer will not be cleared and the color parameter is ignored. 
+.br
+\fIzBuffer,:\fP Specifies if the depth or z buffer should be cleared. It is not nesesarry to do so, if only 2d drawing is used. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns false if failed. Begin Scene can clear the back- and the z-buffer. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::changeCursor (\fBvideo::ITexture\fP * texture)\fC [virtual]\fP"
+.PP
+Change the cursor texture. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItexture,:\fP Pointer to texture to use. Must be a 16x32 image. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::clearZBuffer ()\fC [pure virtual]\fP"
+.PP
+Clears the ZBuffer. 
+.PP
+Note that you usually need not to call this method, This is done automaticly during \fBIVideoDriver::beginScene()\fP or \fBIVideoDriver::setRenderTarget()\fP if you specify zBuffer=true. But if you have to render some special things, you can clear the zbuffer during the rendering process with this method another time. 
+.SS "virtual \fBIImage\fP* engine::video::IVideoDriver::createImageFromData (\fBECOLOR_FORMAT\fP format, const \fBcore::dimension2d\fP< s32 > & size, void * data, bool ownForeignMemory = \fCfalse\fP)\fC [pure virtual]\fP"
+.PP
+Creates a software image from a byte array. 
+.PP
+No hardware texture will be created for this image. This method is useful for example if you want to read a heightmap for a terrain renderer. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIformat,:\fP Desired color format of the texture 
+.br
+\fIsize,:\fP Desired the size of the image 
+.br
+\fIdata,:\fP a byte array with pixelcolor information 
+.br
+\fIuseForeignMemory,:\fP If true, the image will use the data pointer directly and own it from now on, which means it will also try to delete [] the data when the image will be destructed. If false, the memory will by copied internally. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the created image. If you no longer need the image, you should call \fBIImage::drop()\fP. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBIImage\fP* engine::video::IVideoDriver::createImageFromFile (\fBio::IReadFile\fP * file)\fC [pure virtual]\fP"
+.PP
+Creates a software image from a file. 
+.PP
+No hardware texture will be created for this image. This method is useful for example if you want to read a heightmap for a terrain renderer. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfile,:\fP File from which the image is created. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the created image. If you no longer need the image, you should call \fBIImage::drop()\fP. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBIImage\fP* engine::video::IVideoDriver::createImageFromFile (const char * filename)\fC [pure virtual]\fP"
+.PP
+Creates a software image from a file. 
+.PP
+No hardware texture will be created for this image. This method is useful for example if you want to read a heightmap for a terrain renderer. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfilename,:\fP Name of the file from which the image is created. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the created image. If you no longer need the image, you should call \fBIImage::drop()\fP. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBITexture\fP* engine::video::IVideoDriver::createRenderTargetTexture (\fBcore::dimension2d\fP< s32 > size)\fC [pure virtual]\fP"
+.PP
+Creates a render target texture. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsize,:\fP Size of the texture, in pixels. Width and height should be a power of two (for example 64, 128, 256, 512, ...) and it should not be bigger than the backbuffer, because it shares the zbuffer with the screen buffer. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created texture or 0 if the texture could not be created. If you no longer need the image, you should call \fBITexture::drop()\fP. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::draw2DImage (\fBvideo::ITexture\fP * texture, const \fBcore::rect\fP< s32 > & destRect, const \fBcore::rect\fP< s32 > & sourceRect, const \fBcore::rect\fP< s32 > * clipRect = \fC0\fP, \fBvideo::SColor\fP * colors = \fC0\fP, bool useAlphaChannelOfTexture = \fCfalse\fP)\fC [pure virtual]\fP"
+.PP
+Draws a part of the texture into the rectangle. 
+.PP
+Suggested and first implemented by zola. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItexture,:\fP the texture to draw from 
+.br
+\fIdestRect,:\fP the rectangle to draw into 
+.br
+\fIsourceRect,:\fP the rectangle denoting a part of the texture 
+.br
+\fIclipRect,:\fP cipps the destination rectangle (may be 0) 
+.br
+\fIcolors,:\fP array of 4 colors denoting the color values of the corners of the destRect 
+.br
+\fIuseAlphaChannelOfTexture,:\fP true if alpha channel will be blended. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::draw2DImage (\fBvideo::ITexture\fP * texture, const \fBcore::position2d\fP< s32 > & destPos, const \fBcore::rect\fP< s32 > & sourceRect, const \fBcore::rect\fP< s32 > * clipRect = \fC0\fP, \fBSColor\fP color = \fC\fBSColor\fP(255, 255, 255, 255)\fP, bool useAlphaChannelOfTexture = \fCfalse\fP)\fC [pure virtual]\fP"
+.PP
+Draws an 2d image, using a color. 
+.PP
+(if color is other than Color(255,255,255,255)) and the alpha channel of the texture if wanted. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItexture,:\fP Texture to be drawn. 
+.br
+\fIdestPos,:\fP Upper left 2d destination position where the image will be drawn. 
+.br
+\fIsourceRect,:\fP Source rectangle in the image. 
+.br
+\fIclipRect,:\fP Pointer to rectangle on the screen where the image is clipped to. This pointer can be NULL. Then the image is not clipped. 
+.br
+\fIcolor,:\fP Color with wich the image is colored. If the color equals Color(255,255,255,255), the color is ignored. Note that the alpha component is used: If alpha is other than 255, the image will be transparent. 
+.br
+\fIuseAlphaChannelOfTexture,:\fP If true, the alpha channel of the texture is used to draw the image. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::draw2DImage (\fBvideo::ITexture\fP * texture, const \fBcore::position2d\fP< s32 > & destPos)\fC [pure virtual]\fP"
+.PP
+Simply draws an 2d image, without any special effects. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItexture,:\fP Pointer to texture to use. 
+.br
+\fIdestPos,:\fP upper left 2d destination position where the image will be drawn. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::draw2DLine (const \fBcore::position2d\fP< s32 > & start, const \fBcore::position2d\fP< s32 > & end, \fBSColor\fP color = \fC\fBSColor\fP(255, 255, 255, 255)\fP)\fC [pure virtual]\fP"
+.PP
+Draws a 2d line. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstart,:\fP Screen coordinates of the start of the line in pixels. 
+.br
+\fIend,:\fP Screen coordinates of the start of the line in pixels. 
+.br
+\fIcolor,:\fP Color of the line to draw. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::draw2DPolygon (\fBcore::position2d\fP< s32 > center, f32 radius, \fBvideo::SColor\fP color = \fC\fBSColor\fP(100, 255, 255, 255)\fP, s32 vertexCount = \fC10\fP)\fC [pure virtual]\fP"
+.PP
+Draws a non filled concyclic reqular 2d polyon. 
+.PP
+This method can be used to draw circles, but also triangles, tetragons, pentagons, hexagons, heptagons, octagons, enneagons, decagons, hendecagons, dodecagon, triskaidecagons, etc. I think you'll got it now. And all this by simply specifying the vertex count. Welcome to the wonders of geometry. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcenter,:\fP Position of center of circle (pixels). 
+.br
+\fIradius,:\fP Radius of circle in pixels. 
+.br
+\fIcolor,:\fP Color of the circle. 
+.br
+\fIvertexCount,:\fP Amount of vertices of the polygon. Specify 2 to draw a line, 3 to draw a triangle, 4 for a tetragons and a lot (>10) for nearly a circle. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::draw2DRectangle (const \fBcore::rect\fP< s32 > & pos, \fBSColor\fP colorLeftUp, \fBSColor\fP colorRightUp, \fBSColor\fP colorLeftDown, \fBSColor\fP colorRightDown, const \fBcore::rect\fP< s32 > * clip = \fC0\fP)\fC [pure virtual]\fP"
+.PP
+Draws an 2d rectangle with a gradient. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcolorLeftUp,:\fP Color of the left upper corner to draw. The alpha component will not be ignored and specifies how transparent the rectangle will be. 
+.br
+\fIcolorRightUp,:\fP Color of the right upper corner to draw. The alpha component will not be ignored and specifies how transparent the rectangle will be. 
+.br
+\fIcolorLeftDown,:\fP Color of the left lower corner to draw. The alpha component will not be ignored and specifies how transparent the rectangle will be. 
+.br
+\fIcolorRightDown,:\fP Color of the right lower corner to draw. The alpha component will not be ignored and specifies how transparent the rectangle will be. 
+.br
+\fIpos,:\fP Position of the rectangle. 
+.br
+\fIclip,:\fP Pointer to rectangle against which the rectangle will be clipped. If the pointer is null, no clipping will be performed. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::draw2DRectangle (\fBSColor\fP color, const \fBcore::rect\fP< s32 > & pos, const \fBcore::rect\fP< s32 > * clip = \fC0\fP)\fC [pure virtual]\fP"
+.PP
+Draws an 2d rectangle. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcolor,:\fP Color of the rectangle to draw. The alpha component will not be ignored and specifies how transparent the rectangle will be. 
+.br
+\fIpos,:\fP Position of the rectangle. 
+.br
+\fIclip,:\fP Pointer to rectangle against which the rectangle will be clipped. If the pointer is null, no clipping will be performed. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::draw3DBox (const \fBcore::aabbox3d\fP< f32 > box, \fBSColor\fP color = \fC\fBSColor\fP(255, 255, 255, 255)\fP)\fC [pure virtual]\fP"
+.PP
+Draws a 3d axis aligned box. 
+.PP
+This method usually simply calls drawIndexedTriangles with some triangles. Note that the line is drawed using the current transformation matrix and material. This method was created for making culling debugging easier. It works with all drivers because it does simply a call to drawIndexedTriangleList and hence is not very fast but it might be useful for further development. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIbox,:\fP The axis aligned box to draw 
+.br
+\fIcolor,:\fP Color to use while drawing the box. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::draw3DLine (const \fBcore::vector3df\fP & start, const \fBcore::vector3df\fP & end, \fBSColor\fP color = \fC\fBSColor\fP(255, 255, 255, 255)\fP)\fC [pure virtual]\fP"
+.PP
+Draws a 3d line. 
+.PP
+For some implementations, this method simply calls drawIndexedTriangles with some triangles. Note that the line is drawed using the current transformation matrix and material. So if you need to draw the 3D line independent of the current transformation, use 
+.PP
+.nf
+          driver->setTransform(video::ETS_WORLD, core::matrix4());
+
+.fi
+.PP
+ before drawing the line. This method was created for making culling debugging easier. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstart,:\fP Start of the 3d line. 
+.br
+\fIend,:\fP End of the 3d line. 
+.br
+\fIcolor,:\fP Color of the line. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::draw3DTriangle (const \fBcore::triangle3df\fP & triangle, \fBSColor\fP color = \fC\fBSColor\fP(255, 255, 255, 255)\fP)\fC [pure virtual]\fP"
+.PP
+Draws a 3d triangle. 
+.PP
+This method usually simply calls drawIndexedTriangles with some triangles. Note that the line is drawed using the current transformation matrix and material. This method was created for making collision debugging easier. It works with all drivers because it does simply a call to drawIndexedTriangleList and hence is not very fast but it might be useful for further development. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItriangle,:\fP The triangle to draw. 
+.br
+\fIcolor,:\fP Color of the line. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::drawIndexedTriangleFan (const \fBS3DVertex2TCoords\fP * vertices, s32 vertexCount, const u16 * indexList, s32 triangleCount)\fC [pure virtual]\fP"
+.PP
+Draws an indexed triangle fan. 
+.PP
+Note that there may be at maximum 65536 vertices, because the index list is a array of 16 bit values each with a maximum value of 65536. If there are more than 65536 vertices in the list, results of this operation are not defined. Please note that some of the implementation code for this method is based on free code sent in by Mario Gruber, lots of thanks go to him! 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvertices,:\fP Pointer to array of vertices. 
+.br
+\fIvertexCount,:\fP Amount of vertices in the array. 
+.br
+\fIindexList,:\fP Pointer to array of indizes. 
+.br
+\fItriangleCount,:\fP amount of Triangles. Usually amount of indizes - 2. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::drawIndexedTriangleFan (const \fBS3DVertex\fP * vertices, s32 vertexCount, const u16 * indexList, s32 triangleCount)\fC [pure virtual]\fP"
+.PP
+Draws an indexed triangle fan. 
+.PP
+Note that there may be at maximum 65536 vertices, because the index list is a array of 16 bit values each with a maximum value of 65536. If there are more than 65536 vertices in the list, results of this operation are not defined. Please note that some of the implementation code for this method is based on free code sent in by Mario Gruber, lots of thanks go to him! 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvertices,:\fP Pointer to array of vertices. 
+.br
+\fIvertexCount,:\fP Amount of vertices in the array. 
+.br
+\fIindexList,:\fP Pointer to array of indizes. 
+.br
+\fItriangleCount,:\fP amount of Triangles. Usually amount of indizes - 2. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::drawIndexedTriangleList (const \fBS3DVertexTangents\fP * vertices, s32 vertexCount, const u16 * indexList, s32 triangleCount)\fC [pure virtual]\fP"
+.PP
+Draws an indexed triangle list. 
+.PP
+Note that there may be at maximum 65536 vertices, because the index list is a array of 16 bit values each with a maximum value of 65536. If there are more than 65536 vertices in the list, results of this operation are not defined. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvertices,:\fP Pointer to array of vertices. 
+.br
+\fIvertexCount,:\fP Amount of vertices in the array. 
+.br
+\fIindexList,:\fP Pointer to array of indizes. 
+.br
+\fItriangleCount,:\fP amount of Triangles. Usually amount of indizes / 3. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::drawIndexedTriangleList (const \fBS3DVertex2TCoords\fP * vertices, s32 vertexCount, const u16 * indexList, s32 triangleCount)\fC [pure virtual]\fP"
+.PP
+Draws an indexed triangle list. 
+.PP
+Note that there may be at maximum 65536 vertices, because the index list is a array of 16 bit values each with a maximum value of 65536. If there are more than 65536 vertices in the list, results of this operation are not defined. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvertices,:\fP Pointer to array of vertices. 
+.br
+\fIvertexCount,:\fP Amount of vertices in the array. 
+.br
+\fIindexList,:\fP Pointer to array of indizes. 
+.br
+\fItriangleCount,:\fP amount of Triangles. Usually amount of indizes / 3. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::drawIndexedTriangleList (const \fBS3DVertex\fP * vertices, s32 vertexCount, const u16 * indexList, s32 triangleCount)\fC [pure virtual]\fP"
+.PP
+Draws an indexed triangle list. 
+.PP
+Note that there may be at maximum 65536 vertices, because the index list is a array of 16 bit values each with a maximum value of 65536. If there are more than 65536 vertices in the list, results of this operation are not defined. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvertices,:\fP Pointer to array of vertices. 
+.br
+\fIvertexCount,:\fP Amount of vertices in the array. 
+.br
+\fIindexList,:\fP Pointer to array of indizes. 
+.br
+\fItriangleCount,:\fP amount of Triangles. Usually amount of indizes / 3. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::drawMeshBuffer (\fBscene::IMeshBuffer\fP * mb)\fC [pure virtual]\fP"
+.PP
+Draws a mesh buffer. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fImb,:\fP Buffer to draw; 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::drawStencilShadow (bool clearStencilBuffer = \fCfalse\fP, \fBvideo::SColor\fP leftUpEdge = \fC\fBvideo::SColor\fP(255, 0, 0, 0)\fP, \fBvideo::SColor\fP rightUpEdge = \fC\fBvideo::SColor\fP(255, 0, 0, 0)\fP, \fBvideo::SColor\fP leftDownEdge = \fC\fBvideo::SColor\fP(255, 0, 0, 0)\fP, \fBvideo::SColor\fP rightDownEdge = \fC\fBvideo::SColor\fP(255, 0, 0, 0)\fP)\fC [pure virtual]\fP"
+.PP
+Fills the stencil shadow with color. 
+.PP
+After the shadow volume has been drawn into the stencil buffer using \fBIVideoDriver::drawStencilShadowVolume()\fP, use this to draw the color of the shadow. Please note that the code for the opengl version of the method is based on free code sent in by Philipp Dortmann, lots of thanks go to him! 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIclearStencilBuffer,:\fP Set this to false, if you want to draw every shadow with the same color, and only want to call \fBdrawStencilShadow()\fP once after all shadow volumes have been drawn. Set this to true, if you want to paint every shadow with its own color. 
+.br
+\fIleftUpEdge,:\fP Color of the shadow in the upper left corner of screen. 
+.br
+\fIrightUpEdge,:\fP Color of the shadow in the upper right corner of screen. 
+.br
+\fIleftDownEdge,:\fP Color of the shadow in the lower left corner of screen. 
+.br
+\fIrightDownEdge,:\fP Color of the shadow in the lower right corner of screen. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::drawStencilShadowVolume (const \fBcore::vector3df\fP * triangles, s32 count, bool zfail = \fCtrue\fP)\fC [pure virtual]\fP"
+.PP
+Draws a shadow volume into the stencil buffer. 
+.PP
+To draw a stencil shadow, do this: Frist, draw all geometry. Then use this method, to draw the shadow volume. Then, use \fBIVideoDriver::drawStencilShadow()\fP to visualize the shadow. Please note that the code for the opengl version of the method is based on free code sent in by Philipp Dortmann, lots of thanks go to him! 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItriangles,:\fP Pointer to array of 3d vectors, specifing the shadow volume. 
+.br
+\fIcount,:\fP Amount of triangles in the array. 
+.br
+\fIzfail,:\fP If set to true, zfail method is used, otherwise zpass. 
+.RE
+.PP
+
+.SS "virtual bool engine::video::IVideoDriver::endScene (s32 windowId = \fC0\fP, \fBcore::rect\fP< s32 > * sourceRect = \fC0\fP)\fC [pure virtual]\fP"
+.PP
+Presents the rendered image on the screen. 
+.PP
+Applications must call this method after performing any rendering. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIwindowId,:\fP Handle of another window, if you want the bitmap to be displayed on another window. If this is null, everything will be displayed in the default window. Note: This does not work in fullscreen mode and is not implemented for all devices (only for D3D8, D3D9, Software1 and Software2, and only for Windows). 
+.br
+\fIsourceRect,:\fP Pointer to a rectangle defining the source rectangle of the area to be presented. Set to null to present everything. Note: not implemented in all devices. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns false if failed and true if succeeded. 
+.RE
+.PP
+
+.SS "virtual const \fBSLight\fP& engine::video::IVideoDriver::getDynamicLight (s32 idx)\fC [pure virtual]\fP"
+.PP
+Returns light data which was previously set with IVideDriver::addDynamicLight(). 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIidx,:\fP Zero based index of the light. Must be greater than 0 and smaller than IVideoDriver()getDynamicLightCount. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Light data. 
+.RE
+.PP
+
+.SS "virtual s32 engine::video::IVideoDriver::getDynamicLightCount ()\fC [pure virtual]\fP"
+.PP
+Returns current amount of dynamic lights set. 
+.PP
+\fBReturns:\fP
+.RS 4
+Current amount of dynamic lights set 
+.RE
+.PP
+
+.SS "virtual \fBSExposedVideoData\fP engine::video::IVideoDriver::getExposedVideoData ()\fC [pure virtual]\fP"
+.PP
+Returns driver and operating system specific data about the \fBIVideoDriver\fP. 
+.PP
+This method should only be used if the engine should be extended without having to modify the source of the engine. 
+.SS "virtual s32 engine::video::IVideoDriver::getFPS ()\fC [pure virtual]\fP"
+.PP
+Returns current frames per second value. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns amount of frames per second drawn. 
+.RE
+.PP
+
+.SS "virtual \fBIGPUProgrammingServices\fP* engine::video::IVideoDriver::getGPUProgrammingServices ()\fC [pure virtual]\fP"
+.PP
+Returns pointer to the \fBIGPUProgrammingServices\fP interface. 
+.PP
+Returns 0 if the videodriver does not support this. (For example the Software and the NULL device will always return 0) 
+.SS "virtual \fBIMaterialRenderer\fP* engine::video::IVideoDriver::getMaterialRenderer (s32 idx)\fC [pure virtual]\fP"
+.PP
+Returns pointer to material renderer or null if not existing. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIidx,:\fP Id of the material renderer. Can be a value of the E_MATERIAL_TYPE or a value which was returned by \fBaddMaterialRenderer()\fP. 
+.RE
+.PP
+
+.SS "virtual s32 engine::video::IVideoDriver::getMaximalDynamicLightAmount ()\fC [pure virtual]\fP"
+.PP
+Returns the maximal amount of dynamic lights the device can handle. 
+.PP
+\fBReturns:\fP
+.RS 4
+Maximal amount of dynamic lights. 
+.RE
+.PP
+
+.SS "virtual s32 engine::video::IVideoDriver::getMaximalPrimitiveCount ()\fC [pure virtual]\fP"
+.PP
+Returns the maximum amount of primitives. 
+.PP
+(mostly vertices) which the device is able to render with one drawIndexedTriangleList call. 
+.SS "virtual const wchar_t* engine::video::IVideoDriver::getName ()\fC [pure virtual]\fP"
+.PP
+Gets name of this video driver. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the name of the video driver. Example: In case of the Direct3D8 driver, it would return 'Direct3D 8.1'. 
+.RE
+.PP
+
+.SS "virtual u32 engine::video::IVideoDriver::getPrimitiveCountDrawn ()\fC [pure virtual]\fP"
+.PP
+Returns amount of primitives (mostly triangles) which were drawn in the last frame. 
+.PP
+Together with \fBgetFPS()\fP very useful method for statistics. 
+.PP
+\fBReturns:\fP
+.RS 4
+Amount of primitives drawn in the last frame. 
+.RE
+.PP
+
+.SS "virtual \fBcore::dimension2d\fP<s32> engine::video::IVideoDriver::getScreenSize ()\fC [pure virtual]\fP"
+.PP
+Returns the size of the screen or render window. 
+.PP
+\fBReturns:\fP
+.RS 4
+Size of screen or render window. 
+.RE
+.PP
+
+.SS "virtual \fBITexture\fP* engine::video::IVideoDriver::getTexture (\fBio::IReadFile\fP * file)\fC [pure virtual]\fP"
+.PP
+Returns a pointer to a texture. 
+.PP
+Loads the texture if it is not already loaded, and generates mipmap levels if wished. You can influence how the texture is loaded using the \fBsetTextureCreationFlag()\fP method. The texture can be in BMP, JPG, TGA, PCX, PNG and PSD format. For loading BMP, TGA, PCX, and PSD files, the engine uses its own methods. PCX loading is based on some code by Dean P. Macri, who sent it in for free use by the engine, PGN loading is done using a loader by rt who allowed it to be used by engine. For loading JPG-Files the JPEG LIB 6b, written by The Independent JPEG Group is used by the engine. For PNG loading, libPNG is used. Thanx for such great libraries! 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfile,:\fP Pointer to an already opened file. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the texture and NULL if the texture could not be loaded. This pointer should not be dropped. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual \fBITexture\fP* engine::video::IVideoDriver::getTexture (const c8 * filename)\fC [pure virtual]\fP"
+.PP
+Returns a pointer to a texture. 
+.PP
+Loads the texture if it is not already loaded, and generates mipmap levels if wished. You can influence how the texture is loaded using the \fBsetTextureCreationFlag()\fP method. The texture can be in BMP, JPG, TGA, PCX, PNG and PSD format. For loading BMP, TGA, PCX, and PSD files, the engine uses its own methods. PCX loading is based on some code by Dean P. Macri, who sent it in for free use by the engine, PGN loading is done using a loader by rt who allowed it to be used by engine. For loading JPG-Files the JPEG LIB 6b, written by The Independent JPEG Group is used by the engine. For PNG loading, libPNG is used. Thanx for such great libraries! 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfilename,:\fP Filename of the texture to be loaded. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the texture and NULL if the texture could not be loaded. This pointer should not be dropped. See \fBIUnknown::drop()\fP for more information. 
+.RE
+.PP
+
+.SS "virtual bool engine::video::IVideoDriver::getTextureCreationFlag (\fBE_TEXTURE_CREATION_FLAG\fP flag)\fC [pure virtual]\fP"
+.PP
+Returns if a texture creation flag is enabled or disabled. 
+.PP
+You can change this value using setTextureCreationMode(). 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIflag,:\fP Texture creation flag. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the current texture creation mode. 
+.RE
+.PP
+
+.SS "virtual const \fBcore::rect\fP<s32>& engine::video::IVideoDriver::getViewPort () const\fC [pure virtual]\fP"
+.PP
+Gets the area of the current viewport. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns rectangle of the current vieport. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::makeColorKeyTexture (\fBvideo::ITexture\fP * texture, \fBcore::position2d\fP< s32 > colorKeyPixelPos)\fC [pure virtual]\fP"
+.PP
+Creates an 1bit alpha channel of the texture based of an color key position. 
+.PP
+This makes the texture transparent at the regions where this color key can be found when using for example draw2DImage with useAlphachannel = true. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItexture,:\fP Texture of which its alpha channel is modified. 
+.br
+\fIcolorKeyPixelPos,:\fP Position of a pixel with the color key color. Every pixel with this color will get transparent like described above. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::makeColorKeyTexture (\fBvideo::ITexture\fP * texture, \fBvideo::SColor\fP color)\fC [pure virtual]\fP"
+.PP
+Creates an 1bit alpha channel of the texture based of an color key. 
+.PP
+This makes the texture transparent at the regions where this color key can be found when using for example draw2DImage with useAlphachannel = true. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItexture,:\fP Texture of which its alpha channel is modified. 
+.br
+\fIcolor,:\fP Color key color. Every pixel with this color will get transparent like described above. Please note that the colors of a texture may get converted when loading it, so the color values may not be exactly the same in the engine and for example in picture edit programs. To avoid this problem, you could use the makeColorKeyTexture method, which takes the position of a pixel instead a color value. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::makeNormalMapTexture (\fBvideo::ITexture\fP * texture, f32 amplitude = \fC1.0f\fP)\fC [pure virtual]\fP"
+.PP
+Creates a normal map from a height map texture. 
+.PP
+If the target texture has 32 bit, the height value is stored in the alpha component of the texture as addition. This value will be used by the \fBvideo::EMT_PARALLAX_MAP_SOLID\fP material and similar materials. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItexture,:\fP Texture of which its alpha channel is modified. 
+.br
+\fIamplitude,:\fP Constant value by which the height information is multiplied. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::OnResize (const \fBcore::dimension2d\fP< s32 > & size)\fC [pure virtual]\fP"
+.PP
+Only used by the internal engine. 
+.PP
+Used to notify the driver that the window was resized. Usually, there is no need to call this method. 
+.SS "virtual bool engine::video::IVideoDriver::queryFeature (\fBE_VIDEO_DRIVER_FEATURE\fP feature)\fC [pure virtual]\fP"
+.PP
+Queries the features of the driver. 
+.PP
+Returns true if a feature is available 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfeature,:\fP A feature to query. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if the feature is available, false if not. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::removeAllTextures ()\fC [pure virtual]\fP"
+.PP
+Removes all texture from the texture cache and deletes them, freeing lot of memory. 
+.PP
+Please note that after calling this, the pointer to all ITextures may not be longer valid, if they were not grabbed before by other parts of the engine for storing them longer. So it would be a good idea to set all materials which are using textures to null first. 
+.SS "virtual void engine::video::IVideoDriver::removeTexture (\fBITexture\fP * texture)\fC [pure virtual]\fP"
+.PP
+Removes a texture from the texture cache and deletes it, freeing lot of memory. 
+.PP
+Please note that after calling this, the pointer to the \fBITexture\fP may not be longer valid, if it was not grabbed before by other parts of the engine for storing it longer. So it would be a good idea to set all materials which are using this texture to null or another texture first. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItexture,:\fP Texture to delete from the engines cache. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::setAmbientLight (const \fBSColorf\fP & color)\fC [pure virtual]\fP"
+.PP
+Sets the dynamic ambient light color. 
+.PP
+The default color is (0,0,0,0) which means it is dark. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcolor,:\fP New color of the ambient light. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::setFog (\fBSColor\fP color = \fC\fBSColor\fP(0, 255, 255, 255)\fP, bool linearFog = \fCtrue\fP, f32 start = \fC50.0f\fP, f32 end = \fC100.0f\fP, f32 density = \fC0.01f\fP, bool pixelFog = \fCfalse\fP, bool rangeFog = \fCfalse\fP)\fC [pure virtual]\fP"
+.PP
+Sets the fog mode. 
+.PP
+These are global values attached to each 3d object rendered, which has the fog flag enabled in its material. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcolor,:\fP Color of the fog 
+.br
+\fIlinearFog,:\fP Set this to true for linear fog, otherwise exponential fog is applied. 
+.br
+\fIstart,:\fP Only used in linear fog mode (linearFog=true). Specifies where fog starts. 
+.br
+\fIend,:\fP Only used in linear fog mode (linearFog=true). Specifies where fog ends. 
+.br
+\fIdensity,:\fP Only used in expotential fog mode (linearFog=false). Must be a value between 0 and 1. 
+.br
+\fIpixelFog,:\fP Set this to false for vertex fog, and true if you want pixel fog. 
+.br
+\fIrangeFog,:\fP Set this to true to enable range-based vertex fog. The distance from the viewer is used to compute the fog, not the z-coordinate. This is better, but slower. This is only available with D3D and vertex fog. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::setMaterial (const \fBSMaterial\fP & material)\fC [pure virtual]\fP"
+.PP
+Sets a material. 
+.PP
+All 3d drawing functions draw geometry now using this material. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fImaterial,:\fP Material to be used from now on. 
+.RE
+.PP
+
+.SS "virtual bool engine::video::IVideoDriver::setRenderTarget (\fBvideo::ITexture\fP * texture, bool clearBackBuffer = \fCtrue\fP, bool clearZBuffer = \fCtrue\fP, \fBSColor\fP color = \fC\fBvideo::SColor\fP(0, 0, 0, 0)\fP)\fC [pure virtual]\fP"
+.PP
+Sets a new render target. 
+.PP
+This will only work if the driver supports the EVDF_RENDER_TO_TARGET feature, which can be queried with \fBqueryFeature()\fP. Usually, rendering to textures is done in this way: 
+.PP
+.nf
+               // create render target
+                ITexture* target = driver->createRenderTargetTexture(core::dimension2d<s32>(128,128);
+
+                // ...
+
+                driver->setRenderTarget(target); // set render target
+                // .. draw stuff here
+                driver->setRenderTarget(0);     // set previous render target
+                Please note that you cannot render 3D or 2D geometry with a render target as texture
+                on it when you are rendering the scene into this render target at the same time. It is 
+                usually only possible to render into a texture between the IVideoDriver::beginScene() and endScene()
+                method calls. And please also note that the scene will be rendered upside down into the texture 
+                in some devices (e.g. OpenGL vs. D3D). A simple workaround for this is to flip the
+                texture coordinates of the geometry where the render target texture is displayed on.
+
+.fi
+.PP
+ 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItexture,:\fP New render target. Must be a texture created with \fBIVideoDriver::createRenderTargetTexture()\fP. If set to 0, it sets the previous render target which was set before the last \fBsetRenderTarget()\fP call. 
+.br
+\fIclearBackBuffer,:\fP Clears the backbuffer of the render target with the color parameter 
+.br
+\fIclearZBuffer,:\fP Clears the zBuffer of the rendertarget. Note that, because the frame buffer shares the zbuffer with the rendertarget, its zbuffer will be partially cleared too with this. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if sucessful and false if not. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::setTextureCreationFlag (\fBE_TEXTURE_CREATION_FLAG\fP flag, bool enabled)\fC [pure virtual]\fP"
+.PP
+Enables or disables a texture creation flag. 
+.PP
+This flag defines how textures should be created. By changing this value, you can influence for example the speed of rendering a lot. But please note that the video drivers take this value only as recommendation. It could happen that you enable the ETCM_ALWAYS_16_BIT mode, but the driver creates 32 bit textures. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIflag,:\fP Texture creation flag. 
+.br
+\fIenbabled,:\fP Specifies if the given flag should be enabled or disabled. 
+.RE
+.PP
+
+.SS "virtual void engine::video::IVideoDriver::setViewPort (const \fBcore::rect\fP< s32 > & area)\fC [pure virtual]\fP"
+.PP
+Sets a new viewport. 
+.PP
+Every rendering operation is done into this new area. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIRectangle\fP defining the new area of rendering operations. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

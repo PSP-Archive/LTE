@@ -1,0 +1,53 @@
+.TH "engine::gui::IGUITab" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::gui::IGUITab \- A tab, onto which other gui elements could be added.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IGUITabControl.h>\fP
+.PP
+Inherits \fBengine::gui::IGUIElement\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBIGUITab\fP (\fBIGUIEnvironment\fP *environment, \fBIGUIElement\fP *parent, s32 id, \fBcore::rect\fP< s32 > rectangle)"
+.br
+.RI "\fIconstructor \fP"
+.ti -1c
+.RI "virtual \fB~IGUITab\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual s32 \fBgetNumber\fP ()=0"
+.br
+.RI "\fIReturns number of tab if in tabcontrol. \fP"
+.ti -1c
+.RI "virtual void \fBsetDrawBackground\fP (bool draw=true)=0"
+.br
+.RI "\fIsets if the tab should draw its background \fP"
+.ti -1c
+.RI "virtual void \fBsetBackgroundColor\fP (\fBvideo::SColor\fP c)=0"
+.br
+.RI "\fIsets the color of the background, if it should be drawn. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+A tab, onto which other gui elements could be added. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual s32 engine::gui::IGUITab::getNumber ()\fC [pure virtual]\fP"
+.PP
+Returns number of tab if in tabcontrol. 
+.PP
+Can be accessed later \fBIGUITabControl::getTab()\fP by this number. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

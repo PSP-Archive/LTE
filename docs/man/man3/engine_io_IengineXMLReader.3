@@ -1,0 +1,298 @@
+.TH "engine::io::IengineXMLReader" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::io::IengineXMLReader \- Interface providing easy read access to a XML file.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <engineXML.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~IengineXMLReader\fP ()"
+.br
+.RI "\fIDestructor. \fP"
+.ti -1c
+.RI "virtual bool \fBread\fP ()=0"
+.br
+.RI "\fIReads forward to the next xml node. \fP"
+.ti -1c
+.RI "virtual \fBEXML_NODE\fP \fBgetNodeType\fP () const =0"
+.br
+.RI "\fIReturns the type of the current XML node. \fP"
+.ti -1c
+.RI "virtual int \fBgetAttributeCount\fP () const =0"
+.br
+.RI "\fIReturns attribute count of the current XML node. \fP"
+.ti -1c
+.RI "virtual const char_type * \fBgetAttributeName\fP (int idx) const =0"
+.br
+.RI "\fIReturns name of an attribute. \fP"
+.ti -1c
+.RI "virtual const char_type * \fBgetAttributeValue\fP (int idx) const =0"
+.br
+.RI "\fIReturns the value of an attribute. \fP"
+.ti -1c
+.RI "virtual const char_type * \fBgetAttributeValue\fP (const char_type *name) const =0"
+.br
+.RI "\fIReturns the value of an attribute. \fP"
+.ti -1c
+.RI "virtual const char_type * \fBgetAttributeValueSafe\fP (const char_type *name) const =0"
+.br
+.RI "\fIReturns the value of an attribute in a safe way. \fP"
+.ti -1c
+.RI "virtual int \fBgetAttributeValueAsInt\fP (const char_type *name) const =0"
+.br
+.RI "\fIReturns the value of an attribute as integer. \fP"
+.ti -1c
+.RI "virtual int \fBgetAttributeValueAsInt\fP (int idx) const =0"
+.br
+.RI "\fIReturns the value of an attribute as integer. \fP"
+.ti -1c
+.RI "virtual float \fBgetAttributeValueAsFloat\fP (const char_type *name) const =0"
+.br
+.RI "\fIReturns the value of an attribute as float. \fP"
+.ti -1c
+.RI "virtual float \fBgetAttributeValueAsFloat\fP (int idx) const =0"
+.br
+.RI "\fIReturns the value of an attribute as float. \fP"
+.ti -1c
+.RI "virtual const char_type * \fBgetNodeName\fP () const =0"
+.br
+.RI "\fIReturns the name of the current node. \fP"
+.ti -1c
+.RI "virtual const char_type * \fBgetNodeData\fP () const =0"
+.br
+.RI "\fIReturns data of the current node. \fP"
+.ti -1c
+.RI "virtual bool \fBisEmptyElement\fP () const =0"
+.br
+.RI "\fIReturns if an element is an empty element, like <foo>. \fP"
+.ti -1c
+.RI "virtual \fBETEXT_FORMAT\fP \fBgetSourceFormat\fP () const =0"
+.br
+.RI "\fIReturns format of the source xml file. \fP"
+.ti -1c
+.RI "virtual \fBETEXT_FORMAT\fP \fBgetParserFormat\fP () const =0"
+.br
+.RI "\fIReturns format of the strings returned by the parser. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<class char_type, class super_class> class engine::io::IengineXMLReader< char_type, super_class >"
+Interface providing easy read access to a XML file. 
+
+You can create an instance of this reader using one of the factory functions \fBcreateengineXMLReader()\fP, \fBcreateengineXMLReaderUTF16()\fP and \fBcreateengineXMLReaderUTF32()\fP. If using the parser from the engine Engine, please use \fBIFileSystem::createXMLReader()\fP instead. For a detailed intro how to use the parser, see \fBenginexmlexample\fP and \fBfeatures\fP.
+.PP
+The typical usage of this parser looks like this: 
+.PP
+.nf
+        #include <engineXML.h>
+        using namespace engine; // engineXML is located in the namespace engine::io
+        using namespace io;
+
+        void main()
+        {
+                // create the reader using one of the factory functions
+                engineXMLReader* xml = createengineXMLReader('config.xml');
+
+                if (xml == 0)
+                        return; // file could not be opened
+
+                // parse the file until end reached
+                while(xml->read())
+                {
+                        // based on xml->getNodeType(), do something.
+                }
+
+                // delete the xml parser after usage
+                delete xml;
+        }
+
+.fi
+.PP
+ See \fBenginexmlexample\fP for a more detailed example. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class char_type, class super_class> virtual int \fBengine::io::IengineXMLReader\fP< char_type, super_class >::getAttributeCount () const\fC [pure virtual]\fP"
+.PP
+Returns attribute count of the current XML node. 
+.PP
+This is usually non null if the current node is EXN_ELEMENT, and the element has attributes. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns amount of attributes of this xml node. 
+.RE
+.PP
+
+.SS "template<class char_type, class super_class> virtual const char_type* \fBengine::io::IengineXMLReader\fP< char_type, super_class >::getAttributeName (int idx) const\fC [pure virtual]\fP"
+.PP
+Returns name of an attribute. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIidx,:\fP Zero based index, should be something between 0 and \fBgetAttributeCount()\fP-1. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Name of the attribute, 0 if an attribute with this index does not exist. 
+.RE
+.PP
+
+.SS "template<class char_type, class super_class> virtual const char_type* \fBengine::io::IengineXMLReader\fP< char_type, super_class >::getAttributeValue (const char_type * name) const\fC [pure virtual]\fP"
+.PP
+Returns the value of an attribute. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIname,:\fP Name of the attribute. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Value of the attribute, 0 if an attribute with this name does not exist. 
+.RE
+.PP
+
+.SS "template<class char_type, class super_class> virtual const char_type* \fBengine::io::IengineXMLReader\fP< char_type, super_class >::getAttributeValue (int idx) const\fC [pure virtual]\fP"
+.PP
+Returns the value of an attribute. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIidx,:\fP Zero based index, should be something between 0 and \fBgetAttributeCount()\fP-1. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Value of the attribute, 0 if an attribute with this index does not exist. 
+.RE
+.PP
+
+.SS "template<class char_type, class super_class> virtual float \fBengine::io::IengineXMLReader\fP< char_type, super_class >::getAttributeValueAsFloat (int idx) const\fC [pure virtual]\fP"
+.PP
+Returns the value of an attribute as float. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIidx,:\fP Zero based index, should be something between 0 and \fBgetAttributeCount()\fP-1. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Value of the attribute as float, and 0 if an attribute with this index does not exist or the value could not be interpreted as float. 
+.RE
+.PP
+
+.SS "template<class char_type, class super_class> virtual float \fBengine::io::IengineXMLReader\fP< char_type, super_class >::getAttributeValueAsFloat (const char_type * name) const\fC [pure virtual]\fP"
+.PP
+Returns the value of an attribute as float. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIname,:\fP Name of the attribute. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Value of the attribute as float, and 0 if an attribute with this name does not exist or the value could not be interpreted as float. 
+.RE
+.PP
+
+.SS "template<class char_type, class super_class> virtual int \fBengine::io::IengineXMLReader\fP< char_type, super_class >::getAttributeValueAsInt (int idx) const\fC [pure virtual]\fP"
+.PP
+Returns the value of an attribute as integer. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIidx,:\fP Zero based index, should be something between 0 and \fBgetAttributeCount()\fP-1. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Value of the attribute as integer, and 0 if an attribute with this index does not exist or the value could not be interpreted as integer. 
+.RE
+.PP
+
+.SS "template<class char_type, class super_class> virtual int \fBengine::io::IengineXMLReader\fP< char_type, super_class >::getAttributeValueAsInt (const char_type * name) const\fC [pure virtual]\fP"
+.PP
+Returns the value of an attribute as integer. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIname\fP Name of the attribute. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Value of the attribute as integer, and 0 if an attribute with this name does not exist or the value could not be interpreted as integer. 
+.RE
+.PP
+
+.SS "template<class char_type, class super_class> virtual const char_type* \fBengine::io::IengineXMLReader\fP< char_type, super_class >::getAttributeValueSafe (const char_type * name) const\fC [pure virtual]\fP"
+.PP
+Returns the value of an attribute in a safe way. 
+.PP
+Like \fBgetAttributeValue()\fP, but does not return 0 if the attribute does not exist. An empty string ('') is returned then. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIname,:\fP Name of the attribute. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Value of the attribute, and '' if an attribute with this name does not exist 
+.RE
+.PP
+
+.SS "template<class char_type, class super_class> virtual const char_type* \fBengine::io::IengineXMLReader\fP< char_type, super_class >::getNodeData () const\fC [pure virtual]\fP"
+.PP
+Returns data of the current node. 
+.PP
+Only non null if the node has some data and it is of type EXN_TEXT or EXN_UNKNOWN. 
+.SS "template<class char_type, class super_class> virtual const char_type* \fBengine::io::IengineXMLReader\fP< char_type, super_class >::getNodeName () const\fC [pure virtual]\fP"
+.PP
+Returns the name of the current node. 
+.PP
+Only non null, if the node type is EXN_ELEMENT. 
+.PP
+\fBReturns:\fP
+.RS 4
+Name of the current node or 0 if the node has no name. 
+.RE
+.PP
+
+.SS "template<class char_type, class super_class> virtual \fBETEXT_FORMAT\fP \fBengine::io::IengineXMLReader\fP< char_type, super_class >::getParserFormat () const\fC [pure virtual]\fP"
+.PP
+Returns format of the strings returned by the parser. 
+.PP
+This will be UTF8 for example when you created a parser with engineXMLReaderUTF8() and UTF32 when it has been created using engineXMLReaderUTF32. It should not be necessary to call this method and only exists for informational purposes. 
+.SS "template<class char_type, class super_class> virtual \fBETEXT_FORMAT\fP \fBengine::io::IengineXMLReader\fP< char_type, super_class >::getSourceFormat () const\fC [pure virtual]\fP"
+.PP
+Returns format of the source xml file. 
+.PP
+It is not necessary to use this method because the parser will convert the input file format to the format wanted by the user when creating the parser. This method is useful to get/display additional informations. 
+.SS "template<class char_type, class super_class> virtual bool \fBengine::io::IengineXMLReader\fP< char_type, super_class >::read ()\fC [pure virtual]\fP"
+.PP
+Reads forward to the next xml node. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns false, if there was no further node. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

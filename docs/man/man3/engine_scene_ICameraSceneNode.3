@@ -1,0 +1,296 @@
+.TH "engine::scene::ICameraSceneNode" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::ICameraSceneNode \- Scene Node which is a (controlable) camera.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ICameraSceneNode.h>\fP
+.PP
+Inherits \fBengine::scene::ISceneNode\fP, and \fBengine::IEventReceiver\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBICameraSceneNode\fP (\fBISceneNode\fP *parent, \fBISceneManager\fP *mgr, s32 id, const \fBcore::vector3df\fP &position=\fBcore::vector3df\fP(0, 0, 0), const \fBcore::vector3df\fP &rotation=\fBcore::vector3df\fP(0, 0, 0), const \fBcore::vector3df\fP &scale=\fBcore::vector3df\fP(1.0f, 1.0f, 1.0f))"
+.br
+.RI "\fIConstructor. \fP"
+.ti -1c
+.RI "virtual \fB~ICameraSceneNode\fP ()"
+.br
+.RI "\fIDestructor. \fP"
+.ti -1c
+.RI "virtual void \fBsetProjectionMatrix\fP (const \fBcore::matrix4\fP &projection)=0"
+.br
+.RI "\fISets the projection matrix of the camera. \fP"
+.ti -1c
+.RI "virtual const \fBcore::matrix4\fP & \fBgetProjectionMatrix\fP ()=0"
+.br
+.RI "\fIGets the current projection matrix of the camera. \fP"
+.ti -1c
+.RI "virtual const \fBcore::matrix4\fP & \fBgetViewMatrix\fP ()=0"
+.br
+.RI "\fIGets the current view matrix of the camera. \fP"
+.ti -1c
+.RI "virtual bool \fBOnEvent\fP (\fBSEvent\fP event)=0"
+.br
+.RI "\fIIt is possible to send mouse and key events to the camera. \fP"
+.ti -1c
+.RI "virtual void \fBsetTarget\fP (const \fBcore::vector3df\fP &pos)=0"
+.br
+.RI "\fISets the look at target of the camera. \fP"
+.ti -1c
+.RI "virtual \fBcore::vector3df\fP \fBgetTarget\fP () const =0"
+.br
+.RI "\fIGets the current look at target of the camera. \fP"
+.ti -1c
+.RI "virtual void \fBsetUpVector\fP (const \fBcore::vector3df\fP &pos)=0"
+.br
+.RI "\fISets the up vector of the camera. \fP"
+.ti -1c
+.RI "virtual \fBcore::vector3df\fP \fBgetUpVector\fP () const =0"
+.br
+.RI "\fIGets the up vector of the camera. \fP"
+.ti -1c
+.RI "virtual f32 \fBgetNearValue\fP ()=0"
+.br
+.ti -1c
+.RI "virtual f32 \fBgetFarValue\fP ()=0"
+.br
+.ti -1c
+.RI "virtual f32 \fBgetAspectRatio\fP ()=0"
+.br
+.ti -1c
+.RI "virtual f32 \fBgetFOV\fP ()=0"
+.br
+.ti -1c
+.RI "virtual void \fBsetNearValue\fP (f32 zn)=0"
+.br
+.RI "\fISets the value of the near clipping plane. (default: 1.0f). \fP"
+.ti -1c
+.RI "virtual void \fBsetFarValue\fP (f32 zf)=0"
+.br
+.RI "\fISets the value of the far clipping plane (default: 2000.0f). \fP"
+.ti -1c
+.RI "virtual void \fBsetAspectRatio\fP (f32 aspect)=0"
+.br
+.RI "\fISets the aspect ratio (default: 4.0f / 3.0f). \fP"
+.ti -1c
+.RI "virtual void \fBsetFOV\fP (f32 fovy)=0"
+.br
+.RI "\fISets the field of view (Default: PI / 2.5f). \fP"
+.ti -1c
+.RI "virtual const \fBSViewFrustrum\fP * \fBgetViewFrustrum\fP ()=0"
+.br
+.RI "\fIReturns the view frustrum. \fP"
+.ti -1c
+.RI "virtual void \fBsetInputReceiverEnabled\fP (bool enabled)=0"
+.br
+.RI "\fIDisables or enables the camera to get key or mouse inputs. \fP"
+.ti -1c
+.RI "virtual bool \fBisInputReceiverEnabled\fP ()=0"
+.br
+.RI "\fIReturns if the input receiver of the camera is currently enabled. \fP"
+.ti -1c
+.RI "virtual bool \fBisOrthogonal\fP ()"
+.br
+.RI "\fIReturns if a camera is orthogonal. \fP"
+.ti -1c
+.RI "void \fBsetIsOrthogonal\fP (bool orthogonal)"
+.br
+.RI "\fISets if this camera should return if it is orthogonal. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Scene Node which is a (controlable) camera. 
+
+The whole scene will be rendered from the cameras point of view. Because the ICameraScenNode is a SceneNode, it can be attached to any other scene node, and will follow its parents movement, rotation and so on. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual f32 engine::scene::ICameraSceneNode::getAspectRatio ()\fC [pure virtual]\fP"
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the aspect ratio of the camera. 
+.RE
+.PP
+
+.SS "virtual f32 engine::scene::ICameraSceneNode::getFarValue ()\fC [pure virtual]\fP"
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the value of the far plane of the camera. 
+.RE
+.PP
+
+.SS "virtual f32 engine::scene::ICameraSceneNode::getFOV ()\fC [pure virtual]\fP"
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the field of view of the camera in radiants. 
+.RE
+.PP
+
+.SS "virtual f32 engine::scene::ICameraSceneNode::getNearValue ()\fC [pure virtual]\fP"
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the value of the near plane of the camera. 
+.RE
+.PP
+
+.SS "virtual const \fBcore::matrix4\fP& engine::scene::ICameraSceneNode::getProjectionMatrix ()\fC [pure virtual]\fP"
+.PP
+Gets the current projection matrix of the camera. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the current projection matrix of the camera. 
+.RE
+.PP
+
+.SS "virtual \fBcore::vector3df\fP engine::scene::ICameraSceneNode::getTarget () const\fC [pure virtual]\fP"
+.PP
+Gets the current look at target of the camera. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the current look at target of the camera 
+.RE
+.PP
+
+.SS "virtual \fBcore::vector3df\fP engine::scene::ICameraSceneNode::getUpVector () const\fC [pure virtual]\fP"
+.PP
+Gets the up vector of the camera. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the up vector of the camera. 
+.RE
+.PP
+
+.SS "virtual const \fBSViewFrustrum\fP* engine::scene::ICameraSceneNode::getViewFrustrum ()\fC [pure virtual]\fP"
+.PP
+Returns the view frustrum. 
+.PP
+Needed sometimes by bspTree or LOD render nodes. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the current view frustrum. 
+.RE
+.PP
+
+.SS "virtual const \fBcore::matrix4\fP& engine::scene::ICameraSceneNode::getViewMatrix ()\fC [pure virtual]\fP"
+.PP
+Gets the current view matrix of the camera. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the current view matrix of the camera. 
+.RE
+.PP
+
+.SS "virtual bool engine::scene::ICameraSceneNode::isOrthogonal ()\fC [inline, virtual]\fP"
+.PP
+Returns if a camera is orthogonal. 
+.PP
+This setting does not change anything of the view or projection matrix. However it influences how collision detection and picking is done with this camera. 
+.SS "virtual bool engine::scene::ICameraSceneNode::OnEvent (\fBSEvent\fP event)\fC [pure virtual]\fP"
+.PP
+It is possible to send mouse and key events to the camera. 
+.PP
+Most cameras may ignore this input, but camera scene nodes which are created for example with ISceneManager::addMayaCameraSceneNode or ISceneManager::addMeshViewerCameraSceneNode, may want to get this input for changing their position, look at target or whatever. 
+.PP
+Implements \fBengine::IEventReceiver\fP.
+.SS "virtual void engine::scene::ICameraSceneNode::setAspectRatio (f32 aspect)\fC [pure virtual]\fP"
+.PP
+Sets the aspect ratio (default: 4.0f / 3.0f). 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIaspect,:\fP New aspect ratio. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::ICameraSceneNode::setFarValue (f32 zf)\fC [pure virtual]\fP"
+.PP
+Sets the value of the far clipping plane (default: 2000.0f). 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIzf,:\fP New z far value. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::ICameraSceneNode::setFOV (f32 fovy)\fC [pure virtual]\fP"
+.PP
+Sets the field of view (Default: PI / 2.5f). 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfovy,:\fP New field of view in radiants. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::ICameraSceneNode::setInputReceiverEnabled (bool enabled)\fC [pure virtual]\fP"
+.PP
+Disables or enables the camera to get key or mouse inputs. 
+.PP
+If this is set to true, the camera will respond to key inputs otherwise not. 
+.SS "void engine::scene::ICameraSceneNode::setIsOrthogonal (bool orthogonal)\fC [inline]\fP"
+.PP
+Sets if this camera should return if it is orthogonal. 
+.PP
+This setting does not change anything of the view or projection matrix. However it influences how collision detection and picking is done with this camera. 
+.SS "virtual void engine::scene::ICameraSceneNode::setNearValue (f32 zn)\fC [pure virtual]\fP"
+.PP
+Sets the value of the near clipping plane. (default: 1.0f). 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIzn,:\fP New z near value. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::ICameraSceneNode::setProjectionMatrix (const \fBcore::matrix4\fP & projection)\fC [pure virtual]\fP"
+.PP
+Sets the projection matrix of the camera. 
+.PP
+The \fBcore::matrix4\fP class has some methods to build a projection matrix. e.g: \fBcore::matrix4::buildProjectionMatrixPerspectiveFovLH\fP. Note that the matrix will only stay as set by this method until one of the following Methods are called: setNearValue, setFarValue, setAspectRatio, setFOV. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIprojection,:\fP The new projection matrix of the camera. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::ICameraSceneNode::setTarget (const \fBcore::vector3df\fP & pos)\fC [pure virtual]\fP"
+.PP
+Sets the look at target of the camera. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpos,:\fP Look at target of the camera. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::ICameraSceneNode::setUpVector (const \fBcore::vector3df\fP & pos)\fC [pure virtual]\fP"
+.PP
+Sets the up vector of the camera. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpos,:\fP New upvector of the camera. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

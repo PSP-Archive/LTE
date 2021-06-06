@@ -1,0 +1,234 @@
+.TH "engine::core::aabbox3d" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::core::aabbox3d \- Axis aligned bounding box in 3d dimensional space.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <aabbox3d.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBaddInternalPoint\fP (const \fBvector3d\fP< T > &p)"
+.br
+.ti -1c
+.RI "void \fBaddInternalBox\fP (const \fBaabbox3d\fP< T > &b)"
+.br
+.ti -1c
+.RI "void \fBreset\fP (T x, T y, T z)"
+.br
+.RI "\fIResets the bounding box. \fP"
+.ti -1c
+.RI "void \fBreset\fP (const \fBaabbox3d\fP< T > &initValue)"
+.br
+.RI "\fIResets the bounding box. \fP"
+.ti -1c
+.RI "void \fBreset\fP (const \fBvector3d\fP< T > &initValue)"
+.br
+.RI "\fIResets the bounding box. \fP"
+.ti -1c
+.RI "void \fBaddInternalPoint\fP (T x, T y, T z)"
+.br
+.ti -1c
+.RI "bool \fBisPointInside\fP (const \fBvector3d\fP< T > &p) const "
+.br
+.ti -1c
+.RI "bool \fBisPointTotalInside\fP (const \fBvector3d\fP< T > &p) const "
+.br
+.ti -1c
+.RI "bool \fBintersectsWithBox\fP (const \fBaabbox3d\fP< T > &other) const "
+.br
+.ti -1c
+.RI "bool \fBintersectsWithLine\fP (const \fBline3d\fP< T > &line) const "
+.br
+.ti -1c
+.RI "bool \fBintersectsWithLine\fP (const \fBvector3d\fP< T > &linemiddle, const \fBvector3d\fP< T > &linevect, T halflength) const "
+.br
+.ti -1c
+.RI "\fBEIntersectionRelation3D\fP \fBclassifyPlaneRelation\fP (const \fBplane3d\fP< f32 > &plane) const "
+.br
+.ti -1c
+.RI "\fBvector3d\fP< T > \fBgetCenter\fP () const "
+.br
+.RI "\fIreturns center of the bounding box \fP"
+.ti -1c
+.RI "\fBvector3d\fP< T > \fBgetExtent\fP () const "
+.br
+.RI "\fIreturns extend of the box \fP"
+.ti -1c
+.RI "void \fBgetEdges\fP (\fBvector3d\fP< T > *edges) const "
+.br
+.ti -1c
+.RI "bool \fBisEmpty\fP () const "
+.br
+.ti -1c
+.RI "void \fBrepair\fP ()"
+.br
+.RI "\fIrepairs the box, if for example MinEdge and MaxEdge are swapped. \fP"
+.ti -1c
+.RI "\fBaabbox3d\fP< T > \fBgetInterpolated\fP (const \fBaabbox3d\fP< T > &other, f32 d) const "
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<class T> class engine::core::aabbox3d< T >"
+Axis aligned bounding box in 3d dimensional space. 
+
+Has some useful methods used with occlusion culling or clipping. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class T> void \fBengine::core::aabbox3d\fP< T >::addInternalBox (const \fBaabbox3d\fP< T > & b)\fC [inline]\fP"
+.PP
+Adds an other bounding box to the bounding box, causing it to grow bigger, if the box is outside of the box 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIb,:\fP Other bounding box to add into this box. 
+.RE
+.PP
+
+.SS "template<class T> void \fBengine::core::aabbox3d\fP< T >::addInternalPoint (T x, T y, T z)\fC [inline]\fP"
+.PP
+Adds a point to the bounding box, causing it to grow bigger, if point is outside of the box. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIx,:\fP X Coordinate of the point to add to this box. 
+.br
+\fIy,:\fP Y Coordinate of the point to add to this box. 
+.br
+\fIz,:\fP Z Coordinate of the point to add to this box. 
+.RE
+.PP
+
+.SS "template<class T> void \fBengine::core::aabbox3d\fP< T >::addInternalPoint (const \fBvector3d\fP< T > & p)\fC [inline]\fP"
+.PP
+Adds a point to the bounding box, causing it to grow bigger, if point is outside of the box 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIp,:\fP Point to add into the box. 
+.RE
+.PP
+
+.SS "template<class T> \fBEIntersectionRelation3D\fP \fBengine::core::aabbox3d\fP< T >::classifyPlaneRelation (const \fBplane3d\fP< f32 > & plane) const\fC [inline]\fP"
+.PP
+Classifies a relation with a plane. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIplane,:\fP Plane to classify relation to. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns ISREL3D_FRONT if the box is in front of the plane, ISREL3D_BACK if the box is back of the plane, and ISREL3D_CLIPPED if is on both sides of the plane. 
+.RE
+.PP
+
+.SS "template<class T> void \fBengine::core::aabbox3d\fP< T >::getEdges (\fBvector3d\fP< T > * edges) const\fC [inline]\fP"
+.PP
+stores all 8 edges of the box into a array 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIedges,:\fP Pointer to array of 8 edges 
+.RE
+.PP
+
+.SS "template<class T> \fBaabbox3d\fP<T> \fBengine::core::aabbox3d\fP< T >::getInterpolated (const \fBaabbox3d\fP< T > & other, f32 d) const\fC [inline]\fP"
+.PP
+Calculates a new interpolated bounding box. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother,:\fP other box to interpolate between 
+.br
+\fId,:\fP value between 0.0f and 1.0f. 
+.RE
+.PP
+
+.SS "template<class T> bool \fBengine::core::aabbox3d\fP< T >::intersectsWithBox (const \fBaabbox3d\fP< T > & other) const\fC [inline]\fP"
+.PP
+Determinates if the box intersects with an other box. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother,:\fP Other box to check a intersection with. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if there is a intersection with the other box, otherwise false. 
+.RE
+.PP
+
+.SS "template<class T> bool \fBengine::core::aabbox3d\fP< T >::intersectsWithLine (const \fBvector3d\fP< T > & linemiddle, const \fBvector3d\fP< T > & linevect, T halflength) const\fC [inline]\fP"
+.PP
+Tests if the box intersects with a line 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if there is an intersection and false if not. 
+.RE
+.PP
+
+.SS "template<class T> bool \fBengine::core::aabbox3d\fP< T >::intersectsWithLine (const \fBline3d\fP< T > & line) const\fC [inline]\fP"
+.PP
+Tests if the box intersects with a line 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIline,:\fP Line to test intersection with. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if there is an intersection and false if not. 
+.RE
+.PP
+
+.SS "template<class T> bool \fBengine::core::aabbox3d\fP< T >::isEmpty () const\fC [inline]\fP"
+.PP
+returns if the box is empty, which means that there is no space within the min and the max edge. 
+.SS "template<class T> bool \fBengine::core::aabbox3d\fP< T >::isPointInside (const \fBvector3d\fP< T > & p) const\fC [inline]\fP"
+.PP
+Determinates if a point is within this box. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIp,:\fP Point to check. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if the point is withing the box, and false if it is not. 
+.RE
+.PP
+
+.SS "template<class T> bool \fBengine::core::aabbox3d\fP< T >::isPointTotalInside (const \fBvector3d\fP< T > & p) const\fC [inline]\fP"
+.PP
+Determinates if a point is within this box and its borders. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIp,:\fP Point to check. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if the point is withing the box, and false if it is not. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

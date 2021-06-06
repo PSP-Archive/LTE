@@ -1,0 +1,117 @@
+.TH "engine::core::vector2d" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::core::vector2d \- 2d vector template class with lots of operators and methods.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <vector2d.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "f32 \fBgetLength\fP () const "
+.br
+.ti -1c
+.RI "T \fBdotProduct\fP (const \fBvector2d\fP< T > &other) const "
+.br
+.RI "\fIReturns the dot product of this vector with an other. \fP"
+.ti -1c
+.RI "f32 \fBgetDistanceFrom\fP (const \fBvector2d\fP< T > &other) const "
+.br
+.ti -1c
+.RI "void \fBrotateBy\fP (f32 degrees, const \fBvector2d\fP< T > &center)"
+.br
+.RI "\fIrotates the point around a center by an amount of degrees. \fP"
+.ti -1c
+.RI "\fBvector2d\fP< T > & \fBnormalize\fP ()"
+.br
+.RI "\fInormalizes the vector. \fP"
+.ti -1c
+.RI "f32 \fBgetAngleTrig\fP () const "
+.br
+.ti -1c
+.RI "f32 \fBgetAngle\fP () const "
+.br
+.ti -1c
+.RI "f32 \fBgetAngleWith\fP (const \fBvector2d\fP< T > &b) const "
+.br
+.ti -1c
+.RI "\fBvector2d\fP< T > \fBgetInterpolated\fP (const \fBvector2d\fP< T > &other, f32 d) const "
+.br
+.ti -1c
+.RI "void \fBinterpolate\fP (const \fBvector2d\fP< T > &a, const \fBvector2d\fP< T > &b, const f32 t)"
+.br
+.RI "\fIsets this vector to the interpolated vector between a and b. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<class T> class engine::core::vector2d< T >"
+2d vector template class with lots of operators and methods. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class T> f32 \fBengine::core::vector2d\fP< T >::getAngle () const\fC [inline]\fP"
+.PP
+Calculates the angle of this vector in grad in the counter trigonometric sense. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a value between 0 and 360. 
+.RE
+.PP
+
+.SS "template<class T> f32 \fBengine::core::vector2d\fP< T >::getAngleTrig () const\fC [inline]\fP"
+.PP
+Calculates the angle of this vector in grad in the trigonometric sense. This method has been suggested by Pr3t3nd3r. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a value between 0 and 360. 
+.RE
+.PP
+
+.SS "template<class T> f32 \fBengine::core::vector2d\fP< T >::getAngleWith (const \fBvector2d\fP< T > & b) const\fC [inline]\fP"
+.PP
+Calculates the angle between this vector and another one in grad. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a value between 0 and 90. 
+.RE
+.PP
+
+.SS "template<class T> f32 \fBengine::core::vector2d\fP< T >::getDistanceFrom (const \fBvector2d\fP< T > & other) const\fC [inline]\fP"
+.PP
+Returns distance from an other point. Here, the vector is interpreted as point in 2 dimensional space. 
+.SS "template<class T> \fBvector2d\fP<T> \fBengine::core::vector2d\fP< T >::getInterpolated (const \fBvector2d\fP< T > & other, f32 d) const\fC [inline]\fP"
+.PP
+returns interpolated vector 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother,:\fP other vector to interpolate between 
+.br
+\fId,:\fP value between 0.0f and 1.0f. 
+.RE
+.PP
+
+.SS "template<class T> f32 \fBengine::core::vector2d\fP< T >::getLength () const\fC [inline]\fP"
+.PP
+Returns the length of the vector 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the length of the vector. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

@@ -1,0 +1,500 @@
+.TH "engine::video" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::video \- The video namespace contains classes for accessing the video driver. All 2d and 3d rendering is done here.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBIGPUProgrammingServices\fP"
+.br
+.RI "\fIInterface making it possible to create and use programs running on the GPU. \fP"
+.ti -1c
+.RI "class \fBIImage\fP"
+.br
+.RI "\fIInterface for software image data. \fP"
+.ti -1c
+.RI "class \fBIImageLoader\fP"
+.br
+.RI "\fIClass which is able to create a image from a file. \fP"
+.ti -1c
+.RI "class \fBIMaterialRenderer\fP"
+.br
+.RI "\fIInterface for material rendering. Can be used to extend the engine with new materials. \fP"
+.ti -1c
+.RI "class \fBIMaterialRendererServices\fP"
+.br
+.RI "\fIInterface providing some methods for changing advanced, internal states of a \fBIVideoDriver\fP. \fP"
+.ti -1c
+.RI "class \fBIShaderConstantSetCallBack\fP"
+.br
+.RI "\fIInterface making it possible to set constants for gpu programs every frame. \fP"
+.ti -1c
+.RI "class \fBITexture\fP"
+.br
+.RI "\fIInterface for a Video Driver dependent Texture. \fP"
+.ti -1c
+.RI "class \fBIVideoDriver\fP"
+.br
+.RI "\fIInterface to driver which is able to perform 2d and 3d gfx functions. \fP"
+.ti -1c
+.RI "class \fBIVideoModeList\fP"
+.br
+.RI "\fIA list of all available video modes. \fP"
+.ti -1c
+.RI "struct \fBS3DVertex\fP"
+.br
+.RI "\fIstandard vertex used by the engine engine. \fP"
+.ti -1c
+.RI "struct \fBS3DVertex2TCoords\fP"
+.br
+.RI "\fIVertex with two texture coordinates. \fP"
+.ti -1c
+.RI "struct \fBS3DVertexTangents\fP"
+.br
+.RI "\fIVertex with a tangent and binormal vector. \fP"
+.ti -1c
+.RI "class \fBSColor\fP"
+.br
+.RI "\fIClass representing a 32 bit ARGB color. \fP"
+.ti -1c
+.RI "class \fBSColorf\fP"
+.br
+.RI "\fIClass representing a color with four floats. \fP"
+.ti -1c
+.RI "struct \fBSExposedVideoData\fP"
+.br
+.RI "\fIstructure for holding data describing a driver and operating system specific data. \fP"
+.ti -1c
+.RI "struct \fBSLight\fP"
+.br
+.RI "\fIstructure for holding data describing a dynamic point light. \fP"
+.ti -1c
+.RI "struct \fBSMaterial\fP"
+.br
+.RI "\fIstruct for holding a material \fP"
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBE_DRIVER_TYPE\fP "
+.br
+.RI "\fIUnused. \fP"
+.ti -1c
+.RI "enum \fBE_VERTEX_SHADER_TYPE\fP { , \fBEVST_COUNT\fP }"
+.br
+.RI "\fICompile target enumeration for the addHighLevelShaderMaterial() method. \fP"
+.ti -1c
+.RI "enum \fBE_PIXEL_SHADER_TYPE\fP { , \fBEPST_COUNT\fP }"
+.br
+.RI "\fICompile target enumeration for the addHighLevelShaderMaterial() method. \fP"
+.ti -1c
+.RI "enum \fBECOLOR_FORMAT\fP { \fBECF_A1R5G5B5\fP =  0, \fBECF_R5G6B5\fP, \fBECF_R8G8B8\fP, \fBECF_A8R8G8B8\fP }"
+.br
+.RI "\fIAn enum for the color format of textures used by the engine Engine. \fP"
+.ti -1c
+.RI "enum \fBE_TEXTURE_CREATION_FLAG\fP { \fBETCF_ALWAYS_16_BIT\fP =  0x00000001, \fBETCF_ALWAYS_32_BIT\fP =  0x00000002, \fBETCF_OPTIMIZED_FOR_QUALITY\fP =  0x00000004, \fBETCF_OPTIMIZED_FOR_SPEED\fP =  0x00000008, \fBETCF_CREATE_MIP_MAPS\fP =  0x00000010, \fBETCF_FORCE_32_BIT_DO_NOT_USE\fP =  0x7fffffff }"
+.br
+.ti -1c
+.RI "enum \fBE_VIDEO_DRIVER_FEATURE\fP { \fBEVDF_RENDER_TO_TARGET\fP =  0, \fBEVDF_BILINEAR_FILTER\fP, \fBEVDF_HARDWARE_TL\fP, \fBEVDF_MIP_MAP\fP, \fBEVDF_STENCIL_BUFFER\fP, \fBEVDF_VERTEX_SHADER_1_1\fP, \fBEVDF_VERTEX_SHADER_2_0\fP, \fBEVDF_VERTEX_SHADER_3_0\fP, \fBEVDF_PIXEL_SHADER_1_1\fP, \fBEVDF_PIXEL_SHADER_1_2\fP, \fBEVDF_PIXEL_SHADER_1_3\fP, \fBEVDF_PIXEL_SHADER_1_4\fP, \fBEVDF_PIXEL_SHADER_2_0\fP, \fBEVDF_PIXEL_SHADER_3_0\fP, \fBEVDF_ARB_VERTEX_PROGRAM_1\fP, \fBEVDF_ARB_FRAGMENT_PROGRAM_1\fP, \fBEVDF_ARB_GLSL\fP, \fBEVDF_HLSL\fP }"
+.br
+.RI "\fIenumeration for querying features of the video driver. \fP"
+.ti -1c
+.RI "enum \fBE_TRANSFORMATION_STATE\fP { \fBETS_VIEW\fP =  0, \fBETS_WORLD\fP, \fBETS_PROJECTION\fP, \fBETS_COUNT\fP }"
+.br
+.RI "\fIenumeration for geometry transformation states \fP"
+.ti -1c
+.RI "enum \fBE_VERTEX_TYPE\fP { \fBEVT_STANDARD\fP =  0, \fBEVT_2TCOORDS\fP, \fBEVT_TANGENTS\fP }"
+.br
+.RI "\fIEnumeration for all vertex types there are. \fP"
+.ti -1c
+.RI "enum \fBE_LIGHT_TYPE\fP { \fBELT_POINT\fP, \fBELT_DIRECTIONAL\fP }"
+.br
+.RI "\fIEnumeration for different types of lights. \fP"
+.ti -1c
+.RI "enum \fBE_MATERIAL_TYPE\fP { \fBEMT_SOLID\fP =  0, \fBEMT_SOLID_2_LAYER\fP, \fBEMT_LIGHTMAP\fP, \fBEMT_LIGHTMAP_ADD\fP, \fBEMT_LIGHTMAP_M2\fP, \fBEMT_LIGHTMAP_M4\fP, \fBEMT_LIGHTMAP_LIGHTING\fP, \fBEMT_LIGHTMAP_LIGHTING_M2\fP, \fBEMT_LIGHTMAP_LIGHTING_M4\fP, \fBEMT_DETAIL_MAP\fP, \fBEMT_SPHERE_MAP\fP, \fBEMT_REFLECTION_2_LAYER\fP, \fBEMT_TRANSPARENT_ADD_COLOR\fP, \fBEMT_TRANSPARENT_ALPHA_CHANNEL\fP, \fBEMT_TRANSPARENT_ALPHA_CHANNEL_REF\fP, \fBEMT_TRANSPARENT_VERTEX_ALPHA\fP, \fBEMT_TRANSPARENT_REFLECTION_2_LAYER\fP, \fBEMT_NORMAL_MAP_SOLID\fP, \fBEMT_NORMAL_MAP_TRANSPARENT_ADD_COLOR\fP, \fBEMT_NORMAL_MAP_TRANSPARENT_VERTEX_ALPHA\fP, \fBEMT_PARALLAX_MAP_SOLID\fP, \fBEMT_PARALLAX_MAP_TRANSPARENT_ADD_COLOR\fP, \fBEMT_PARALLAX_MAP_TRANSPARENT_VERTEX_ALPHA\fP, \fBEMT_FORCE_32BIT\fP =  0x7fffffff }"
+.br
+.RI "\fIAbstracted and easy to use fixed function/programmable pipeline material modes. \fP"
+.ti -1c
+.RI "enum \fBE_MATERIAL_FLAG\fP { \fBEMF_WIREFRAME\fP =  0, \fBEMF_GOURAUD_SHADING\fP, \fBEMF_LIGHTING\fP, \fBEMF_ZBUFFER\fP, \fBEMF_ZWRITE_ENABLE\fP, \fBEMF_BACK_FACE_CULLING\fP, \fBEMF_BILINEAR_FILTER\fP, \fBEMF_TRILINEAR_FILTER\fP, \fBEMF_ANISOTROPIC_FILTER\fP, \fBEMF_FOG_ENABLE\fP, \fBEMF_NORMALIZE_NORMALS\fP, \fBEMF_MATERIAL_FLAG_COUNT\fP }"
+.br
+.RI "\fIMaterial flags. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBE_TEXTURE_CREATION_FLAG\fP \fBgetTextureFormatFromFlags\fP (u32 flags)"
+.br
+.ti -1c
+.RI "s16 \fBRGB16\fP (s32 r, s32 g, s32 b)"
+.br
+.RI "\fICreates a 16 bit A1R5G5B5 color. \fP"
+.ti -1c
+.RI "s16 \fBRGBA16\fP (s32 r, s32 g, s32 b, s32 a)"
+.br
+.RI "\fICreates a 16 bit A1R5G5B5 color. \fP"
+.ti -1c
+.RI "s16 \fBX8R8G8B8toA1R5G5B5\fP (s32 color)"
+.br
+.RI "\fIConverts a 32 bit (X8R8G8B8) color to a 16 A1R5G5B5 color. \fP"
+.ti -1c
+.RI "u16 \fBA8R8G8B8toA1R5G5B5\fP (u32 color)"
+.br
+.RI "\fIConverts a 32 bit (A8R8G8B8) color to a 16 A1R5G5B5 color. \fP"
+.ti -1c
+.RI "u32 \fBA1R5G5B5toA8R8G8B8\fP (u16 color)"
+.br
+.RI "\fIReturns A8R8G8B8 Color from A1R5G5B5 color. \fP"
+.ti -1c
+.RI "s32 \fBgetAlpha\fP (s16 color)"
+.br
+.RI "\fIReturns the red component from A1R5G5B5 color. \fP"
+.ti -1c
+.RI "s32 \fBgetRed\fP (s16 color)"
+.br
+.ti -1c
+.RI "s32 \fBgetGreen\fP (s16 color)"
+.br
+.ti -1c
+.RI "s32 \fBgetBlue\fP (s16 color)"
+.br
+.ti -1c
+.RI "s32 \fBgetLuminance\fP (s16 color)"
+.br
+.RI "\fIReturns the luminance from a 16 bit A1R5G5B5 color. \fP"
+.ti -1c
+.RI "s32 \fBR5G6B5toA8R8G8B8\fP (s16 color)"
+.br
+.RI "\fIReturns A8R8G8B8 Color from R5G6B5 color. \fP"
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "const char *const \fBVERTEX_SHADER_TYPE_NAMES\fP []"
+.br
+.RI "\fINames for all vertex shader types, each entry corresponds to a E_VERTEX_SHADER_TYPE entry. \fP"
+.ti -1c
+.RI "const char *const \fBPIXEL_SHADER_TYPE_NAMES\fP []"
+.br
+.RI "\fINames for all pixel shader types, each entry corresponds to a E_PIXEL_SHADER_TYPE entry. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+The video namespace contains classes for accessing the video driver. All 2d and 3d rendering is done here. 
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBengine::video::E_VERTEX_SHADER_TYPE\fP"
+.PP
+Compile target enumeration for the addHighLevelShaderMaterial() method. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIEVST_COUNT \fP\fP
+This is not a type, but a value indicating how much types there are. 
+.SS "enum \fBengine::video::E_PIXEL_SHADER_TYPE\fP"
+.PP
+Compile target enumeration for the addHighLevelShaderMaterial() method. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIEPST_COUNT \fP\fP
+This is not a type, but a value indicating how much types there are. 
+.SS "enum \fBengine::video::ECOLOR_FORMAT\fP"
+.PP
+An enum for the color format of textures used by the engine Engine. 
+.PP
+A color format specifies how color information is stored. The engine Engine mostly uses the format ECF_A1R5G5B5. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIECF_A1R5G5B5 \fP\fP
+16 bit color format used by the software driver, and thus preferred by all other engine engine video drivers. There are 5 bits for every color component, and a single bit is left for alpha information. 
+.TP
+\fB\fIECF_R5G6B5 \fP\fP
+Standard 16 bit color format. 
+.TP
+\fB\fIECF_R8G8B8 \fP\fP
+24 bit color, no alpha channel, but 8 bit for red, green and blue. 
+.TP
+\fB\fIECF_A8R8G8B8 \fP\fP
+Default 32 bit color format. 8 bits are used for every component: red, green, blue and alpha. 
+.SS "enum \fBengine::video::E_TEXTURE_CREATION_FLAG\fP"
+.PP
+Enumeration flags telling the video driver in which format textures should be created. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIETCF_ALWAYS_16_BIT \fP\fP
+Forces the driver to create 16 bit textures always, indepenent of which format the file on disk has. When choosing this you may loose some color detail, but gain much speed and memory. 16 bit textures can be transferred twice as fast as 32 bit textures and only use half of the space in memory. When using this flag, it does not make sence to use the flags ETCF_ALWAYS_32_BIT, ETCF_OPTIMIZED_FOR_QUALITY, or ETCF_OPTIMIZED_FOR_SPEED at the same time. 
+.TP
+\fB\fIETCF_ALWAYS_32_BIT \fP\fP
+Forces the driver to create 32 bit textures always, indepenent of which format the file on disk has. Please note that some drivers (like the software device) will ignore this, because they only are able to create and use 16 bit textures. When using this flag, it does not make sence to use the flags ETCF_ALWAYS_16_BIT, ETCF_OPTIMIZED_FOR_QUALITY, or ETCF_OPTIMIZED_FOR_SPEED at the same time. 
+.TP
+\fB\fIETCF_OPTIMIZED_FOR_QUALITY \fP\fP
+Lets the driver decide in which format the texutures are created and tries to make the textures look as good as possible. Usually it simply chooses the format in which the texture was stored on disk. When using this flag, it does not make sence to use the flags ETCF_ALWAYS_16_BIT, ETCF_ALWAYS_32_BIT, or ETCF_OPTIMIZED_FOR_SPEED at the same time. 
+.TP
+\fB\fIETCF_OPTIMIZED_FOR_SPEED \fP\fP
+Lets the driver decide in which format the texutures are created and tries to create them maximizing render speed. When using this flag, it does not make sence to use the flags ETCF_ALWAYS_16_BIT, ETCF_ALWAYS_32_BIT, or ETCF_OPTIMIZED_FOR_QUALITY, at the same time. 
+.TP
+\fB\fIETCF_CREATE_MIP_MAPS \fP\fP
+Automaticly creates mip map levels for the textures. 
+.TP
+\fB\fIETCF_FORCE_32_BIT_DO_NOT_USE \fP\fP
+compile these enumeration values to 32 bit. 
+.PP
+This flag is never used, it only forces the compiler to 
+.SS "enum \fBengine::video::E_VIDEO_DRIVER_FEATURE\fP"
+.PP
+enumeration for querying features of the video driver. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIEVDF_RENDER_TO_TARGET \fP\fP
+Is driver able to render to a surface? 
+.TP
+\fB\fIEVDF_BILINEAR_FILTER \fP\fP
+Is driver able to render with a bilinear filter applied? 
+.TP
+\fB\fIEVDF_HARDWARE_TL \fP\fP
+Is hardeware transform and lighting supported? 
+.TP
+\fB\fIEVDF_MIP_MAP \fP\fP
+Can the driver handle mip maps? 
+.TP
+\fB\fIEVDF_STENCIL_BUFFER \fP\fP
+Are stencilbuffers switched on and does the device support stencil buffers? 
+.TP
+\fB\fIEVDF_VERTEX_SHADER_1_1 \fP\fP
+Is Vertex Shader 1.1 supported? 
+.TP
+\fB\fIEVDF_VERTEX_SHADER_2_0 \fP\fP
+Is Vertex Shader 2.0 supported? 
+.TP
+\fB\fIEVDF_VERTEX_SHADER_3_0 \fP\fP
+Is Vertex Shader 3.0 supported? 
+.TP
+\fB\fIEVDF_PIXEL_SHADER_1_1 \fP\fP
+Is Pixel Shader 1.1 supported? 
+.TP
+\fB\fIEVDF_PIXEL_SHADER_1_2 \fP\fP
+Is Pixel Shader 1.2 supported? 
+.TP
+\fB\fIEVDF_PIXEL_SHADER_1_3 \fP\fP
+Is Pixel Shader 1.3 supported? 
+.TP
+\fB\fIEVDF_PIXEL_SHADER_1_4 \fP\fP
+Is Pixel Shader 1.4 supported? 
+.TP
+\fB\fIEVDF_PIXEL_SHADER_2_0 \fP\fP
+Is Pixel Shader 2.0 supported? 
+.TP
+\fB\fIEVDF_PIXEL_SHADER_3_0 \fP\fP
+Is Pixel Shader 3.0 supported? 
+.TP
+\fB\fIEVDF_ARB_VERTEX_PROGRAM_1 \fP\fP
+Are ARB vertex programs v1.0 supported? 
+.TP
+\fB\fIEVDF_ARB_FRAGMENT_PROGRAM_1 \fP\fP
+Are ARB fragment programs v1.0 supported? 
+.TP
+\fB\fIEVDF_ARB_GLSL \fP\fP
+Is GLSL supported? 
+.TP
+\fB\fIEVDF_HLSL \fP\fP
+Is HLSL supported? 
+.SS "enum \fBengine::video::E_TRANSFORMATION_STATE\fP"
+.PP
+enumeration for geometry transformation states 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIETS_VIEW \fP\fP
+View transformation. 
+.TP
+\fB\fIETS_WORLD \fP\fP
+World transformation. 
+.TP
+\fB\fIETS_PROJECTION \fP\fP
+Projection transformation. 
+.TP
+\fB\fIETS_COUNT \fP\fP
+Not used. 
+.SS "enum \fBengine::video::E_VERTEX_TYPE\fP"
+.PP
+Enumeration for all vertex types there are. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIEVT_STANDARD \fP\fP
+Standard vertex type used by the engine engine, \fBvideo::S3DVertex\fP. 
+.TP
+\fB\fIEVT_2TCOORDS \fP\fP
+Vertex with two texture coordinates, \fBvideo::S3DVertex2TCoords\fP. Usually used for geometry with lightmaps or other special materials. 
+.TP
+\fB\fIEVT_TANGENTS \fP\fP
+Vertex with a tangent and binormal vector, \fBvideo::S3DVertexTangents\fP. Usually used for tangent space normal mapping. 
+.SS "enum \fBengine::video::E_LIGHT_TYPE\fP"
+.PP
+Enumeration for different types of lights. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIELT_POINT \fP\fP
+point light, it has a position in space and radiates light in all directions 
+.TP
+\fB\fIELT_DIRECTIONAL \fP\fP
+directional light, coming from a direction from an infinite distance 
+.SS "enum \fBengine::video::E_MATERIAL_TYPE\fP"
+.PP
+Abstracted and easy to use fixed function/programmable pipeline material modes. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIEMT_SOLID \fP\fP
+Standard solid material. Only first texture is used, which is supposed to be the diffuse material. 
+.TP
+\fB\fIEMT_SOLID_2_LAYER \fP\fP
+Solid material with 2 texture layers. The second is blended onto the first using the alpha value of the vertex colors. This material is currently not implemented in OpenGL, but it works with DirectX. 
+.TP
+\fB\fIEMT_LIGHTMAP \fP\fP
+Material type with standard lightmap technique: There should be 2 textures: The first texture layer is a diffuse map, the second is a light map. Vertex light is ignored. 
+.TP
+\fB\fIEMT_LIGHTMAP_ADD \fP\fP
+Material type with lightmap technique like EMT_LIGHTMAP, but lightmap and diffuse texture are not modulated, but added instead. 
+.TP
+\fB\fIEMT_LIGHTMAP_M2 \fP\fP
+Material type with standard lightmap technique: There should be 2 textures: The first texture layer is a diffuse map, the second is a light map. Vertex light is ignored. The texture colors are effectively multiplyied by 2 for brightening. like known in DirectX as D3DTOP_MODULATE2X. 
+.TP
+\fB\fIEMT_LIGHTMAP_M4 \fP\fP
+Material type with standard lightmap technique: There should be 2 textures: The first texture layer is a diffuse map, the second is a light map. Vertex light is ignored. The texture colors are effectively multiplyied by 4 for brightening. like known in DirectX as D3DTOP_MODULATE4X. 
+.TP
+\fB\fIEMT_LIGHTMAP_LIGHTING \fP\fP
+Like EMT_LIGHTMAP, but also supports dynamic lighting. 
+.TP
+\fB\fIEMT_LIGHTMAP_LIGHTING_M2 \fP\fP
+Like EMT_LIGHTMAP_M2, but also supports dynamic lighting. 
+.TP
+\fB\fIEMT_LIGHTMAP_LIGHTING_M4 \fP\fP
+Like EMT_LIGHTMAP_4, but also supports dynamic lighting. 
+.TP
+\fB\fIEMT_DETAIL_MAP \fP\fP
+Detail mapped material. The first texture is diffuse color map, the second is added to this and usually displayed with a bigger scale value so that it adds more detail. The detail map is added to the diffuse map using ADD_SIGNED, so that it is possible to add and substract color from the diffuse map. For example a value of (127,127,127) will not change the appearance of the diffuse map at all. Often used for terrain rendering. 
+.TP
+\fB\fIEMT_SPHERE_MAP \fP\fP
+Makes the material look like it was reflection the environment around it. To make this possible, a texture called 'sphere map' is used, which must be set as Texture1. 
+.TP
+\fB\fIEMT_REFLECTION_2_LAYER \fP\fP
+A reflecting material with an optional additional non reflecting texture layer. The reflection map should be set as Texture 1. 
+.TP
+\fB\fIEMT_TRANSPARENT_ADD_COLOR \fP\fP
+A transparent material. Only the first texture is used. The new color is calculated by simply adding the source color and the dest color. This means if for example a billboard using a texture with black background and a red circle on it is drawed with this material, the result is that only the red circle will be drawn a little bit transparent, and everything which was black is 100% transparent and not visible. This material type is useful for e.g. particle effects. 
+.TP
+\fB\fIEMT_TRANSPARENT_ALPHA_CHANNEL \fP\fP
+Makes the material transparent based on the texture alpha channel. The final color is blended together from the destination color and the texture color, using the alpha channel value as blend factor. Only first texture is used. If you are using this material with small textures, it is a good idea to load the texture in 32 bit mode (\fBvideo::IVideoDriver::setTextureCreationFlag()\fP). Also, an alpha ref is used, which can be manipulated using \fBSMaterial::MaterialTypeParam\fP. If set to 0, the alpha ref gets its default value which is 0.5f and which means that pixels with an alpha value >127 will be written, others not. In other, simple words: this value controls how sharp the edges become when going from a transparent to a solid spot on the texture. 
+.TP
+\fB\fIEMT_TRANSPARENT_ALPHA_CHANNEL_REF \fP\fP
+Makes the material transparent based on the texture alpha channel. If the alpha channel value is greater than 127, a pixel is written to the target, otherwise not. This material does not use alpha blending and is a lot faster than EMT_TRANSPARENT_ALPHA_CHANNEL. It is ideal for drawing stuff like leafes of plants, because the borders are not blurry but sharp. Only first texture is used. If you are using this material with small textures and 3d object, it is a good idea to load the texture in 32 bit mode (\fBvideo::IVideoDriver::setTextureCreationFlag()\fP). 
+.TP
+\fB\fIEMT_TRANSPARENT_VERTEX_ALPHA \fP\fP
+Makes the material transparent based on the vertex alpha value. 
+.TP
+\fB\fIEMT_TRANSPARENT_REFLECTION_2_LAYER \fP\fP
+A transparent reflecting material with an optional additional non reflecting texture layer. The reflection map should be set as Texture 1. The transparency depends on the alpha value in the vertex colors. A texture which will not reflect can be set als Texture 2. Please note that this material type is currently not 100% implemented in OpenGL. It works in Direct3D. 
+.TP
+\fB\fIEMT_NORMAL_MAP_SOLID \fP\fP
+A solid normal map renderer. First texture is the color map, the second should be the normal map. Note that you should use this material only when drawing geometry consisting of vertices of type \fBS3DVertexTangents\fP (EVT_TANGENTS). You can convert any mesh into this format using IMeshManipulator::createMeshWithTangents() (See SpecialFX2 Tutorial). This shader runs on vertex shader 1.1 and pixel shader 1.1 capable hardware and falls back on a fixed function lighted material if this hardware is not available. Only two lights are supported by this shader, if there are more, the nearest two are chosen. Currently, this shader is only implemented for the D3D8 and D3D9 renderers. 
+.TP
+\fB\fIEMT_NORMAL_MAP_TRANSPARENT_ADD_COLOR \fP\fP
+A transparent normal map renderer. First texture is the color map, the second should be the normal map. Note that you should use this material only when drawing geometry consisting of vertices of type \fBS3DVertexTangents\fP (EVT_TANGENTS). You can convert any mesh into this format using IMeshManipulator::createMeshWithTangents() (See SpecialFX2 Tutorial). This shader runs on vertex shader 1.1 and pixel shader 1.1 capable hardware and falls back on a fixed function lighted material if this hardware is not available. Only two lights are supported by this shader, if there are more, the nearest two are chosen. Currently, this shader is only implemented for the D3D8 and D3D9 renderers. 
+.TP
+\fB\fIEMT_NORMAL_MAP_TRANSPARENT_VERTEX_ALPHA \fP\fP
+A transparent (based on the vertex alpha value) normal map renderer. First texture is the color map, the second should be the normal map. Note that you should use this material only when drawing geometry consisting of vertices of type \fBS3DVertexTangents\fP (EVT_TANGENTS). You can convert any mesh into this format using IMeshManipulator::createMeshWithTangents() (See SpecialFX2 Tutorial). This shader runs on vertex shader 1.1 and pixel shader 1.1 capable hardware and falls back on a fixed function lighted material if this hardware is not available. Only two lights are supported by this shader, if there are more, the nearest two are chosen. Currently, this shader is only implemented for the D3D8 and D3D9 renderers. 
+.TP
+\fB\fIEMT_PARALLAX_MAP_SOLID \fP\fP
+Just like EMT_NORMAL_MAP_SOLID, but uses parallax mapping too, which looks a lot more realistic. This only works when the hardware supports at least vertex shader 1.1 and pixel shader 1.4. First texture is the color map, the second should be the normal map. The normal map texture should contain the height value in the alpha component. The \fBIVideoDriver::makeNormalMapTexture()\fP method writes this value automaticly when creating normal maps from a heightmap when using a 32 bit texture. The height scale of the material (affecting the bumpiness) is being controlled by the \fBSMaterial::MaterialTypeParam\fP member. If set to zero, the default value (0.02f) will be applied. Otherwise the value set in \fBSMaterial::MaterialTypeParam\fP is taken. This value depends on with which scale the texture is mapped on the material. Too high or low values of MaterialTypeParam can result in strange artifacts. 
+.TP
+\fB\fIEMT_PARALLAX_MAP_TRANSPARENT_ADD_COLOR \fP\fP
+A material just like EMT_PARALLAX_MAP_SOLID, but it is transparent, using EMT_TRANSPARENT_ADD_COLOR as base material. 
+.TP
+\fB\fIEMT_PARALLAX_MAP_TRANSPARENT_VERTEX_ALPHA \fP\fP
+A material just like EMT_PARALLAX_MAP_SOLID, but it is transparent, using EMT_TRANSPARENT_VERTEX_ALPHA as base material. 
+.TP
+\fB\fIEMT_FORCE_32BIT \fP\fP
+This value is not used. It only forces this enumeration to compile in 32 bit. 
+.SS "enum \fBengine::video::E_MATERIAL_FLAG\fP"
+.PP
+Material flags. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIEMF_WIREFRAME \fP\fP
+Draw as wireframe or filled triangles? Default: false. 
+.TP
+\fB\fIEMF_GOURAUD_SHADING \fP\fP
+Flat or Gouraud shading? Default: true. 
+.TP
+\fB\fIEMF_LIGHTING \fP\fP
+Will this material be lighted? Default: true. 
+.TP
+\fB\fIEMF_ZBUFFER \fP\fP
+Is the ZBuffer enabled? Default: true. 
+.TP
+\fB\fIEMF_ZWRITE_ENABLE \fP\fP
+May be written to the zbuffer or is it readonly. Default: true This flag is ignored, if the material type is a transparent type. 
+.TP
+\fB\fIEMF_BACK_FACE_CULLING \fP\fP
+Is backfaceculling enabled? Default: true. 
+.TP
+\fB\fIEMF_BILINEAR_FILTER \fP\fP
+Is bilinear filtering enabled? Default: true. 
+.TP
+\fB\fIEMF_TRILINEAR_FILTER \fP\fP
+Is trilinear filtering enabled? Default: false If the trilinear filter flag is enabled, the bilinear filtering flag is ignored. 
+.TP
+\fB\fIEMF_ANISOTROPIC_FILTER \fP\fP
+Is anisotropic filtering? Default: false In engine you can use anisotropic texture filtering in conjunction with bilinear or trilinear texture filtering to improve rendering results. Primitives will look less blurry with this flag switched on. 
+.TP
+\fB\fIEMF_FOG_ENABLE \fP\fP
+Is fog enabled? Default: false. 
+.TP
+\fB\fIEMF_NORMALIZE_NORMALS \fP\fP
+Normalizes normals.You can enable this if you need to scale a dynamic lighted model. Usually, its normals will get scaled too then and it will get darker. If you enable the EMF_NORMALIZE_NORMALS flag, the normals will be normalized again, and the model will look as bright as it should. 
+.TP
+\fB\fIEMF_MATERIAL_FLAG_COUNT \fP\fP
+This is not a flag, but a value indicating how much flags there are. 
+.SH "Function Documentation"
+.PP 
+.SS "\fBE_TEXTURE_CREATION_FLAG\fP engine::video::getTextureFormatFromFlags (u32 flags)\fC [inline]\fP"
+.PP
+Helper function, helps to get the wished texture creation format from the flags. Returns either ETCF_ALWAYS_32_BIT, ETCF_ALWAYS_16_BIT, ETCF_OPTIMIZED_FOR_QUALITY, or ETCF_OPTIMIZED_FOR_SPEED. 
+.SS "s32 engine::video::getRed (s16 color)\fC [inline]\fP"
+.PP
+Returns the red component from A1R5G5B5 color. Shift left by 3 to get 8 bit value. 
+.SS "s32 engine::video::getGreen (s16 color)\fC [inline]\fP"
+.PP
+Returns the green component from A1R5G5B5 color Shift left by 3 to get 8 bit value. 
+.SS "s32 engine::video::getBlue (s16 color)\fC [inline]\fP"
+.PP
+Returns the blue component from A1R5G5B5 color Shift left by 3 to get 8 bit value. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

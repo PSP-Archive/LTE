@@ -1,0 +1,43 @@
+.TH "engine::gui::IGUICheckBox" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::gui::IGUICheckBox \- GUI Check box interface.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IGUICheckBox.h>\fP
+.PP
+Inherits \fBengine::gui::IGUIElement\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBIGUICheckBox\fP (\fBIGUIEnvironment\fP *environment, \fBIGUIElement\fP *parent, s32 id, \fBcore::rect\fP< s32 > rectangle)"
+.br
+.RI "\fIconstructor \fP"
+.ti -1c
+.RI "\fB~IGUICheckBox\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual void \fBsetChecked\fP (bool checked)=0"
+.br
+.RI "\fISet if box is checked. \fP"
+.ti -1c
+.RI "virtual bool \fBisChecked\fP ()=0"
+.br
+.RI "\fIReturns true if box is checked. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+GUI Check box interface. 
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

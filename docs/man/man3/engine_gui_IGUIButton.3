@@ -1,0 +1,139 @@
+.TH "engine::gui::IGUIButton" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::gui::IGUIButton \- GUI Button interface.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IGUIButton.h>\fP
+.PP
+Inherits \fBengine::gui::IGUIElement\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBIGUIButton\fP (\fBIGUIEnvironment\fP *environment, \fBIGUIElement\fP *parent, s32 id, \fBcore::rect\fP< s32 > rectangle)"
+.br
+.RI "\fIconstructor \fP"
+.ti -1c
+.RI "\fB~IGUIButton\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual void \fBsetOverrideFont\fP (\fBIGUIFont\fP *font=0)=0"
+.br
+.RI "\fISets another skin independent font. \fP"
+.ti -1c
+.RI "virtual void \fBsetImage\fP (\fBvideo::ITexture\fP *image)=0"
+.br
+.RI "\fISets an image which should be displayed on the button when it is in normal state. \fP"
+.ti -1c
+.RI "virtual void \fBsetImage\fP (\fBvideo::ITexture\fP *image, const \fBcore::rect\fP< s32 > &pos)=0"
+.br
+.RI "\fISets an image which should be displayed on the button when it is in normal state. \fP"
+.ti -1c
+.RI "virtual void \fBsetPressedImage\fP (\fBvideo::ITexture\fP *image)=0"
+.br
+.RI "\fISets an image which should be displayed on the button when it is in pressed state. \fP"
+.ti -1c
+.RI "virtual void \fBsetPressedImage\fP (\fBvideo::ITexture\fP *image, const \fBcore::rect\fP< s32 > &pos)=0"
+.br
+.RI "\fISets an image which should be displayed on the button when it is in pressed state. \fP"
+.ti -1c
+.RI "virtual void \fBsetIsPushButton\fP (bool isPushButton)=0"
+.br
+.RI "\fISets if the button should behave like a push button. \fP"
+.ti -1c
+.RI "virtual void \fBsetPressed\fP (bool pressed)=0"
+.br
+.RI "\fISets the pressed state of the button if this is a pushbutton. \fP"
+.ti -1c
+.RI "virtual bool \fBisPressed\fP ()=0"
+.br
+.RI "\fIReturns if the button is currently pressed. \fP"
+.ti -1c
+.RI "virtual void \fBsetUseAlphaChannel\fP (bool useAlphaChannel)=0"
+.br
+.RI "\fISets if the alpha channel should be used for drawing images on the button (default is false). \fP"
+.ti -1c
+.RI "virtual bool \fBgetUseAlphaChannel\fP ()=0"
+.br
+.RI "\fIReturns if the alpha channel should be used for drawing images on the button. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+GUI Button interface. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual void engine::gui::IGUIButton::setImage (\fBvideo::ITexture\fP * image, const \fBcore::rect\fP< s32 > & pos)\fC [pure virtual]\fP"
+.PP
+Sets an image which should be displayed on the button when it is in normal state. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIimage,:\fP Texture containing the image to be displayed 
+.br
+\fIrect,:\fP Position in the texture, where the image is located 
+.RE
+.PP
+
+.SS "virtual void engine::gui::IGUIButton::setImage (\fBvideo::ITexture\fP * image)\fC [pure virtual]\fP"
+.PP
+Sets an image which should be displayed on the button when it is in normal state. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIimage,:\fP Image to be displayed 
+.RE
+.PP
+
+.SS "virtual void engine::gui::IGUIButton::setIsPushButton (bool isPushButton)\fC [pure virtual]\fP"
+.PP
+Sets if the button should behave like a push button. 
+.PP
+Which means it can be in two states: Normal or Pressed. With a click on the button, the user can change the state of the button. 
+.SS "virtual void engine::gui::IGUIButton::setOverrideFont (\fBIGUIFont\fP * font = \fC0\fP)\fC [pure virtual]\fP"
+.PP
+Sets another skin independent font. 
+.PP
+If this is set to zero, the button uses the font of the skin. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfont,:\fP New font to set. 
+.RE
+.PP
+
+.SS "virtual void engine::gui::IGUIButton::setPressedImage (\fBvideo::ITexture\fP * image, const \fBcore::rect\fP< s32 > & pos)\fC [pure virtual]\fP"
+.PP
+Sets an image which should be displayed on the button when it is in pressed state. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIimage,:\fP Texture containing the image to be displayed 
+.br
+\fIrect,:\fP Position in the texture, where the image is located 
+.RE
+.PP
+
+.SS "virtual void engine::gui::IGUIButton::setPressedImage (\fBvideo::ITexture\fP * image)\fC [pure virtual]\fP"
+.PP
+Sets an image which should be displayed on the button when it is in pressed state. 
+.PP
+If no images is specified for the pressed state via \fBsetPressedImage()\fP, this image is also drawn in pressed state. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIimage,:\fP Image to be displayed 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

@@ -1,0 +1,47 @@
+.TH "engine::gui::IGUIWindow" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::gui::IGUIWindow \- Default moveable window GUI element with border, caption and close icons.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IGUIWindow.h>\fP
+.PP
+Inherits \fBengine::gui::IGUIElement\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBIGUIWindow\fP (\fBIGUIEnvironment\fP *environment, \fBIGUIElement\fP *parent, s32 id, \fBcore::rect\fP< s32 > rectangle)"
+.br
+.RI "\fIconstructor \fP"
+.ti -1c
+.RI "virtual \fB~IGUIWindow\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual \fBIGUIButton\fP * \fBgetCloseButton\fP ()=0"
+.br
+.RI "\fIReturns pointer to the close button. \fP"
+.ti -1c
+.RI "virtual \fBIGUIButton\fP * \fBgetMinimizeButton\fP ()=0"
+.br
+.RI "\fIReturns pointer to the minimize button. \fP"
+.ti -1c
+.RI "virtual \fBIGUIButton\fP * \fBgetMaximizeButton\fP ()=0"
+.br
+.RI "\fIReturns pointer to the maximize button. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Default moveable window GUI element with border, caption and close icons. 
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

@@ -1,0 +1,48 @@
+.TH "engine::video::IImageLoader" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::video::IImageLoader \- Class which is able to create a image from a file.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IImageLoader.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~IImageLoader\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual bool \fBisALoadableFileExtension\fP (const c8 *fileName)=0"
+.br
+.ti -1c
+.RI "virtual bool \fBisALoadableFileFormat\fP (\fBengine::io::IReadFile\fP *file)=0"
+.br
+.RI "\fIreturns true if the file maybe is able to be loaded by this class \fP"
+.ti -1c
+.RI "virtual \fBIImage\fP * \fBloadImage\fP (\fBengine::io::IReadFile\fP *file)=0"
+.br
+.RI "\fIcreates a surface from the file \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Class which is able to create a image from a file. 
+
+If you want the engine Engine be able to load textures of currently unsupported file formats (e.g .gif), then implement this and add your new Surface loader with \fBIVideoDriver::addExternalImageLoader()\fP to the engine. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual bool engine::video::IImageLoader::isALoadableFileExtension (const c8 * fileName)\fC [pure virtual]\fP"
+.PP
+returns true if the file maybe is able to be loaded by this class based on the file extension (e.g. '.tga') 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

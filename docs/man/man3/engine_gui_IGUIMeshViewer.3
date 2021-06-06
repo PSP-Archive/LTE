@@ -1,0 +1,47 @@
+.TH "engine::gui::IGUIMeshViewer" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::gui::IGUIMeshViewer \- 3d mesh viewing GUI element.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IGUIMeshViewer.h>\fP
+.PP
+Inherits \fBengine::gui::IGUIElement\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBIGUIMeshViewer\fP (\fBIGUIEnvironment\fP *environment, \fBIGUIElement\fP *parent, s32 id, \fBcore::rect\fP< s32 > rectangle)"
+.br
+.RI "\fIconstructor \fP"
+.ti -1c
+.RI "\fB~IGUIMeshViewer\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual void \fBsetMesh\fP (\fBscene::IAnimatedMesh\fP *mesh)=0"
+.br
+.RI "\fIsets the mesh to be shown \fP"
+.ti -1c
+.RI "virtual void \fBsetMaterial\fP (const \fBvideo::SMaterial\fP &material)=0"
+.br
+.RI "\fIsets the material \fP"
+.ti -1c
+.RI "virtual const \fBvideo::SMaterial\fP & \fBgetMaterial\fP ()=0"
+.br
+.RI "\fIgets the material \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+3d mesh viewing GUI element. 
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

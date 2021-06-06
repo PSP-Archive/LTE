@@ -1,0 +1,66 @@
+.TH "engine::video::SLight" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::video::SLight \- structure for holding data describing a dynamic point light.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <SLight.h>\fP
+.PP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBSColorf\fP \fBAmbientColor\fP"
+.br
+.RI "\fIAmbient color emitted by the light. \fP"
+.ti -1c
+.RI "\fBSColorf\fP \fBDiffuseColor\fP"
+.br
+.RI "\fIDiffuse color emitted by the light. \fP"
+.ti -1c
+.RI "\fBSColorf\fP \fBSpecularColor\fP"
+.br
+.RI "\fISpecular color emitted by the light. \fP"
+.ti -1c
+.RI "\fBcore::vector3df\fP \fBPosition\fP"
+.br
+.RI "\fIPosition of the light. If Type is ELT_DIRECTIONAL, this is the direction vector the light is coming from. \fP"
+.ti -1c
+.RI "f32 \fBRadius\fP"
+.br
+.RI "\fIRadius of light. Everything within this radius be be lighted. \fP"
+.ti -1c
+.RI "bool \fBCastShadows\fP"
+.br
+.RI "\fIDoes the light cast shadows? \fP"
+.ti -1c
+.RI "\fBE_LIGHT_TYPE\fP \fBType\fP"
+.br
+.RI "\fIType of the light. Default: ELT_POINT. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+structure for holding data describing a dynamic point light. 
+
+ambient light and point lights are the only light supported by the engine engine. 
+.PP
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBSColorf\fP \fBengine::video::SLight::DiffuseColor\fP"
+.PP
+Diffuse color emitted by the light. 
+.PP
+This is the primary color you might want to set. 
+.SS "\fBSColorf\fP \fBengine::video::SLight::SpecularColor\fP"
+.PP
+Specular color emitted by the light. 
+.PP
+For details how to use specular highlights, see \fBSMaterial::Shininess\fP 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

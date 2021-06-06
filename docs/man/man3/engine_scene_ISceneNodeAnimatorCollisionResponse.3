@@ -1,0 +1,153 @@
+.TH "engine::scene::ISceneNodeAnimatorCollisionResponse" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::ISceneNodeAnimatorCollisionResponse \- Special scene node animator for doing automatic collision detection and response.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ISceneNodeAnimatorCollisionResponse.h>\fP
+.PP
+Inherits \fBengine::scene::ISceneNodeAnimator\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~ISceneNodeAnimatorCollisionResponse\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual bool \fBisFalling\fP ()=0"
+.br
+.ti -1c
+.RI "virtual void \fBsetEllipsoidRadius\fP (const \fBcore::vector3df\fP &radius)=0"
+.br
+.ti -1c
+.RI "virtual \fBcore::vector3df\fP \fBgetEllipsoidRadius\fP () const =0"
+.br
+.ti -1c
+.RI "virtual void \fBsetGravity\fP (const \fBcore::vector3df\fP &gravity)=0"
+.br
+.ti -1c
+.RI "virtual \fBcore::vector3df\fP \fBgetGravity\fP () const =0"
+.br
+.ti -1c
+.RI "virtual void \fBsetEllipsoidTranslation\fP (\fBcore::vector3df\fP translation)=0"
+.br
+.ti -1c
+.RI "virtual \fBcore::vector3df\fP \fBgetEllipsoidTranslation\fP () const =0"
+.br
+.ti -1c
+.RI "virtual void \fBsetWorld\fP (\fBITriangleSelector\fP *newWorld)=0"
+.br
+.ti -1c
+.RI "virtual \fBITriangleSelector\fP * \fBgetWorld\fP () const =0"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Special scene node animator for doing automatic collision detection and response. 
+
+This scene node animator can be attached to any scene node modifying it in that way, that it cannot move through walls of the world, is influenced by gravity and acceleration. This animator is useful for example for first person shooter games. Attach it for example to a first person shooter camera, and the camera will behave as the player control in a first person shooter game: The camera stops and slides at walls, walks up stairs, falls down if there is no floor under it, and so on. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual \fBcore::vector3df\fP engine::scene::ISceneNodeAnimatorCollisionResponse::getEllipsoidRadius () const\fC [pure virtual]\fP"
+.PP
+Returns the radius of the ellipsoid with wich the collision detection and response is done. 
+.PP
+\fBReturns:\fP
+.RS 4
+Radius of the ellipsoid. 
+.RE
+.PP
+
+.SS "virtual \fBcore::vector3df\fP engine::scene::ISceneNodeAnimatorCollisionResponse::getEllipsoidTranslation () const\fC [pure virtual]\fP"
+.PP
+Returns the translation of the ellipsoid for collision detection. See \fBISceneNodeAnimatorCollisionResponse::setEllipsoidTranslation()\fP for more details. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the tranlation of the ellipsoid relative to the position of the scene node. 
+.RE
+.PP
+
+.SS "virtual \fBcore::vector3df\fP engine::scene::ISceneNodeAnimatorCollisionResponse::getGravity () const\fC [pure virtual]\fP"
+.PP
+Returns current vector of gravity. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the gravity vector. 
+.RE
+.PP
+
+.SS "virtual \fBITriangleSelector\fP* engine::scene::ISceneNodeAnimatorCollisionResponse::getWorld () const\fC [pure virtual]\fP"
+.PP
+Returns the current triangle selector containing all triangles for collision detection. 
+.SS "virtual bool engine::scene::ISceneNodeAnimatorCollisionResponse::isFalling ()\fC [pure virtual]\fP"
+.PP
+Returns if the attached scene node is falling, which means that there is no blocking wall from the scene node in the direction of the gravity. The implementation of this method is very fast, no collision detection is done when invoking it. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if the scene node is falling, false if not. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::ISceneNodeAnimatorCollisionResponse::setEllipsoidRadius (const \fBcore::vector3df\fP & radius)\fC [pure virtual]\fP"
+.PP
+Sets the radius of the ellipsoid with which collision detection and response is done. If you have got a scene node, and you are unsure about how big the radius should be, you could use the following code to determine it: 
+.PP
+.nf
+
+
+                //! 
+
+.fi
+.PP
+ 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIradius,:\fP New radius of the ellipsoid. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::ISceneNodeAnimatorCollisionResponse::setEllipsoidTranslation (\fBcore::vector3df\fP translation)\fC [pure virtual]\fP"
+.PP
+By default, the ellipsoid for collision detection is created around the center of the scene node, which means that the ellipsoid surrounds it completely. If this is not what you want, you may specify a translation for the ellipsoid. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fITranslation\fP of the ellipsoid relative to the position of the scene node. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::ISceneNodeAnimatorCollisionResponse::setGravity (const \fBcore::vector3df\fP & gravity)\fC [pure virtual]\fP"
+.PP
+Sets the gravity of the environment. A good example value would be \fBcore::vector3df\fP(0,-100.0f,0) for letting gravity affect all object to fall down. For bigger gravity, make increase the length of the vector. You can disable gravity by setting it to core::vector3df(0,0,0); 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIgravity,:\fP New gravity vector. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::ISceneNodeAnimatorCollisionResponse::setWorld (\fBITriangleSelector\fP * newWorld)\fC [pure virtual]\fP"
+.PP
+Sets a triangle selector holding all triangles of the world with which the scene node may collide. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fInewWorld,:\fP New triangle selector containing triangles to let the scene node collide with. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

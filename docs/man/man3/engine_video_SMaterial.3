@@ -1,0 +1,217 @@
+.TH "engine::video::SMaterial" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::video::SMaterial \- struct for holding a material  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <SMaterial.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBSMaterial\fP ()"
+.br
+.RI "\fIdefault constructor, creates a solid material with standard colors \fP"
+.ti -1c
+.RI "bool \fBoperator!=\fP (const \fBSMaterial\fP &b)"
+.br
+.RI "\fICompare operator. \fP"
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBE_MATERIAL_TYPE\fP \fBMaterialType\fP"
+.br
+.RI "\fIType of the material. Specifies how everything is blended together. \fP"
+.ti -1c
+.RI "\fBSColor\fP \fBAmbientColor\fP"
+.br
+.RI "\fIHow much ambient light (a global light) is reflected by this material. \fP"
+.ti -1c
+.RI "\fBSColor\fP \fBDiffuseColor\fP"
+.br
+.RI "\fIHow much diffuse light coming from a light source is reflected by this material. \fP"
+.ti -1c
+.RI "\fBSColor\fP \fBEmissiveColor\fP"
+.br
+.RI "\fILight emitted by this material. Default is to emitt no light. \fP"
+.ti -1c
+.RI "\fBSColor\fP \fBSpecularColor\fP"
+.br
+.RI "\fIHow much specular light (highlights from a light) is reflected. \fP"
+.ti -1c
+.RI "f32 \fBShininess\fP"
+.br
+.RI "\fIValue affecting the size of specular highlights. A value of 20 is common. \fP"
+.ti -1c
+.RI "f32 \fBMaterialTypeParam\fP"
+.br
+.RI "\fIFree parameter dependend on the material type. \fP"
+.ti -1c
+.RI "union {"
+.br
+.ti -1c
+.RI "   \fBITexture\fP * \fBTextures\fP [MATERIAL_MAX_TEXTURES]"
+.br
+.RI "\fIArray of textures, the same as accessing through Texture1 and Texture2. \fP"
+.ti -1c
+.RI "}; "
+.br
+.RI "\fITexture layer union. \fP"
+.ti -1c
+.RI "union {"
+.br
+.ti -1c
+.RI "   bool \fBFlags\fP [EMF_MATERIAL_FLAG_COUNT]"
+.br
+.RI "\fIArray representing all flags. \fP"
+.ti -1c
+.RI "}; "
+.br
+.RI "\fImaterial flag union. \fP"
+.ti -1c
+.RI "\fBITexture\fP * \fBTexture1\fP"
+.br
+.RI "\fIPrimary texture layer. \fP"
+.ti -1c
+.RI "\fBITexture\fP * \fBTexture2\fP"
+.br
+.RI "\fISecondary texture layer. \fP"
+.ti -1c
+.RI "bool \fBWireframe\fP"
+.br
+.RI "\fIDraw as wireframe or filled triangles? Default: false. \fP"
+.ti -1c
+.RI "bool \fBGouraudShading\fP"
+.br
+.RI "\fIFlat or Gouraud shading? Default: true. \fP"
+.ti -1c
+.RI "bool \fBLighting\fP"
+.br
+.RI "\fIWill this material be lighted? Default: true. \fP"
+.ti -1c
+.RI "bool \fBZBuffer\fP"
+.br
+.RI "\fIIs the ZBuffer enabled? Default: true. \fP"
+.ti -1c
+.RI "bool \fBZWriteEnable\fP"
+.br
+.RI "\fIMay be written to the zbuffer or is it readonly. \fP"
+.ti -1c
+.RI "bool \fBBackfaceCulling\fP"
+.br
+.RI "\fIIs backfaceculling enabled? Default: true. \fP"
+.ti -1c
+.RI "bool \fBBilinearFilter\fP"
+.br
+.RI "\fIIs bilinear filtering enabled? Default: true. \fP"
+.ti -1c
+.RI "bool \fBTrilinearFilter\fP"
+.br
+.RI "\fIIs trilinear filtering enabled? Default: false. \fP"
+.ti -1c
+.RI "bool \fBAnisotropicFilter\fP"
+.br
+.RI "\fIIs anisotropic filtering enabled? Default: false. \fP"
+.ti -1c
+.RI "bool \fBFogEnable\fP"
+.br
+.RI "\fIIs fog enabled? Default: false. \fP"
+.ti -1c
+.RI "bool \fBNormalizeNormals\fP"
+.br
+.RI "\fIShould normals be normalized? Default: false. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+struct for holding a material 
+.PP
+.SH "Member Data Documentation"
+.PP 
+.SS "union { ... } "
+.PP
+material flag union. 
+.PP
+This enables the user to access the material flag using e.g: material.Wireframe = true or material.flag[EMF_WIREFRAME] = true; 
+.SS "\fBSColor\fP \fBengine::video::SMaterial::AmbientColor\fP"
+.PP
+How much ambient light (a global light) is reflected by this material. 
+.PP
+The default is full white, meaning objects are completely globally illuminated. Reduce this if you want to see diffuse or specular light effects. 
+.SS "bool \fBengine::video::SMaterial::AnisotropicFilter\fP"
+.PP
+Is anisotropic filtering enabled? Default: false. 
+.PP
+In engine you can use anisotropic texture filtering in conjunction with bilinear or trilinear texture filtering to improve rendering results. Primitives will look less blurry with this flag switched on. 
+.SS "\fBSColor\fP \fBengine::video::SMaterial::DiffuseColor\fP"
+.PP
+How much diffuse light coming from a light source is reflected by this material. 
+.PP
+The default is full white. 
+.SS "f32 \fBengine::video::SMaterial::MaterialTypeParam\fP"
+.PP
+Free parameter dependend on the material type. 
+.PP
+Mostly ignored, used for example in EMT_PARALLAX_MAP_SOLID and EMT_TRANSPARENT_ALPHA_CHANNEL. 
+.SS "f32 \fBengine::video::SMaterial::Shininess\fP"
+.PP
+Value affecting the size of specular highlights. A value of 20 is common. 
+.PP
+If set to 0, no specular highlights are being used. Currently, specular highlights are only implemented in the D3D9 and D3D8 driver. To activate, simply set the shininess of a material to a value other than 0: Using scene nodes: 
+.PP
+.nf
+                sceneNode->getMaterial(0).Shininess = 20.0f;
+
+.fi
+.PP
+.PP
+You can also change the color of the highlights using 
+.PP
+.nf
+                sceneNode->getMaterial(0).SpecularColor.set(255,255,255,255);
+
+.fi
+.PP
+.PP
+The specular color of the dynamic lights (\fBSLight::SpecularColor\fP) will influence the the highlight color too, but they are set to a useful value by default when creating the light scene node. Here is a simple example on how to use specular highlights: 
+.PP
+.nf
+                // load and display mesh
+                scene::IAnimatedMeshSceneNode* node = smgr->addAnimatedMeshSceneNode(
+                smgr->getMesh('data/faerie.md2'));
+                node->setMaterialTexture(0, driver->getTexture('data/Faerie2.pcx')); // set diffuse texture
+                node->setMaterialFlag(video::EMF_LIGHTING, true); // enable dynamic lighting
+                node->getMaterial(0).Shininess = 20.0f; // set size of specular highlights
+                
+                // add white light
+                scene::ILightSceneNode* light = smgr->addLightSceneNode(0,
+                    core::vector3df(5,5,5), video::SColorf(1.0f, 1.0f, 1.0f));
+
+.fi
+.PP
+ 
+.SS "\fBSColor\fP \fBengine::video::SMaterial::SpecularColor\fP"
+.PP
+How much specular light (highlights from a light) is reflected. 
+.PP
+The default is to reflect white specular light. See \fBSMaterial::Shininess\fP how to enable specular lights. 
+.SS "bool \fBengine::video::SMaterial::TrilinearFilter\fP"
+.PP
+Is trilinear filtering enabled? Default: false. 
+.PP
+If the trilinear filter flag is enabled, the bilinear filtering flag is ignored. 
+.SS "bool \fBengine::video::SMaterial::ZWriteEnable\fP"
+.PP
+May be written to the zbuffer or is it readonly. 
+.PP
+Default: true This flag is ignored, if the MaterialType is a transparent type. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

@@ -1,0 +1,94 @@
+.TH "engine::gui::IGUIInOutFader" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::gui::IGUIInOutFader \- Element for fading out or in.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IGUIInOutFader.h>\fP
+.PP
+Inherits \fBengine::gui::IGUIElement\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBIGUIInOutFader\fP (\fBIGUIEnvironment\fP *environment, \fBIGUIElement\fP *parent, s32 id, \fBcore::rect\fP< s32 > rectangle)"
+.br
+.RI "\fIconstructor \fP"
+.ti -1c
+.RI "\fB~IGUIInOutFader\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual \fBvideo::SColor\fP \fBgetColor\fP () const =0"
+.br
+.RI "\fIGets the color to fade out to or to fade in from. \fP"
+.ti -1c
+.RI "virtual void \fBsetColor\fP (\fBvideo::SColor\fP color)=0"
+.br
+.ti -1c
+.RI "virtual void \fBfadeIn\fP (u32 time)=0"
+.br
+.ti -1c
+.RI "virtual void \fBfadeOut\fP (u32 time)=0"
+.br
+.ti -1c
+.RI "virtual bool \fBisReady\fP () const =0"
+.br
+.RI "\fIReturns if the fade in or out process is done. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Element for fading out or in. 
+
+Here is a small example on how the class is used. In this example we fade in from a total red screen in the beginning. As you can see, the fader is not only useful for dramatic in and out fading, but also to show that the player is hit in a first person shooter game for example. 
+.PP
+.nf
+        gui::IGUIInOutFader* fader = device->getGUIEnvironment()->addInOutFader();
+        fader->setColor(video::SColor(0,255,0,0));
+        fader->fadeIn(4000);
+
+.fi
+.PP
+ 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual void engine::gui::IGUIInOutFader::fadeIn (u32 time)\fC [pure virtual]\fP"
+.PP
+Starts the fade in process. In the beginning the whole rect is drawn by the set color (black by default) and at the end of the overgiven time the color has faded out. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItime,:\fP Time specifing how long it should need to fade in, in milliseconds. 
+.RE
+.PP
+
+.SS "virtual void engine::gui::IGUIInOutFader::fadeOut (u32 time)\fC [pure virtual]\fP"
+.PP
+Starts the fade out process. In the beginning everything is visible, and at the end of the time only the set color (black by the fault) will be drawn. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItime,:\fP Time specifing how long it should need to fade out, in milliseconds. 
+.RE
+.PP
+
+.SS "virtual void engine::gui::IGUIInOutFader::setColor (\fBvideo::SColor\fP color)\fC [pure virtual]\fP"
+.PP
+Sets the color to fade out to or to fade in from. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcolor,:\fP Color to where it is faded out od from it is faded in. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

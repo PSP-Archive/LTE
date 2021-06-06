@@ -1,0 +1,53 @@
+.TH "engine::audio" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::audio \- The audio namespace contains classes for accessing the audio driver. All audio playing is done here.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBIAudioSound\fP"
+.br
+.RI "\fIAudio sound. \fP"
+.ti -1c
+.RI "class \fBIAudioDriver\fP"
+.br
+.RI "\fIInterface to the Audio Driver. \fP"
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBAUDIO_TYPE\fP { \fBFORMAT_UNKNOWN\fP =  -1, \fBFORMAT_WAV\fP =  0, \fBFORMAT_MP3\fP =  1, \fBFORMAT_COUNT\fP =  2 }"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+The audio namespace contains classes for accessing the audio driver. All audio playing is done here. 
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBengine::audio::AUDIO_TYPE\fP"
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIFORMAT_UNKNOWN \fP\fP
+Unknow format, media not loaded. 
+.TP
+\fB\fIFORMAT_WAV \fP\fP
+Wave format. 
+.TP
+\fB\fIFORMAT_MP3 \fP\fP
+MP3 format. 
+.TP
+\fB\fIFORMAT_COUNT \fP\fP
+Numbers of format. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

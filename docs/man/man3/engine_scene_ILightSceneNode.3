@@ -1,0 +1,45 @@
+.TH "engine::scene::ILightSceneNode" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::ILightSceneNode \- Scene node which is a dynamic light.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ILightSceneNode.h>\fP
+.PP
+Inherits \fBengine::scene::ISceneNode\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBILightSceneNode\fP (\fBISceneNode\fP *parent, \fBISceneManager\fP *mgr, s32 id, const \fBcore::vector3df\fP &position=\fBcore::vector3df\fP(0, 0, 0))"
+.br
+.RI "\fIconstructor \fP"
+.ti -1c
+.RI "virtual \fBvideo::SLight\fP & \fBgetLightData\fP ()=0"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Scene node which is a dynamic light. 
+
+You can switch the light on and off by making it visible or not, and let it be animated by ordinary scene node animators. If you set the light type to be directional, you will need to set the direction of the light source manually in the SLight structure, the position of the scene node will have no effect on this direction. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual \fBvideo::SLight\fP& engine::scene::ILightSceneNode::getLightData ()\fC [pure virtual]\fP"
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the light data. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

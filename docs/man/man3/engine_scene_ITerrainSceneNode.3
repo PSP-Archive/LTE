@@ -1,0 +1,206 @@
+.TH "engine::scene::ITerrainSceneNode" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::ITerrainSceneNode \- A scene node for displaying terrain using the geo mip map algorithm.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ITerrainSceneNode.h>\fP
+.PP
+Inherits \fBengine::scene::ISceneNode\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBITerrainSceneNode\fP (\fBISceneNode\fP *parent, \fBISceneManager\fP *mgr, s32 id, const \fBcore::vector3df\fP &position=\fBcore::vector3df\fP(0.0f, 0.0f, 0.0f), const core::vector3df &rotation=core::vector3df(0.0f, 0.0f, 0.0f), const core::vector3df &scale=core::vector3df(1.0f, 1.0f, 1.0f))"
+.br
+.RI "\fIconstructor \fP"
+.ti -1c
+.RI "virtual \fB~ITerrainSceneNode\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual const \fBcore::aabbox3d\fP< f32 > & \fBgetBoundingBox\fP () const =0"
+.br
+.ti -1c
+.RI "virtual const \fBcore::aabbox3d\fP< f32 > & \fBgetBoundingBox\fP (s32 patchX, s32 patchZ) const =0"
+.br
+.RI "\fIReturns the bounding box of a patch. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetIndexCount\fP ()=0"
+.br
+.RI "\fIReturns the number of indices currently in the meshbuffer for this scene node. \fP"
+.ti -1c
+.RI "virtual \fBIMesh\fP * \fBgetMesh\fP ()=0"
+.br
+.RI "\fIReturns pointer to the mesh. \fP"
+.ti -1c
+.RI "virtual void \fBgetMeshBufferForLOD\fP (\fBSMeshBufferLightMap\fP &mb, s32 LOD)=0"
+.br
+.RI "\fIGets the meshbuffer data based on a specified level of detail. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetIndicesForPatch\fP (\fBcore::array\fP< u32 > &indices, s32 patchX, s32 patchZ, s32 LOD=0)=0"
+.br
+.RI "\fIGets the indices for a specified patch at a specified Level of Detail. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetCurrentLODOfPatches\fP (\fBcore::array\fP< s32 > &LODs)=0"
+.br
+.RI "\fIPopulates an array with the CurrentLOD of each patch. \fP"
+.ti -1c
+.RI "virtual void \fBsetLODOfPatch\fP (s32 patchX, s32 patchZ, s32 LOD)=0"
+.br
+.RI "\fIManually sets the LOD of a patch. \fP"
+.ti -1c
+.RI "virtual \fBcore::vector3df\fP \fBgetTerrainCenter\fP ()=0"
+.br
+.RI "\fIReturns center of terrain. \fP"
+.ti -1c
+.RI "virtual void \fBsetCameraMovementDelta\fP (f32 delta)=0"
+.br
+.RI "\fISets the movement camera threshold. \fP"
+.ti -1c
+.RI "virtual void \fBsetCameraRotationDelta\fP (f32 delta)=0"
+.br
+.RI "\fISets the rotation camera threshold. \fP"
+.ti -1c
+.RI "virtual void \fBsetDynamicSelectorUpdate\fP (bool bVal)=0"
+.br
+.RI "\fISets whether or not the node should dynamically update its associated selector when the geomipmap data changes. \fP"
+.ti -1c
+.RI "virtual bool \fBoverrideLODDistance\fP (s32 LOD, f32 newDistance)=0"
+.br
+.RI "\fIOverride the default generation of distance thresholds. \fP"
+.ti -1c
+.RI "virtual void \fBscaleTexture\fP (f32 scale=1.0f, f32 scale2=0.0f)=0"
+.br
+.RI "\fIScales the base texture, similar to makePlanarTextureMapping. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+A scene node for displaying terrain using the geo mip map algorithm. 
+
+The code for the TerrainSceneNode is based on the Terrain renderer by Soconne and the GeoMipMapSceneNode developed by Spinz. They made their code available for engine and allowed it to be distributed under this licence. I only modified some parts. A lot of thanks go to them.
+.PP
+This scene node is capable of very quickly loading terrains and updating the indices at runtime to enable viewing very large terrains. It uses a CLOD ( Continuous Level of Detail ) algorithm which updates the indices for each patch based on a LOD ( Level of Detail ) which is determined based on a patch's distance from the camera.
+.PP
+The Patch Size of the terrain must always be a size of ( 2^N+1, i.e. 8+1(9), 16+1(17), etc. ). The MaxLOD available is directly dependent on the patch size of the terrain. LOD 0 contains all of the indices to draw all the triangles at the max detail for a patch. As each LOD goes up by 1 the step taken, in generating indices increases by - 2^LOD, so for LOD 1, the step taken is 2, for LOD 2, the step taken is 4, LOD 3 - 8, etc. The step can be no larger than the size of the patch, so having a LOD of 8, with a patch size of 17, is asking the algoritm to generate indices every 2^8 ( 256 ) vertices, which is not possible with a patch size of 17. The maximum LOD for a patch size of 17 is 2^4 ( 16 ). So, with a MaxLOD of 5, you'll have LOD 0 ( full detail ), LOD 1 ( every 2 vertices ), LOD 2 ( every 4 vertices ), LOD 3 ( every 8 vertices ) and LOD 4 ( every 16 vertices ). 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual const \fBcore::aabbox3d\fP<f32>& engine::scene::ITerrainSceneNode::getBoundingBox () const\fC [pure virtual]\fP"
+.PP
+\fBReturns:\fP
+.RS 4
+: Returns the bounding box of the entire terrain. 
+.RE
+.PP
+
+.PP
+Implements \fBengine::scene::ISceneNode\fP.
+.SS "virtual s32 engine::scene::ITerrainSceneNode::getCurrentLODOfPatches (\fBcore::array\fP< s32 > & LODs)\fC [pure virtual]\fP"
+.PP
+Populates an array with the CurrentLOD of each patch. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fILODs,:\fP A reference to a core::array<s32> to hold the values 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+: Returns the number of elements in the array 
+.RE
+.PP
+
+.SS "virtual s32 engine::scene::ITerrainSceneNode::getIndicesForPatch (\fBcore::array\fP< u32 > & indices, s32 patchX, s32 patchZ, s32 LOD = \fC0\fP)\fC [pure virtual]\fP"
+.PP
+Gets the indices for a specified patch at a specified Level of Detail. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIindices,:\fP A reference to an array of u32 indices. 
+.br
+\fIpatchX,:\fP Patch x coordinate. 
+.br
+\fIpatchZ,:\fP Patch z coordinate. 
+.br
+\fILOD,:\fP The level of detail to get for that patch. If -1, then get the CurrentLOD. If the CurrentLOD is set to -1, meaning it's not shown, then it will retrieve the triangles at the highest LOD ( 0 ). 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+: Number if indices put into the buffer. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::ITerrainSceneNode::getMeshBufferForLOD (\fBSMeshBufferLightMap\fP & mb, s32 LOD)\fC [pure virtual]\fP"
+.PP
+Gets the meshbuffer data based on a specified level of detail. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fImb,:\fP A reference to an \fBSMeshBuffer\fP object 
+.br
+\fILOD,:\fP the level of detail you want the indices from. 
+.RE
+.PP
+
+.SS "virtual bool engine::scene::ITerrainSceneNode::overrideLODDistance (s32 LOD, f32 newDistance)\fC [pure virtual]\fP"
+.PP
+Override the default generation of distance thresholds. 
+.PP
+For determining the LOD a patch is rendered at. If any LOD is overridden, then the scene node will no longer apply scaling factors to these values. If you override these distances, and then apply a scale to the scene node, it is your responsibility to update the new distances to work best with your new terrain size. 
+.SS "virtual void engine::scene::ITerrainSceneNode::scaleTexture (f32 scale = \fC1.0f\fP, f32 scale2 = \fC0.0f\fP)\fC [pure virtual]\fP"
+.PP
+Scales the base texture, similar to makePlanarTextureMapping. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIscale,:\fP The scaling amount. Values above 1.0 increase the number of time the texture is drawn on the terrain. Values below 0 will decrease the number of times the texture is drawn on the terrain. Using negative values will flip the texture, as well as still scaling it. 
+.br
+\fIscale2,:\fP If set to 0 (default value), this will set the second texture coordinate set to the same values as in the first set. If this is another value than zero, it will scale the second texture coordinate set by this value. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::ITerrainSceneNode::setCameraMovementDelta (f32 delta)\fC [pure virtual]\fP"
+.PP
+Sets the movement camera threshold. 
+.PP
+It is used to determine when to recalculate indices for the scene node. The default value is 10.0f. 
+.SS "virtual void engine::scene::ITerrainSceneNode::setCameraRotationDelta (f32 delta)\fC [pure virtual]\fP"
+.PP
+Sets the rotation camera threshold. 
+.PP
+It is used to determine when to recalculate indices for the scene node. The default value is 1.0f. 
+.SS "virtual void engine::scene::ITerrainSceneNode::setDynamicSelectorUpdate (bool bVal)\fC [pure virtual]\fP"
+.PP
+Sets whether or not the node should dynamically update its associated selector when the geomipmap data changes. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIbVal,:\fP Boolean value representing whether or not to update selector dynamically. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::ITerrainSceneNode::setLODOfPatch (s32 patchX, s32 patchZ, s32 LOD)\fC [pure virtual]\fP"
+.PP
+Manually sets the LOD of a patch. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpatchX,:\fP Patch x coordinate. 
+.br
+\fIpatchZ,:\fP Patch z coordinate. 
+.br
+\fILOD,:\fP The level of detail to set the patch to. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

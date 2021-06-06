@@ -1,0 +1,530 @@
+.TH "engine::scene::ISceneNode" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::ISceneNode \- Scene node interface.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ISceneNode.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+Inherited by \fBengine::scene::IAnimatedMeshSceneNode\fP, \fBengine::scene::IBillboardSceneNode\fP, \fBengine::scene::ICameraSceneNode\fP, \fBengine::scene::IDummyTransformationSceneNode\fP, \fBengine::scene::ILightSceneNode\fP, \fBengine::scene::IParticleSystemSceneNode\fP, \fBengine::scene::IShadowVolumeSceneNode\fP, \fBengine::scene::ITerrainSceneNode\fP, and \fBengine::scene::ITextSceneNode\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBISceneNode\fP (\fBISceneNode\fP *parent, \fBISceneManager\fP *mgr, s32 id=-1, const \fBcore::vector3df\fP &position=\fBcore::vector3df\fP(0, 0, 0), const \fBcore::vector3df\fP &rotation=\fBcore::vector3df\fP(0, 0, 0), const \fBcore::vector3df\fP &scale=\fBcore::vector3df\fP(1.0f, 1.0f, 1.0f))"
+.br
+.RI "\fIConstructor. \fP"
+.ti -1c
+.RI "virtual \fB~ISceneNode\fP ()"
+.br
+.RI "\fIDestructor. \fP"
+.ti -1c
+.RI "virtual void \fBOnPreRender\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBOnPostRender\fP (u32 timeMs)"
+.br
+.ti -1c
+.RI "virtual void \fBrender\fP ()=0"
+.br
+.RI "\fIRenders the node. \fP"
+.ti -1c
+.RI "virtual const wchar_t * \fBgetName\fP () const "
+.br
+.ti -1c
+.RI "virtual void \fBsetName\fP (const wchar_t *name)"
+.br
+.ti -1c
+.RI "virtual const \fBcore::aabbox3d\fP< f32 > & \fBgetBoundingBox\fP () const =0"
+.br
+.ti -1c
+.RI "\fBcore::aabbox3d\fP< f32 > \fBgetTransformedBoundingBox\fP ()"
+.br
+.ti -1c
+.RI "\fBcore::matrix4\fP & \fBgetAbsoluteTransformation\fP ()"
+.br
+.RI "\fIreturns the absolute transformation of the node. Is recalculated every \fBOnPostRender()\fP-call. \fP"
+.ti -1c
+.RI "virtual \fBcore::matrix4\fP \fBgetRelativeTransformation\fP () const "
+.br
+.ti -1c
+.RI "virtual bool \fBisVisible\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBsetVisible\fP (bool isVisible)"
+.br
+.RI "\fISets if the node should be visible or not. All children of this node won't be visible too. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetID\fP ()"
+.br
+.RI "\fIReturns the id of the scene node. This id can be used to identify the node. \fP"
+.ti -1c
+.RI "virtual void \fBsetID\fP (s32 id)"
+.br
+.RI "\fIsets the id of the scene node. This id can be used to identify the node. \fP"
+.ti -1c
+.RI "virtual void \fBaddChild\fP (\fBISceneNode\fP *child)"
+.br
+.ti -1c
+.RI "virtual bool \fBremoveChild\fP (\fBISceneNode\fP *child)"
+.br
+.ti -1c
+.RI "virtual void \fBremoveAll\fP ()"
+.br
+.RI "\fIRemoves all children of this scene node. \fP"
+.ti -1c
+.RI "virtual void \fBremove\fP ()"
+.br
+.RI "\fIRemoves this scene node from the scene, deleting it. \fP"
+.ti -1c
+.RI "virtual void \fBaddAnimator\fP (\fBISceneNodeAnimator\fP *animator)"
+.br
+.RI "\fIAdds an animator which should animate this node. \fP"
+.ti -1c
+.RI "virtual void \fBremoveAnimator\fP (\fBISceneNodeAnimator\fP *animator)"
+.br
+.RI "\fIRemoves an animator from this scene node. \fP"
+.ti -1c
+.RI "virtual void \fBremoveAnimators\fP ()"
+.br
+.RI "\fIRemoves all animators from this scene node. \fP"
+.ti -1c
+.RI "virtual \fBvideo::SMaterial\fP & \fBgetMaterial\fP (s32 i)"
+.br
+.ti -1c
+.RI "virtual s32 \fBgetMaterialCount\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetMaterialFlag\fP (\fBvideo::E_MATERIAL_FLAG\fP flag, bool newvalue)"
+.br
+.ti -1c
+.RI "void \fBsetMaterialTexture\fP (s32 textureLayer, \fBvideo::ITexture\fP *texture)"
+.br
+.ti -1c
+.RI "void \fBsetMaterialType\fP (\fBvideo::E_MATERIAL_TYPE\fP newType)"
+.br
+.ti -1c
+.RI "virtual \fBcore::vector3df\fP \fBgetScale\fP () const "
+.br
+.RI "\fIGets the scale of the scene node. \fP"
+.ti -1c
+.RI "virtual void \fBsetScale\fP (const \fBcore::vector3df\fP &scale)"
+.br
+.RI "\fISets the scale of the scene node. \fP"
+.ti -1c
+.RI "virtual const \fBcore::vector3df\fP \fBgetRotation\fP () const "
+.br
+.RI "\fISets the rotation of the node. \fP"
+.ti -1c
+.RI "virtual void \fBsetRotation\fP (const \fBcore::vector3df\fP &rotation)"
+.br
+.RI "\fISets the rotation of the node. \fP"
+.ti -1c
+.RI "virtual const \fBcore::vector3df\fP \fBgetPosition\fP () const "
+.br
+.RI "\fIGets the position of the node. \fP"
+.ti -1c
+.RI "virtual void \fBsetPosition\fP (const \fBcore::vector3df\fP &newpos)"
+.br
+.RI "\fISets the position of the node. \fP"
+.ti -1c
+.RI "virtual \fBcore::vector3df\fP \fBgetAbsolutePosition\fP () const "
+.br
+.RI "\fIGets the abolute position of the node. \fP"
+.ti -1c
+.RI "void \fBsetAutomaticCulling\fP (bool enabled)"
+.br
+.RI "\fIEnables or disables automatic culling based on the bounding box. \fP"
+.ti -1c
+.RI "bool \fBgetAutomaticCulling\fP () const "
+.br
+.RI "\fIGets the automatic culling state. \fP"
+.ti -1c
+.RI "void \fBsetDebugDataVisible\fP (bool visible)"
+.br
+.RI "\fISets if debug data like bounding boxes should be drawn. \fP"
+.ti -1c
+.RI "bool \fBisDebugDataVisible\fP ()"
+.br
+.RI "\fIReturns if debug data like bounding boxes are drawed. \fP"
+.ti -1c
+.RI "void \fBsetIsDebugObject\fP (bool debugObject)"
+.br
+.RI "\fISets if this scene node is a debug object. \fP"
+.ti -1c
+.RI "bool \fBisDebugObject\fP ()"
+.br
+.RI "\fIReturns if this scene node is a debug object. \fP"
+.ti -1c
+.RI "const \fBcore::list\fP< \fBISceneNode\fP * > & \fBgetChildren\fP () const "
+.br
+.RI "\fIReturns a const reference to the list of all children. \fP"
+.ti -1c
+.RI "virtual void \fBsetParent\fP (\fBISceneNode\fP *newParent)"
+.br
+.RI "\fIChanges the parent of the scene node. \fP"
+.ti -1c
+.RI "virtual \fBITriangleSelector\fP * \fBgetTriangleSelector\fP () const "
+.br
+.ti -1c
+.RI "virtual void \fBsetTriangleSelector\fP (\fBITriangleSelector\fP *selector)"
+.br
+.ti -1c
+.RI "virtual void \fBupdateAbsolutePosition\fP ()"
+.br
+.RI "\fIupdates the absolute position based on the relative and the parents position \fP"
+.ti -1c
+.RI "\fBscene::ISceneNode\fP * \fBgetParent\fP ()"
+.br
+.RI "\fIReturns the parent of this scene node. \fP"
+.ti -1c
+.RI "virtual \fBESCENE_NODE_TYPE\fP \fBgetType\fP ()"
+.br
+.RI "\fIReturns type of the scene node. \fP"
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBcore::stringw\fP \fBName\fP"
+.br
+.RI "\fIname of the scene node. \fP"
+.ti -1c
+.RI "\fBcore::matrix4\fP \fBAbsoluteTransformation\fP"
+.br
+.RI "\fIabsolute transformation of the node. \fP"
+.ti -1c
+.RI "\fBcore::vector3df\fP \fBRelativeTranslation\fP"
+.br
+.RI "\fIrelative translation of the scene node. \fP"
+.ti -1c
+.RI "\fBcore::vector3df\fP \fBRelativeRotation\fP"
+.br
+.RI "\fIrelative rotation of the scene node. \fP"
+.ti -1c
+.RI "\fBcore::vector3df\fP \fBRelativeScale\fP"
+.br
+.RI "\fIrelative scale of the scene node. \fP"
+.ti -1c
+.RI "\fBISceneNode\fP * \fBParent\fP"
+.br
+.RI "\fIPointer to the parent. \fP"
+.ti -1c
+.RI "\fBcore::list\fP< \fBISceneNode\fP * > \fBChildren\fP"
+.br
+.RI "\fIList of all children of this node. \fP"
+.ti -1c
+.RI "\fBcore::list\fP< \fBISceneNodeAnimator\fP * > \fBAnimators\fP"
+.br
+.RI "\fIList of all animatrors node. \fP"
+.ti -1c
+.RI "s32 \fBID\fP"
+.br
+.RI "\fIid of the node. \fP"
+.ti -1c
+.RI "\fBISceneManager\fP * \fBSceneManager\fP"
+.br
+.RI "\fIpointer to the scene manager \fP"
+.ti -1c
+.RI "\fBITriangleSelector\fP * \fBTriangleSelector\fP"
+.br
+.RI "\fIpointer to the triangleselector \fP"
+.ti -1c
+.RI "bool \fBAutomaticCullingEnabled\fP"
+.br
+.RI "\fIautomatic culling \fP"
+.ti -1c
+.RI "bool \fBDebugDataVisible\fP"
+.br
+.RI "\fIflag if debug data should be drawed, like Bounding Boxes. \fP"
+.ti -1c
+.RI "bool \fBIsVisible\fP"
+.br
+.RI "\fIis the node visible? \fP"
+.ti -1c
+.RI "bool \fBIsDebugObject\fP"
+.br
+.RI "\fIis debug object? \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Scene node interface. 
+
+A scene node is a node in the hirachical scene graph. Every scene node may have children, which are other scene nodes. Children move relative the their parents position. If the parent of a node is not visible, its children won't be visible too. In this way, it is for example easily possible to attach a light to a moving car, or to place a walking character on a moving platform on a moving ship. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual void engine::scene::ISceneNode::addChild (\fBISceneNode\fP * child)\fC [inline, virtual]\fP"
+.PP
+Adds a child to this scene node. If the scene node already has got a parent, it is removed from there as child. 
+.SS "virtual \fBcore::vector3df\fP engine::scene::ISceneNode::getAbsolutePosition () const\fC [inline, virtual]\fP"
+.PP
+Gets the abolute position of the node. 
+.PP
+The position is absolute. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the current absolute position of the scene node. 
+.RE
+.PP
+
+.SS "bool engine::scene::ISceneNode::getAutomaticCulling () const\fC [inline]\fP"
+.PP
+Gets the automatic culling state. 
+.PP
+\fBReturns:\fP
+.RS 4
+The node is culled based on its bounding box if this method returns true, otherwise no culling is performed. 
+.RE
+.PP
+
+.SS "virtual const \fBcore::aabbox3d\fP<f32>& engine::scene::ISceneNode::getBoundingBox () const\fC [pure virtual]\fP"
+.PP
+Returns the axis aligned, not transformed bounding box of this node. This means that if this node is a animated 3d character, moving in a room, the bounding box will always be around the origin. To get the box in real world coordinates, just transform it with the matrix you receive with \fBgetAbsoluteTransformation()\fP or simply use \fBgetTransformedBoundingBox()\fP, which does the same. 
+.PP
+Implemented in \fBengine::scene::ITerrainSceneNode\fP.
+.SS "virtual \fBvideo::SMaterial\fP& engine::scene::ISceneNode::getMaterial (s32 i)\fC [inline, virtual]\fP"
+.PP
+Returns the material based on the zero based index i. To get the amount of materials used by this scene node, use \fBgetMaterialCount()\fP. This function is needed for inserting the node into the scene hirachy on a optimal position for minimizing renderstate changes, but can also be used to directly modify the material of a scene node. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIi,:\fP Zero based index i. The maximal value for this may be \fBgetMaterialCount()\fP - 1. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the material of that index. 
+.RE
+.PP
+
+.SS "virtual s32 engine::scene::ISceneNode::getMaterialCount ()\fC [inline, virtual]\fP"
+.PP
+Returns amount of materials used by this scene node. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns current count of materials used by this scene node. 
+.RE
+.PP
+
+.SS "virtual const wchar_t* engine::scene::ISceneNode::getName () const\fC [inline, virtual]\fP"
+.PP
+Returns the name of the node. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns name as wide character string. 
+.RE
+.PP
+
+.SS "virtual const \fBcore::vector3df\fP engine::scene::ISceneNode::getPosition () const\fC [inline, virtual]\fP"
+.PP
+Gets the position of the node. 
+.PP
+Note that the position is relative to the parent. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the current position of the node relative to the parent. 
+.RE
+.PP
+
+.SS "virtual \fBcore::matrix4\fP engine::scene::ISceneNode::getRelativeTransformation () const\fC [inline, virtual]\fP"
+.PP
+Returns the relative transformation of the scene node. The relative transformation is stored internally as 3 vectors: translation, rotation and scale. To get the relative transformation matrix, it is calculated from these values. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the relative transformation matrix. 
+.RE
+.PP
+
+.SS "virtual const \fBcore::vector3df\fP engine::scene::ISceneNode::getRotation () const\fC [inline, virtual]\fP"
+.PP
+Sets the rotation of the node. 
+.PP
+Note that this is the relative rotation of the node. 
+.PP
+\fBReturns:\fP
+.RS 4
+Current relative rotation of the scene node. 
+.RE
+.PP
+
+.SS "virtual \fBcore::vector3df\fP engine::scene::ISceneNode::getScale () const\fC [inline, virtual]\fP"
+.PP
+Gets the scale of the scene node. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the scale of the scene node. 
+.RE
+.PP
+
+.SS "\fBcore::aabbox3d\fP<f32> engine::scene::ISceneNode::getTransformedBoundingBox ()\fC [inline]\fP"
+.PP
+Returns the axis aligned, transformed and animated absolute bounding box of this node. 
+.SS "virtual \fBITriangleSelector\fP* engine::scene::ISceneNode::getTriangleSelector () const\fC [inline, virtual]\fP"
+.PP
+Returns the triangle selector attached to this scene node. The Selector can be used by the engine for doing collision detection. You can create a TriangleSelector with \fBISceneManager::createTriangleSelector()\fP or \fBISceneManager::createOctTreeTriangleSelector\fP and set it with \fBISceneNode::setTriangleSelector()\fP. If a scene node got no triangle selector, but collision tests should be done with it, a triangle selector is created using the bounding box of the scene node. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the TriangleSelector or NULL, if there is none. 
+.RE
+.PP
+
+.SS "bool engine::scene::ISceneNode::isDebugObject ()\fC [inline]\fP"
+.PP
+Returns if this scene node is a debug object. 
+.PP
+Debug objects have some special properties, for example they can be easily excluded from collision detection or from serialization, etc. 
+.SS "virtual bool engine::scene::ISceneNode::isVisible ()\fC [inline, virtual]\fP"
+.PP
+Returns true if the node is visible. This is only an option, set by the user and has nothing to do with geometry culling 
+.SS "virtual void engine::scene::ISceneNode::OnPostRender (u32 timeMs)\fC [inline, virtual]\fP"
+.PP
+\fBOnPostRender()\fP is called just after rendering the whole scene. Nodes may calculate or store animations here, and may do other useful things, dependent on what they are. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItimeMs,:\fP Current time in milli seconds. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::ISceneNode::OnPreRender ()\fC [inline, virtual]\fP"
+.PP
+This method is called just before the rendering process of the whole scene. Nodes may register themselves in the render pipeline during this call, precalculate the geometry which should be renderered, and prevent their children from being able to register them selfes if they are clipped by simply not calling their OnPreRender-Method. 
+.SS "virtual bool engine::scene::ISceneNode::removeChild (\fBISceneNode\fP * child)\fC [inline, virtual]\fP"
+.PP
+Removes a child from this scene node. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if the child could be removed, and false if not. 
+.RE
+.PP
+
+.SS "void engine::scene::ISceneNode::setAutomaticCulling (bool enabled)\fC [inline]\fP"
+.PP
+Enables or disables automatic culling based on the bounding box. 
+.PP
+Automatic culling is enabled by default. Note that not all SceneNodes support culling (the billboard scene node for example) and that some nodes always cull their geometry because it is their only reason for existance, for example the OctreeSceneNode. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIenabled,:\fP If true, automatic culling is enabled. If false, it is disabled. 
+.RE
+.PP
+
+.SS "void engine::scene::ISceneNode::setDebugDataVisible (bool visible)\fC [inline]\fP"
+.PP
+Sets if debug data like bounding boxes should be drawn. 
+.PP
+Please note that not all scene nodes support this feature. 
+.SS "void engine::scene::ISceneNode::setIsDebugObject (bool debugObject)\fC [inline]\fP"
+.PP
+Sets if this scene node is a debug object. 
+.PP
+Debug objects have some special properties, for example they can be easily excluded from collision detection or from serialization, etc. 
+.SS "void engine::scene::ISceneNode::setMaterialFlag (\fBvideo::E_MATERIAL_FLAG\fP flag, bool newvalue)\fC [inline]\fP"
+.PP
+Sets all material flags at once to a new value. Helpful for example, if you want to be the the whole mesh to be lighted by 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIflag,:\fP Which flag of all materials to be set. 
+.br
+\fInewvalue,:\fP New value of the flag. 
+.RE
+.PP
+
+.SS "void engine::scene::ISceneNode::setMaterialTexture (s32 textureLayer, \fBvideo::ITexture\fP * texture)\fC [inline]\fP"
+.PP
+Sets the texture of the specified layer in all materials of this scene node to the new texture. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItextureLayer,:\fP Layer of texture to be set. Must be a value greater or equal than 0 and smaller than MATERIAL_MAX_TEXTURES. 
+.br
+\fItexture,:\fP Texture to be used. 
+.RE
+.PP
+
+.SS "void engine::scene::ISceneNode::setMaterialType (\fBvideo::E_MATERIAL_TYPE\fP newType)\fC [inline]\fP"
+.PP
+Sets the material type of all materials s32 this scene node to a new material type. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fInewType,:\fP New type of material to be set. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::ISceneNode::setName (const wchar_t * name)\fC [inline, virtual]\fP"
+.PP
+Sets the name of the node. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIname,:\fP New name of the scene node. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::ISceneNode::setPosition (const \fBcore::vector3df\fP & newpos)\fC [inline, virtual]\fP"
+.PP
+Sets the position of the node. 
+.PP
+Note that the position is relative to the parent. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fInewpos,:\fP New relative postition of the scene node. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::ISceneNode::setRotation (const \fBcore::vector3df\fP & rotation)\fC [inline, virtual]\fP"
+.PP
+Sets the rotation of the node. 
+.PP
+This only modifies the relative rotation of the node. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIroation,:\fP New rotation of the node in degrees. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::ISceneNode::setScale (const \fBcore::vector3df\fP & scale)\fC [inline, virtual]\fP"
+.PP
+Sets the scale of the scene node. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIscale,:\fP New scale of the node 
+.RE
+.PP
+
+.SS "virtual void engine::scene::ISceneNode::setTriangleSelector (\fBITriangleSelector\fP * selector)\fC [inline, virtual]\fP"
+.PP
+Sets the triangle selector of the scene node. The Selector can be used by the engine for doing collision detection. You can create a TriangleSelector with \fBISceneManager::createTriangleSelector()\fP or \fBISceneManager::createOctTreeTriangleSelector()\fP. Some nodes may create their own selector by default, so it would be good to check if there is already a selector in this node by calling \fBISceneNode::getTriangleSelector()\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIselector,:\fP New triangle selector for this scene node. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

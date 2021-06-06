@@ -1,0 +1,391 @@
+.TH "engine::io" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::io \- This namespace provides interfaces for input/output: Reading and writing files, accessing zip archives, xml files, ...  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBIFileReadCallBack\fP"
+.br
+.RI "\fICallback class for file read abstraction. \fP"
+.ti -1c
+.RI "class \fBIXMLBase\fP"
+.br
+.RI "\fIEmpty class to be used as parent class for engineXMLReader. \fP"
+.ti -1c
+.RI "class \fBIengineXMLReader\fP"
+.br
+.RI "\fIInterface providing easy read access to a XML file. \fP"
+.ti -1c
+.RI "class \fBIFileList\fP"
+.br
+.RI "\fIThe Filelist lists all files in a directory. \fP"
+.ti -1c
+.RI "class \fBIFileSystem\fP"
+.br
+.RI "\fIThe FileSystem manages files and archives and provides access to them. \fP"
+.ti -1c
+.RI "class \fBIReadFile\fP"
+.br
+.RI "\fIInterface providing read acess to a file. \fP"
+.ti -1c
+.RI "class \fBIWriteFile\fP"
+.br
+.RI "\fIInterface providing write acess to a file. \fP"
+.ti -1c
+.RI "class \fBIXMLWriter\fP"
+.br
+.RI "\fIInterface providing methods for making it easier to write XML files. \fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef unsigned short \fBchar16\fP"
+.br
+.RI "\fIdefines the utf-16 type. \fP"
+.ti -1c
+.RI "typedef unsigned long \fBchar32\fP"
+.br
+.RI "\fIdefines the utf-32 type. \fP"
+.ti -1c
+.RI "typedef \fBIengineXMLReader\fP< char, \fBIXMLBase\fP > \fBengineXMLReader\fP"
+.br
+.RI "\fIA UTF-8 or ASCII character xml parser. \fP"
+.ti -1c
+.RI "typedef \fBIengineXMLReader\fP< \fBchar16\fP, \fBIXMLBase\fP > \fBengineXMLReaderUTF16\fP"
+.br
+.RI "\fIA UTF-16 xml parser. \fP"
+.ti -1c
+.RI "typedef \fBIengineXMLReader\fP< \fBchar32\fP, \fBIXMLBase\fP > \fBengineXMLReaderUTF32\fP"
+.br
+.RI "\fIA UTF-32 xml parser. \fP"
+.ti -1c
+.RI "typedef \fBIengineXMLReader\fP< wchar_t, \fBIUnknown\fP > \fBIXMLReader\fP"
+.br
+.ti -1c
+.RI "typedef \fBIengineXMLReader\fP< c8, \fBIUnknown\fP > \fBIXMLReaderUTF8\fP"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBETEXT_FORMAT\fP { \fBETF_ASCII\fP, \fBETF_UTF8\fP, \fBETF_UTF16_BE\fP, \fBETF_UTF16_LE\fP, \fBETF_UTF32_BE\fP, \fBETF_UTF32_LE\fP }"
+.br
+.RI "\fIEnumeration of all supported source text file formats. \fP"
+.ti -1c
+.RI "enum \fBEXML_NODE\fP { \fBEXN_NONE\fP, \fBEXN_ELEMENT\fP, \fBEXN_ELEMENT_END\fP, \fBEXN_TEXT\fP, \fBEXN_COMMENT\fP, \fBEXN_CDATA\fP, \fBEXN_UNKNOWN\fP }"
+.br
+.RI "\fIEnumeration for all xml nodes which are parsed by engineXMLReader. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBengineXMLReader\fP * \fBcreateengineXMLReader\fP (const char *filename)"
+.br
+.RI "\fICreates an instance of an UFT-8 or ASCII character xml parser. \fP"
+.ti -1c
+.RI "\fBengineXMLReader\fP * \fBcreateengineXMLReader\fP (FILE *file)"
+.br
+.RI "\fICreates an instance of an UFT-8 or ASCII character xml parser. \fP"
+.ti -1c
+.RI "\fBengineXMLReader\fP * \fBcreateengineXMLReader\fP (\fBIFileReadCallBack\fP *callback)"
+.br
+.RI "\fICreates an instance of an UFT-8 or ASCII character xml parser. \fP"
+.ti -1c
+.RI "\fBengineXMLReaderUTF16\fP * \fBcreateengineXMLReaderUTF16\fP (const char *filename)"
+.br
+.RI "\fICreates an instance of an UFT-16 xml parser. \fP"
+.ti -1c
+.RI "\fBengineXMLReaderUTF16\fP * \fBcreateengineXMLReaderUTF16\fP (FILE *file)"
+.br
+.RI "\fICreates an instance of an UFT-16 xml parser. \fP"
+.ti -1c
+.RI "\fBengineXMLReaderUTF16\fP * \fBcreateengineXMLReaderUTF16\fP (\fBIFileReadCallBack\fP *callback)"
+.br
+.RI "\fICreates an instance of an UFT-16 xml parser. \fP"
+.ti -1c
+.RI "\fBengineXMLReaderUTF32\fP * \fBcreateengineXMLReaderUTF32\fP (const char *filename)"
+.br
+.RI "\fICreates an instance of an UFT-32 xml parser. \fP"
+.ti -1c
+.RI "\fBengineXMLReaderUTF32\fP * \fBcreateengineXMLReaderUTF32\fP (FILE *file)"
+.br
+.RI "\fICreates an instance of an UFT-32 xml parser. \fP"
+.ti -1c
+.RI "\fBengineXMLReaderUTF32\fP * \fBcreateengineXMLReaderUTF32\fP (\fBIFileReadCallBack\fP *callback)"
+.br
+.RI "\fICreates an instance of an UFT-32 xml parser. \fP"
+.ti -1c
+.RI "\fBIReadFile\fP * \fBcreateReadFile\fP (const c8 *fileName)"
+.br
+.RI "\fIInternal function, please do not use. \fP"
+.ti -1c
+.RI "\fBIReadFile\fP * \fBcreateLimitReadFile\fP (const c8 *fileName, \fBIReadFile\fP *alreadyOpenedFile, s32 areaSize)"
+.br
+.RI "\fIInternal function, please do not use. \fP"
+.ti -1c
+.RI "\fBIReadFile\fP * \fBcreateMemoryReadFile\fP (void *memory, s32 size, const c8 *fileName, bool deleteMemoryWhenDropped)"
+.br
+.RI "\fIInternal function, please do not use. \fP"
+.ti -1c
+.RI "\fBIWriteFile\fP * \fBcreateWriteFile\fP (const c8 *fileName, bool append)"
+.br
+.RI "\fIInternal function, please do not use. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+This namespace provides interfaces for input/output: Reading and writing files, accessing zip archives, xml files, ... 
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef unsigned short \fBengine::io::char16\fP"
+.PP
+defines the utf-16 type. 
+.PP
+Not using wchar_t for this because wchar_t has 16 bit on windows and 32 bit on other operating systems. 
+.SS "typedef unsigned long \fBengine::io::char32\fP"
+.PP
+defines the utf-32 type. 
+.PP
+Not using wchar_t for this because wchar_t has 16 bit on windows and 32 bit on other operating systems. 
+.SS "typedef \fBIengineXMLReader\fP<char, \fBIXMLBase\fP> \fBengine::io::engineXMLReader\fP"
+.PP
+A UTF-8 or ASCII character xml parser. 
+.PP
+This means that all character data will be returned in 8 bit ASCII or UTF-8 by this parser. The file to read can be in any format, it will be converted to UTF-8 if it is not in this format. Create an instance of this with \fBcreateengineXMLReader()\fP; See \fBIengineXMLReader\fP for description on how to use it. 
+.SS "typedef \fBIengineXMLReader\fP<\fBchar16\fP, \fBIXMLBase\fP> \fBengine::io::engineXMLReaderUTF16\fP"
+.PP
+A UTF-16 xml parser. 
+.PP
+This means that all character data will be returned in UTF-16 by this parser. The file to read can be in any format, it will be converted to UTF-16 if it is not in this format. Create an instance of this with \fBcreateengineXMLReaderUTF16()\fP; See \fBIengineXMLReader\fP for description on how to use it. 
+.SS "typedef \fBIengineXMLReader\fP<\fBchar32\fP, \fBIXMLBase\fP> \fBengine::io::engineXMLReaderUTF32\fP"
+.PP
+A UTF-32 xml parser. 
+.PP
+This means that all character data will be returned in UTF-32 by this parser. The file to read can be in any format, it will be converted to UTF-32 if it is not in this format. Create an instance of this with \fBcreateengineXMLReaderUTF32()\fP; See \fBIengineXMLReader\fP for description on how to use it. 
+.SS "typedef \fBIengineXMLReader\fP<wchar_t, \fBIUnknown\fP> \fBengine::io::IXMLReader\fP"
+.PP
+A xml reader for wide characters, derived from \fBIUnknown\fP. This XML Parser can read any type of text files from any source where engine can read. Just call \fBIFileSystem::createXMLReader()\fP. For more informations on how to use the parser, see \fBIengineXMLReader\fP 
+.SS "typedef \fBIengineXMLReader\fP<c8, \fBIUnknown\fP> \fBengine::io::IXMLReaderUTF8\fP"
+.PP
+A xml reader for ASCII or UTF-8 characters, derived from \fBIUnknown\fP. This XML Parser can read any type of text files from any source where engine can read. Just call \fBIFileSystem::createXMLReaderUTF8()\fP. For more informations on how to use the parser, see \fBIengineXMLReader\fP 
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBengine::io::ETEXT_FORMAT\fP"
+.PP
+Enumeration of all supported source text file formats. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIETF_ASCII \fP\fP
+ASCII, file without byte order mark, or not a text file. 
+.TP
+\fB\fIETF_UTF8 \fP\fP
+UTF-8 format. 
+.TP
+\fB\fIETF_UTF16_BE \fP\fP
+UTF-16 format, big endian. 
+.TP
+\fB\fIETF_UTF16_LE \fP\fP
+UTF-16 format, little endian. 
+.TP
+\fB\fIETF_UTF32_BE \fP\fP
+UTF-32 format, big endian. 
+.TP
+\fB\fIETF_UTF32_LE \fP\fP
+UTF-32 format, little endian. 
+.SS "enum \fBengine::io::EXML_NODE\fP"
+.PP
+Enumeration for all xml nodes which are parsed by engineXMLReader. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIEXN_NONE \fP\fP
+No xml node. This is usually the node if you did not read anything yet. 
+.TP
+\fB\fIEXN_ELEMENT \fP\fP
+A xml element, like <foo>. 
+.TP
+\fB\fIEXN_ELEMENT_END \fP\fP
+End of an xml element, like </foo>. 
+.TP
+\fB\fIEXN_TEXT \fP\fP
+Text within a xml element: <foo> this is the text. </foo>. 
+.TP
+\fB\fIEXN_COMMENT \fP\fP
+An xml comment like <!-- I am a comment --> or a DTD definition. 
+.TP
+\fB\fIEXN_CDATA \fP\fP
+An xml cdata section like <![CDATA[ this is some CDATA ]]>. 
+.TP
+\fB\fIEXN_UNKNOWN \fP\fP
+Unknown element. 
+.SH "Function Documentation"
+.PP 
+.SS "\fBengineXMLReader\fP* engine::io::createengineXMLReader (const char * filename)"
+.PP
+Creates an instance of an UFT-8 or ASCII character xml parser. 
+.PP
+This means that all character data will be returned in 8 bit ASCII or UTF-8. The file to read can be in any format, it will be converted to UTF-8 if it is not in this format. If you are using the engine Engine, it is better not to use this function but \fBIFileSystem::createXMLReaderUTF8()\fP instead. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfilename,:\fP Name of file to be opened. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created xml parser. This pointer should be deleted using 'delete' after no longer needed. Returns 0 if an error occured and the file could not be opened. 
+.RE
+.PP
+
+.SS "\fBengineXMLReader\fP* engine::io::createengineXMLReader (FILE * file)"
+.PP
+Creates an instance of an UFT-8 or ASCII character xml parser. 
+.PP
+This means that all character data will be returned in 8 bit ASCII or UTF-8. The file to read can be in any format, it will be converted to UTF-8 if it is not in this format. If you are using the engine Engine, it is better not to use this function but \fBIFileSystem::createXMLReaderUTF8()\fP instead. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfile,:\fP Pointer to opened file, must have been opened in binary mode, e.g. using fopen('foo.bar', 'wb'); The file will not be closed after it has been read. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created xml parser. This pointer should be deleted using 'delete' after no longer needed. Returns 0 if an error occured and the file could not be opened. 
+.RE
+.PP
+
+.SS "\fBengineXMLReader\fP* engine::io::createengineXMLReader (IFileReadCallBack * callback)"
+.PP
+Creates an instance of an UFT-8 or ASCII character xml parser. 
+.PP
+This means that all character data will be returned in 8 bit ASCII or UTF-8. The file to read can be in any format, it will be converted to UTF-8 if it is not in this format. If you are using the engine Engine, it is better not to use this function but \fBIFileSystem::createXMLReaderUTF8()\fP instead. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcallback,:\fP Callback for file read abstraction. Implement your own callback to make the xml parser read in other things than just files. See \fBIFileReadCallBack\fP for more information about this. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created xml parser. This pointer should be deleted using 'delete' after no longer needed. Returns 0 if an error occured and the file could not be opened. 
+.RE
+.PP
+
+.SS "\fBengineXMLReaderUTF16\fP* engine::io::createengineXMLReaderUTF16 (const char * filename)"
+.PP
+Creates an instance of an UFT-16 xml parser. 
+.PP
+This means that all character data will be returned in UTF-16. The file to read can be in any format, it will be converted to UTF-16 if it is not in this format. If you are using the engine Engine, it is better not to use this function but \fBIFileSystem::createXMLReader()\fP instead. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfilename,:\fP Name of file to be opened. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created xml parser. This pointer should be deleted using 'delete' after no longer needed. Returns 0 if an error occured and the file could not be opened. 
+.RE
+.PP
+
+.SS "\fBengineXMLReaderUTF16\fP* engine::io::createengineXMLReaderUTF16 (FILE * file)"
+.PP
+Creates an instance of an UFT-16 xml parser. 
+.PP
+This means that all character data will be returned in UTF-16. The file to read can be in any format, it will be converted to UTF-16 if it is not in this format. If you are using the engine Engine, it is better not to use this function but \fBIFileSystem::createXMLReader()\fP instead. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfile,:\fP Pointer to opened file, must have been opened in binary mode, e.g. using fopen('foo.bar', 'wb'); The file will not be closed after it has been read. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created xml parser. This pointer should be deleted using 'delete' after no longer needed. Returns 0 if an error occured and the file could not be opened. 
+.RE
+.PP
+
+.SS "\fBengineXMLReaderUTF16\fP* engine::io::createengineXMLReaderUTF16 (IFileReadCallBack * callback)"
+.PP
+Creates an instance of an UFT-16 xml parser. 
+.PP
+This means that all character data will be returned in UTF-16. The file to read can be in any format, it will be converted to UTF-16 if it is not in this format. If you are using the engine Engine, it is better not to use this function but \fBIFileSystem::createXMLReader()\fP instead. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcallback,:\fP Callback for file read abstraction. Implement your own callback to make the xml parser read in other things than just files. See \fBIFileReadCallBack\fP for more information about this. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created xml parser. This pointer should be deleted using 'delete' after no longer needed. Returns 0 if an error occured and the file could not be opened. 
+.RE
+.PP
+
+.SS "\fBengineXMLReaderUTF32\fP* engine::io::createengineXMLReaderUTF32 (const char * filename)"
+.PP
+Creates an instance of an UFT-32 xml parser. 
+.PP
+This means that all character data will be returned in UTF-32. The file to read can be in any format, it will be converted to UTF-32 if it is not in this format. If you are using the engine Engine, it is better not to use this function but \fBIFileSystem::createXMLReader()\fP instead. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfilename,:\fP Name of file to be opened. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created xml parser. This pointer should be deleted using 'delete' after no longer needed. Returns 0 if an error occured and the file could not be opened. 
+.RE
+.PP
+
+.SS "\fBengineXMLReaderUTF32\fP* engine::io::createengineXMLReaderUTF32 (FILE * file)"
+.PP
+Creates an instance of an UFT-32 xml parser. 
+.PP
+This means that all character data will be returned in UTF-32. The file to read can be in any format, it will be converted to UTF-32 if it is not in this format. if you are using the engine Engine, it is better not to use this function but \fBIFileSystem::createXMLReader()\fP instead. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfile,:\fP Pointer to opened file, must have been opened in binary mode, e.g. using fopen('foo.bar', 'wb'); The file will not be closed after it has been read. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created xml parser. This pointer should be deleted using 'delete' after no longer needed. Returns 0 if an error occured and the file could not be opened. 
+.RE
+.PP
+
+.SS "\fBengineXMLReaderUTF32\fP* engine::io::createengineXMLReaderUTF32 (IFileReadCallBack * callback)"
+.PP
+Creates an instance of an UFT-32 xml parser. 
+.PP
+This means that all character data will be returned in UTF-32. The file to read can be in any format, it will be converted to UTF-32 if it is not in this format. If you are using the engine Engine, it is better not to use this function but \fBIFileSystem::createXMLReader()\fP instead. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcallback,:\fP Callback for file read abstraction. Implement your own callback to make the xml parser read in other things than just files. See \fBIFileReadCallBack\fP for more information about this. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the created xml parser. This pointer should be deleted using 'delete' after no longer needed. Returns 0 if an error occured and the file could not be opened. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

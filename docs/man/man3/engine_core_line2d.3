@@ -1,0 +1,87 @@
+.TH "engine::core::line2d" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::core::line2d \- 2D line between two points with intersection methods.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <line2d.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "f32 \fBgetLength\fP () const "
+.br
+.ti -1c
+.RI "\fBvector2d\fP< T > \fBgetVector\fP () const "
+.br
+.ti -1c
+.RI "bool \fBintersectWith\fP (const \fBline2d\fP< T > &l, \fBvector2d\fP< T > &out)"
+.br
+.ti -1c
+.RI "\fBvector2d\fP< T > \fBgetUnitVector\fP ()"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<class T> class engine::core::line2d< T >"
+2D line between two points with intersection methods. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class T> f32 \fBengine::core::line2d\fP< T >::getLength () const\fC [inline]\fP"
+.PP
+Returns length of line 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns length of line. 
+.RE
+.PP
+
+.SS "template<class T> \fBvector2d\fP<T> \fBengine::core::line2d\fP< T >::getUnitVector ()\fC [inline]\fP"
+.PP
+Returns unit vector of the line. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns unit vector of this line. 
+.RE
+.PP
+
+.SS "template<class T> \fBvector2d\fP<T> \fBengine::core::line2d\fP< T >::getVector () const\fC [inline]\fP"
+.PP
+Returns the vector of the line. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the vector of the line. 
+.RE
+.PP
+
+.SS "template<class T> bool \fBengine::core::line2d\fP< T >::intersectWith (const \fBline2d\fP< T > & l, \fBvector2d\fP< T > & out)\fC [inline]\fP"
+.PP
+Tests if this line intersects with an other line. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIl,:\fP Other line to test intersection with. 
+.br
+\fIout,:\fP If there is an intersection, the location of the intersection will be stored in this vector. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if there is an intersection, false if not. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

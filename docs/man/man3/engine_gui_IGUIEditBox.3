@@ -1,0 +1,100 @@
+.TH "engine::gui::IGUIEditBox" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::gui::IGUIEditBox \- Single line edit box for editing simple text.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IGUIEditBox.h>\fP
+.PP
+Inherits \fBengine::gui::IGUIElement\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBIGUIEditBox\fP (\fBIGUIEnvironment\fP *environment, \fBIGUIElement\fP *parent, s32 id, \fBcore::rect\fP< s32 > rectangle)"
+.br
+.RI "\fIconstructor \fP"
+.ti -1c
+.RI "\fB~IGUIEditBox\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual void \fBsetOverrideFont\fP (\fBIGUIFont\fP *font=0)=0"
+.br
+.RI "\fISets another skin independent font. \fP"
+.ti -1c
+.RI "virtual void \fBsetOverrideColor\fP (\fBvideo::SColor\fP color)=0"
+.br
+.RI "\fISets another color for the text. \fP"
+.ti -1c
+.RI "virtual void \fBenableOverrideColor\fP (bool enable)=0"
+.br
+.RI "\fISets if the text should use the overide color or the color in the gui skin. \fP"
+.ti -1c
+.RI "virtual void \fBsetMax\fP (s32 max)=0"
+.br
+.RI "\fISets the maximum amount of characters which may be entered in the box. \fP"
+.ti -1c
+.RI "virtual s32 \fBgetMax\fP ()=0"
+.br
+.RI "\fIReturns maximum amount of characters, previously set by \fBsetMax()\fP;. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Single line edit box for editing simple text. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual void engine::gui::IGUIEditBox::enableOverrideColor (bool enable)\fC [pure virtual]\fP"
+.PP
+Sets if the text should use the overide color or the color in the gui skin. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIenable,:\fP If set to true, the override color, which can be set with \fBIGUIEditBox::setOverrideColor\fP is used, otherwise the EGDC_BUTTON_TEXT color of the skin. 
+.RE
+.PP
+
+.SS "virtual void engine::gui::IGUIEditBox::setMax (s32 max)\fC [pure virtual]\fP"
+.PP
+Sets the maximum amount of characters which may be entered in the box. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fImax,:\fP Maximum amount of characters. If 0, the character amount is infinity. 
+.RE
+.PP
+
+.SS "virtual void engine::gui::IGUIEditBox::setOverrideColor (\fBvideo::SColor\fP color)\fC [pure virtual]\fP"
+.PP
+Sets another color for the text. 
+.PP
+If set, the edit box does not use the EGDC_BUTTON_TEXT color defined in the skin, but the set color instead. You don't need to call IGUIEditBox::enableOverrrideColor(true) after this, this is done by this function. If you set a color, and you want the text displayed with the color of the skin again, call IGUIEditBox::enableOverrideColor(false); 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcolor,:\fP New color of the text. 
+.RE
+.PP
+
+.SS "virtual void engine::gui::IGUIEditBox::setOverrideFont (\fBIGUIFont\fP * font = \fC0\fP)\fC [pure virtual]\fP"
+.PP
+Sets another skin independent font. 
+.PP
+If this is set to zero, the button uses the font of the skin. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfont,:\fP New font to set. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

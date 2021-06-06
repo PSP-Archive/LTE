@@ -1,0 +1,39 @@
+.TH "engine::gui::IGUIToolBar" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::gui::IGUIToolBar \- Stays at the top of its parent like the menu bar and contains tool buttons.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IGUIToolbar.h>\fP
+.PP
+Inherits \fBengine::gui::IGUIElement\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBIGUIToolBar\fP (\fBIGUIEnvironment\fP *environment, \fBIGUIElement\fP *parent, s32 id, \fBcore::rect\fP< s32 > rectangle)"
+.br
+.RI "\fIconstructor \fP"
+.ti -1c
+.RI "\fB~IGUIToolBar\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual \fBIGUIButton\fP * \fBaddButton\fP (s32 id=-1, const wchar_t *text=0, \fBvideo::ITexture\fP *img=0, \fBvideo::ITexture\fP *pressedimg=0, bool isPushButton=false, bool useAlphaChannel=false)=0"
+.br
+.RI "\fIAdds a button to the tool bar. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Stays at the top of its parent like the menu bar and contains tool buttons. 
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

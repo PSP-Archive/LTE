@@ -1,0 +1,101 @@
+.TH "engine::scene::ITriangleSelector" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::ITriangleSelector \- Interface to return triangles with specific properties.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ITriangleSelector.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+Inherited by \fBengine::scene::IMetaTriangleSelector\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~ITriangleSelector\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual s32 \fBgetTriangleCount\fP () const =0"
+.br
+.RI "\fIReturns amount of all available triangles in this selector. \fP"
+.ti -1c
+.RI "virtual void \fBgetTriangles\fP (\fBcore::triangle3df\fP *triangles, s32 arraySize, s32 &outTriangleCount, const \fBcore::matrix4\fP *transform=0)=0"
+.br
+.ti -1c
+.RI "virtual void \fBgetTriangles\fP (\fBcore::triangle3df\fP *triangles, s32 arraySize, s32 &outTriangleCount, const \fBcore::aabbox3d\fP< f32 > &box, const \fBcore::matrix4\fP *transform=0)=0"
+.br
+.ti -1c
+.RI "virtual void \fBgetTriangles\fP (\fBcore::triangle3df\fP *triangles, s32 arraySize, s32 &outTriangleCount, const \fBcore::line3d\fP< f32 > &line, const \fBcore::matrix4\fP *transform=0)=0"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Interface to return triangles with specific properties. 
+
+Every \fBISceneNode\fP may have a triangle selector, available with ISceneNode::getTriangleScelector() or \fBISceneManager::createTriangleSelector\fP. This is used for doing collision detection: For example if you know, that a collision may happened in the area between (1,1,1) and (10,10,10), you can get all triangles of the scene node in this area with the \fBITriangleSelector\fP easily and check every triangle if it collided. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual void engine::scene::ITriangleSelector::getTriangles (\fBcore::triangle3df\fP * triangles, s32 arraySize, s32 & outTriangleCount, const \fBcore::line3d\fP< f32 > & line, const \fBcore::matrix4\fP * transform = \fC0\fP)\fC [pure virtual]\fP"
+.PP
+Gets all triangles which have or may have contact with a 3d line. Please note that unoptimized triangle selectors also may return triangles, which are not in contact at all with the 3d line. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItriangles,:\fP Array where the resulting triangles will be written to. 
+.br
+\fIarraySize,:\fP Size of the target array. 
+.br
+\fIoutTriangleCount,:\fP Amount of triangles which have been written into the array. 
+.br
+\fIline,:\fP Only triangles which may be in contact with this 3d line will be written into the array. 
+.br
+\fItransform,:\fP Pointer to matrix for transforming the triangles before. they are returned. Useful for example to scale all triangles down into an ellipsoid space. If this pointer is null, no transformation will be done. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::ITriangleSelector::getTriangles (\fBcore::triangle3df\fP * triangles, s32 arraySize, s32 & outTriangleCount, const \fBcore::aabbox3d\fP< f32 > & box, const \fBcore::matrix4\fP * transform = \fC0\fP)\fC [pure virtual]\fP"
+.PP
+Gets all triangles which lie within a specific bounding box. Please note that unoptimized triangle selectors also may return triangles, which are not in the specific box at all. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItriangles,:\fP Array where the resulting triangles will be written to. 
+.br
+\fIarraySize,:\fP Size of the target array. 
+.br
+\fIoutTriangleCount,:\fP Amount of triangles which have been written into the array. 
+.br
+\fIbox,:\fP Only triangles which are in this axis aligned bounding box will be written into the array. 
+.br
+\fItransform,:\fP Pointer to matrix for transforming the triangles before. they are returned. Useful for example to scale all triangles down into an ellipsoid space. If this pointer is null, no transformation will be done. 
+.RE
+.PP
+
+.SS "virtual void engine::scene::ITriangleSelector::getTriangles (\fBcore::triangle3df\fP * triangles, s32 arraySize, s32 & outTriangleCount, const \fBcore::matrix4\fP * transform = \fC0\fP)\fC [pure virtual]\fP"
+.PP
+Gets all triangles. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItriangles,:\fP Array where the resulting triangles will be written to. 
+.br
+\fIarraySize,:\fP Size of the target array. 
+.br
+\fIoutTriangleCount,:\fP Amount of triangles which have been written into the array. 
+.br
+\fItransform,:\fP Pointer to matrix for transforming the triangles before. they are returned. Useful for example to scale all triangles down into an ellipsoid space. If this pointer is null, no transformation will be done. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

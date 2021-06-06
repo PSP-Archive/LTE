@@ -1,0 +1,99 @@
+.TH "engine::scene::SMeshBufferTangents" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::SMeshBufferTangents \- Simple implementation of the \fBIMeshBuffer\fP interface with S3DVertexTangents vertices.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <SMeshBufferTangents.h>\fP
+.PP
+Inherits \fBengine::scene::IMeshBuffer\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBSMeshBufferTangents\fP ()"
+.br
+.RI "\fIconstructor \fP"
+.ti -1c
+.RI "\fB~SMeshBufferTangents\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual const \fBvideo::SMaterial\fP & \fBgetMaterial\fP () const "
+.br
+.RI "\fIreturns the material of this meshbuffer \fP"
+.ti -1c
+.RI "virtual \fBvideo::SMaterial\fP & \fBgetMaterial\fP ()"
+.br
+.RI "\fIreturns the material of this meshbuffer \fP"
+.ti -1c
+.RI "virtual const void * \fBgetVertices\fP () const "
+.br
+.RI "\fIreturns pointer to vertices \fP"
+.ti -1c
+.RI "virtual void * \fBgetVertices\fP ()"
+.br
+.RI "\fIreturns pointer to vertices \fP"
+.ti -1c
+.RI "virtual s32 \fBgetVertexCount\fP () const "
+.br
+.RI "\fIreturns amount of vertices \fP"
+.ti -1c
+.RI "virtual const u16 * \fBgetIndices\fP () const "
+.br
+.RI "\fIreturns pointer to Indices \fP"
+.ti -1c
+.RI "virtual u16 * \fBgetIndices\fP ()"
+.br
+.RI "\fIreturns pointer to Indices \fP"
+.ti -1c
+.RI "virtual s32 \fBgetIndexCount\fP () const "
+.br
+.RI "\fIreturns amount of indices \fP"
+.ti -1c
+.RI "virtual const \fBcore::aabbox3d\fP< f32 > & \fBgetBoundingBox\fP () const "
+.br
+.RI "\fIreturns an axis aligned bounding box \fP"
+.ti -1c
+.RI "virtual \fBcore::aabbox3d\fP< f32 > & \fBgetBoundingBox\fP ()"
+.br
+.RI "\fIreturns an axis aligned bounding box \fP"
+.ti -1c
+.RI "void \fBrecalculateBoundingBox\fP ()"
+.br
+.RI "\fIrecalculates the bounding box. should be called if the mesh changed. \fP"
+.ti -1c
+.RI "virtual \fBvideo::E_VERTEX_TYPE\fP \fBgetVertexType\fP () const "
+.br
+.RI "\fIreturns which type of vertex data is stored. \fP"
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBcore::array\fP< \fBvideo::S3DVertexTangents\fP > \fBVertices\fP"
+.br
+.RI "\fImaterial for this meshBuffer. \fP"
+.ti -1c
+.RI "\fBcore::array\fP< u16 > \fBIndices\fP"
+.br
+.RI "\fIArray of vertices. \fP"
+.ti -1c
+.RI "\fBcore::aabbox3d\fP< f32 > \fBBoundingBox\fP"
+.br
+.RI "\fIArray of the Indices. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Simple implementation of the \fBIMeshBuffer\fP interface with S3DVertexTangents vertices. 
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

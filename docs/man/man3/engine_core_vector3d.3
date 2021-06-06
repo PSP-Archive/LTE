@@ -1,0 +1,133 @@
+.TH "engine::core::vector3d" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::core::vector3d \- 3d vector template class with lots of operators and methods.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <vector3d.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBequals\fP (const \fBvector3d\fP< T > &other)"
+.br
+.RI "\fIreturns if this vector equals the other one, taking floating point rounding errors into account \fP"
+.ti -1c
+.RI "f32 \fBgetLength\fP () const "
+.br
+.RI "\fIReturns length of the vector. \fP"
+.ti -1c
+.RI "f32 \fBgetLengthSQ\fP () const "
+.br
+.RI "\fIReturns squared length of the vector. \fP"
+.ti -1c
+.RI "T \fBdotProduct\fP (const \fBvector3d\fP< T > &other) const "
+.br
+.RI "\fIReturns the dot product with another vector. \fP"
+.ti -1c
+.RI "f32 \fBgetDistanceFrom\fP (const \fBvector3d\fP< T > &other) const "
+.br
+.RI "\fIReturns distance from an other point. \fP"
+.ti -1c
+.RI "f32 \fBgetDistanceFromSQ\fP (const \fBvector3d\fP< T > &other) const "
+.br
+.RI "\fIReturns squared distance from an other point. \fP"
+.ti -1c
+.RI "\fBvector3d\fP< T > \fBcrossProduct\fP (const \fBvector3d\fP< T > &p) const "
+.br
+.RI "\fICalculates the cross product with another vector. \fP"
+.ti -1c
+.RI "bool \fBisBetweenPoints\fP (const \fBvector3d\fP< T > &begin, const \fBvector3d\fP< T > &end) const "
+.br
+.RI "\fIReturns if this vector interpreted as a point is on a line between two other points. \fP"
+.ti -1c
+.RI "\fBvector3d\fP< T > & \fBnormalize\fP ()"
+.br
+.RI "\fINormalizes the vector. \fP"
+.ti -1c
+.RI "void \fBsetLength\fP (T newlength)"
+.br
+.RI "\fISets the lenght of the vector to a new value. \fP"
+.ti -1c
+.RI "void \fBinvert\fP ()"
+.br
+.RI "\fIInverts the vector. \fP"
+.ti -1c
+.RI "\fBvector3d\fP< T > \fBgetInterpolated\fP (const \fBvector3d\fP< T > &other, f32 d) const "
+.br
+.RI "\fIReturns interpolated vector. \fP"
+.ti -1c
+.RI "\fBvector3d\fP< T > \fBgetHorizontalAngle\fP ()"
+.br
+.RI "\fIGets the Y and Z rotations of a vector. \fP"
+.ti -1c
+.RI "void \fBgetAs4Values\fP (T *\fBarray\fP)"
+.br
+.RI "\fIFills an array of 4 values with the vector data (usually floats). \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<class T> class engine::core::vector3d< T >"
+3d vector template class with lots of operators and methods. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class T> void \fBengine::core::vector3d\fP< T >::getAs4Values (T * array)\fC [inline]\fP"
+.PP
+Fills an array of 4 values with the vector data (usually floats). 
+.PP
+Useful for setting in shader constants for example. The fourth value will always be 0. 
+.SS "template<class T> f32 \fBengine::core::vector3d\fP< T >::getDistanceFrom (const \fBvector3d\fP< T > & other) const\fC [inline]\fP"
+.PP
+Returns distance from an other point. 
+.PP
+Here, the vector is interpreted as point in 3 dimensional space. 
+.SS "template<class T> f32 \fBengine::core::vector3d\fP< T >::getDistanceFromSQ (const \fBvector3d\fP< T > & other) const\fC [inline]\fP"
+.PP
+Returns squared distance from an other point. 
+.PP
+Here, the vector is interpreted as point in 3 dimensional space. 
+.SS "template<class T> \fBvector3d\fP<T> \fBengine::core::vector3d\fP< T >::getHorizontalAngle ()\fC [inline]\fP"
+.PP
+Gets the Y and Z rotations of a vector. 
+.PP
+Thanks to Arras on the engine forums to add this method. 
+.PP
+\fBReturns:\fP
+.RS 4
+A vector representing the rotation in degrees of this vector. The Z component of the vector will always be 0. 
+.RE
+.PP
+
+.SS "template<class T> \fBvector3d\fP<T> \fBengine::core::vector3d\fP< T >::getInterpolated (const \fBvector3d\fP< T > & other, f32 d) const\fC [inline]\fP"
+.PP
+Returns interpolated vector. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother,:\fP other vector to interpolate between 
+.br
+\fId,:\fP value between 0.0f and 1.0f. 
+.RE
+.PP
+
+.SS "template<class T> f32 \fBengine::core::vector3d\fP< T >::getLengthSQ () const\fC [inline]\fP"
+.PP
+Returns squared length of the vector. 
+.PP
+This is useful because it is much faster then \fBgetLength()\fP. 
+.SS "template<class T> bool \fBengine::core::vector3d\fP< T >::isBetweenPoints (const \fBvector3d\fP< T > & begin, const \fBvector3d\fP< T > & end) const\fC [inline]\fP"
+.PP
+Returns if this vector interpreted as a point is on a line between two other points. 
+.PP
+It is assumed that the point is on the line. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

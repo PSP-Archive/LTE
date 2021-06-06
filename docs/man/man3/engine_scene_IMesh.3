@@ -1,0 +1,123 @@
+.TH "engine::scene::IMesh" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::IMesh \- Class for accessing a mesh with multiple mesh buffers.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IMesh.h>\fP
+.PP
+Inherits \fBengine::IUnknown\fP.
+.PP
+Inherited by \fBengine::scene::SMesh\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~IMesh\fP ()"
+.br
+.RI "\fIdestructor \fP"
+.ti -1c
+.RI "virtual s32 \fBgetMeshBufferCount\fP ()=0"
+.br
+.RI "\fIReturns the amount of mesh buffers. \fP"
+.ti -1c
+.RI "virtual \fBIMeshBuffer\fP * \fBgetMeshBuffer\fP (s32 nr)=0"
+.br
+.RI "\fIReturns pointer to a mesh buffer. \fP"
+.ti -1c
+.RI "virtual const \fBcore::aabbox3d\fP< f32 > & \fBgetBoundingBox\fP () const =0"
+.br
+.RI "\fIReturns an axis aligned bounding box of the mesh. \fP"
+.ti -1c
+.RI "virtual \fBcore::aabbox3d\fP< f32 > & \fBgetBoundingBox\fP ()=0"
+.br
+.RI "\fIReturns an axis aligned bounding box of the mesh. \fP"
+.ti -1c
+.RI "virtual void \fBsetMaterialFlag\fP (\fBvideo::E_MATERIAL_FLAG\fP flag, bool newvalue)=0"
+.br
+.RI "\fISets a flag of all contained materials to a new value. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Class for accessing a mesh with multiple mesh buffers. 
+
+An \fBIMesh\fP is nothing more than a collection of some mesh buffers (\fBIMeshBuffer\fP). \fBSMesh\fP is a simple implementation of an \fBIMesh\fP. 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual \fBcore::aabbox3d\fP<f32>& engine::scene::IMesh::getBoundingBox ()\fC [pure virtual]\fP"
+.PP
+Returns an axis aligned bounding box of the mesh. 
+.PP
+\fBReturns:\fP
+.RS 4
+A bounding box of this mesh is returned. 
+.RE
+.PP
+
+.PP
+Implemented in \fBengine::scene::SMesh\fP.
+.SS "virtual const \fBcore::aabbox3d\fP<f32>& engine::scene::IMesh::getBoundingBox () const\fC [pure virtual]\fP"
+.PP
+Returns an axis aligned bounding box of the mesh. 
+.PP
+\fBReturns:\fP
+.RS 4
+A bounding box of this mesh is returned. 
+.RE
+.PP
+
+.PP
+Implemented in \fBengine::scene::SMesh\fP.
+.SS "virtual \fBIMeshBuffer\fP* engine::scene::IMesh::getMeshBuffer (s32 nr)\fC [pure virtual]\fP"
+.PP
+Returns pointer to a mesh buffer. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIZero\fP based index of the mesh buffer. The maximum value is \fBgetMeshBufferCount()\fP - 1; 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the pointer to the mesh buffer or NULL if there is no such mesh buffer. 
+.RE
+.PP
+
+.PP
+Implemented in \fBengine::scene::SMesh\fP.
+.SS "virtual s32 engine::scene::IMesh::getMeshBufferCount ()\fC [pure virtual]\fP"
+.PP
+Returns the amount of mesh buffers. 
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the amount of mesh buffers (\fBIMeshBuffer\fP) in this mesh. 
+.RE
+.PP
+
+.PP
+Implemented in \fBengine::scene::SMesh\fP.
+.SS "virtual void engine::scene::IMesh::setMaterialFlag (\fBvideo::E_MATERIAL_FLAG\fP flag, bool newvalue)\fC [pure virtual]\fP"
+.PP
+Sets a flag of all contained materials to a new value. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIflag,:\fP Flag to set in all materials. 
+.br
+\fInewvalue,:\fP New value to set in all materials. 
+.RE
+.PP
+
+.PP
+Implemented in \fBengine::scene::SMesh\fP.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

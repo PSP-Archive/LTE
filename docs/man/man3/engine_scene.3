@@ -1,0 +1,505 @@
+.TH "engine::scene" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene \- All scene management can be found in this namespace: Mesh loading, special scene nodes like octrees and billboards, ...  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBIAnimatedMesh\fP"
+.br
+.RI "\fIInterface for an animated mesh. \fP"
+.ti -1c
+.RI "class \fBIAnimatedMeshMD2\fP"
+.br
+.RI "\fIInterface for using some special functions of MD2 meshes. \fP"
+.ti -1c
+.RI "class \fBIAnimatedMeshMS3D\fP"
+.br
+.RI "\fIInterface for using some special functions of MS3D meshes. \fP"
+.ti -1c
+.RI "class \fBIAnimationEndCallBack\fP"
+.br
+.RI "\fICallback interface for catching events of ended animations. \fP"
+.ti -1c
+.RI "class \fBIAnimatedMeshSceneNode\fP"
+.br
+.RI "\fIScene node capable of displaying an animated mesh and its shadow. \fP"
+.ti -1c
+.RI "class \fBIAnimatedMeshX\fP"
+.br
+.RI "\fIInterface for using some special functions of X meshes. \fP"
+.ti -1c
+.RI "class \fBIBillboardSceneNode\fP"
+.br
+.RI "\fIA billboard scene node. \fP"
+.ti -1c
+.RI "class \fBICameraSceneNode\fP"
+.br
+.RI "\fIScene Node which is a (controlable) camera. \fP"
+.ti -1c
+.RI "class \fBIDummyTransformationSceneNode\fP"
+.br
+.RI "\fIDummy scene node for adding additional transformations to the scene graph. \fP"
+.ti -1c
+.RI "class \fBILightSceneNode\fP"
+.br
+.RI "\fIScene node which is a dynamic light. \fP"
+.ti -1c
+.RI "class \fBIMesh\fP"
+.br
+.RI "\fIClass for accessing a mesh with multiple mesh buffers. \fP"
+.ti -1c
+.RI "class \fBIMeshBuffer\fP"
+.br
+.RI "\fIStruct for holding a mesh with a single material. \fP"
+.ti -1c
+.RI "class \fBIMeshCache\fP"
+.br
+.RI "\fIThe mesh cache stores already loaded meshes and provides an interface to them. \fP"
+.ti -1c
+.RI "class \fBIMeshLoader\fP"
+.br
+.RI "\fIClass which is able to load an animated mesh from a file. \fP"
+.ti -1c
+.RI "class \fBIMeshManipulator\fP"
+.br
+.RI "\fIAn interface for easily manipulate meshes. \fP"
+.ti -1c
+.RI "class \fBIMetaTriangleSelector\fP"
+.br
+.RI "\fIInterface for making multiple triangle selectors work as one big selector. \fP"
+.ti -1c
+.RI "class \fBIParticleAffector\fP"
+.br
+.RI "\fIA particle affector modifies particles. \fP"
+.ti -1c
+.RI "class \fBIParticleEmitter\fP"
+.br
+.RI "\fIA particle emitter for using with particle systems. \fP"
+.ti -1c
+.RI "class \fBIParticleSystemSceneNode\fP"
+.br
+.RI "\fIA particle system scene node for creating snow, fire, exlosions, smoke... \fP"
+.ti -1c
+.RI "class \fBIQ3LevelMesh\fP"
+.br
+.RI "\fIInterface for a Mesh wich can be loaded directly from a Quake3 .bsp-file. \fP"
+.ti -1c
+.RI "class \fBISceneCollisionManager\fP"
+.br
+.RI "\fIThe Scene Collision Manager provides methods for performing collision tests and picking on scene nodes. \fP"
+.ti -1c
+.RI "class \fBISceneManager\fP"
+.br
+.RI "\fIThe Scene Manager manages scene nodes, mesh recources, cameras and all the other stuff. \fP"
+.ti -1c
+.RI "class \fBISceneNode\fP"
+.br
+.RI "\fIScene node interface. \fP"
+.ti -1c
+.RI "class \fBISceneNodeAnimator\fP"
+.br
+.RI "\fIAnimates a scene node. Can animate position, rotation, material, and so on. \fP"
+.ti -1c
+.RI "class \fBISceneNodeAnimatorCollisionResponse\fP"
+.br
+.RI "\fISpecial scene node animator for doing automatic collision detection and response. \fP"
+.ti -1c
+.RI "class \fBIShadowVolumeSceneNode\fP"
+.br
+.RI "\fIScene node for rendering a shadow volume into a stencil buffer. \fP"
+.ti -1c
+.RI "class \fBITerrainSceneNode\fP"
+.br
+.RI "\fIA scene node for displaying terrain using the geo mip map algorithm. \fP"
+.ti -1c
+.RI "class \fBITextSceneNode\fP"
+.br
+.RI "\fIA scene node for displaying 2d text at a position in three dimensional space. \fP"
+.ti -1c
+.RI "class \fBITriangleSelector\fP"
+.br
+.RI "\fIInterface to return triangles with specific properties. \fP"
+.ti -1c
+.RI "struct \fBSAnimatedMesh\fP"
+.br
+.RI "\fISimple implementation of the \fBIAnimatedMesh\fP interface. \fP"
+.ti -1c
+.RI "struct \fBSMesh\fP"
+.br
+.RI "\fISimple implementation of the \fBIMesh\fP interface. \fP"
+.ti -1c
+.RI "struct \fBSMeshBuffer\fP"
+.br
+.RI "\fISimple implementation of the \fBIMeshBuffer\fP interface with S3DVertex vertices. \fP"
+.ti -1c
+.RI "struct \fBSMeshBufferLightMap\fP"
+.br
+.RI "\fISimple implementation of the \fBIMeshBuffer\fP interface with S3DVertex2TCoords vertices. \fP"
+.ti -1c
+.RI "struct \fBSMeshBufferTangents\fP"
+.br
+.RI "\fISimple implementation of the \fBIMeshBuffer\fP interface with S3DVertexTangents vertices. \fP"
+.ti -1c
+.RI "struct \fBSParticle\fP"
+.br
+.RI "\fIStruct for holding particle data. \fP"
+.ti -1c
+.RI "struct \fBSViewFrustrum\fP"
+.br
+.RI "\fIDefines the view frustrum. Thats the space viewed by the camera. \fP"
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBESCENE_NODE_TYPE\fP { \fBESNT_TEST\fP =  0, \fBESNT_TEXT\fP, \fBESNT_WATER_SURFACE\fP, \fBESNT_TERRAIN\fP, \fBESNT_SKY_BOX\fP, \fBESNT_SHADOW_VOLUME\fP, \fBESNT_OCT_TREE\fP, \fBESNT_MESH\fP, \fBESNT_LIGHT\fP, \fBESNT_EMPTY\fP, \fBESNT_DUMMY_TRANSFORMATION\fP, \fBESNT_CAMERA\fP, \fBESNT_CAMERA_MAYA\fP, \fBESNT_CAMERA_FPS\fP, \fBESNT_BILLBOARD\fP, \fBESNT_ANIMATED_MESH\fP, \fBESNT_PARTICLE_SYSTEM\fP, \fBESNT_COUNT\fP, \fBESNT_UNKNOWN\fP, \fBESNT_FORCE_32_BIT\fP =  0x7fffffff }"
+.br
+.RI "\fIAn enumeration for all types of built-in scene nodes. \fP"
+.ti -1c
+.RI "enum \fBE_ANIMATED_MESH_TYPE\fP { \fBEAMT_UNKNOWN\fP =  0, \fBEAMT_MD2\fP, \fBEAMT_MS3D\fP, \fBEAMT_OBJ\fP, \fBEAMT_BSP\fP, \fBEAMT_3DS\fP, \fBEAMT_X\fP, \fBEAMT_MY3D\fP, \fBEAMT_LMTS\fP, \fBEAMT_CSM\fP, \fBEAMTS_OCT\fP }"
+.br
+.ti -1c
+.RI "enum \fBEMD2_ANIMATION_TYPE\fP { , \fBEMAT_COUNT\fP }"
+.br
+.RI "\fITypes of standard md2 animations. \fP"
+.ti -1c
+.RI "enum \fBE_SCENE_NODE_RENDER_PASS\fP { \fBESNRP_LIGHT_AND_CAMERA\fP, \fBESNRP_SKY_BOX\fP, \fBESNRP_AUTOMATIC\fP, \fBESNRP_SOLID\fP, \fBESNRP_SHADOW\fP, \fBESNRP_TRANSPARENT\fP, \fBESNRP_COUNT\fP }"
+.br
+.RI "\fIEnumeration for render passes. \fP"
+.ti -1c
+.RI "enum \fBE_TERRAIN_PATCH_SIZE\fP { \fBETPS_9\fP =  9, \fBETPS_17\fP =  17, \fBETPS_33\fP =  33, \fBETPS_65\fP =  65, \fBETPS_129\fP =  129 }"
+.br
+.RI "\fIenumeration for patch sizes specifying the size of patches in the TerrainSceneNode \fP"
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "const char *const \fBCSM_TEXTURE_PATH\fP = 'CSM_TexturePath'"
+.br
+.RI "\fIName of the parameter for changing the texture path of the built-in csm loader. \fP"
+.ti -1c
+.RI "const char *const \fBLMTS_TEXTURE_PATH\fP = 'LMTS_TexturePath'"
+.br
+.RI "\fIName of the parameter for changing the texture path of the built-in lmts loader. \fP"
+.ti -1c
+.RI "const char *const \fBMY3D_TEXTURE_PATH\fP = 'MY3D_TexturePath'"
+.br
+.RI "\fIName of the parameter for changing the texture path of the built-in my3d loader. \fP"
+.ti -1c
+.RI "const char *const \fBCOLLADA_CREATE_SCENE_INSTANCES\fP = 'COLLADA_CreateSceneInstances'"
+.br
+.RI "\fIName of the parameter specifying the COLLADA mesh loading mode. \fP"
+.ti -1c
+.RI "const char *const \fBDMF_TEXTURE_PATH\fP = 'DMF_TexturePath'"
+.br
+.RI "\fIName of the parameter for changing the texture path of the built-in DMF loader. \fP"
+.ti -1c
+.RI "const char *const \fBDMF_USE_MATERIALS_DIRS\fP = 'DMF_MaterialsDir'"
+.br
+.RI "\fIName of the parameter for preserving DMF textures dir structure with built-in DMF loader. \fP"
+.ti -1c
+.RI "const char *const \fBDMF_ALPHA_CHANNEL_REF\fP = 'DMF_AlphaRef'"
+.br
+.RI "\fIName of the parameter for setting reference value of alpha in transparent materials. \fP"
+.ti -1c
+.RI "const char *const \fBDMF_FLIP_ALPHA_TEXTURES\fP = 'DMF_FlipAlpha'"
+.br
+.RI "\fIName of the parameter for choose to flip or not tga files. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+All scene management can be found in this namespace: Mesh loading, special scene nodes like octrees and billboards, ... 
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBengine::scene::ESCENE_NODE_TYPE\fP"
+.PP
+An enumeration for all types of built-in scene nodes. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIESNT_TEST \fP\fP
+Test Scene Node. 
+.TP
+\fB\fIESNT_TEXT \fP\fP
+Text Scene Node. 
+.TP
+\fB\fIESNT_WATER_SURFACE \fP\fP
+Water Surface Scene Node. 
+.TP
+\fB\fIESNT_TERRAIN \fP\fP
+Terrain Scene Node. 
+.TP
+\fB\fIESNT_SKY_BOX \fP\fP
+Sky Box Scene Node. 
+.TP
+\fB\fIESNT_SHADOW_VOLUME \fP\fP
+Shadow Volume Scene Node. 
+.TP
+\fB\fIESNT_OCT_TREE \fP\fP
+OctTree Scene Node. 
+.TP
+\fB\fIESNT_MESH \fP\fP
+Mesh Scene Node. 
+.TP
+\fB\fIESNT_LIGHT \fP\fP
+Light Scene Node. 
+.TP
+\fB\fIESNT_EMPTY \fP\fP
+Empty Scene Node. 
+.TP
+\fB\fIESNT_DUMMY_TRANSFORMATION \fP\fP
+Dummy Transformation Scene Node. 
+.TP
+\fB\fIESNT_CAMERA \fP\fP
+Camera Scene Node. 
+.TP
+\fB\fIESNT_CAMERA_MAYA \fP\fP
+Maya Camera Scene Node. 
+.TP
+\fB\fIESNT_CAMERA_FPS \fP\fP
+First Person Shooter style Camera. 
+.TP
+\fB\fIESNT_BILLBOARD \fP\fP
+Billboard Scene Node. 
+.TP
+\fB\fIESNT_ANIMATED_MESH \fP\fP
+Animated Mesh Scene Node. 
+.TP
+\fB\fIESNT_PARTICLE_SYSTEM \fP\fP
+Particle System Scene Node. 
+.TP
+\fB\fIESNT_COUNT \fP\fP
+Amount of build in Scene Nodes. 
+.TP
+\fB\fIESNT_UNKNOWN \fP\fP
+Unknown scene node. 
+.TP
+\fB\fIESNT_FORCE_32_BIT \fP\fP
+This enum is never used, it only forces the compiler to compile these enumeration values to 32 bit. 
+.SS "enum \fBengine::scene::E_ANIMATED_MESH_TYPE\fP"
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIEAMT_UNKNOWN \fP\fP
+Unknown animated mesh type. 
+.TP
+\fB\fIEAMT_MD2 \fP\fP
+Quake 2 MD2 model file. 
+.TP
+\fB\fIEAMT_MS3D \fP\fP
+Milkshape 3d skeletal animation file. 
+.TP
+\fB\fIEAMT_OBJ \fP\fP
+Maya .obj not animated model. 
+.TP
+\fB\fIEAMT_BSP \fP\fP
+Quake 3 .bsp Map, not animated. 
+.TP
+\fB\fIEAMT_3DS \fP\fP
+3D Studio .3ds file 
+.TP
+\fB\fIEAMT_X \fP\fP
+Microsoft Direct3D .x-file. Can contain static and skeletal animated skinned meshes. This is the standard and best supported format of the engine Engine. 
+.TP
+\fB\fIEAMT_MY3D \fP\fP
+My3D Mesh, the file format by Zhuck Dimitry. 
+.TP
+\fB\fIEAMT_LMTS \fP\fP
+Pulsar LMTools (.lmts) file. The engine loader for this was written by Jonas Petersen 
+.TP
+\fB\fIEAMT_CSM \fP\fP
+Cartography Shop .csm file. The loader for this was created by Saurav Mohapatra. 
+.TP
+\fB\fIEAMTS_OCT \fP\fP
+.oct file for Paul Nette's FSRad or from Murphy McCauley's Blender .oct exporter. The oct file format contains 3D geometry and lightmaps and can be loaded directly by engine 
+.SS "enum \fBengine::scene::EMD2_ANIMATION_TYPE\fP"
+.PP
+Types of standard md2 animations. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIEMAT_COUNT \fP\fP
+Not an animation, but amount of animation types. 
+.SS "enum \fBengine::scene::E_SCENE_NODE_RENDER_PASS\fP"
+.PP
+Enumeration for render passes. 
+.PP
+A parameter passed to the registerNodeForRendering() method of the \fBISceneManager\fP, specifying when the mode wants to be drawed in relation to the other nodes. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIESNRP_LIGHT_AND_CAMERA \fP\fP
+Scene nodes which are lights or camera should use this, the very first pass. 
+.TP
+\fB\fIESNRP_SKY_BOX \fP\fP
+This is used for sky boxes. 
+.TP
+\fB\fIESNRP_AUTOMATIC \fP\fP
+All normal objects can use this for registering themselves. This value will never be returned by \fBISceneManager::getSceneNodeRenderPass()\fP. The scene manager will determine by itself if an object is transparent or solid and register the object as SNRT_TRANSPARENT or SNRT_SOLD automaticly if you call registerNodeForRendering with this value (which is default). Note that it will register the node only as ONE type. If your scene node has both solid and transparent material types register it twice (one time as SNRT_SOLID, the other time as SNRT_TRANSPARENT) and in the render() method call getSceneNodeRenderPass() to find out the current render pass and render only the corresponding parts of the node. 
+.TP
+\fB\fIESNRP_SOLID \fP\fP
+Solid scene nodes or special scene nodes without materials. 
+.TP
+\fB\fIESNRP_SHADOW \fP\fP
+Drawn after the transparent nodes, the time for drawing shadow volumes. 
+.TP
+\fB\fIESNRP_TRANSPARENT \fP\fP
+Transparent scene nodes, drawn after shadow nodes. They are sorted from back to front and drawn in that order. 
+.TP
+\fB\fIESNRP_COUNT \fP\fP
+Never used, value specifing how much parameters there are. 
+.SS "enum \fBengine::scene::E_TERRAIN_PATCH_SIZE\fP"
+.PP
+enumeration for patch sizes specifying the size of patches in the TerrainSceneNode 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIETPS_9 \fP\fP
+patch size of 9, at most, use 4 levels of detail with this patch size. 
+.TP
+\fB\fIETPS_17 \fP\fP
+patch size of 17, at most, use 5 levels of detail with this patch size. 
+.TP
+\fB\fIETPS_33 \fP\fP
+patch size of 33, at most, use 6 levels of detail with this patch size. 
+.TP
+\fB\fIETPS_65 \fP\fP
+patch size of 65, at most, use 7 levels of detail with this patch size. 
+.TP
+\fB\fIETPS_129 \fP\fP
+patch size of 129, at most, use 8 levels of detail with this patch size. 
+.SH "Variable Documentation"
+.PP 
+.SS "const char* const \fBengine::scene::CSM_TEXTURE_PATH\fP = 'CSM_TexturePath'"
+.PP
+Name of the parameter for changing the texture path of the built-in csm loader. 
+.PP
+Use it like this: 
+.PP
+.nf
+    SceneManager->getParameters()->setParameter(
+            scene::CSM_TEXTURE_PATH, 'path/to/your/textures');
+
+.fi
+.PP
+ 
+.SS "const char* const \fBengine::scene::LMTS_TEXTURE_PATH\fP = 'LMTS_TexturePath'"
+.PP
+Name of the parameter for changing the texture path of the built-in lmts loader. 
+.PP
+Use it like this: 
+.PP
+.nf
+  SceneManager->getParameters()->setParameter(
+           scene::LMTS_TEXTURE_PATH, 'path/to/your/textures');
+
+.fi
+.PP
+ 
+.SS "const char* const \fBengine::scene::MY3D_TEXTURE_PATH\fP = 'MY3D_TexturePath'"
+.PP
+Name of the parameter for changing the texture path of the built-in my3d loader. 
+.PP
+Use it like this: 
+.PP
+.nf
+  SceneManager->getParameters()->setParameter(
+           scene::MY3D_TEXTURE_PATH, 'path/to/your/textures');
+
+.fi
+.PP
+ 
+.SS "const char* const \fBengine::scene::COLLADA_CREATE_SCENE_INSTANCES\fP = 'COLLADA_CreateSceneInstances'"
+.PP
+Name of the parameter specifying the COLLADA mesh loading mode. 
+.PP
+Specifies if the COLLADA loader should create instances of the models, lights and cameras when loading COLLADA meshes. By default, this is set to false. If this is set to true, the \fBISceneManager::getMesh()\fP method will only return a pointer to a dummy mesh and create instances of all meshes and lights and cameras in the collada file by itself. Example: 
+.PP
+.nf
+         SceneManager->getParameters()->setParameter(
+           scene::COLLADA_CREATE_SCENE_INSTANCES, true);
+
+.fi
+.PP
+ 
+.SS "const char* const \fBengine::scene::DMF_TEXTURE_PATH\fP = 'DMF_TexturePath'"
+.PP
+Name of the parameter for changing the texture path of the built-in DMF loader. 
+.PP
+Use it like this: 
+.PP
+.nf
+    SceneManager->getStringParameters()->setParameter(
+           scene::DMF_TEXTURE_PATH, 'path/to/your/textures');
+
+.fi
+.PP
+ 
+.SS "const char* const \fBengine::scene::DMF_USE_MATERIALS_DIRS\fP = 'DMF_MaterialsDir'"
+.PP
+Name of the parameter for preserving DMF textures dir structure with built-in DMF loader. 
+.PP
+Use it like this: 
+.PP
+.nf
+     //this way you won't use this setting
+         SceneManager->getParameters()->setParameter(
+           scene::DMF_USE_MATERIALS_DIRS, false); 
+
+.fi
+.PP
+ 
+.PP
+.nf
+     //this way you'll use this setting
+     SceneManager->getParameters()->setParameter(
+           scene::DMF_USE_MATERIALS_DIRS, true); 
+
+.fi
+.PP
+ 
+.SS "const char* const \fBengine::scene::DMF_ALPHA_CHANNEL_REF\fP = 'DMF_AlphaRef'"
+.PP
+Name of the parameter for setting reference value of alpha in transparent materials. 
+.PP
+Use it like this: 
+.PP
+.nf
+  //this way you'll set alpha ref to 0.1
+     SceneManager->getParameters()->setParameter(
+           scene::DMF_ALPHA_CHANNEL_REF, 0.1); 
+
+.fi
+.PP
+ 
+.SS "const char* const \fBengine::scene::DMF_FLIP_ALPHA_TEXTURES\fP = 'DMF_FlipAlpha'"
+.PP
+Name of the parameter for choose to flip or not tga files. 
+.PP
+Use it like this: 
+.PP
+.nf
+       //this way you'll choose to flip alpha textures
+     SceneManager->()->setParameter(
+           scene::DMF_FLIP_ALPHA_TEXTURES, true); 
+
+.fi
+.PP
+ 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.

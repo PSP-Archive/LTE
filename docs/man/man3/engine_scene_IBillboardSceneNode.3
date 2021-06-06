@@ -1,0 +1,41 @@
+.TH "engine::scene::IBillboardSceneNode" 3 "29 Jul 2006" "LTE 3D Engine" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+engine::scene::IBillboardSceneNode \- A billboard scene node.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <IBillboardSceneNode.h>\fP
+.PP
+Inherits \fBengine::scene::ISceneNode\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBIBillboardSceneNode\fP (\fBISceneNode\fP *parent, \fBISceneManager\fP *mgr, s32 id, const \fBcore::vector3df\fP &position=\fBcore::vector3df\fP(0, 0, 0))"
+.br
+.RI "\fIconstructor \fP"
+.ti -1c
+.RI "virtual void \fBsetSize\fP (const \fBcore::dimension2d\fP< f32 > &size)=0"
+.br
+.RI "\fISets the size of the billboard. \fP"
+.ti -1c
+.RI "virtual const \fBcore::dimension2d\fP< f32 > & \fBgetSize\fP ()=0"
+.br
+.RI "\fIReturns the size of the billboard. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+A billboard scene node. 
+
+A billboard is like a 3d sprite: A 2d element, which always looks to the camera. It is usually used for explosions, fire, lensflares, particles and things like that. 
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LTE 3D Engine from the source code.
