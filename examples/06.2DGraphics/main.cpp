@@ -1,5 +1,5 @@
 /*
-This Tutorial shows how to do 2d graphics with the LTE 3D Engine.
+This Tutorial shows how to do 2d graphics with the LTE Game Engine.
 It shows how to draw images, keycolor based sprites,
 transparent rectangles and different fonts. You will may consider
 this useful if you want to make a 2d game with the engine, or if 
@@ -12,7 +12,7 @@ As always, I include the header files and use the engine namespace.
 
 using namespace engine;
 
-int main()
+int engineMain(unsigned int argc, void *argv )
 {
   
   setupPSP(); // setup psp
@@ -93,7 +93,7 @@ int main()
 
 			// draw some text
 			if (font)
-			font->draw(L"This demo shows that LTE 3D Engine is also capable of drawing 2D graphics.", 
+			font->draw(L"This demo shows that LTE Game Engine is also capable of drawing 2D graphics.", 
 				core::rect<s32>(130,10,300,50),
 				video::SColor(255,255,255,255));
 

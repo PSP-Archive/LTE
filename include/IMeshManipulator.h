@@ -1,8 +1,19 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
-// This file is part of the LTE 3D Engine
-// (C) 2006 - LTE Studios - by SiberianSTAR
-// LTE 3D Engine is based on Irrlicht 1.0
-// For conditions of distribution and use, see copyright notice in engine.h
+/*
+
+  LTE Game Engine SDK:
+
+   Copyright (C) 2006, SiberianSTAR <haxormail@gmail.com>
+
+  Based on Irrlicht 1.0:
+ 
+   Copyright (C) 2002-2006 Nikolaus Gebhardt
+
+  For conditions of distribution and use, see copyright notice in
+  engine.h
+ 
+  http://www.ltestudios.com
+
+*/
 
 #ifndef __I_MESH_MANIPULATOR_H_INCLUDED__
 #define __I_MESH_MANIPULATOR_H_INCLUDED__
@@ -50,6 +61,11 @@ namespace scene
 		//! Recalculates all normals of the mesh.
 		/** \param mesh: Mesh on which the operation is performed. */
 		virtual void recalculateNormals(IMesh* mesh, bool smooth = false) const = 0;
+ 
+    //! Subidivde in four all triangles wich sides are greater than 64 unit
+    /** \param mesh:  Mesh on which the operation is performed. 
+        \param maxlen: Maximium size of a side */
+    virtual void subdivideTriangles(scene::IMesh* mesh, s32 maxlen = 64) const = 0;
 
 		//! Recalculates all normals of the mesh buffer.
 		/** \param buffer: Mesh buffer on which the operation is performed. */
@@ -68,6 +84,13 @@ namespace scene
 		If you no longer need the cloned mesh, you should call SMesh::drop().
 		See IUnknown::drop() for more information. */
 		virtual SMesh* createMeshCopy(IMesh* mesh) const = 0;
+
+
+    //! Generate a shadow volume for the given mesh
+    //! \return Returns a Mesh that can be used as a prebuilt shadow volume
+    //! for IAnimatedMeshSceneNode::addShadowVolumeSceneNode, note you must specify
+    //! ESV_PREBUILT as type
+	  virtual SMesh* buildShadowVolume(scene::IMesh* mesh);
 
 		//! Creates a planar texture mapping on the mesh
 		/** \param mesh: Mesh on which the operation is performed.
@@ -104,4 +127,5 @@ namespace scene
 
 
 #endif
+
 

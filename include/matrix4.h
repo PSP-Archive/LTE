@@ -1,8 +1,19 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
-// This file is part of the LTE 3D Engine
-// (C) 2006 - LTE Studios - by SiberianSTAR
-// LTE 3D Engine is based on Irrlicht 1.0
-// For conditions of distribution and use, see copyright notice in engine.h
+/*
+
+  LTE Game Engine SDK:
+
+   Copyright (C) 2006, SiberianSTAR <haxormail@gmail.com>
+
+  Based on Irrlicht 1.0:
+ 
+   Copyright (C) 2002-2006 Nikolaus Gebhardt
+
+  For conditions of distribution and use, see copyright notice in
+  engine.h
+ 
+  http://www.ltestudios.com
+
+*/
 
 #ifndef __engine_MATRIX_H_INCLUDED__
 #define __engine_MATRIX_H_INCLUDED__
@@ -84,6 +95,10 @@ namespace core
 
 			//! Set Scale
 			void setScale( const vector3df& scale );
+
+			
+			//! Get Scale
+			core::vector3df getScale( );
 			
 			//! Translate a vector by the inverse of the translation part of this matrix.
 			void inverseTranslateVect( vector3df& vect ) const;			
@@ -125,14 +140,23 @@ namespace core
 			//! Multiplies this matrix by a 1x4 matrix
 			void multiplyWith1x4Matrix(f32* matrix) const;
 
-			//! Calculates inverse of matrix. Slow.
+			//! Calculates inverse of matrix. Fast inverse.
 			//! \return Returns false if there is no inverse matrix.
 			bool makeInverse();
-
+			
+			//! Calculates inverse of matrix. Slow
+			//! \return Returns false if there is no inverse matrix.
+			bool makeFullInverse();
+			
 			//! returns the inversed matrix of this one
-			//! \param Target, where result matrix is written to.
+			//! \param out, where result matrix is written to.
 			//! \return Returns false if there is no inverse matrix.
 			bool getInverse(matrix4& out);
+
+			//! returns the inversed matrix of this one
+			//! \param out, where result matrix is written to.
+			//! \return Returns false if there is no inverse matrix.
+			bool getFullInverse(matrix4& out);
 
 			//! Builds a right-handed perspective projection matrix based on a field of view
 			void buildProjectionMatrixPerspectiveFovRH(f32 fieldOfViewRadians, f32 aspectRatio, f32 zNear, f32 zFar);
@@ -176,12 +200,21 @@ namespace core
 
 			//! returns transposed matrix
 			matrix4 getTransposed();
+			
+			void toGLMatrix(float *glmat);
 
 			//! Matrix data, stored in column-major order
 			f32 M[16];
 	};
 
-
+  inline void matrix4::toGLMatrix(float *glmat)
+  {
+			s32 i = 0;
+			for (s32 r=0; r<4; ++r)
+				for (s32 c=0; c<4; ++c)
+					glmat[i++] = (*this)(c,r);	
+  	
+  }
 	inline matrix4::matrix4()
 	{
 		makeIdentity();
@@ -381,7 +414,10 @@ namespace core
 		M[10] = (f32)( cr*cp );
 	}
 
-
+	inline core::vector3df matrix4::getScale( )
+	{
+		return core::vector3df(M[0], M[5], M[10]);
+	}
 	inline void matrix4::makeIdentity()
 	{
 		for (s32 i=0; i<16; ++i)
@@ -528,13 +564,9 @@ namespace core
 		vect.Z = vect.Z+M[14];
 	}
 
-
 	inline bool matrix4::getInverse(matrix4& out)
 	{
-		/// Calculates the inverse of this Matrix 
-		/// The inverse is calculated using Cramers rule.
-		/// If no inverse exists then 'false' is returned.
-
+    /*
 		const matrix4 &m = *this;
 
 		f32 d = (m(0, 0) * m(1, 1) - m(1, 0) * m(0, 1)) * (m(2, 2) * m(3, 3) - m(3, 2) * m(2, 3))	- (m(0, 0) * m(2, 1) - m(2, 0) * m(0, 1)) * (m(1, 2) * m(3, 3) - m(3, 2) * m(1, 3))
@@ -565,8 +597,38 @@ namespace core
 		out(1, 3) = d * (m(0, 2) * (m(2, 0) * m(1, 3) - m(1, 0) * m(2, 3)) + m(1, 2) * (m(0, 0) * m(2, 3) - m(2, 0) * m(0, 3)) + m(2, 2) * (m(1, 0) * m(0, 3) - m(0, 0) * m(1, 3)));
 		out(2, 3) = d * (m(0, 3) * (m(2, 0) * m(1, 1) - m(1, 0) * m(2, 1)) + m(1, 3) * (m(0, 0) * m(2, 1) - m(2, 0) * m(0, 1)) + m(2, 3) * (m(1, 0) * m(0, 1) - m(0, 0) * m(1, 1)));
 		out(3, 3) = d * (m(0, 0) * (m(1, 1) * m(2, 2) - m(2, 1) * m(1, 2)) + m(1, 0) * (m(2, 1) * m(0, 2) - m(0, 1) * m(2, 2)) + m(2, 0) * (m(0, 1) * m(1, 2) - m(1, 1) * m(0, 2)));
+    */
+    matrix4 temp;
+    const matrix4 &m = *this;
+    core::vector3df v(m(0, 3), m(1,3), m(2, 3));
+
+    
+    temp(0,0) = m(0,0);
+    temp(0,1) = m(1,0);
+    temp(0,2) = m(2,0);
+    temp(1,0) = m(0,1);
+    temp(1,1) = m(1,1);
+    temp(1,2) = m(2,1);
+    temp(2,0) = m(0,2);
+    temp(2,1) = m(1,2);
+    temp(2,2) = m(2,2);
+    
+    temp.rotateVect(v);
+    v.X *= -1.0f;
+    v.Y *= -1.0f;
+    v.Z *= -1.0f;   
+
+    temp(0,3) = v.X;
+    temp(1,3) = v.Y;
+    temp(2,3) = v.Z;
+
+    for (int x = 0; x < 16; x++)
+     out.M[x] = temp.M[x];
 
 		return true;
+
+
+
 	}
 
 
@@ -583,6 +645,56 @@ namespace core
 		return false;
 	}
 
+inline bool matrix4::makeFullInverse()
+	{
+		matrix4 temp;
+
+		if (getFullInverse(temp))
+		{
+			*this = temp;
+			return true;
+		}
+
+		return false;
+	}
+
+
+	inline bool matrix4::getFullInverse(matrix4& out)
+	{
+		/// Calculates the inverse of this Matrix 
+		/// The inverse is calculated using Cramers rule.
+		/// If no inverse exists then 'false' is returned.
+
+		const matrix4 &m = *this;
+
+		f32 d = (m(0, 0) * m(1, 1) - m(1, 0) * m(0, 1)) * (m(2, 2) * m(3, 3) - m(3, 2) * m(2, 3))	- (m(0, 0) * m(2, 1) - m(2, 0) * m(0, 1)) * (m(1, 2) * m(3, 3) - m(3, 2) * m(1, 3))
+				+ (m(0, 0) * m(3, 1) - m(3, 0) * m(0, 1)) * (m(1, 2) * m(2, 3) - m(2, 2) * m(1, 3))	+ (m(1, 0) * m(2, 1) - m(2, 0) * m(1, 1)) * (m(0, 2) * m(3, 3) - m(3, 2) * m(0, 3))
+				- (m(1, 0) * m(3, 1) - m(3, 0) * m(1, 1)) * (m(0, 2) * m(2, 3) - m(2, 2) * m(0, 3))	+ (m(2, 0) * m(3, 1) - m(3, 0) * m(2, 1)) * (m(0, 2) * m(1, 3) - m(1, 2) * m(0, 3));
+		
+		if (d == 0.f)
+			return false;
+
+		d = 1.f / d;
+
+		out(0, 0) = d * (m(1, 1) * (m(2, 2) * m(3, 3) - m(3, 2) * m(2, 3)) + m(2, 1) * (m(3, 2) * m(1, 3) - m(1, 2) * m(3, 3)) + m(3, 1) * (m(1, 2) * m(2, 3) - m(2, 2) * m(1, 3)));
+		out(1, 0) = d * (m(1, 2) * (m(2, 0) * m(3, 3) - m(3, 0) * m(2, 3)) + m(2, 2) * (m(3, 0) * m(1, 3) - m(1, 0) * m(3, 3)) + m(3, 2) * (m(1, 0) * m(2, 3) - m(2, 0) * m(1, 3)));
+		out(2, 0) = d * (m(1, 3) * (m(2, 0) * m(3, 1) - m(3, 0) * m(2, 1)) + m(2, 3) * (m(3, 0) * m(1, 1) - m(1, 0) * m(3, 1)) + m(3, 3) * (m(1, 0) * m(2, 1) - m(2, 0) * m(1, 1)));
+		out(3, 0) = d * (m(1, 0) * (m(3, 1) * m(2, 2) - m(2, 1) * m(3, 2)) + m(2, 0) * (m(1, 1) * m(3, 2) - m(3, 1) * m(1, 2)) + m(3, 0) * (m(2, 1) * m(1, 2) - m(1, 1) * m(2, 2)));
+		out(0, 1) = d * (m(2, 1) * (m(0, 2) * m(3, 3) - m(3, 2) * m(0, 3)) + m(3, 1) * (m(2, 2) * m(0, 3) - m(0, 2) * m(2, 3)) + m(0, 1) * (m(3, 2) * m(2, 3) - m(2, 2) * m(3, 3)));
+		out(1, 1) = d * (m(2, 2) * (m(0, 0) * m(3, 3) - m(3, 0) * m(0, 3)) + m(3, 2) * (m(2, 0) * m(0, 3) - m(0, 0) * m(2, 3)) + m(0, 2) * (m(3, 0) * m(2, 3) - m(2, 0) * m(3, 3)));
+		out(2, 1) = d * (m(2, 3) * (m(0, 0) * m(3, 1) - m(3, 0) * m(0, 1)) + m(3, 3) * (m(2, 0) * m(0, 1) - m(0, 0) * m(2, 1)) + m(0, 3) * (m(3, 0) * m(2, 1) - m(2, 0) * m(3, 1)));
+		out(3, 1) = d * (m(2, 0) * (m(3, 1) * m(0, 2) - m(0, 1) * m(3, 2)) + m(3, 0) * (m(0, 1) * m(2, 2) - m(2, 1) * m(0, 2)) + m(0, 0) * (m(2, 1) * m(3, 2) - m(3, 1) * m(2, 2)));
+		out(0, 2) = d * (m(3, 1) * (m(0, 2) * m(1, 3) - m(1, 2) * m(0, 3)) + m(0, 1) * (m(1, 2) * m(3, 3) - m(3, 2) * m(1, 3)) + m(1, 1) * (m(3, 2) * m(0, 3) - m(0, 2) * m(3, 3)));
+		out(1, 2) = d * (m(3, 2) * (m(0, 0) * m(1, 3) - m(1, 0) * m(0, 3)) + m(0, 2) * (m(1, 0) * m(3, 3) - m(3, 0) * m(1, 3)) + m(1, 2) * (m(3, 0) * m(0, 3) - m(0, 0) * m(3, 3)));
+		out(2, 2) = d * (m(3, 3) * (m(0, 0) * m(1, 1) - m(1, 0) * m(0, 1)) + m(0, 3) * (m(1, 0) * m(3, 1) - m(3, 0) * m(1, 1)) + m(1, 3) * (m(3, 0) * m(0, 1) - m(0, 0) * m(3, 1)));
+		out(3, 2) = d * (m(3, 0) * (m(1, 1) * m(0, 2) - m(0, 1) * m(1, 2)) + m(0, 0) * (m(3, 1) * m(1, 2) - m(1, 1) * m(3, 2)) + m(1, 0) * (m(0, 1) * m(3, 2) - m(3, 1) * m(0, 2)));
+		out(0, 3) = d * (m(0, 1) * (m(2, 2) * m(1, 3) - m(1, 2) * m(2, 3)) + m(1, 1) * (m(0, 2) * m(2, 3) - m(2, 2) * m(0, 3)) + m(2, 1) * (m(1, 2) * m(0, 3) - m(0, 2) * m(1, 3)));
+		out(1, 3) = d * (m(0, 2) * (m(2, 0) * m(1, 3) - m(1, 0) * m(2, 3)) + m(1, 2) * (m(0, 0) * m(2, 3) - m(2, 0) * m(0, 3)) + m(2, 2) * (m(1, 0) * m(0, 3) - m(0, 0) * m(1, 3)));
+		out(2, 3) = d * (m(0, 3) * (m(2, 0) * m(1, 1) - m(1, 0) * m(2, 1)) + m(1, 3) * (m(0, 0) * m(2, 1) - m(2, 0) * m(0, 1)) + m(2, 3) * (m(1, 0) * m(0, 1) - m(0, 0) * m(1, 1)));
+		out(3, 3) = d * (m(0, 0) * (m(1, 1) * m(2, 2) - m(2, 1) * m(1, 2)) + m(1, 0) * (m(2, 1) * m(0, 2) - m(0, 1) * m(2, 2)) + m(2, 0) * (m(0, 1) * m(1, 2) - m(1, 1) * m(0, 2)));
+
+		return true;
+	}
 
 
 	inline matrix4& matrix4::operator=(const matrix4 &other)
@@ -775,28 +887,30 @@ namespace core
 	//! Builds a matrix that flattens geometry into a plane.
 	inline void matrix4::buildShadowMatrix(core::vector3df light, core::plane3df plane, f32 point)
 	{
-		plane.Normal.normalize();
-		f32 d = plane.Normal.dotProduct(light);
 
-		(*this)(0,0) = plane.Normal.X * light.X + d;
-		(*this)(1,0) = plane.Normal.X * light.Y;
-		(*this)(2,0) = plane.Normal.X * light.Z;
-		(*this)(3,0) = plane.Normal.X * point;
+   plane.Normal.normalize(); 
+   f32 d = plane.Normal.dotProduct(light); 
 
-		(*this)(0,1) = plane.Normal.Y * light.X;
-		(*this)(1,1) = plane.Normal.Y * light.Y + d;
-		(*this)(2,1) = plane.Normal.Y * light.Z;
-		(*this)(3,1) = plane.Normal.Y * point;
+  M[0] = d - plane.Normal.X * light.X; 
+  M[1] = -plane.Normal.X * light.Y; 
+  M[2] = -plane.Normal.X * light.Z; 
+  M[3] = -plane.Normal.X * point; 
 
-		(*this)(0,2) = plane.Normal.Z * light.X;
-		(*this)(1,2) = plane.Normal.Z * light.Y;
-		(*this)(2,2) = plane.Normal.Z * light.Z + d;
-		(*this)(3,2) = plane.Normal.Z * point;
+  M[4] = -plane.Normal.Y * light.X; 
+  M[5] = d - plane.Normal.Y * light.Y; 
+  M[6] = -plane.Normal.Y * light.Z; 
+  M[7] = -plane.Normal.Y * point; 
+  M[8] = -plane.Normal.Z * light.X; 
+  M[9] = -plane.Normal.Z * light.Y; 
+  M[10] = d - plane.Normal.Z * light.Z; 
+  M[11] = -plane.Normal.Z * point; 
 
-		(*this)(0,3) = plane.D * light.X + d;
-		(*this)(1,3) = plane.D * light.Y;
-		(*this)(2,3) = plane.D * light.Z;
-		(*this)(3,3) = plane.D * point;
+  M[12] = -plane.D * light.X; 
+  M[13] = -plane.D * light.Y; 
+  M[14] = -plane.D * light.Z; 
+  M[15] = d - plane.D * point; 
+    
+    
 	}
 
 	//! Builds a left-handed look-at matrix.
@@ -922,4 +1036,5 @@ namespace core
 } // end namespace engine
 
 #endif 
+
 

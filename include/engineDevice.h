@@ -1,8 +1,19 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
-// This file is part of the LTE 3D Engine
-// (C) 2006 - LTE Studios - by SiberianSTAR
-// LTE 3D Engine is based on Irrlicht 1.0
-// For conditions of distribution and use, see copyright notice in engine.h
+/*
+
+  LTE Game Engine SDK:
+
+   Copyright (C) 2006, SiberianSTAR <haxormail@gmail.com>
+
+  Based on Irrlicht 1.0:
+ 
+   Copyright (C) 2002-2006 Nikolaus Gebhardt
+
+  For conditions of distribution and use, see copyright notice in
+  engine.h
+ 
+  http://www.ltestudios.com
+
+*/
 
 #ifndef __I_engine_DEVICE_H_INCLUDED__
 #define __I_engine_DEVICE_H_INCLUDED__
@@ -22,6 +33,7 @@
 #include "ILogger.h"
 #include "IOSOperator.h"
 #include "IAudioDriver.h"
+#include "INetworkDriver.h"
 
 namespace engine
 {
@@ -60,6 +72,9 @@ namespace engine
 
     //! \return Returns a pointer to the audio driver
     virtual audio::IAudioDriver* getAudioDriver() = 0;
+    	
+    //! \return Returns a pointer to the network driver
+    virtual net::INetworkDriver* getNetworkDriver() = 0;
  
 		//! Provides access to the logger. 
 		/** \return Returns a pointer to the logger. */
@@ -130,4 +145,5 @@ while(device->run())
 } // end namespace
 
 #endif
+
 

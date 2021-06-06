@@ -1,19 +1,32 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
-// This file is part of the LTE 3D Engine
-// (C) 2006 - LTE Studios - by SiberianSTAR
-// LTE 3D Engine is based on Irrlicht 1.0
-// For conditions of distribution and use, see copyright notice in engine.h
+/*
+
+  LTE Game Engine SDK:
+
+   Copyright (C) 2006, SiberianSTAR <haxormail@gmail.com>
+
+  Based on Irrlicht 1.0:
+ 
+   Copyright (C) 2002-2006 Nikolaus Gebhardt
+
+  For conditions of distribution and use, see copyright notice in
+  engine.h
+ 
+  http://www.ltestudios.com
+
+*/
 
 #ifndef __engine_STRING_H_INCLUDED__
 #define __engine_STRING_H_INCLUDED__
 
 #include "engineTypes.h"
+#include "engineArray.h"
+#include <string.h>
 
 namespace engine
 {
 namespace core
 {
-
+	
 //!	Very simple string class with some useful features.
 /**	string<c8> and string<wchar_t> work both with unicode AND ascii,
 so you can assign unicode to string<c8> and ascii to string<wchar_t> 
@@ -653,6 +666,343 @@ private:
 };
 
 
+//! Binary string, used with the socket implementation
+class stringb
+{
+	
+	public:
+		
+	//! default constructor
+	stringb()
+	: buffer_len(0), buffer(0)
+	{
+
+  }
+
+  //! Copies a stringc into the buffer
+  stringb(string<c8> *str_to_copy)
+  {
+  	
+   
+   if (str_to_copy->size() == 0)
+   	 return;
+   	
+   const char *arr = str_to_copy->c_str();
+   
+   buffer = new c8[str_to_copy->size()+1];
+   
+   int i;
+   
+   for (i = 0; i < str_to_copy->size(); i++)
+     buffer[i] = arr[i];
+   
+    buffer[i] = 0;
+		buffer_len = i+1;
+
+  }
+  
+  //! destructor
+  ~stringb()
+  {
+  	
+  	if (buffer_len && buffer)
+  		delete buffer;
+	
+  }  
+  
+  
+  //! set a new pointer and a new size
+  /** \param set_mem: the new pointer
+     \param size: the new size
+  */
+  void set_pointer(c8 *set_mem, int size)
+  {
+  	buffer = set_mem;
+  	buffer_len = size;
+  }
+  
+  //! Copy a substring into a new allocated char array
+  /**
+   \param from: the start position of the substring
+   \param to: the end position of the substring (the char at the end position is included)
+   \return Returns a new pointer of the substring
+  
+  */
+  c8 *copy_substr(int from, int to)
+  {
+  	
+  	c8 *new_buff = new c8[to-from+1];
+  	
+  	memcpy(new_buff, &buffer[from], to-from+1);
+   	
+  	return new_buff;
+  }
+  
+  //! Appends data into the buffer
+  /**
+   \param data: the data to append in
+   \param size: the length of the data
+  */
+  void append_data(c8 *data, int size)
+  {
+  	
+  	int new_size = size+ buffer_len;
+  	c8 *buff = new c8[new_size];
+  	
+  	memcpy(buff, buffer, buffer_len);
+  	memcpy(&buff[buffer_len], data, size);
+  	
+  	delete buffer;
+  	buffer = buff;
+  	
+  	buffer_len = new_size;
+  	
+  }
+  
+  //! Appends a byte at the end of the buffer
+  /**
+    
+    \param data: the char to append at the end of the buffer
+  
+  
+  */
+  void append_char(c8 data)
+  {
+
+  	int new_size = 1 + buffer_len;
+  	c8 *buff = new c8[new_size];
+  	
+  	memcpy(buff, buffer, buffer_len);
+    buff[buffer_len] = data;
+  	
+  	delete buffer;
+  	buffer = buff;
+  	
+  	buffer_len = new_size;	  
+
+  }
+
+  //! Appends a zero (null-char) at the end of the buffer
+  void append_zero()
+  {
+  	 append_char(0);
+  }
+  
+  //! Returns a stringc of the buffer
+  string<c8>& to_stringc()
+  {
+  	string<c8> *str = new string<c8>;
+  	
+  	if ( buffer[ buffer_len - 1 ] != 0)
+  		append_zero();
+  	
+  	
+  	
+  	*str = buffer;
+  	
+  	return *str;
+  }
+
+  //! Returns the size of the buffer
+  int get_size()
+  { 
+  	return buffer_len;
+  }
+  
+  //! Returns the pointer to the buffer
+  c8* ret_buffer() 
+  { 
+  	return buffer;
+  }
+  
+  //! Count substr in the buffer
+  //! \return Returns the number of times substr appears in the buffer
+  
+  int substr_count(c8 *substr)
+  {
+  	
+  	int count = 0;
+  	int skiplen = strlen(substr) - 1;
+  	
+  	bool found;
+  	
+  	for (int i = 0; i < buffer_len; i++)
+  	{
+  		
+   		
+  		
+  	  if (substr[1] == 0)
+  		  found = (buffer[i] == substr[0]);
+  	  else 
+  	  	found = compare_substring(substr, i);	   		
+  		
+  		if (found == true)
+  		{
+  			
+  			count++;
+  			i+=skiplen;
+  			
+  		}
+  		
+  	}
+  	
+  	
+  	return count;
+  }
+  
+  //! Compare a substring
+  /**
+   
+    \param substr: the substring to be compared
+    \param from: the start position of the buffer to be compared
+    \return Returns true if the strings coincide
+    
+  */
+  bool compare_substring(c8 *substr, int from)
+  {
+  	
+  	int rest_len = buffer_len-from;
+  	
+  	if (rest_len < 1)
+  		 return false;
+  	
+  	int v = strlen(substr);
+  	
+  	if (v > rest_len)
+  		 return false;
+    
+    char ch = buffer[from + v];
+    buffer[from+v] = 0;
+    
+    
+    bool ret = false;
+    
+    if (strcmp(&buffer[from], substr) == 0)
+    	ret = true;
+    
+    buffer[from+v] = ch;
+    return ret;
+    
+  }
+
+  //! Copies a binary string
+  stringb& operator=(const stringb& other)
+  {
+		
+	  if (buffer && buffer_len)
+		  delete buffer;
+	  
+	  int l = ((stringb&)other).get_size();
+	  
+	  buffer_len = l;
+	  buffer = new c8[l];
+	  memcpy(buffer, ((stringb&)other).ret_buffer(), l);
+	
+	  return (*this);
+  }
+  
+  stringb& operator+= (const stringb& other)
+  {
+  	
+  	append_data(((stringb&)other).ret_buffer(), ((stringb&)other).get_size());
+  	
+  	
+  }
+  
+  //! Explode a string
+  /**
+   Returns an array of strings, each of which is a substring of string formed by splitting it on boundaries formed by the string delimiter. If limit is set, the returned array will contain a maximum of limit elements with the last element containing the rest of string. 
+   Note: This function is binary safe
+   \param separator: the delimiter of each substring
+   \param limit: the limit of the number of elements of the array
+   \return Returns an array containing the splitted strings
+  */
+  core::array<stringb>& explode(c8* separator, int limit = 0)
+  {
+  	
+  	int cur = 0, sep_len = strlen(separator) ;
+  	
+  	core::array<stringb>* arr = new array<stringb>;
+  	
+  	stringb* current;
+  	
+  	int last_set = 0;
+  	
+  	bool found = false;
+  	
+  	
+	for (int i = 0; i < buffer_len; i++)
+  	{
+  		
+  		
+  		
+  	  if (separator[1] == 0)
+  		found = (buffer[i] == separator[0]);
+  	  else 
+  	  	found = compare_substring(separator, i);	  	
+ 
+  	  if (found == true)
+  	  {
+  	  	
+ 	    char *str = copy_substr(last_set, i-1);
+
+		
+
+  	  	current = new stringb();
+  	  	
+  	  	current->set_pointer(str, i-last_set);
+  	  	
+  	  	arr->push_back(*current);
+  	  	cur++;
+  	  		 
+  	  	i+= sep_len;
+  	  	last_set = i;
+
+  	  	if (cur == limit-1)
+  	  		 break;
+
+
+  	  }
+  	    		
+  	}
+
+	
+		if (buffer_len > last_set)
+		{
+
+			char *str = copy_substr(last_set, buffer_len-1);
+			current = new stringb();
+			current->set_pointer(str,  buffer_len-last_set);
+			arr->push_back(*current);
+
+	  }		
+	  
+		
+	  return *arr;
+  }
+  
+  void clear()
+  {
+  	
+  	if (buffer_len && buffer)
+  	{
+  		 
+  		 delete buffer;
+  		 buffer_len = 0;
+  		 buffer = 0;
+  	}
+  	
+  }
+
+	
+	
+	private:
+		c8 *buffer;
+		int buffer_len;
+	
+	
+};
+
 //! Typedef for character strings
 typedef string<c8> stringc;
 
@@ -663,4 +1013,5 @@ typedef string<wchar_t> stringw;
 } // end namespace engine
 
 #endif
+
 

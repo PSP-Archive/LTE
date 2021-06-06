@@ -1,4 +1,4 @@
-// This is a Demo of the LTE 3D Engine. This is the original demo of the Irrlicht Engine
+// This is a Demo of the LTE Game Engine. This is the original demo of the Irrlicht Engine
 // This file is not documentated.
 
 #ifndef __C_DEMO_H_INCLUDED__

@@ -1,8 +1,19 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
-// This file is part of the LTE 3D Engine
-// (C) 2006 - LTE Studios - by SiberianSTAR
-// LTE 3D Engine is based on Irrlicht 1.0
-// For conditions of distribution and use, see copyright notice in engine.h
+/*
+
+  LTE Game Engine SDK:
+
+   Copyright (C) 2006, SiberianSTAR <haxormail@gmail.com>
+
+  Based on Irrlicht 1.0:
+ 
+   Copyright (C) 2002-2006 Nikolaus Gebhardt
+
+  For conditions of distribution and use, see copyright notice in
+  engine.h
+ 
+  http://www.ltestudios.com
+
+*/
 
 #ifndef __engine_TYPES_H_INCLUDED__
 #define __engine_TYPES_H_INCLUDED__
@@ -37,14 +48,8 @@ typedef unsigned int		u32;
 /** This is a typedef for signed int, it ensures portability of the engine. */
 typedef signed int			s32; 
 
-typedef unsigned long u64;
+typedef unsigned long long u64;
 
-
-// 64 bit signed variable.
-// This is a typedef for __int64, it ensures portability of the engine. 
-// This type is currently not used by the engine and not supported by compilers
-// other than Microsoft Compilers, so it is outcommented.
-typedef long 				s64; 
 
 #endif
 //! 8 bit character variable.
@@ -98,4 +103,5 @@ Compiler version defines: VC6.0 : 1200, VC7.0 : 1300, VC7.1 : 1310, VC8.0 : 1400
 #endif // _engine_MANAGED_MARSHALLING_BUGFIX
 
 #endif // __engine_TYPES_H_INCLUDED__
+
 

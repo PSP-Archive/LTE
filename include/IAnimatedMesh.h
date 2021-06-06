@@ -1,8 +1,19 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
-// This file is part of the LTE 3D Engine
-// (C) 2006 - LTE Studios - by SiberianSTAR
-// LTE 3D Engine is based on Irrlicht 1.0
-// For conditions of distribution and use, see copyright notice in engine.h
+/*
+
+  LTE Game Engine SDK:
+
+   Copyright (C) 2006, SiberianSTAR <haxormail@gmail.com>
+
+  Based on Irrlicht 1.0:
+ 
+   Copyright (C) 2002-2006 Nikolaus Gebhardt
+
+  For conditions of distribution and use, see copyright notice in
+  engine.h
+ 
+  http://www.ltestudios.com
+
+*/
 
 #ifndef __I_ANIMATED_MESH_H_INCLUDED__
 #define __I_ANIMATED_MESH_H_INCLUDED__
@@ -53,7 +64,9 @@ namespace scene
 		//! .oct file for Paul Nette's FSRad or from Murphy McCauley's Blender .oct exporter.
 		//! The oct file format contains 3D geometry and lightmaps and can 
 		//! be loaded directly by engine
-		EAMTS_OCT
+		EAMTS_OCT,
+		//! Blitz Basic .b3d file, the file format by Mark Sibly
+		EAMTS_B3D
 	};
 
 	//! Interface for an animated mesh.
@@ -107,4 +120,5 @@ namespace scene
 } // end namespace engine
 
 #endif
+
 

@@ -1,14 +1,14 @@
 /* 
-  Common include for the LTE 3D Engine examples, here there are the functions
+  Common include for the LTE Game Engine examples, here there are the functions
   to setup psp.
 */
 
-#define PSP_OVERCLOCK_CPU
+#define PSP_BOOST_CPU
 // Undefine this if you don't want to
 // overclock your cpu to 333MHz
 
 #include <pspkernel.h>
-#ifdef PSP_OVERCLOCK_CPU
+#ifdef PSP_BOOST_CPU
 #include <psppower.h>
 #endif
 
@@ -18,12 +18,9 @@
 #endif
 
 
-
-// Sets the module info, is necessary.
-PSP_MODULE_INFO("LTE 3D Demo", 0, 1, 1);
-
 int exitCallback(int arg1, int arg2, void *common)
 {
+
 	sceKernelExitGame();
 	return 0;
 }
@@ -56,7 +53,7 @@ int setupCallbacks(void)
 int setupPSP(void)
 {
   
-   #ifdef PSP_OVERCLOCK_CPU
+   #ifdef PSP_BOOST_CPU
     scePowerSetClockFrequency(333, 333, 166);
    #endif
 

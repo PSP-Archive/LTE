@@ -9,6 +9,8 @@ the engine header file.
 #include <engine.h>
 #include "../common.h"
 
+
+
 /*
 Use the main namespace engine
 */
@@ -22,15 +24,18 @@ using namespace core;
 // all the functions of the GUI system
 using namespace gui;
 
-int main()
+engineDevice *device = 0;
+
+int engineMain(unsigned int argc, void *argv )
 { 
   // setup psp callbacks
   setupPSP();
 
-	
-
-	engineDevice *device =
+	device =
 		createDevice();
+
+  
+
 
 	/*
 	Get a pointer to the video driver and the SceneManager so that
@@ -40,6 +45,8 @@ int main()
 	video::IVideoDriver* driver = device->getVideoDriver();
 	scene::ISceneManager* smgr = device->getSceneManager();
   IGUIEnvironment* guienv = device->getGUIEnvironment();
+
+
 
 	/*
 	We add a static label to let you know the FPS count.
@@ -54,8 +61,9 @@ int main()
 	we are able to read from the files in that archive as they would
 	directly be stored on disk.
 	*/
+	
 	device->getFileSystem()->addZipFileArchive("ms0:/media/map-20kdm2.pk3");
-
+	
 	/* 
 	Now we can load the mesh by calling getMesh(). We get a pointer returned
 	to a IAnimatedMesh. As you know, Quake 3 maps are not really animated,
@@ -72,6 +80,7 @@ int main()
 	IVideoDriver class). Note that this optimization with the Octree is only
 	useful when drawing huge meshes consiting of lots of geometry.
 	*/
+ 
 	scene::IAnimatedMesh* mesh = smgr->getMesh("20kdm2.bsp");
 	scene::ISceneNode* node = 0;
 	
@@ -81,35 +90,47 @@ int main()
 	/*
 	Because the level was modelled not around the origin (0,0,0), we translate
 	the whole level a little bit.
+	
 	*/
 	if (node)
+	{
 		node->setPosition(core::vector3df(-1300,-144,-1249));
-
+				
+		// Mesh need to be clipped
+		node->setMaterialFlag(video::EMF_CLIPPING, true);
+			
+  }
+	
+	
 	/*
 	Now we only need a Camera to look at the Quake 3 map.
 	And we want to create a user controlled camera. There are some
-	different cameras available in the LTE 3D engine.For this example, we want to create a 
+	different cameras available in the Irrlicht engine. For example the 
+	Maya Camera which can be controlled compareable to the camera in Maya:
+	Rotate with left mouse button pressed, Zoom with both buttons pressed,
+	translate with right mouse button pressed. This could be created with
+	addCameraSceneNodeMaya(). But for this example, we want to create a 
 	camera which behaves like the ones in first person shooter games (FPS).
 	*/
 	smgr->addCameraSceneNodeFPS();
-
+	
 	/*
 	The mouse cursor needs not to be visible, so we make it invisible.
 	*/
 
-	device->getCursorControl()->setVisible(false);
+  device->getCursorControl()->setVisible(false);
 
 	/*
 	We have done everything, so lets draw it.
 	*/
 	while(device->run())
 	{
+
 		driver->beginScene(true, true, video::SColor(0,200,200,200));
 		smgr->drawAll();
     guienv->drawAll();
 		driver->endScene();
-
-
+   
 		int fps = driver->getFPS();
 		core::stringw str = L"FPS: ";
 		str += fps; 

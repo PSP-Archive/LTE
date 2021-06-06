@@ -1,21 +1,20 @@
-// This is a Demo of the LTE 3D Engine. This is the original demo of the Irrlicht Engine
+// This is a Demo of the LTE Game Engine. This is the original demo of the Irrlicht Engine
 // This file is not documentated.
 
 
 #include "CDemo.h"
+#define PSP_ENABLE_DEBUG
 #include "../common.h"
-
 engineDevice *device;
 
 /* main function */
-int main(void)
+int engineMain(unsigned int argc, void *argv)
 {
   
   setupPSP();
   CDemo obj;
 
   obj.run();
- 
 }
 
 CDemo::CDemo() { 
@@ -39,7 +38,7 @@ bool CDemo::OnEvent(SEvent event)
 
 	if ((event.EventType == EET_KEY_INPUT_EVENT &&
 		event.KeyInput.Key == KEY_CROSS &&
-		event.KeyInput.PressedDown == false) &&
+		event.KeyInput.PressedOnce == true) &&
 		currentScene == 3)
 	{
 		// shoot 
@@ -66,7 +65,7 @@ CDemo::~CDemo()
 void CDemo::run()
 {
 
-  device = createDevice(this);;
+  device = createDevice(this);
 
 	device->getFileSystem()->addZipFileArchive("ms0:/media/engine.dat");
 	device->getFileSystem()->addZipFileArchive("ms0:/media/map-20kdm2.pk3");
@@ -230,14 +229,15 @@ void CDemo::switchToNextScene()
 
 
 
-			camera = sm->addCameraSceneNodeFPS(0, 100.0f, 300.0f, -1, 0, 0, false, 2);
+			camera = sm->addCameraSceneNodeFPS(0, 100.0f, 300.0f, -1);
 			camera->setPosition(core::vector3df(108,140,-140));
+		
 			
 			scene::ISceneNodeAnimatorCollisionResponse* collider = 
 				sm->createCollisionResponseAnimator(
-				metaSelector, camera, core::vector3df(30,50,30), 
+				metaSelector, camera, core::vector3df(15,25,15), 
 				core::vector3df(0, quakeLevelMesh ? -3.0f : 0.0f,0), 
-					core::vector3df(0,40,0), 0.0005f); 
+					core::vector3df(0,20,0), 0.0005f); 
 		    
 			camera->addAnimator(collider);
 			collider->drop();
@@ -259,10 +259,13 @@ void CDemo::loadSceneData()
 {
 	// load quake level
 
+  pspDebugScreenClear();
+
 	video::IVideoDriver* driver = device->getVideoDriver();
 	scene::ISceneManager* sm = device->getSceneManager();
-
+ driver->setTextureCreationFlag(video::ETCF_CREATE_MIP_MAPS, true);
 	quakeLevelMesh = sm->getMesh("20kdm2.bsp");
+
 
 	if (quakeLevelMesh)
 	{
@@ -279,8 +282,11 @@ void CDemo::loadSceneData()
 		}
 	}
 
+  // quakeLevelNode need to be clipped
+  quakeLevelNode->setMaterialFlag(video::EMF_CLIPPING, true);
+ driver->setTextureCreationFlag(video::ETCF_CREATE_MIP_MAPS, true);
 	// load sydney model and create 2 instances
-
+ 
 	scene::IAnimatedMesh* mesh = 0;
 	mesh = sm->getMesh("ms0:/media/sydney.md2");
 	if (mesh)
@@ -294,21 +300,20 @@ void CDemo::loadSceneData()
 			model1->setMD2Animation(scene::EMAT_STAND);
 			model1->setMaterialFlag(video::EMF_LIGHTING, false);
 			model1->setMaterialType(video::EMT_SPHERE_MAP);
-			model1->addShadowVolumeSceneNode();
 		}
 
 		model2 = sm->addAnimatedMeshSceneNode(mesh);
 		if (model2)
 		{
-			model2->setPosition(core::vector3df(180,15,-60));
+			model2->setPosition(core::vector3df(180,40,-60));
 			model2->setScale(core::vector3df(2,2,2));
 			model2->setMD2Animation(scene::EMAT_RUN);
 			//model2->setAnimationSpeed(1);
 			model2->setMaterialTexture(0, device->getVideoDriver()->getTexture("ms0:/media/sydney.bmp"));
-			model2->setMaterialFlag(video::EMF_LIGHTING, true);
-			model2->addShadowVolumeSceneNode();
+			model2->setMaterialFlag(video::EMF_LIGHTING, false);
 		}
 	}
+
 
 	scene::ISceneNodeAnimator* anim = 0;
 
@@ -323,6 +328,9 @@ void CDemo::loadSceneData()
 		driver->getTexture("ms0:/media/skybox_rt.jpg"),
 		driver->getTexture("ms0:/media/skybox_ft.jpg"),
 		driver->getTexture("ms0:/media/skybox_bk.jpg"));
+ 
+  // skybox need to be clipped
+  skyboxNode->setMaterialFlag(video::EMF_CLIPPING, true);
 
 	driver->setTextureCreationFlag(video::ETCF_CREATE_MIP_MAPS, true);
 
@@ -399,6 +407,7 @@ void CDemo::loadSceneData()
 	campFire->setScale(core::vector3df(2,2,2));
 
 	campFire->setParticleSize(core::dimension2d<float>(20.0f, 10.0f));
+  campFire->setMaterialFlag(video::EMF_CLIPPING, true);
 
 	scene::IParticleEmitter* em = campFire->createBoxEmitter(
 		core::aabbox3d<float>(-7,0,-7,7,1,7), 
@@ -421,9 +430,7 @@ void CDemo::loadSceneData()
  
   // unpack it to make play faster
   impactfx->unpack();
-
-	
-
+  
 	// set background color
 
 	backColor.set(0,0,0,0);
@@ -445,7 +452,7 @@ void CDemo::createLoadingScreen()
 	// create in fader
 
 	inOutFader = device->getGUIEnvironment()->addInOutFader();
-	inOutFader->setColor(backColor);
+	inOutFader->setColor(backColor); 
 
 
 	// loading text
@@ -467,7 +474,7 @@ void CDemo::createLoadingScreen()
 	// set new font color
 
 	device->getGUIEnvironment()->getSkin()->setColor(gui::EGDC_BUTTON_TEXT,
-		video::SColor(255,100,100,100));
+		video::SColor(255,100,100,100)); 
 }
 
 
@@ -594,7 +601,7 @@ void CDemo::createParticleImpacts()
 			Impacts.erase(i);
 			i--;			
 
-      if (impactfx && impactfx->isPlaying() == false) 
+      if (impactfx) 
        impactfx->play();
 		}
 }

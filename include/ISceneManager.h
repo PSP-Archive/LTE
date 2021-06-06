@@ -1,8 +1,19 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
-// This file is part of the LTE 3D Engine
-// (C) 2006 - LTE Studios - by SiberianSTAR
-// LTE 3D Engine is based on Irrlicht 1.0
-// For conditions of distribution and use, see copyright notice in engine.h
+/*
+
+  LTE Game Engine SDK:
+
+   Copyright (C) 2006, SiberianSTAR <haxormail@gmail.com>
+
+  Based on Irrlicht 1.0:
+ 
+   Copyright (C) 2002-2006 Nikolaus Gebhardt
+
+  For conditions of distribution and use, see copyright notice in
+  engine.h
+ 
+  http://www.ltestudios.com
+
+*/
 
 #ifndef __I_SCENE_MANAGER_H_INCLUDED__
 #define __I_SCENE_MANAGER_H_INCLUDED__
@@ -76,6 +87,12 @@ namespace scene
 		//! to front and drawn in that order.
 		ESNRP_TRANSPARENT,
 
+    //! Cel shading scene node, drawn after the shadow node
+    ESNRP_CELSHADING,
+    
+    //! Planar shadows, drawn at the end
+    ESNRP_PLANARSHADOW,
+    
 		//! Never used, value specifing how much parameters there are.
 		ESNRP_COUNT				
 	};
@@ -259,6 +276,8 @@ namespace scene
 		 *  This pointer should not be dropped. See IUnknown::drop() for more information.
 		 **/
 		virtual IAnimatedMesh* getMesh(const c8* filename) = 0;
+		
+		virtual IAnimatedMesh* getMesh(io::IReadFile* file) = 0;
 
 		//! Returns an interface to the mesh cache which is shared beween all existing scene managers.
 		/** With this interface, it is possible to manually add new loaded 
@@ -681,6 +700,23 @@ namespace scene
 			f32 maxHeight=200.0f, 
 			const core::dimension2d<s32>& defaultVertexBlockSize = core::dimension2d<s32>(64,64)) = 0;
 
+		//! Adds a sphere scene node for test purposes to the scene.
+		/** It is a simple sphere.
+		\param radius: Radius of the sphere.
+		\param polyCount: Polycount of the sphere.
+		\param parent: Parent of the scene node. Can be NULL if no parent.
+		\param id: Id of the node. This id can be used to identify the scene node.
+		\param position: Position of the space relative to its parent where the
+		 scene node will be placed.
+		\param rotation: Initital rotation of the scene node.
+		\param scale: Initial scale of the scene node.
+		\return Returns pointer to the created test scene node.
+	     This pointer should not be dropped. See IUnknown::drop() for more information. */
+		virtual ISceneNode* addSphereSceneNode(f32 radius=5.0f, s32 polyCount=16, ISceneNode* parent=0, s32 id=-1,
+			const core::vector3df& position = core::vector3df(0,0,0),
+			const core::vector3df& rotation = core::vector3df(0,0,0),
+			const core::vector3df& scale = core::vector3df(1.0f, 1.0f, 1.0f)) = 0;
+
 		//! Returns the root scene node.
 		/** This is the scene node wich is parent 
 		 of all scene nodes. The root scene node is a special scene node which
@@ -988,4 +1024,5 @@ namespace scene
 } // end namespace engine
 
 #endif
+
 

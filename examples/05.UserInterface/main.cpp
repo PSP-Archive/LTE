@@ -131,12 +131,12 @@ public:
 Ok, now for the more interesting part. First, create the 
 engine device.
 */
-int main()
+int engineMain(unsigned int argc, void *argv )
 { 
   // setup psp
   setupPSP();
 
-	device = createDevice(0, false);
+	device = createDevice();
 	/* The creation was successful, now we set the event receiver and
 		store pointers to the driver and to the gui environment. */
 
@@ -179,7 +179,7 @@ int main()
 	IGUIScrollBar* scrollbar = env->addScrollBar(true, rect<s32>(150, 45, 350, 60), 0, 104);
 	scrollbar->setMax(255);
 
-	env->addStaticText(L"Logging ListBox:", rect<s32>(50,80,250,100), true);
+	env->addEditBox(L"Logging ListBox:", rect<s32>(50,80,250,100), true);
 	listbox = env->addListBox(rect<s32>(50, 110, 250, 180));
 
 	/*

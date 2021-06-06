@@ -1,21 +1,14 @@
-/* This tutorials describes how to do special effects. It shows how to use stencil
-buffer shadows, the particle system, billboards, dynamic light and the water
-surface scene node.
-
-We start like in some tutorials before. Please note that this time, the 'shadows' flag in
-createDevice() is set to true, for we want to have a dynamic shadow casted from
-an animated character. If your this example runs to slow, set it to false.
-The LTE 3D Engine checks if your hardware doesn't support the stencil
-buffer, and disables shadows by itself, but just in case the demo runs slow
-on your hardware.*/
+/* This tutorials describes how to do special effects. It shows how to use the particle system, 
+   billboards, dynamic light and the water surface scene node.
+*/
 
 #include <engine.h>
+#define PSP_ENABLE_DEBUG
 #include "../common.h"
 
 using namespace engine;
 
-
-int main()
+int engineMain(unsigned int argc, void *argv )
 {
 
   setupPSP();
@@ -26,6 +19,7 @@ int main()
 
 	if (device == 0)
 		return 1; // could not create selected driver.
+
 
 	video::IVideoDriver* driver = device->getVideoDriver();
 	scene::ISceneManager* smgr = device->getSceneManager();
@@ -48,12 +42,13 @@ int main()
 
 	smgr->getMeshManipulator()->makePlanarTextureMapping(
 		mesh->getMesh(0), 0.004f);
-
+  
 	scene::ISceneNode* node = 0;
 
 	node = smgr->addAnimatedMeshSceneNode(mesh);
 	node->setMaterialTexture(0,	driver->getTexture("ms0:/media/wall.jpg"));
 	node->getMaterial(0).EmissiveColor.set(0,0,0,0);
+	node->setMaterialFlag(video::EMF_CLIPPING, true);
 
 	/*
 	Now, for the first special effect: Animated water. It works like this: The
@@ -103,7 +98,7 @@ int main()
 	node->setMaterialFlag(video::EMF_LIGHTING, false);
 	node->setMaterialType(video::EMT_TRANSPARENT_ADD_COLOR);
 	node->setMaterialTexture(0,	driver->getTexture("ms0:/media/particlewhite.bmp"));
-
+ 
 	/*
 	The next special effect is a lot more interesting: A particle system. The particle
 	system in the engine is quit modular and extensible and yet easy to use.
@@ -160,42 +155,11 @@ int main()
 	ps->setMaterialTexture(0, driver->getTexture("ms0:/media/fire.bmp"));
 	ps->setMaterialType(video::EMT_TRANSPARENT_VERTEX_ALPHA);
 
-	/*
-	As our last special effect, we want a dynamic shadow be casted from an animated
-	character. For this we load a DirectX .x model and place it into our world.
-	For creating the shadow, we simply need to call addShadowVolumeSceneNode().
-	The color of shadows is only adjustable globally for all shadows, by calling
-	ISceneManager::setShadowColor(). Voila, here is our dynamic shadow.
-
-	Because the character is a little bit too small for this scene, we make it bigger
-	using setScale(). And because the character is lighted by a dynamic light, we need
-	to normalize the normals to make the lighting on it correct. This is always necessary if
-	the scale of a dynamic lighted model is not (1,1,1). Otherwise it would get too dark or
-	too bright because the normals will be scaled too.
-	*/
-
-	// add animated character
-
-	mesh = smgr->getMesh("ms0:/media/dwarf.x");
-	scene::IAnimatedMeshSceneNode* anode = 0;
-
-	anode = smgr->addAnimatedMeshSceneNode(mesh);
-	anode->setPosition(core::vector3df(-50,20,-60));
-	anode->setAnimationSpeed(15);
-
-	// add shadow
-	anode->addShadowVolumeSceneNode();
-	smgr->setShadowColor(video::SColor(150,0,0,0));
-
-	// make the model a little bit bigger and normalize its normals
-	// because of this for correct lighting
-	anode->setScale(core::vector3df(2,2,2));
-	anode->setMaterialFlag(video::EMF_NORMALIZE_NORMALS, true);
-
+	
 	/*
 	Finally we simply have to draw everything, that's all.
 	*/
-
+ 
 	scene::ICameraSceneNode* camera = smgr->addCameraSceneNodeFPS();
 	camera->setPosition(core::vector3df(-50,50,-150));
 

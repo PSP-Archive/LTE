@@ -1,8 +1,19 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
-// This file is part of the LTE 3D Engine
-// (C) 2006 - LTE Studios - by SiberianSTAR
-// LTE 3D Engine is based on Irrlicht 1.0
-// For conditions of distribution and use, see copyright notice in engine.h
+/*
+
+  LTE Game Engine SDK:
+
+   Copyright (C) 2006, SiberianSTAR <haxormail@gmail.com>
+
+  Based on Irrlicht 1.0:
+ 
+   Copyright (C) 2002-2006 Nikolaus Gebhardt
+
+  For conditions of distribution and use, see copyright notice in
+  engine.h
+ 
+  http://www.ltestudios.com
+
+*/
 
 #ifndef __engine_POINT_2D_H_INCLUDED__
 #define __engine_POINT_2D_H_INCLUDED__
@@ -60,6 +71,7 @@ public:
 	//! Returns the length of the vector
 	//! \return Returns the length of the vector.
 	f32 getLength() const { return FastSqrt(X*X + Y*Y); }
+	f32 getLengthSQ() const { return X*X + Y*Y; }
 
 	//! Returns the dot product of this vector with an other.
 	T dotProduct(const vector2d<T>& other) const
@@ -73,6 +85,14 @@ public:
 	{
 		f32 vx = X - other.X; f32 vy = Y - other.Y;
 		return FastSqrt(vx*vx + vy*vy);
+	}
+	
+	//! Returns square distance from an other point. Here, the vector is interpreted as
+	//! point in 2 dimensional space.
+	f32 getDistanceFromSQ(const vector2d<T>& other) const
+	{
+		f32 vx = X - other.X; f32 vy = Y - other.Y;
+		return vx*vx + vy*vy;
 	}
 
 	//! rotates the point around a center by an amount of degrees.
@@ -199,4 +219,5 @@ public:
 } // end namespace engine
 
 #endif
+
 

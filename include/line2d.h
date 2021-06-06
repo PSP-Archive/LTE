@@ -1,8 +1,19 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
-// This file is part of the LTE 3D Engine
-// (C) 2006 - LTE Studios - by SiberianSTAR
-// LTE 3D Engine is based on Irrlicht 1.0
-// For conditions of distribution and use, see copyright notice in engine.h
+/*
+
+  LTE Game Engine SDK:
+
+   Copyright (C) 2006, SiberianSTAR <haxormail@gmail.com>
+
+  Based on Irrlicht 1.0:
+ 
+   Copyright (C) 2002-2006 Nikolaus Gebhardt
+
+  For conditions of distribution and use, see copyright notice in
+  engine.h
+ 
+  http://www.ltestudios.com
+
+*/
 
 #ifndef __engine_LINE_2D_H_INCLUDED__
 #define __engine_LINE_2D_H_INCLUDED__
@@ -58,12 +69,57 @@ class line2d
 		//! \return Returns true if there is an intersection, false if not.
 		bool intersectWith(const line2d<T>& l, vector2d<T>& out)
 		{
-			bool found = getInterSectionOfLines(	start.X, start.Y, end.X-start.X, end.Y-start.Y,
-													l.start.X, l.start.Y, l.end.X-l.start.X, l.end.Y-l.start.Y,
-													out.X, out.Y);
-			return (found
-				&&	isPointBetweenPoints(out.X, out.Y, start.X, start.Y, end.X, end.Y)
-				&&	isPointBetweenPoints(out.X, out.Y, l.start.X, l.start.Y, l.end.X, l.end.Y));
+			
+			float m1, m2;
+			float v, t;
+			v = (end.Y - start.Y);
+			t = (end.X - start.X);
+			
+			if (v == 0)
+				m1 = 0.00001;
+			else
+			if (t == 0)
+				m1 = 100000;
+			else
+			m1 = v / t;
+			
+			
+			v = (l.end.Y - l.start.Y);
+			t = (l.end.X - l.start.X);
+			
+			if (v == 0)
+				m2 = 0.00001;
+			else
+			if (t == 0)
+				m2 = 100000;
+			else
+			m2 = v / t;
+			
+			
+			if ( m1 == m2 )
+			{
+				return false;
+      }
+	
+			float b1, b2;
+			b1 = start.Y - m1 * start.X;
+			b2 = l.start.Y - m2 * l.start.X;
+		
+
+			float x = (b1 - b2)/(m2 - m1);
+			float y = m1 * x + b1;
+			
+			out.X = x;
+			out.Y = y;
+			
+			f32 f = (f32)(end - start).getLengthSQ();
+			f32 r = (f32)(l.end - l.start).getLengthSQ();
+			
+			return (((f32)out.getDistanceFromSQ(start) <= f && 
+				(f32)out.getDistanceFromSQ(end) <= f) &&
+				((f32)out.getDistanceFromSQ(l.start) <= r && 
+				(f32)out.getDistanceFromSQ(l.end) <= r));
+				
 		}
 
 		//! Returns unit vector of the line.
@@ -93,4 +149,5 @@ class line2d
 } // end namespace engine
 
 #endif
+
 

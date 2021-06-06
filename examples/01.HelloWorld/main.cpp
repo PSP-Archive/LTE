@@ -1,22 +1,23 @@
 
 /*
-This tutorial show how to make you first LTE 3D Engine homebrew,
+This tutorial show how to make you first LTE Game Engine homebrew,
 the first thing to do to use the engine is to include the file
 <engine.h>, all is stored there.
 
 */
 #include <engine.h>
+
 #include "../common.h"
 
 /*
-In the LTE 3D Engine all things are stored into the namespace
+In the LTE Game Engine all things are stored into the namespace
 'engine', doing using name space engine; will save us to write
 engine:: to access each member of the engine.
 */
 using namespace engine;
 
 /* 
-There are 6 sub namespaces in the LTE 3D Engine. You can read
+There are 6 sub namespaces in the LTE Game Engine. You can read
 their description in the offline or online documentation. 
 Online documentation can be found here: http://www.ltestudios.com/3d/docs
 */
@@ -33,7 +34,7 @@ using namespace audio;
 */
 // using namespace audio;
 
-int main()
+int engineMain( unsigned int argc, void *argv )
 {
 
   /* setups the PSP callbacks */
@@ -41,14 +42,14 @@ int main()
 
 
 	/*
-	To create an LTE 3D Engine instance you have to call the function
+	To create an LTE Game Engine instance you have to call the function
    createDevice(), it has two optional parameters:
  
    createDevices( IEventReceiver *receiver = 0,
                   bool showLogo = true );
 
    receiver can be used to set the user defined event receiver,
-   showLogo tells if the LTE 3D Engine logo is shown after creating  
+   showLogo tells if the LTE Game Engine logo is shown after creating  
    the device. You can disable the logo but the engine will stop 
    to run after ten minutes. You can disable the logo to try your
    homebrew when prorgamming.
@@ -70,7 +71,7 @@ int main()
 
 	/*
 	We add a hello world label to the window, using the GUI environment,
-  LTE 3D Engine uses widechar and you have to type L before the string
+  LTE Game Engine uses widechar and you have to type L before the string
   to convert it into widechar.
 	*/
 	gui::IGUIStaticText* statusText = guienv->addStaticText(L"Hello World!",
@@ -101,8 +102,9 @@ int main()
 	if (node)
 	{
 		node->setMaterialFlag(EMF_LIGHTING, false);
-		node->setMD2Animation ( scene::EMAT_STAND );
+		node->setMD2Animation ( scene::EMAT_RUN );
 		node->setMaterialTexture( 0, driver->getTexture("ms0:/media/sydney.bmp") );
+    node->addCelshadingSceneNode();
 
     // Scale the mesh to make it smaller
     node->setScale(core::vector3df(0.7f, 0.7f,0.7f));

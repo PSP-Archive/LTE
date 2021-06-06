@@ -1,17 +1,60 @@
-LTE 3D ENGINE LICENSE
+Non-commercial Version License agreement for LTE Game Engine
 
-This software is provided 'as-is', without any express or implied
-warranty. In no event will the authors be held liable for any damages
-arising from the use of this software.
 
-Permission is granted to anyone to use this software for any purpose,
-including commercial applications, and to alter it and redistribute it
-freely, subject to the following restrictions:
+LTE Game Engine License Agreement 
 
-1. The origin of this software must not be misrepresented; you must not
-claim that you wrote the original software. If you use this software
-in a product, an acknowledgment in the product documentation would be
-appreciated but is not required.
-2. Altered source versions must be plainly marked as such, and must not be
-misrepresented as being the original software.
-3. This notice may not be removed or altered from any source distribution.
+LTE studios IS WILLING TO LICENSE THE LTE Game Engine  SOFTWARE AND ACCOMPANYING DOCUMENTATION (COLLECTIVELY, "SOFTWARE") UPON THE CONDITION THAT YOU ACCEPT ALL OF THE TERMS OF THIS NON-COMMERCIAL VERSION LICENSE AGREEMENT ("AGREEMENT"). PLEASE READ THESE TERMS CAREFULLY BEFORE INSTALLING OR USING THE SOFTWARE. BY INSTALLING OR USING THE SOFTWARE, YOU ARE CONSENTING TO BE BOUND BY AND ARE BECOMING A PARTY TO THIS AGREEMENT. IF YOU DO NOT AGREE TO ALL OF THE TERMS OF THIS AGREEMENT, LTE studios IS UNWILLING TO LICENSE THE SOFTWARE TO YOU ("YOU"), AND YOU SHOULD NOT INSTALL OR USE THE SOFTWARE. 
+
+NON-COMMERCIAL VERSION LICENSE 
+
+To qualify for a Non-Commercial Version License, You must: (1) use the Software for non-commercial purposes as defined herein and be a Non-Commercial Entity as defined herein, or (3) be an University User as defined herein, or (4) be an Excluded Contractor as defined herein. 
+
+The term "Non-Commercial Entity" is limited to the following: university or other educational institutions (such as pre-schools, elementary schools, middle or junior high schools, high schools, and community or junior colleges), non-profit organizations (such as public libraries, charities, and other organizations created for the promotion of social welfare), "University Users", and other individual users who use the Software for personal use (such as monitoring your home network for personal use, hobby, recreational, or educational purposes). The term "University Users" is limited to students, faculty members, researchers, administrators, support staff, and employees of a university when acting in this capacity. The term "Excluded Contractor" is limited to independent, solo contractors while performing work for a Non-Commercial Entity, such as a university or other educational institution in an individual capacity. If You qualify for a Non-Commercial Version License, You may use the Software free of charge. LTE studios reserves the right to further clarify the terms Non-Commercial Entity, University Users and Excluded Contractor at its sole determination. 
+
+If You do not qualify for a Non-Commercial Version License, then You should discontinue the downloading or installation process and purchase a Commercial Use License. 
+
+GRANT OF LICENSE 
+
+Provided that you qualify for a Non-Commercial Version License as specified above, and subject to the terms and conditions contained herein, LTE studios hereby grants You, an end user, a personal, non-transferable, non-exclusive, non-sublicensable license to install and use the Software, free of charge, for non-commercial purposes only, but if You are an Excluded Contractor (as defined above). In addition, subject to the terms and conditions contained herein and provided that You meet the requirement specified above for an Non-Commercial Version License, LTE studios hereby grants to You, an end user, a non-transferable, non-exclusive, non-sublicensable license, free of charge.
+
+For the avoidance of doubt, the following are considered examples of commercial uses of the Software: 
+
+(1) use at or for a commercial enterprise; 
+(2) use for financial gain, personal or otherwise; 
+(3) use by government agencies; 
+(4 )use by a telecommunication or Internet service provider company; 
+(5) use at home or while traveling for work for which You will be paid; 
+(6) use in connection with administering a commercial web site; 
+(7) use in connection with the provision of professional service for which You are compensated (including paid system administration); 
+(8) bundling or integrating the Software with any hardware product or another software product for commercial. 
+
+LTE studios and/or its licensors reserve all rights not expressly granted to You herein. This license is not a sale of the Software or any copy of the Software. The Software contains valuable trade secrets of LTE studios and its licensors. All worldwide ownership of and all rights, titles and interests in and to the Software, and all copies and portions of the Software (excluding 3rd parties libraries which are distributed under their own license), including without limitation, all intellectual property rights therein and thereto, are and will remain exclusively with LTE studios. The Software is protected, among other ways, by the copyright laws of the United States and international copyright treaties. All rights not expressly granted herein are retained by LTE studios and its licensors. 
+
+USE RESTRICTIONS 
+
+You may not: 
+
+- use the Software, except under the terms listed above; 
+
+- modify, translate, reverse engineer, decompile, disassemble or otherwise attempt to reconstruct or discover the source code from the binaries of the Software.
+
+- create derivative, for commercial purposes, works based on the Software.
+
+- rent, lease, sublicense, convey, distribute or otherwise transfer rights to the Software; 
+
+- remove any product identification, copyright, proprietary notices or labels from the Software;
+
+Any and all copies made by You as permitted hereunder must contain all of the original Software's copyright, trademark and other proprietary notices and marks. 
+
+MAINTENANCE, SUPPORT AND UPDATES 
+
+LTE studios is under no obligation to maintain or support or update the Software in any way, or to provide updates or error corrections. 
+
+WARRANTY 
+
+LTE studios EXPRESSLY DISCLAIMS ALL WARRANTIES, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY, OF FITNESS FOR A PARTICULAR PURPOSE, NONINFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY RIGHTS, AND ANY WARRANTY THAT MAY ARISE BY REASON OF TRADE USAGE, CUSTOM, OR COURSE OF DEALING. WITHOUT LIMITING THE FOREGOING, YOU ACKNOWLEDGE THAT THE SOFTWARE IS PROVIDED "AS IS" AND THAT LTE studios DOES NOT WARRANT THAT THE SOFTWARE WILL RUN UNINTERRUPTED OR ERROR FREE NOR THAT THE SOFTWARE WILL OPERATE WITH HARDWARE AND/OR SOFTWARE NOT PROVIDED BY LTE studios. THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THE AGREEMENT. SOME STATES DO NOT ALLOW THE EXCLUSION OF IMPLIED WARRANTIES, SO THE ABOVE EXCLUSION MAY NOT APPLY TO YOU, AND YOU MAY HAVE OTHER RIGHTS, WHICH VARY FROM STATE TO STATE. 
+
+TERMINATION 
+
+This Agreement will terminate immediately and automatically without notice if You breach any provision in this Agreement. Upon termination You will remove all copies of the Software or any part of the Software from any and all computer storage devices and destroy the Software.
+ 

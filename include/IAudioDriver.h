@@ -1,7 +1,19 @@
-// This file is part of the LTE 3D Engine
-// (C) 2006 - LTE Studios - by SiberianSTAR
-// LTE 3D Engine is based on Irrlicht 1.0
-// For conditions of distribution and use, see copyright notice in engine.h
+/*
+
+  LTE Game Engine SDK:
+
+   Copyright (C) 2006, SiberianSTAR <haxormail@gmail.com>
+
+  Based on Irrlicht 1.0:
+ 
+   Copyright (C) 2002-2006 Nikolaus Gebhardt
+
+  For conditions of distribution and use, see copyright notice in
+  engine.h
+ 
+  http://www.ltestudios.com
+
+*/
 
 #ifndef __engine_I_AUDIO_DRIVER_H_INCLUDED__
 #define __engine_I_AUDIO_DRIVER_H_INCLUDED__
@@ -24,11 +36,12 @@ namespace audio
 
       //! MP3 format
       FORMAT_MP3 = 1,
-
-       
-
+      
+      //! AT3 Plus format
+      FORMAT_AT3PLUS = 2,
+      
       //! Numbers of format
-      FORMAT_COUNT = 2
+      FORMAT_COUNT = 3
     };
 
     struct ISoundInfo{
@@ -90,6 +103,10 @@ namespace audio
 
       //! Returns the current position in ms.
       virtual s32 getPosition();
+      
+      //! Automatically stop the sound after a time
+      //! \param time: 0 disable the function, otherwise after time milliseconds the sound will be stopped automatically
+      virtual void setAutoStop(int time = 0) = 0;
   
       //! Returns the count of loops
       virtual s32 getLoopCount();
@@ -121,6 +138,8 @@ namespace audio
         when a MP3 is unpacked you cannot control the position of the
         stream */
       virtual bool unpack();
+      
+      
     
     };
 
@@ -146,6 +165,10 @@ namespace audio
 			 //! Add a sound into the audio driver.
        /** Note that when you add a sound it remains cached into the driver. To remove the sound please use the function
         removeSound()
+        
+         If the audio file is not an mp3 it will be automatically dropped after loading. You have to
+         grab() the file to avoid this.
+        
         \param file: pointer to a read file, you must not drop the file!
         \param loopCount: loop count, -1 infinite, 0 no loop
         \param startAndPlay: if true the sound is played after added
@@ -184,4 +207,5 @@ namespace audio
 
 
 #endif
+
 

@@ -12,7 +12,7 @@ In the beginning there is nothing special. We include the needed header files.
 
 using namespace engine;
 
-int main()
+int engineMain(unsigned int argc, void *argv )
 {
 	// setup psp
   setupPSP();
@@ -39,6 +39,10 @@ int main()
 	camera->setTarget(core::vector3df(2397*2,343*2,2700*2));
 	camera->setFarValue(12000.0f);
 
+
+	gui::IGUIStaticText* statusText = env->addStaticText(L"Terrain Rendering",
+		core::rect<int>(10,10,260,22), true);
+
 	// disable mouse cursor
 	device->getCursorControl()->setVisible(false);
 
@@ -64,7 +68,7 @@ int main()
 	terrain->setMaterialFlag(video::EMF_LIGHTING, false);
 
 	terrain->setMaterialTexture(0, driver->getTexture("ms0:/media/terrain-texture.jpg"));
-	terrain->setMaterialType(video::EMT_DETAIL_MAP);
+	//terrain->setMaterialType(video::EMT_DETAIL_MAP);
 
 	terrain->scaleTexture(1.0f, 20.0f);
 
@@ -104,12 +108,12 @@ int main()
 		driver->getTexture("ms0:/media/skybox_lf.jpg"),
 		driver->getTexture("ms0:/media/skybox_rt.jpg"),
 		driver->getTexture("ms0:/media/skybox_ft.jpg"),
-		driver->getTexture("ms0:/media/skybox_bk.jpg"));
+		driver->getTexture("ms0:/media/skybox_bk.jpg"))->setMaterialFlag(video::EMF_CLIPPING,true);
 
 	driver->setTextureCreationFlag(video::ETCF_CREATE_MIP_MAPS, true);
 
 	/*
-	That's it, draw everything. Now you know how to use terrain in LTE 3D Engine.
+	That's it, draw everything. Now you know how to use terrain in LTE Game Engine.
 	*/
 	while(device->run())
 	{
@@ -117,6 +121,13 @@ int main()
 
 		smgr->drawAll();
 		env->drawAll();
+
+	  core::stringw status = L"Terrain Rendering FPS = ";
+	  status += driver->getFPS();
+   
+		statusText->setText(status.c_str());
+
+
 
 		driver->endScene();
 	}

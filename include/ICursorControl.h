@@ -1,8 +1,19 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
-// This file is part of the LTE 3D Engine
-// (C) 2006 - LTE Studios - by SiberianSTAR
-// LTE 3D Engine is based on Irrlicht 1.0
-// For conditions of distribution and use, see copyright notice in engine.h
+/*
+
+  LTE Game Engine SDK:
+
+   Copyright (C) 2006, SiberianSTAR <haxormail@gmail.com>
+
+  Based on Irrlicht 1.0:
+ 
+   Copyright (C) 2002-2006 Nikolaus Gebhardt
+
+  For conditions of distribution and use, see copyright notice in
+  engine.h
+ 
+  http://www.ltestudios.com
+
+*/
 
 #ifndef __I_CURSOR_CONTROL_H_INCLUDED__
 #define __I_CURSOR_CONTROL_H_INCLUDED__
@@ -29,6 +40,18 @@ namespace gui
 		//! Returns if the cursor is currently visible.
 		/** \return Returns true if the cursor is visible, false if not. */
         virtual bool isVisible() = 0;
+        
+    //! Enable or disable the mouse
+    virtual void setEnabled(bool state) = 0;
+
+		//! Returns true if mouse is enabled
+		virtual bool isEnabled() = 0;
+		
+		//! Enable or disable the cross button (Mouse Click event)
+		virtual void setXEnabled(bool state) = 0;
+		
+		//! Returns true if the cross button is enabled (Mouse Click event)
+		virtual bool isXEnabled() = 0;
 
 		//! Sets the new position of the cursor.
 		/** \param pos: New position of the cursor. The position must be between
@@ -63,6 +86,10 @@ namespace gui
 		 the top left corner and (1.0f, 1.0f) is the bottom right corner of the
 		 render window. */
 		virtual core::position2d<f32> getRelativePosition() = 0;
+
+    //! Sets a new speed for the cursor, default value is 100
+		virtual void setSpeed(float x);
+			
 	};
 
 
@@ -70,4 +97,5 @@ namespace gui
 } // end namespace engine
 
 #endif
+
 

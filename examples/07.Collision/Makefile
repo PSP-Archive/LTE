@@ -8,10 +8,10 @@ ASFLAGS = $(CFLAGS)
 
 LIBDIR =
 LDFLAGS =
-LIBS= -lengine  -lglut -lGLU  -lGL -lpspvfpu -lm -lstdc++ -lpsppower -lpsprtc -lpspaudio
+LIBS= -lengine -lpspwlan -lglut -lGLU  -lGL -lpspvfpu -lm -lstdc++ -lpsppower -lpsprtc -lpspaudio
 
 EXTRA_TARGETS = EBOOT.PBP
-PSP_EBOOT_TITLE = LTE 3D Engine - Demo
+PSP_EBOOT_TITLE = LTE GE Example - Collision
 
 PSPSDK=$(shell psp-config --pspsdk-path)
 include $(PSPSDK)/lib/build.mak

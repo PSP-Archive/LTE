@@ -1,8 +1,19 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
-// This file is part of the LTE 3D Engine
-// (C) 2006 - LTE Studios - by SiberianSTAR
-// LTE 3D Engine is based on Irrlicht 1.0
-// For conditions of distribution and use, see copyright notice in engine.h
+/*
+
+  LTE Game Engine SDK:
+
+   Copyright (C) 2006, SiberianSTAR <haxormail@gmail.com>
+
+  Based on Irrlicht 1.0:
+ 
+   Copyright (C) 2002-2006 Nikolaus Gebhardt
+
+  For conditions of distribution and use, see copyright notice in
+  engine.h
+ 
+  http://www.ltestudios.com
+
+*/
 
 #ifndef __I_ANIMATED_MESH_SCENE_NODE_H_INCLUDED__
 #define __I_ANIMATED_MESH_SCENE_NODE_H_INCLUDED__
@@ -10,6 +21,8 @@
 #include "ISceneNode.h"
 #include "IAnimatedMeshMD2.h"
 #include "IShadowVolumeSceneNode.h"
+#include "ICelshadingSceneNode.h"
+
 
 namespace engine
 {
@@ -69,21 +82,25 @@ namespace scene
 		virtual void setAnimationSpeed(s32 framesPerSecond) = 0;
 
 		//! Creates shadow volume scene node as child of this node
-		//! and returns a pointer to it.  The shadow can be rendered using the ZPass
-		//! or the zfail method. ZPass is a little bit faster because the shadow volume
-		//! creation is easier, but with this method there occur ugly looking artifacs
-		//! when the camera is inside the shadow volume. These error do not occur
-		//! with the ZFail method.
+		//! and returns a pointer to it.  The shadow is rendered using the ZFail
+		//! method.
 		//! \param id: Id of the shadow scene node. This id can be used to identify
 		//! the node later.
-		//! \param zfailmethod: If set to true, the shadow will use the zfail method,
-		//! if not, zpass is used. 
 		//! \param intinity: Value used by the shadow volume algorithm to scale the 
 		//! shadow volume. 
+		//! \param removeHardVertices: if True the engine will try to remove the hard
+		//! vertices from the mesh, this attribute is default set to true, if you disable
+		//! the speed will be improved but a shadow volume with hard vertices could not work
+		//! properly (or not work at all). 
+		//! \param shadowType: This attribe sets how the shadow should be generated, the
+		//! default param is 0 (ESV_AUTOMATIC). Look at the enum ESV_SHADOWTYPE for more info.
+		//! \param customShadow: If you set ESV_CUSTOM as shadowType you must upload your shadow-mesh
+		//! here.
+		//! 
 		//! \return Returns pointer to the created shadow scene node.
 		//! This pointer should not be dropped. See IUnknown::drop() for more information.
 		virtual IShadowVolumeSceneNode* addShadowVolumeSceneNode(s32 id=-1,
-			bool zfailmethod=true, f32 infinity=10000.0f) = 0;
+			f32 infinity=100.0f, bool removeHardVertices = true, ESV_SHADOWTYPE shadowType = ESV_AUTOMATIC, scene::IMesh *customShadow  = 0) = 0;
 
 		//! Returns a pointer to a child node, wich has the same transformation as 
 		//! the corrsesponding joint, if the mesh in this scene node is a ms3d mesh.
@@ -158,10 +175,34 @@ namespace scene
 		//! Please note that this will only be called when in non looped mode,
 		//! see IAnimatedMeshSceneNode::setLoopMode().
 		virtual void setAnimationEndCallback(IAnimationEndCallBack* callback=0) = 0;
+
+    //! Add a Cel-shading effect node
+    //! \param shader: the shader data, if you don't specify it a default shader is used
+    //! \param width: size of the shader data
+    //! \param recalc_normals: if true the normals will be calculated in real-time (slow)
+    //! \return Returns a pointer to the new created celshading scene node
+    virtual ICelshadingSceneNode* addCelshadingSceneNode(float *shader = 0, 
+                                                         int width = 32, 
+                                                         bool recalc_normals = false);
+
+
+    //! Remove a Cel-shading effect
+    virtual void removeCelshadingSceneNode();
+    
+    
+    //! Add a planar shadow
+    //! \param plane: 3d plane onto project the shadow
+    //! \param animated: set false if the mesh is static to have greater performance
+    //! \param depthTest: Enable or disable depth test
+    virtual void addPlanarShadow(core::plane3df plane, bool animated = true, bool depthTest = false, float Divisor = 100.f) = 0;
+    	
+    //! Remove planar shadow
+    virtual void removePlanarShadow() = 0;
 	};
 
 } // end namespace scene
 } // end namespace engine
 
 #endif
+
 

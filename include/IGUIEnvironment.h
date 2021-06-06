@@ -1,8 +1,19 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
-// This file is part of the LTE 3D Engine
-// (C) 2006 - LTE Studios - by SiberianSTAR
-// LTE 3D Engine is based on Irrlicht 1.0
-// For conditions of distribution and use, see copyright notice in engine.h
+/*
+
+  LTE Game Engine SDK:
+
+   Copyright (C) 2006, SiberianSTAR <haxormail@gmail.com>
+
+  Based on Irrlicht 1.0:
+ 
+   Copyright (C) 2002-2006 Nikolaus Gebhardt
+
+  For conditions of distribution and use, see copyright notice in
+  engine.h
+ 
+  http://www.ltestudios.com
+
+*/
 
 #ifndef __I_GUI_ENVIRNMENT_H_INCLUDED__
 #define __I_GUI_ENVIRNMENT_H_INCLUDED__
@@ -42,6 +53,7 @@ class IGUITab;
 class IGUIContextMenu;
 class IGUIComboBox;
 class IGUIToolBar;
+class IGUIProgressBar;
 
 //! GUI Environment. Used as factory and manager of all other GUI elements.
 class IGUIEnvironment : public IUnknown
@@ -115,6 +127,14 @@ public:
 	your own gui elements, trying to add them to the gui elements without a parent.
 	The returned pointer should not be dropped. See IUnknown::drop() for more information. */
 	virtual IGUIElement* getRootGUIElement() = 0;
+  
+  
+  //! Adds a progressbar
+  /** \return
+  Returns a pointer to the created progressbar. Returns 0 if an error occured.
+  This pointer should not be dropped. See IUnknown:drop() for more information. */
+  virtual IGUIProgressBar* addProgressBar(const core::rect<s32>& rectangle, bool horizontal = true,
+        bool border = true, bool background = true, IGUIElement* parent = 0, s32 id= -1) = 0;
 
 	//! Adds an button element. 
 	/** \return
@@ -305,4 +325,5 @@ public:
 } // end namespace engine
 
 #endif
+
 

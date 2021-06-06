@@ -1,8 +1,19 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
-// This file is part of the LTE 3D Engine
-// (C) 2006 - LTE Studios - by SiberianSTAR
-// LTE 3D Engine is based on Irrlicht 1.0
-// For conditions of distribution and use, see copyright notice in engine.h
+/*
+
+  LTE Game Engine SDK:
+
+   Copyright (C) 2006, SiberianSTAR <haxormail@gmail.com>
+
+  Based on Irrlicht 1.0:
+ 
+   Copyright (C) 2002-2006 Nikolaus Gebhardt
+
+  For conditions of distribution and use, see copyright notice in
+  engine.h
+ 
+  http://www.ltestudios.com
+
+*/
 
 #ifndef __engine_I_VIDEO_DRIVER_H_INCLUDED__
 #define __engine_I_VIDEO_DRIVER_H_INCLUDED__
@@ -202,6 +213,16 @@ namespace video
 		could not be loaded. 
 		This pointer should not be dropped. See IUnknown::drop() for more information.*/
 		virtual ITexture* getTexture(io::IReadFile* file) = 0;
+			
+		//! Returns a pointer to a texture
+		/** Returns the pointer of the texture with the index specified wich
+		is stored into the texture cache.
+		\param index: Index of the texture
+		*/
+		virtual ITexture *getTextureByIndex(u32 Index) = 0;
+		
+		//! Returns the count of the texture in cache
+		virtual u32 getTextureCount() = 0;
 
 		//! Creates an empty Texture of specified size.
 		/** \param size: Size of the texture.
@@ -441,7 +462,14 @@ namespace video
 
     //! Change the cursor texture
     /** \param texture: Pointer to texture to use. Must be a 16x32 image. */
-    virtual void changeCursor(video::ITexture *texture);
+    virtual void changeCursor(video::ITexture *texture) = 0;
+    	
+    //! Enable/Disable clippin feature
+    /** The clipping routine takes 1,2MB of memory to work, if you
+        don't plan to use it you can disable it to get this amount of memory.
+        \param enable: enable/disable the clipping routine.
+    */
+    virtual void enableClippingFeature(bool enable) = 0;
 
 		//! Draws an 2d image, using a color
 		/** (if color is other than 
@@ -471,6 +499,19 @@ namespace video
 		virtual void draw2DImage(video::ITexture* texture, const core::rect<s32>& destRect,
 			const core::rect<s32>& sourceRect, const core::rect<s32>* clipRect = 0,
 			video::SColor* colors=0, bool useAlphaChannelOfTexture=false) = 0;
+				
+		//! Draws a 2d image
+		/** The image can be stretched
+		\param texture: the texture to draw from 
+		\param pos: the position on the screen where draw the image
+		\param size: the size of the image
+		\param sourceRect: source rect on the texture
+		\param color: array of 4 colors denoting the color values of the corners of the rect 
+		\param useAlphaChannelOfTexture: true if alpha channel will be blended. */
+    virtual void draw2DStretchedImage(video::ITexture* texture, const core::position2d<s32>& pos, 
+								 const core::dimension2d<s32>& size, core::rect<s32>& sourceRect, SColor color = SColor(255,255,255,255), 
+								 bool useAlphaChannelOfTexture = false) = 0;
+
 
 		//!Draws an 2d rectangle.
 		/** \param color: Color of the rectangle to draw. The alpha component will not
@@ -744,4 +785,5 @@ namespace video
 
 
 #endif
+
 

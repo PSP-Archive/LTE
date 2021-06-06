@@ -8,7 +8,7 @@ if you want to implement a render technique, the
 engine is currently not supporting. For example you can write
 a indoor portal based renderer or a advanced terrain scene 
 node with it. With creating custom scene nodes, you can 
-easily extend the LTE 3D Engine and adapt it to your
+easily extend the LTE Game Engine and adapt it to your
 needs.
 
 I will keep the tutorial simple: Keep everything very
@@ -149,7 +149,7 @@ public:
 That's it. The Scene node is done. Now we simply have to start
 the engine, create the scene node and a camera, and look at the result.
 */
-int main()
+int engineMain(unsigned int argc, void *argv )
 {
   // setup psp callbacks
   setupPSP();

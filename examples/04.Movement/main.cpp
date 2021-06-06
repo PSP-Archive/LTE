@@ -71,7 +71,7 @@ an engine device and the scene node we want to move. We also create some
 other additional scene nodes, to show that there are also some different 
 possibilities to move and animate scene nodes.
 */
-int main()
+int engineMain(unsigned int argc, void * argv )
 {
   // setup psp callbacks
   setupPSP();

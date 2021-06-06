@@ -1,8 +1,19 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
-// This file is part of the LTE 3D Engine
-// (C) 2006 - LTE Studios - by SiberianSTAR
-// LTE 3D Engine is based on Irrlicht 1.0
-// For conditions of distribution and use, see copyright notice in engine.h
+/*
+
+  LTE Game Engine SDK:
+
+   Copyright (C) 2006, SiberianSTAR <haxormail@gmail.com>
+
+  Based on Irrlicht 1.0:
+ 
+   Copyright (C) 2002-2006 Nikolaus Gebhardt
+
+  For conditions of distribution and use, see copyright notice in
+  engine.h
+ 
+  http://www.ltestudios.com
+
+*/
 
 #ifndef __S_MATERIAL_H_INCLUDED__
 #define __S_MATERIAL_H_INCLUDED__
@@ -14,6 +25,8 @@ namespace engine
 {
 namespace video
 {
+	
+
 	//! Abstracted and easy to use fixed function/programmable pipeline material modes.
 	enum E_MATERIAL_TYPE
 	{
@@ -230,6 +243,24 @@ namespace video
 		//! the normals will be normalized again, and the model will look as bright as it should.
 		EMF_NORMALIZE_NORMALS,
 
+    //! Software clipping. You can enable this if your mesh is a map
+    //! or have got big triangles that are culled from the gpu. If you enable this
+    //! triangles of the mesh will be automatically clipped to the frustrum view,
+    //! note that sw clipping is slow and should be used only when necessary.
+    //! Default: false
+		EMF_CLIPPING,
+
+		//! If Clipping is disabled and your mesh is not animated you must enable this
+		//! to get a better performance.
+		//! Note that sphere mapping doesn't work if this is enabled
+		EMF_DMA,
+
+    //! If this flag is enabled depth func GL_LESS is used instead of GL_LEQUAL
+    EMF_DEPTHLESS,
+    
+    //! If you enable this flag the mesh won't be rendered untill you call driver->endScene
+    EMF_DISABLEFLUSH,
+
 		//! This is not a flag, but a value indicating how much flags there are.
 		EMF_MATERIAL_FLAG_COUNT 
 	};
@@ -248,7 +279,7 @@ namespace video
 			ZBuffer(true), ZWriteEnable(true), BackfaceCulling(true),
 			GouraudShading(true), Shininess(0.0f), MaterialTypeParam(0.0f),
 			BilinearFilter(true), TrilinearFilter(false), FogEnable(false),
-			NormalizeNormals(false), AnisotropicFilter(false)
+			NormalizeNormals(false), AnisotropicFilter(false), Clipping(false), DisableFlush(false)
 		{}
 
 		//! Type of the material. Specifies how everything is blended together
@@ -371,6 +402,26 @@ namespace video
 
 				//! Should normals be normalized? Default: false
 				bool NormalizeNormals;
+
+        //! Software clipping. You can enable this if your mesh is a map
+        //! or have got big triangles that are culled from the gpu. If you enable this
+        //! triangles of the mesh will be automatically clipped to the frustrum view,
+        //! note that sw clipping is slow and should be used only when necessary.
+        //! Default: false
+        bool Clipping;
+        
+        
+				//! If Clipping is disabled and your mesh is not animated you must enable this
+				//! to get a better performance.
+				//! Note that sphere mapping doesn't work if this is enabled
+        bool StaticMesh;
+        
+        //! If this flag is enabled depth func GL_LESS is used instead of GL_LEQUAL
+        bool DepthLess;
+        
+        //! If this flag is enabled the mesh won't be rendered until driver->endScene will be called
+        bool DisableFlush;
+        
 			};
 
 			//! Array representing all flags.
@@ -398,7 +449,11 @@ namespace video
 				TrilinearFilter != b.TrilinearFilter ||
 				AnisotropicFilter != b.AnisotropicFilter ||
 				FogEnable != b.FogEnable ||
-				NormalizeNormals != NormalizeNormals;
+				NormalizeNormals != b.NormalizeNormals || 
+				StaticMesh != b.StaticMesh ||
+				DepthLess != b.DepthLess || 
+				b.DisableFlush != DisableFlush;
+				
 		}	
 	};
 
@@ -406,4 +461,5 @@ namespace video
 } // end namespace engine
 
 #endif
+
 

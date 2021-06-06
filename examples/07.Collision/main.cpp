@@ -1,5 +1,5 @@
 /*
-In this tutorial, I will show how to collision detection with the LTE 3D Engine. 
+In this tutorial, I will show how to collision detection with the LTE Game Engine. 
 I will describe 3 methods: Automatic collision detection for moving through 3d worlds
 with stair climbing and sliding, manual triangle picking and manual
 scene node picking.
@@ -18,7 +18,7 @@ using namespace engine;
 
 
 
-int main()
+int engineMain(unsigned int argc, void *argv )
 {
 	setupPSP();
 	engineDevice *device =
@@ -37,7 +37,9 @@ int main()
 	
 	if (q3levelmesh)
 		q3node = smgr->addOctTreeSceneNode(q3levelmesh->getMesh(0));
-
+		
+	q3node->setMaterialFlag(video::EMF_CLIPPING, true); // mesh needs to be clipped
+	
 	/*
 	So far so good, we've loaded the quake 3 level like in tutorial 2. Now, here
 	comes something different: We create a triangle selector. A triangle selector

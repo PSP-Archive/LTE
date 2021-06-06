@@ -1,20 +1,17 @@
-/* engine.h -- interface of the 'LTE 3D Engine'
+/*
 
-  LTE 3D Engine is
-   Copyright (C) 2006 LTE Studios, SiberianSTAR
+  LTE Game Engine SDK:
 
-  Based on Irrlicht 1.0 
+   Copyright (C) 2006, SiberianSTAR <haxormail@gmail.com>
 
-  Irrlicht is
+  Based on Irrlicht 1.0:
+ 
    Copyright (C) 2002-2006 Nikolaus Gebhardt
 
-  This software is provided 'as-is', without any express or implied
-  warranty.  In no event will the authors be held liable for any damages
-  arising from the use of this software.
-
-  Permission is granted to anyone to use this software for any purpose,
-  including commercial purposes. Please read license.txt included in the 
-  SDK archive.
+  For conditions of distribution and use, read license.txt
+  provided with the package
+ 
+  http://www.ltestudios.com
 
 */
 
@@ -31,6 +28,7 @@
 #include "heapsort.h"
 #include "IAnimatedMesh.h"
 #include "IAnimatedMeshMD2.h"
+#include "IAnimatedMeshB3d.h"
 #include "IAnimatedMeshMS3D.h"
 #include "IAnimatedMeshX.h"
 #include "IAnimatedMeshSceneNode.h"
@@ -39,6 +37,7 @@
 #include "IEventReceiver.h"
 #include "IFileList.h"
 #include "IFileSystem.h"
+#include "IGUIProgressBar.h"
 #include "IGUIButton.h"
 #include "IGUICheckBox.h"
 #include "IGUIContextMenu.h"
@@ -113,6 +112,8 @@
 #include "SMeshBufferTangents.h"
 #include "engineTypes.h"
 #include "IAudioDriver.h"
+#include "INetworkDriver.h"
+
 
 //! engine SDK Version
 #define engine_SDK_VERSION "1.0"
@@ -170,6 +171,11 @@ namespace engine
   namespace audio
   {
   }
+  
+  //! The net namespace contains classes for accessing the network driver.
+  namespace net
+  {
+  }
 }
 
 /*! \file engine.h
@@ -177,4 +183,5 @@ namespace engine
 */
 
 #endif
+
 
